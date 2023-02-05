@@ -19,29 +19,37 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_person")
+    @Column(name = "id_person", nullable = false)
     private Long id;
 
-    @Column(name = "first_name")
+    @NotEmpty
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @NotEmpty
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "document")
+    @NotEmpty
+    @Column(name = "document", nullable = false)
     private String document;
 
-    @Column(name = "birth_date")
+    @NotEmpty
+    @Column(name = "birth_date", nullable = false)
     private Date birthDate;
 
-    @Column(name = "email")
+    @NotEmpty
+    @Email
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "time_stamp")
+    @NotEmpty
+    @Column(name = "time_stamp", nullable = false)
     @CreationTimestamp
     private LocalDateTime timeStamp;
 
-    @Column(name = "phone")
+    @NotEmpty
+    @Column(name = "phone", nullable = false)
     private String phone;
 
 
