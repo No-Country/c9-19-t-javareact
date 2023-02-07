@@ -14,6 +14,6 @@ public class Student extends Person {
     private String grade;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "Student")
-    private List<Person> students;
+    private Student student;
 
 }
