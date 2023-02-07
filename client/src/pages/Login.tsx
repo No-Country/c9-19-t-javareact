@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Container, Form, Row, Col } from 'react-bootstrap';
+import ButtonMain from '../components/ButtonMain';
 
 const Login = () => {
   const [formData, setFormData] = useState({});
@@ -16,39 +17,49 @@ const Login = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center vh-100">
-      <Row xs="1" sm="2" className="justify-content-md-center gap-5 gap-sm-0">
-        <Col>
-          <h1>Bienvenido a Good Learner!</h1>
+    <Container
+      fluid
+      className="d-flex justify-content-center align-items-center vh-100"
+    >
+      <Row
+        xs="1"
+        lg="2"
+        className="d-flex justify-content-lg-center gap-5 gap-lg-0 minW-70"
+      >
+        <Col className="d-flex flex-column align-items-center justify-content-lg-center">
+          <h1>Bienvenido</h1>
         </Col>
         <Col>
-          <h2>Iniciar sesión</h2>
-          <Form className="d-flex flex-column w-1">
+          <Form className="d-flex flex-column">
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email</Form.Label>
+              <Form.Label></Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Email"
+                placeholder="Ingresá tu email"
                 name="email"
                 onChange={handleOnChange}
+                style={{ height: '4rem' }}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Contraseña</Form.Label>
+              <Form.Label></Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Contraseña"
+                placeholder="Ingresá tu contraseña"
                 name="password"
                 onChange={handleOnChange}
+                style={{ height: '4rem' }}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <a href="">Olvidó su contraseña?</a>
+              <a href="">¿Olvidaste tu contraseña?</a>
             </Form.Group>
-            <Button variant="primary" onClick={handleSubmit}>
-              Enviar
-            </Button>
+            <ButtonMain
+              text={'INICIAR SESIÓN'}
+              size="lg"
+              onClick={handleSubmit}
+            />
           </Form>
         </Col>
       </Row>
