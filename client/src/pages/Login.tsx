@@ -19,17 +19,17 @@ const Login = () => {
   return (
     <Container
       fluid
-      className="d-flex justify-content-center align-items-center vh-100"
+      className="d-flex justify-content-center align-items-center vh-100 diagonal-split-background"
     >
       <Row
         xs="1"
         lg="2"
-        className="d-flex justify-content-lg-center gap-5 gap-lg-0 minW-70"
+        className="d-flex justify-content-lg-center gap-5 gap-lg-0 w-100 p-sm-5"
       >
-        <Col className="d-flex flex-column align-items-center justify-content-lg-center">
-          <h1>Bienvenido</h1>
+        <Col className="d-flex flex-column align-items-center justify-content-lg-center p-sm-5">
+          <h1 style={{ color: 'white' }}>Bienvenido</h1>
         </Col>
-        <Col>
+        <Col className="p-sm-5">
           <Form className="d-flex flex-column">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label></Form.Label>
