@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Row, Col } from 'react-bootstrap';
 import ButtonMain from '../components/ButtonMain';
+import logo from '../assets/logo-white.png';
 
 const Login = () => {
   const [formData, setFormData] = useState({});
@@ -19,18 +20,21 @@ const Login = () => {
   return (
     <Container
       fluid
-      className="d-flex justify-content-center align-items-center vh-100 diagonal-split-background"
+      className="d-flex justify-content-center align-items-center vh-100 login-container"
     >
       <Row
         xs="1"
         lg="2"
-        className="d-flex justify-content-lg-center gap-5 gap-lg-0 w-100 p-sm-5"
+        className="d-flex justify-content-lg-center gap-5 gap-lg-0 vh-100 w-100 p-sm-5"
       >
-        <Col className="d-flex flex-column align-items-center justify-content-lg-center p-sm-5">
-          <h1 style={{ color: 'white' }}>Bienvenido</h1>
+        <Col className="d-flex flex-column align-items-center justify-content-end justify-content-lg-evenly gap-5 gap-lg-0 p-sm-5">
+          <img src={logo} alt="" width={300} height="auto" />
+          <h1 style={{ color: 'white', fontWeight: 'bold' }}>
+            Te damos la bienvenida
+          </h1>
         </Col>
-        <Col className="p-sm-5">
-          <Form className="d-flex flex-column">
+        <Col className="p-sm-5 m-auto">
+          <Form className="d-flex flex-column px-4 py-5 bg-white rounded">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label></Form.Label>
               <Form.Control

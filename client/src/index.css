@@ -2,7 +2,6 @@
   min-width: 70%;
 }
 
-.diagonal-split-background {
-  background-color: #013a6b;
-  background-image: -webkit-linear-gradient(-10deg, #58246c 50%, #14238a 50%);
+.login-container {
+  background-color: #14238a;
 }

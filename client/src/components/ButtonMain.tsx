@@ -12,12 +12,15 @@ const ButtonMain: React.FC<Props> = ({ text, size, onClick }) => {
       <style type="text/css">
         {`
     .btn-main {
-      background-color: #D60A0B;
+      background-color: #9C254D;
       color: white;
     }
     .btn-main:hover {
-      background-color: #be0a0b;
+      background-color: #81254d;
       color:white;
+    }
+    .btn-main:active {
+      background-color: #81254d;
     }
     .btn-sm {
       3rem;
