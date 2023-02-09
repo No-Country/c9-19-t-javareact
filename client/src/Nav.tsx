@@ -5,12 +5,14 @@ export const Nav = () => {
                 <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm p-3 mb-4 bg-white rounded">
                     <div className="container-fluid">
                         <div className="d-flex justify-content-start">
-                        <button className="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button className="btn bg-white me-4" id="sidebarToggle"><i className="fa-solid fa-bars fa-xl"></i></button>
                         <div className="input-group input-group-md">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text" id="inputGroup-sizing-lg">🔎</span>
+                            <div className="input-group-prepend p-2">
+                            <i className="fa-solid fa-magnifying-glass fa-xl bg-grey"></i>
+
+                               {/*  <span className="input-group-text" id="inputGroup-sizing-lg">🔎</span> */}
                             </div>
-                            <input type="text" className="form-control form-control-nav" aria-label="Large" aria-describedby="inputGroup-sizing-sm"/>
+                            <input type="text" className="form-control form-control-nav" placeholder="Busqueda" aria-label="Large" aria-describedby="inputGroup-sizing-sm"/>
                         </div>
                         </div>
                         {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon"></span></button> */}

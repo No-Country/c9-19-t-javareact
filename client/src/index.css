@@ -89,6 +89,9 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 .bg-blue{
     background-color: #14238A !important;
 }
+.bg-grey{
+    color: grey !important;
+}
 .bg-red{
     background-color: #9c254d !important;
 }
