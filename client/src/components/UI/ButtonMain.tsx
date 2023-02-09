@@ -4,9 +4,10 @@ interface Props {
   text?: string;
   size?: 'sm' | 'lg' | undefined;
   onClick: () => void;
+  className?: string | undefined;
 }
 
-const ButtonMain: React.FC<Props> = ({ text, size, onClick }) => {
+const ButtonMain: React.FC<Props> = ({ className, text, size, onClick }) => {
   return (
     <>
       <style type="text/css">
@@ -19,8 +20,9 @@ const ButtonMain: React.FC<Props> = ({ text, size, onClick }) => {
       background-color: #81254d;
       color:white;
     }
-    .btn-main:active {
+    .btn-main:not(:disabled):not(:disabled):active {
       background-color: #81254d;
+      color:white;
     }
     .btn-sm {
       3rem;
@@ -30,7 +32,12 @@ const ButtonMain: React.FC<Props> = ({ text, size, onClick }) => {
     }
     `}
       </style>
-      <Button variant="main" size={size || 'sm'} onClick={() => onClick()}>
+      <Button
+        className={className}
+        variant="main"
+        size={size || 'sm'}
+        onClick={() => onClick()}
+      >
         {text || 'Button'}
       </Button>
     </>
