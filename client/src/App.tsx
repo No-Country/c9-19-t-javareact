@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Usuarios from "./pages/Usuarios";
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
