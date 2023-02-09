@@ -103,8 +103,12 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     background-color: #8A91C5 !important;
     color:white;
 }
+.input-group{
+    width:auto;
+}
 .input-group-text{
     border:none;
+    width:auto;
     background-color: white;
 }
 .form-control-nav{
