@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ButtonMain from './UI/ButtonMain';
 import { Form, Button } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const LoginForm = () => {
   });
 
   const [forgotPassword, setForgotPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
@@ -18,7 +20,10 @@ const LoginForm = () => {
   };
 
   const handleSubmit = () => {
+    localStorage.setItem("token", "test-token");
     console.log(formData);
+    console.log(localStorage.getItem("token"))
+    navigate('/', { replace: true });
   };
 
   const handleResetPassword = () => {
