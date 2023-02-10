@@ -6,6 +6,7 @@ import { User } from '../models/User';
 
 // compoents
 import FormUsuario from '../components/formUsuario';
+import ButtonMain from '../components/UI/ButtonMain';
 
 // UI
 import Button from 'react-bootstrap/Button';
@@ -69,14 +70,18 @@ function Usuarios () {
     return (    
         <>
             <Container>
-                <Row>
-                    <Col xs={9} className='header'>
-                        <h2>Usuarios</h2>
+                <Row className='header'>
+                    <Col xs={9}>
+                        <h3 className='header-title'>Usuarios</h3>
+                        <div className='header-line'></div>
                     </Col>
-                    <Col xs={2} >
-                        <Button style={{marginTop: '2em'}} variant="primary" onClick={handleShowFormUser}>
-                            Agregar Usuario
-                        </Button>
+                    <Col xs={3} >
+                        <ButtonMain
+                            text={'Agregar Usuario'}
+                            size="md"
+                            icon='fa fa-add'
+                            onClick={handleShowFormUser}
+                        />
                     </Col> 
                 </Row>
                 <Row>
@@ -116,9 +121,7 @@ function Usuarios () {
                             }
                         </tbody>
                     </Table>  
-                    </Container>
-                {/* handleUpdateUsuario */}
-                        
+                    </Container>                        
                 </Row>  
                 <FormUsuario show={showFormUser} handleClose={handleCloseFormUser} handleSave={handleSaveFormUser} user={selectedUser}/>
 

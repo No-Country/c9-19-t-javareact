@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 // Models
 import { User } from '../models/User';
 // UI
+import ButtonMain from './UI/ButtonMain';
+import ButtonSecondary from './UI/ButtonSecondary';
 import Modal  from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -193,12 +194,19 @@ function FormUsuario({show, handleClose, handleSave, user}: Props) {
             </Modal.Body>
             
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModal}>
-                    Cancelar
-                </Button>
-                <Button variant="primary" onClick={handleSaveData}>
-                    Guardar
-                </Button>
+                
+                <ButtonSecondary
+                    text={'Cancelar'}
+                    size="md"
+                    icon='fa fa-times'
+                    onClick={handleCloseModal}
+                />
+                <ButtonMain
+                    text={'Guardar'}
+                    size="md"
+                    icon='fa fa-save'
+                    onClick={handleSaveData}
+                />
             </Modal.Footer>
         </Modal>
         </>

@@ -8,22 +8,25 @@ interface Props {
   onClick: () => void;
 }
 
-const ButtonMain: React.FC<Props> = ({ className, text, size, icon, onClick }) => {
+const ButtonSecondary: React.FC<Props> = ({ className, text, size, icon, onClick }) => {
   return (
     <>
       <style type="text/css">
         {`
-    .btn-main {
-      background-color: #9C254D;
-      color: white;
+    .btn-secondary {
+        color: #fff;
+        background-color: #6c757d;
+        border-color: #6c757d;
     }
-    .btn-main:hover {
-      background-color: #81254d;
-      color:white;
+    .btn-secondary:hover {
+        color: #fff;
+        background-color: #5a6268;
+        border-color: #545b62;
     }
-    .btn-main:not(:disabled):not(:disabled):active {
-      background-color: #81254d;
-      color:white;
+    .btn-secondary:not(:disabled):not(:disabled):active {
+        color: #fff;
+        background-color: #5a6268;
+        border-color: #545b62;
     }
     .btn-sm {
       height: 3rem;
@@ -38,7 +41,7 @@ const ButtonMain: React.FC<Props> = ({ className, text, size, icon, onClick }) =
       </style>
       <Button
         className={className}
-        variant="main"
+        variant="secondary"
         size={size || 'sm'}
         onClick={() => onClick()}
       >
@@ -52,4 +55,4 @@ const ButtonMain: React.FC<Props> = ({ className, text, size, icon, onClick }) =
     </>
   );
 };
-export default ButtonMain;
+export default ButtonSecondary;

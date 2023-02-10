@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import '../styles/dashboard.css';
+import '../styles/header.css';
 
 const data = [
     {usuario: 'Estudiantes', cantidad: 180, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap'},
@@ -12,24 +13,25 @@ const data = [
 function Dashboard () {
     return (
         <Container>
-            <Row>
-                <Col xs={12} className='header'>
-                    <h2>Administrador</h2>
+            <Row className='header'>
+                <Col xs={12}>
+                    <h3 className='header-title'>Administrador</h3>
+                    <div className='header-line'></div>
                 </Col>
             </Row>
             <Row>
                 {
                     data.map( (user: any) => (
-
                         <Col xs={12} md={4} className='d-flex justify-content-center'>
                             <Card className='card-dash' key={user.usuario}>
                                 <Card.Body>
                                     <Row>
-                                        <Col xs={6} md={6}>
+                                        <Col xs={6} md={6} className='card-line'>
                                             <div style={{background: user.background}} className='rounded-circle'>
                                                 <i style={{color: user.color, fontSize: '1.8rem'}} className={user.icon}></i>
                                             </div>
                                         </Col>
+                                        
                                         <Col xs={6} md={6} className='d-flex flex-column justify-content-center align-items-start'>
                                             <span className='card-amount'> {user.usuario}</span>
                                             <span> <strong> {user.cantidad} </strong> </span>

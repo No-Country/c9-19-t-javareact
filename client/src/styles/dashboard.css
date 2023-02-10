@@ -1,8 +1,4 @@
-.header{
-    height: 8em;
-    padding: 2em;
-    margin-left: 2em
-}
+
 .card-dash {
     width: 260px;
     height: 108px;
@@ -16,6 +12,9 @@
     opacity: 93%;
 }
 
+.card-line {
+    border-right: 3px solid #9C254D !important;
+}
 
 .rounded-circle {
     width: 3.5rem;
