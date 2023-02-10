@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class PersonDTO {
-    private Long id;
+    private Long idPerson;
     private String firstName;
     private String lastName;
     private String document;
@@ -20,8 +20,8 @@ public class PersonDTO {
     private LocalDateTime timeStamp;
     private String phone;
 
-    public PersonDTO(Long id){
-        this.id = id;
+    public PersonDTO(Long idPerson){
+        this.idPerson = idPerson;
     }
     public PersonDTO(
             String firstName,

@@ -12,6 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString
 @Entity
+@Table(name = "shift")
 public class Shift implements Serializable {
 
     @Id

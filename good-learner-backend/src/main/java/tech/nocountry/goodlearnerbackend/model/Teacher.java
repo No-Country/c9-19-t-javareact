@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Setter
 @NoArgsConstructor
@@ -20,5 +21,11 @@ public class Teacher /*extends Person*/ implements Serializable {
     @Column(name = "id_teacher")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long teacherId;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "school_entry_date")
+    private LocalDate schoolEntryDate;
 
 }
