@@ -5,8 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -37,7 +37,7 @@ public abstract class Person implements Serializable {
 
     //@NotEmpty
     @Column(name = "birth_date", nullable = false)
-    private Date birthDate;
+    private LocalDate birthDate;
 
     //@NotEmpty
     //@Email
@@ -53,6 +53,23 @@ public abstract class Person implements Serializable {
     @Column(name = "phone")
     private String phone;
 
+    public Person(
+            String firstName,
+            String lastName,
+            String document,
+            LocalDate birthDate,
+            String email,
+            LocalDateTime timeStamp,
+            String phone
+    ){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.document = document;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.timeStamp = timeStamp;
+        this.phone = phone;
+    }
 
     public static final long serialVersionUID=1L;
 }

@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -13,16 +14,37 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Student /*extends Person*/ implements Serializable {
-    @Id
+@PrimaryKeyJoinColumn(name="person_id")
+public class Student extends Person implements Serializable {
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_student", nullable = false)
-    private Long studentId;
+    private Long studentId;*/
 
     @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate;
 
+    @ManyToOne
+    @JoinColumn(name = "tutor_id", nullable = false)
+    private Tutor tutor;
+
     /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "Student")
     private Student student;*/
+
+    public Student(
+            String firstName,
+            String lastName,
+            String document,
+            LocalDate birthDate,
+            String email,
+            LocalDateTime timeStamp,
+            String phone,
+            LocalDate registrationDate,
+            Tutor tutor
+    ){
+        super(firstName, lastName, document, birthDate, email, timeStamp, phone);
+        this.registrationDate = registrationDate;
+        this.tutor = tutor;
+    }
 
 }
