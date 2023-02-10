@@ -15,11 +15,11 @@ import java.io.Serializable;
 public class Shift implements Serializable {
 
     @Id
-    @Column(name = "id_shift")
+    @Column(name = "id_shift", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "shift_name")
-    //@Enumerated(EnumType.STRING)
-    private String shiftName;
+    @Column(name = "shift_name", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ShiftName shiftName;
 }

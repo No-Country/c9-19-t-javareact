@@ -13,12 +13,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Tutor /*extends Person*/ implements Serializable {
+@PrimaryKeyJoinColumn(name="person_id")
+public class Tutor extends Person implements Serializable {
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tutor_id", nullable = false)
-    private Long tutorId;
+    private Long tutorId;*/
 
     @Temporal(TemporalType.DATE)
     @Column(name = "start_date", nullable = false)

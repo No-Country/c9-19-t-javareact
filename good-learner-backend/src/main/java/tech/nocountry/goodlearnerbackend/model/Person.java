@@ -1,4 +1,4 @@
-/*package tech.nocountry.goodlearnerbackend.model;
+package tech.nocountry.goodlearnerbackend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,11 +15,12 @@ import java.util.Date;
 @ToString
 @Entity
 @Table(name = "person")
-public class Person implements Serializable {
+@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_person", nullable = false)
+    @Column(name = "id_person", nullable = false, unique = true)
     private Long id;
 
     //@NotEmpty
@@ -40,7 +41,7 @@ public class Person implements Serializable {
 
     //@NotEmpty
     //@Email
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
     //@NotEmpty
@@ -49,9 +50,9 @@ public class Person implements Serializable {
     private LocalDateTime timeStamp;
 
     //@NotEmpty
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone")
     private String phone;
 
 
     public static final long serialVersionUID=1L;
-}*/
+}

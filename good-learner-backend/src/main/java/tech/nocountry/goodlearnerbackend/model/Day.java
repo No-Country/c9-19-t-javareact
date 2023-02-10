@@ -14,11 +14,11 @@ import java.io.Serializable;
 public class Day implements Serializable {
 
     @Id
-    @Column(name = "id_day")
+    @Column(name = "id_day", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long dayId;
 
-    @Column(name = "day_name")
-    //@Enumerated(EnumType.STRING)
-    private String dayName;
+    @Column(name = "day_name", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private DayName dayName;
 }
