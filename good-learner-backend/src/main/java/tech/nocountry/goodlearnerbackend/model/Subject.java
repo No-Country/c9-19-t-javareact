@@ -2,7 +2,6 @@ package tech.nocountry.goodlearnerbackend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Columns;
 
 import java.io.Serializable;
 

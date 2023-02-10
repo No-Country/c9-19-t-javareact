@@ -2,7 +2,6 @@ package tech.nocountry.goodlearnerbackend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-//import tech.nocountry.goodlearnerbackend.model.Person;
 
 import java.io.Serializable;
 import java.time.LocalDate;

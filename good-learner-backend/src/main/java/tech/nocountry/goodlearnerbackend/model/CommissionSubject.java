@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
