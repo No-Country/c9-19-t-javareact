@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 @Entity
 @Table(name = "commission")
-class Commission implements Serializable {
+public class Commission implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
