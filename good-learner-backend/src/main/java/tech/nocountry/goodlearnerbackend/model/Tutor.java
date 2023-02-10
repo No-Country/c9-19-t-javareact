@@ -1,10 +1,19 @@
+package tech.nocountry.goodlearnerbackend.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Entity
-public class Tutor extends Person {
+public class Tutor /*extends Person*/ implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,10 +22,10 @@ public class Tutor extends Person {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "Tutor")
-    private List<Person> tutors;
+    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "")
+    private List<Person> tutors;*/
 
 }
 

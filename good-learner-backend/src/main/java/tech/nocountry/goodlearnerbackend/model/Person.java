@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.model;
+/*package tech.nocountry.goodlearnerbackend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,36 +22,36 @@ public class Person implements Serializable {
     @Column(name = "id_person", nullable = false)
     private Long id;
 
-    @NotEmpty
+    //@NotEmpty
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @NotEmpty
+    //@NotEmpty
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @NotEmpty
+    //@NotEmpty
     @Column(name = "document", nullable = false)
     private String document;
 
-    @NotEmpty
+    //@NotEmpty
     @Column(name = "birth_date", nullable = false)
     private Date birthDate;
 
-    @NotEmpty
-    @Email
+    //@NotEmpty
+    //@Email
     @Column(name = "email", nullable = false)
     private String email;
 
-    @NotEmpty
+    //@NotEmpty
     @Column(name = "time_stamp", nullable = false)
     @CreationTimestamp
     private LocalDateTime timeStamp;
 
-    @NotEmpty
+    //@NotEmpty
     @Column(name = "phone", nullable = false)
     private String phone;
 
 
     public static final long serialVersionUID=1L;
-}
+}*/
