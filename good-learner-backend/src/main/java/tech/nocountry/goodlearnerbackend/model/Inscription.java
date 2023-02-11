@@ -20,6 +20,7 @@ public class Inscription implements Serializable {
     @Column(name = "id_inscription", nullable = false, unique = true)
     private Long idInscription;
 
+
     @Column(name = "inscription_date", nullable = false)
     private LocalDate inscriptionDate;
 
