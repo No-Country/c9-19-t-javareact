@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Setter
 @NoArgsConstructor
@@ -15,17 +16,30 @@ import java.time.LocalDate;
 @ToString
 @Entity
 @Table(name = "teacher")
-public class Teacher /*extends Person*/ implements Serializable {
+@PrimaryKeyJoinColumn(name="person_id")
+public class Teacher extends Person implements Serializable {
 
-    @Id
-    @Column(name = "id_teacher")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long teacherId;
-
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "school_entry_date")
+    @Column(name = "school_entry_date", nullable = false)
     private LocalDate schoolEntryDate;
+
+    public Teacher(
+            String firstName,
+            String lastName,
+            String document,
+            LocalDate birthDate,
+            String email,
+            LocalDateTime timeStamp,
+            String phone,
+            String title,
+            LocalDate schoolEntryDate
+    )
+    {
+        super(firstName, lastName, document, birthDate, email, timeStamp, phone);
+        this.title = title;
+        this.schoolEntryDate = schoolEntryDate;
+    }
 
 }

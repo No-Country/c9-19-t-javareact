@@ -14,18 +14,18 @@ import java.time.LocalDateTime;
 @ToString
 @Entity
 @PrimaryKeyJoinColumn(name="person_id")
+@Table(name = "student")
 public class Student extends Person implements Serializable {
     /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_student", nullable = false)
     private Long studentId;*/
 
-    @Column(name = "registration_date", nullable = false)
-    private LocalDate registrationDate;
+    @Column(name = "alias")
+    private String alias;
 
-    @ManyToOne
-    @JoinColumn(name = "tutor_id", nullable = false)
-    private Tutor tutor;
+    @Column(name = "is_regular", nullable = false)
+    private Boolean isRegular;
 
     /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "Student")
     private Student student;*/
@@ -38,12 +38,12 @@ public class Student extends Person implements Serializable {
             String email,
             LocalDateTime timeStamp,
             String phone,
-            LocalDate registrationDate,
-            Tutor tutor
+            String alias,
+            Boolean isRegular
     ){
         super(firstName, lastName, document, birthDate, email, timeStamp, phone);
-        this.registrationDate = registrationDate;
-        this.tutor = tutor;
+        this.alias = alias;
+        this.isRegular = isRegular;
     }
 
 }

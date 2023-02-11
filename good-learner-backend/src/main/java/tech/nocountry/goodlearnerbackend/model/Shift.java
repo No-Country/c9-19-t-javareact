@@ -16,8 +16,8 @@ import java.io.Serializable;
 public class Shift implements Serializable {
 
     @Id
-    @Column(name = "id_shift", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_shift", nullable = false, unique = true)
     private Long id;
 
     @Column(name = "shift_name", nullable = false)

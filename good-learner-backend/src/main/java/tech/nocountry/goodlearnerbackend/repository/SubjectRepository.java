@@ -2,7 +2,8 @@ package tech.nocountry.goodlearnerbackend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import tech.nocountry.goodlearnerbackend.model.Subject;
 
 @Repository
-public interface Subject extends JpaRepository<Subject, Long> {
+public interface SubjectRepository extends JpaRepository<Subject, Long> {
 }

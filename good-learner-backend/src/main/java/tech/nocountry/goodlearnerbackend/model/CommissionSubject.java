@@ -16,7 +16,8 @@ import java.sql.Time;
 public class CommissionSubject implements Serializable {
 
     @Id
-    @Column(name = "id_commission_subject", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_commission_subject", nullable = false, unique = true)
     private Long idCommissionSubject;
 
     @ManyToOne

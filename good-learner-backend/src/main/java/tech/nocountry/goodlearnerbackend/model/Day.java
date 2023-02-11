@@ -11,6 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString
 @Entity
+@Table(name = "day")
 public class Day implements Serializable {
 
     @Id

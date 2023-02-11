@@ -14,10 +14,11 @@ import java.io.Serializable;
 @Table(name = "subject")
 public class Subject implements Serializable {
     @Id
-    @Column(name = "id_subject")
+    @Column(name = "id_subject", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long subjectId;
 
-    @Column(name = "subject_name")
-    private String subjectName;
+    @Column(name = "subject_name", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private SubjectName subjectName;
 }

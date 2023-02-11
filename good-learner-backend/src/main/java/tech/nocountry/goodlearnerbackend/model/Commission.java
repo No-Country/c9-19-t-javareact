@@ -16,7 +16,7 @@ public class Commission implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_commission", nullable = false)
+    @Column(name = "id_commission", nullable = false, unique = true)
     private Long commissionId;
 
     @Column(name = "course", nullable = false)
@@ -32,9 +32,9 @@ public class Commission implements Serializable {
     @JoinColumn(name = "shift_id", nullable = false)
     private Shift shift;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
-    private Student student;
+    private Student student;*/
 
 
 

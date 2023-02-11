@@ -21,10 +21,10 @@ public class GoodLearnerBackendApplication {
 		TutorRepository tutorRepository = context.getBean(TutorRepository.class);
 
 		Tutor tutor = new Tutor("David", "Ayala", "40975757", LocalDate.of(1989, 9, 9), "david@gmail.com", LocalDateTime.now(), "+5491159117241", "padre");
-		Student student = new Student("Jazmin", "Ayala", "51787181", LocalDate.of(2012, 10, 19), null, LocalDateTime.now(), null, LocalDate.of(2020, 3, 3), tutor);
+		//Student student = new Student("Jazmin", "Ayala", "51787181", LocalDate.of(2012, 10, 19), null, LocalDateTime.now(), null, LocalDate.of(2020, 3, 3), tutor);
 
 		tutorRepository.save(tutor);
-		studentRepository.save(student);
+		//studentRepository.save(student);
 		System.out.println("Hello World");
 	}
 

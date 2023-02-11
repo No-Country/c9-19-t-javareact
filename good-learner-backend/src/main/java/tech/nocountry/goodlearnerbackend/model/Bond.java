@@ -5,21 +5,22 @@ import lombok.*;
 
 import java.io.Serializable;
 
+
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name = "period")
-public class Period implements Serializable {
+@Table(name = "bond")
+public class Bond implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_period", nullable = false, unique = true)
-    private Long idPeriod;
+    @Column(name = "id_bond", nullable = false, unique = true)
+    private Long idBond;
 
-    @ManyToOne
-    @JoinColumn(name = "type_period_id", nullable = false)
-    private TypePeriod typePeriod;
+    @Column(name = "bond_name", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BondName bondName;
 }
