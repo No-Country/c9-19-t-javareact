@@ -1,2 +1,9 @@
-package tech.nocountry.goodlearnerbackend.repository;public interface PeriodRepository {
+package tech.nocountry.goodlearnerbackend.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import tech.nocountry.goodlearnerbackend.model.Period;
+
+@Repository
+public interface PeriodRepository extends JpaRepository<Period, Long> {
 }

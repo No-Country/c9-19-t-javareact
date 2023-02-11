@@ -34,4 +34,13 @@ public class Qualification {
     @JoinColumn(name = "type_qualification", nullable = false)
     private TypeQualification typeQualification;
 
+    @Column(name = "numerical_qualification")
+    private Integer numericalNote;
+
+    @ManyToOne
+    @JoinColumn(name = "scale_qualification")
+    private ScaleQualification scaleQualification;
+
+
+
 }
