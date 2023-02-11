@@ -2,7 +2,6 @@ package tech.nocountry.goodlearnerbackend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -39,10 +38,9 @@ public class Qualification {
     private Integer numericalNote;
 
     @ManyToOne
-    @JoinColumn(name = "scale_qualification_id", nullable = false)
+    @JoinColumn(name = "scale_qualification_id")
     private ScaleQualification scaleQualification;
 
     @Column(name = "message")
     private String message;
-
 }
