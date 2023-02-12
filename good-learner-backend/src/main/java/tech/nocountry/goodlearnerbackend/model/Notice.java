@@ -32,6 +32,6 @@ public class Notice implements Serializable {
     private Boolean isAvailable;
 
     @ManyToOne
-    @JoinColumn(name = "commission_subject_id")
+    @JoinColumn(name = "commission_subject_id", nullable = false)
     private CommissionSubject commissionSubject;
 }
