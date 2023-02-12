@@ -2,13 +2,15 @@ import { Card, Button, ButtonGroup } from 'react-bootstrap';
 import { User } from '../../models/User';
 
 interface Props {
-  user: User | any;
-  handleUpdateUsuario: (elem: any) => void;
+  user: User;
+  handleUpdateUser: (elem: any) => void;
+  handleDeleteUser: (elem: any) => void;
 }
 
 const CardPerson: React.FC<Props> = ({
   user,
-  handleUpdateUsuario,
+  handleUpdateUser,
+  handleDeleteUser
 }) => {
   return (
     <Card>
@@ -23,10 +25,10 @@ const CardPerson: React.FC<Props> = ({
           <Button variant="primary">
             <i className="fa fa-eye"></i>
           </Button>
-          <Button variant="warning" onClick={() => handleUpdateUsuario(user)}>
+          <Button variant="warning" onClick={() => handleUpdateUser(user)}>
             <i className="fa fa-edit"></i>
           </Button>
-          <Button variant="danger">
+          <Button variant="danger" onClick={() => handleDeleteUser(user.id)}>
             <i className="fa fa-trash"></i>
           </Button>
         </ButtonGroup>

@@ -6,13 +6,15 @@ import { User } from '../models/User';
 // compoents
 import FormUsuario from '../components/formUsuario';
 import ButtonMain from '../components/UI/ButtonMain';
+import CardPerson from '../components/UI/CardPerson';
 
 // UI
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-import CardPerson from '../components/UI/CardPerson';
+import { nanoid } from 'nanoid'
+
 
 function Usuarios() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
@@ -26,31 +28,40 @@ function Usuarios() {
         setSelectedUser(new User());
     };
 
-    const handleUpdateUsuario = (user: any) => {
+    const handleUpdateUser = (user: User) => {
         setSelectedUser(user);
         setShowFormUser(true);
+    }
+
+    const handleDeleteUser = (userId: string) => {
+        setUsers((prevState) => (
+            prevState.filter(user => user.id !== userId)
+        ))
     }
 
     const handleSaveFormUser = (user: any) => {
         if (user.id === undefined) {
             console.log('Guardo');
-            console.log(user);
+            user.id = nanoid()
+            setUsers((prevState) => (
+                [...prevState, user]
+            ))
         } else {
             console.log('Modifico');
-            console.log(user);
-        }
-        setUsers((prevState) => prevState.map((item) => {
-            if (item.id === user.id) {
-                return {
-                    ...item, name: user.name,
-                    last_name: user.last_name,
-                    dni: user.dni, username: user.username,
-                    password: user.password
+            setUsers((prevState) => prevState.map((item) => {
+                if (item.id === user.id) {
+                    return {
+                        ...item, name: user.name,
+                        last_name: user.last_name,
+                        dni: user.dni, username: user.username,
+                        password: user.password
 
-                };
-            }
-            return item;
-        }))
+                    };
+                }
+                return item;
+            }))
+        }
+
         handleCloseFormUser();
     };
 
@@ -78,7 +89,8 @@ function Usuarios() {
                                 <Col key={user.id}>
                                     <CardPerson
                                         user={user}
-                                        handleUpdateUsuario={handleUpdateUsuario}
+                                        handleUpdateUser={handleUpdateUser}
+                                        handleDeleteUser={handleDeleteUser}
                                     />
                                 </Col>
                             ))}
