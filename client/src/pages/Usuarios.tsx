@@ -1,5 +1,4 @@
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // Models
 import { User } from '../models/User';
@@ -9,125 +8,92 @@ import FormUsuario from '../components/formUsuario';
 import ButtonMain from '../components/UI/ButtonMain';
 
 // UI
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Table from 'react-bootstrap/Table';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
-function Usuarios () {
-    
+import CardPerson from '../components/UI/CardPerson';
+
+function Usuarios() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
-    const [selectedUser, setSelectedUser] = useState<User>(new User());
-
-    const data = [
-        {id: 1, rol_id: 1, nombre: 'Juan', apellido: 'Guzmán', dni: '12341456', tipo: 'Estudiante'},
-        {id: 2, rol_id: 2, nombre: 'Marcos', apellido: 'Díaz', dni: '12341456', tipo: 'Profesor'},
-        {id: 3, rol_id: 3, nombre: 'Romina', apellido: 'Pérez', dni: '12341456', tipo: 'Tutor'},
-    ]
-
-    useEffect(() => {
-    setSelectedUser(User.parseItem(new User()))
-    }, [])
-
-    const handleShowFormUser = () => {
-    setShowFormUser(true);
-    }
+    const [selectedUser, setSelectedUser] = useState({});
+    const [users, setUsers] = useState([{ id: "1", rol_id: "1", name: 'Juan', last_name: 'Guzmán', dni: 12341456 },
+    { id: "2", rol_id: "2", name: 'Marcos', last_name: 'Díaz', dni: 12341456 },
+    { id: "3", rol_id: "3", name: 'Romina', last_name: 'Pérez', dni: 12341456 }])
 
     const handleCloseFormUser = () => {
-    setShowFormUser(false);
-    setSelectedUser(new User())
+        setShowFormUser(false);
+        setSelectedUser(new User());
+    };
+
+    const handleUpdateUsuario = (user: any) => {
+        setSelectedUser(user);
+        setShowFormUser(true);
     }
 
-    const handleUpdateUsuario = (elem: any) => {
-    let user = User.parseItem(
-                {'id': elem.id,
-                'rol_id': elem.rol_id,
-                'name': elem.nombre,
-                'last_name': elem.apellido,
-                'dni': elem.dni,
-                'username': '40852741',
-                'password': 'password',}
-                );
-            
-    setSelectedUser(user);
-    handleShowFormUser();
-    }
+    const handleSaveFormUser = (user: any) => {
+        if (user.id === undefined) {
+            console.log('Guardo');
+            console.log(user);
+        } else {
+            console.log('Modifico');
+            console.log(user);
+        }
+        setUsers((prevState) => prevState.map((item) => {
+            if (item.id === user.id) {
+                return {
+                    ...item, name: user.name,
+                    last_name: user.last_name,
+                    dni: user.dni, username: user.username,
+                    password: user.password
 
-    const handleSaveFormUser = (user: User) => {
-    if (user.id === undefined) {
-        console.log('Guardo');
-        console.log(user);
-    } else {
-        console.log('Modifico');
-        console.log(user);
-    }
-    handleCloseFormUser();
-    }
+                };
+            }
+            return item;
+        }))
+        handleCloseFormUser();
+    };
 
-
-    return (    
+    return (
         <>
             <Container>
-                <Row className='header'>
+                <Row className="header">
                     <Col xs={9}>
-                        <h3 className='header-title'>Usuarios</h3>
-                        <div className='header-line'></div>
+                        <h3 className="header-title">Usuarios</h3>
+                        <div className="header-line"></div>
                     </Col>
-                    <Col xs={3} >
+                    <Col xs={3}>
                         <ButtonMain
                             text={'Agregar Usuario'}
                             size="md"
-                            icon='fa fa-add'
-                            onClick={handleShowFormUser}
+                            icon="fa fa-add"
+                            onClick={() => setShowFormUser(true)}
                         />
-                    </Col> 
+                    </Col>
                 </Row>
                 <Row>
                     <Container>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                            <th>#</th>
-                            <th>Nombre y Apellido</th>
-                            <th>Tipo</th>
-                            <th>Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                data.map((elem: any) => (
-                                    <tr>
-                                        <td>{elem.id}</td>
-                                        <td>{elem.nombre} {elem.apellido}</td>
-                                        <td>{elem.tipo}</td>
-                                        <td> 
-                                            <ButtonGroup>
-                                                <Button variant="primary"> 
-                                                    <i className='fa fa-eye'></i>
-                                                </Button>
-                                                <Button variant="warning" onClick={() => handleUpdateUsuario(elem)}> 
-                                                    <i className='fa fa-edit'></i>
-                                                </Button>
-                                                <Button variant="danger">
-                                                    <i className='fa fa-trash'></i>
-                                                </Button>
-                                            </ButtonGroup>
-                                        </td>
-                                    </tr>
-
-                                ))
-                            }
-                        </tbody>
-                    </Table>  
-                    </Container>                        
-                </Row>  
-                <FormUsuario show={showFormUser} handleClose={handleCloseFormUser} handleSave={handleSaveFormUser} user={selectedUser}/>
-
+                        <Row xs={1} md={2} lg={3} xl={4} className="g-2">
+                            {users.map((user: any) => (
+                                <Col key={user.id}>
+                                    <CardPerson
+                                        user={user}
+                                        handleUpdateUsuario={handleUpdateUsuario}
+                                    />
+                                </Col>
+                            ))}
+                        </Row>
+                    </Container>
+                </Row>
+                <FormUsuario
+                    show={showFormUser}
+                    handleClose={handleCloseFormUser}
+                    handleSave={handleSaveFormUser}
+                    user={selectedUser}
+                />
             </Container>
-        </>  
-    )
+        </>
+    );
 }
 
 export default Usuarios;
