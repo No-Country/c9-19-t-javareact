@@ -43,10 +43,26 @@ public class UsuarioController {
 		}
 	}
 
-	@GetMapping("/area/administrador")
-	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
-	public ResponseEntity<?> accesoSoloAdministrador() {
-		return new ResponseEntity<>("Eres administrador", HttpStatus.OK);
+	@GetMapping("/area/administrator")
+	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
+	public ResponseEntity<?> accesoSoloAdministrador() throws Exception {
+		try{
+			return new ResponseEntity<>("You are administrator", HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/area/student")
+	@PreAuthorize("hasAuthority('STUDENT')")
+	public ResponseEntity<?> accessStudent() {
+		return new ResponseEntity<String>("Yor are Student", HttpStatus.OK);
+	}
+
+	@GetMapping("/area/teacher")
+	@PreAuthorize("hasAuthority('TEACHER')")
+	public ResponseEntity<?> accessTeacher() {
+		return new ResponseEntity<String>("Yor are Teacher", HttpStatus.OK);
 	}
 
 	@GetMapping("/area/usuario-restringido")

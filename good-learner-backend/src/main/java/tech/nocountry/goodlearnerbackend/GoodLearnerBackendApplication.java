@@ -29,7 +29,8 @@ public class GoodLearnerBackendApplication {
 		//tutorRepository.save(tutor);
 		RolRepository rolRepository = context.getBean(RolRepository.class);
 
-		rolRepository.save(new Rol(NombreRol.ADMINISTRADOR));
+		//rolRepository.save(new Rol(NombreRol.TEACHER));
+
 
 		//studentRepository.save(student);*/
 		System.out.println("Hello World");
