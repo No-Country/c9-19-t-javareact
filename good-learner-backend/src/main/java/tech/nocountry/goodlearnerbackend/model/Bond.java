@@ -5,6 +5,10 @@ import lombok.*;
 
 import java.io.Serializable;
 
+/**
+ * Vínculo entre Estudiante y Tutor.
+ * Ej: Padre, Madre, etc.
+ */
 
 @AllArgsConstructor
 @RequiredArgsConstructor
