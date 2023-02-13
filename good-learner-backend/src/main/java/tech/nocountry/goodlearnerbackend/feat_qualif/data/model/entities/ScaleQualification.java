@@ -1,7 +1,8 @@
-package tech.nocountry.goodlearnerbackend.model;
+package tech.nocountry.goodlearnerbackend.feat_qualif.data.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import tech.nocountry.goodlearnerbackend.feat_qualif.data.model.enums.ScaleQualificationName;
 
 import java.io.Serializable;
 
@@ -23,4 +24,7 @@ public class ScaleQualification implements Serializable {
     @Enumerated(EnumType.STRING)
     private ScaleQualificationName scaleQualificationName;
 
+    public ScaleQualification(ScaleQualificationName scaleQualificationName){
+        this.scaleQualificationName = scaleQualificationName;
+    }
 }

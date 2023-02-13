@@ -2,6 +2,7 @@ package tech.nocountry.goodlearnerbackend.feat_auth.domian.controladores;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UsuarioDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UsuarioLoginDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.UsuarioService;
+import tech.nocountry.goodlearnerbackend.feat_auth.jwt.JwtProvider;
 
 @RestController
 @RequestMapping("api/user")
 public class UsuarioController {
-
 	@Autowired
 	private UsuarioService usuarioService;
 
@@ -45,9 +46,14 @@ public class UsuarioController {
 
 	@GetMapping("/area/administrator")
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
-	public ResponseEntity<?> accesoSoloAdministrador() throws Exception {
+	public ResponseEntity<?> accesoSoloAdministrador(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) throws Exception {
 		try{
-			return new ResponseEntity<>("You are administrator", HttpStatus.OK);
+			String token = null;
+			if (authorization != null && authorization.startsWith("Bearer")) {
+				 token = authorization.replace("Bearer ", "");
+			}
+			String username = JwtProvider.getNombreUsuario(token);
+			return new ResponseEntity<>("You are Administrator. Username: "+username, HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}

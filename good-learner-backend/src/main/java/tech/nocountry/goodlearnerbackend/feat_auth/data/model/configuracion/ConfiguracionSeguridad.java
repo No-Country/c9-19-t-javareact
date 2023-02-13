@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.feat_auth.jwt.configuracion;
+package tech.nocountry.goodlearnerbackend.feat_auth.data.model.configuracion;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

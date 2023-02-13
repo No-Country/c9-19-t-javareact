@@ -1,7 +1,8 @@
-package tech.nocountry.goodlearnerbackend.model;
+package tech.nocountry.goodlearnerbackend.feat_qualif.data.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import tech.nocountry.goodlearnerbackend.feat_qualif.data.model.enums.TypePeriodName;
 
 import java.io.Serializable;
 

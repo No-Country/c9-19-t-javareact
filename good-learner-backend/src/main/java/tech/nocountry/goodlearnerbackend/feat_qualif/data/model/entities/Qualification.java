@@ -1,7 +1,9 @@
-package tech.nocountry.goodlearnerbackend.model;
+package tech.nocountry.goodlearnerbackend.feat_qualif.data.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import tech.nocountry.goodlearnerbackend.model.CommissionSubject;
+import tech.nocountry.goodlearnerbackend.model.Student;
 
 @RequiredArgsConstructor
 @AllArgsConstructor

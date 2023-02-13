@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.model;
+package tech.nocountry.goodlearnerbackend.feat_qualif.data.model.enums;
 
 public enum ScaleQualificationName {
     EXCELLENT,

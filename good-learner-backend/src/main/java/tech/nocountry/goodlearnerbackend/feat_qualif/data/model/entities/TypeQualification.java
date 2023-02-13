@@ -1,7 +1,8 @@
-package tech.nocountry.goodlearnerbackend.model;
+package tech.nocountry.goodlearnerbackend.feat_qualif.data.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import tech.nocountry.goodlearnerbackend.feat_qualif.data.model.enums.TypeQualificationName;
 
 import java.io.Serializable;
 
@@ -21,4 +22,8 @@ public class TypeQualification implements Serializable {
     @Column(name = "type_qualification_name", nullable = false)
     @Enumerated(EnumType.STRING)
     private TypeQualificationName typeQualificationName;
+
+    public TypeQualification(TypeQualificationName typeQualificationName){
+        this.typeQualificationName = typeQualificationName;
+    }
 }
