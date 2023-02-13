@@ -34,7 +34,7 @@ const ButtonSecondary: React.FC<Props> = ({ className, text, size, icon, onClick
     .btn-lg {
       height: 4rem;
     }
-    i {
+    .btn-secondary i {
       margin-left: .5rem;
     }
     `}
