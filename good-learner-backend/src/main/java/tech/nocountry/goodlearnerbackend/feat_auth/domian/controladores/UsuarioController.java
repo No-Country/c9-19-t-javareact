@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.feat_auth.modelos.controladores;
+package tech.nocountry.goodlearnerbackend.feat_auth.domian.controladores;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import tech.nocountry.goodlearnerbackend.feat_auth.dto.UsuarioDTO;
-import tech.nocountry.goodlearnerbackend.feat_auth.dto.UsuarioLoginDTO;
-import tech.nocountry.goodlearnerbackend.feat_auth.servicios.UsuarioService;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UsuarioDTO;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UsuarioLoginDTO;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.UsuarioService;
 
 @RestController
 @RequestMapping("api/user")

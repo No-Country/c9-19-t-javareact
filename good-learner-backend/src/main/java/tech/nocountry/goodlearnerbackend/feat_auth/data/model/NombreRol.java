@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.feat_auth.modelos;
+package tech.nocountry.goodlearnerbackend.feat_auth.data.model;
 
 public enum NombreRol {
 	ADMINISTRATOR,

@@ -1,8 +1,8 @@
-package tech.nocountry.goodlearnerbackend.feat_auth.modelos.repositorios;
+package tech.nocountry.goodlearnerbackend.feat_auth.data.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import tech.nocountry.goodlearnerbackend.feat_auth.modelos.Usuario;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Usuario;
 
 import java.util.Optional;
 

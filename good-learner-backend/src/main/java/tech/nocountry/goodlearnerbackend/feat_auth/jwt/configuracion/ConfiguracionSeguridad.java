@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import tech.nocountry.goodlearnerbackend.feat_auth.jwt.JwtAccesoDenegadoError;
 import tech.nocountry.goodlearnerbackend.feat_auth.jwt.JwtAutenticacionError;
 import tech.nocountry.goodlearnerbackend.feat_auth.jwt.JwtFiltroPeticiones;
-import tech.nocountry.goodlearnerbackend.feat_auth.servicios.DetalleUsuarioImpl;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.DetalleUsuarioImpl;
 
 
 @Configuration

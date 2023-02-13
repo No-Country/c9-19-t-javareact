@@ -1,10 +1,10 @@
-package tech.nocountry.goodlearnerbackend.feat_auth.modelos;
+package tech.nocountry.goodlearnerbackend.feat_auth.data.model;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import tech.nocountry.goodlearnerbackend.model.Person;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -31,6 +31,9 @@ public class Usuario implements UserDetails {
 	@JoinColumn(name = "id_rol", nullable = false)
 	private Rol rol;
 
+	@ManyToOne
+	@JoinColumn(name = "person_id")
+	private Person person;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -101,6 +104,5 @@ public class Usuario implements UserDetails {
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-	
-	
+
 }

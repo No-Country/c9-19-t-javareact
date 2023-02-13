@@ -1,10 +1,10 @@
-package tech.nocountry.goodlearnerbackend.feat_auth.dto;
+package tech.nocountry.goodlearnerbackend.feat_auth.domian.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import tech.nocountry.goodlearnerbackend.feat_auth.modelos.NombreRol;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.NombreRol;
 
 public class UsuarioDTO {
 

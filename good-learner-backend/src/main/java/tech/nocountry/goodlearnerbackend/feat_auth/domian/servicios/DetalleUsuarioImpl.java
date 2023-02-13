@@ -1,12 +1,12 @@
-package tech.nocountry.goodlearnerbackend.feat_auth.servicios;
+package tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import tech.nocountry.goodlearnerbackend.feat_auth.modelos.Usuario;
-import tech.nocountry.goodlearnerbackend.feat_auth.modelos.repositorios.UsuarioRepository;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Usuario;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UsuarioRepository;
 
 
 @Service

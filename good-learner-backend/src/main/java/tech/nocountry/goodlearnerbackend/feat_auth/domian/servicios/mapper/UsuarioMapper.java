@@ -1,9 +1,9 @@
-package tech.nocountry.goodlearnerbackend.feat_auth.servicios.mapper;
+package tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import tech.nocountry.goodlearnerbackend.feat_auth.dto.UsuarioDTO;
-import tech.nocountry.goodlearnerbackend.feat_auth.modelos.Usuario;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UsuarioDTO;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Usuario;
 
 @Mapper(componentModel = "spring")
 public interface UsuarioMapper {

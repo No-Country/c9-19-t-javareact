@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.feat_auth.dto;
+package tech.nocountry.goodlearnerbackend.feat_auth.domian.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.feat_auth.servicios;
+package tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,14 +7,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import tech.nocountry.goodlearnerbackend.feat_auth.dto.UsuarioDTO;
-import tech.nocountry.goodlearnerbackend.feat_auth.dto.UsuarioLoginDTO;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UsuarioDTO;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UsuarioLoginDTO;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.mapper.UsuarioMapper;
 import tech.nocountry.goodlearnerbackend.feat_auth.jwt.JwtProvider;
-import tech.nocountry.goodlearnerbackend.feat_auth.modelos.Rol;
-import tech.nocountry.goodlearnerbackend.feat_auth.modelos.Usuario;
-import tech.nocountry.goodlearnerbackend.feat_auth.modelos.repositorios.RolRepository;
-import tech.nocountry.goodlearnerbackend.feat_auth.modelos.repositorios.UsuarioRepository;
-import tech.nocountry.goodlearnerbackend.feat_auth.servicios.mapper.UsuarioMapper;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Rol;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Usuario;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.RolRepository;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UsuarioRepository;
 
 
 @Service

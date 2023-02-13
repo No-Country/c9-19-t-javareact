@@ -9,7 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
-import tech.nocountry.goodlearnerbackend.feat_auth.servicios.DetalleUsuarioImpl;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.DetalleUsuarioImpl;
 
 import java.io.IOException;
 
