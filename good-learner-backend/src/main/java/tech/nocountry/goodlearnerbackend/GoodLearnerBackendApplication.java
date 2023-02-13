@@ -3,10 +3,13 @@ package tech.nocountry.goodlearnerbackend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import tech.nocountry.goodlearnerbackend.model.Student;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Role;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.RoleName;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.RoleRepository;
 import tech.nocountry.goodlearnerbackend.model.Tutor;
 import tech.nocountry.goodlearnerbackend.repository.StudentRepository;
 import tech.nocountry.goodlearnerbackend.repository.TutorRepository;
+
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,8 +26,15 @@ public class GoodLearnerBackendApplication {
 		Tutor tutor = new Tutor("David", "Ayala", "40975757", LocalDate.of(1989, 9, 9), "david@gmail.com", LocalDateTime.now(), "+5491159117241", "padre");
 		//Student student = new Student("Jazmin", "Ayala", "51787181", LocalDate.of(2012, 10, 19), null, LocalDateTime.now(), null, LocalDate.of(2020, 3, 3), tutor);
 
-		tutorRepository.save(tutor);
-		//studentRepository.save(student);
+		//tutorRepository.save(tutor);
+		RoleRepository rolRepository = context.getBean(RoleRepository.class);
+
+		rolRepository.save(new Role(RoleName.TEACHER));
+		rolRepository.save(new Role(RoleName.STUDENT));
+		rolRepository.save(new Role(RoleName.ADMINISTRATOR));
+
+
+		//studentRepository.save(student);*/
 		System.out.println("Hello World");
 	}
 
