@@ -7,12 +7,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "role")
 public class Rol {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_role")
 	private Long id;
-	
+
+	@Column(name = "role_name")
     @Enumerated(EnumType.STRING)
     private NombreRol nombreRol;
 

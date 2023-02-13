@@ -3,6 +3,8 @@ package tech.nocountry.goodlearnerbackend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.NombreRol;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Rol;
 import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.RolRepository;
 import tech.nocountry.goodlearnerbackend.model.Tutor;
 import tech.nocountry.goodlearnerbackend.repository.StudentRepository;
@@ -27,7 +29,9 @@ public class GoodLearnerBackendApplication {
 		//tutorRepository.save(tutor);
 		RolRepository rolRepository = context.getBean(RolRepository.class);
 
-		//rolRepository.save(new Rol(NombreRol.TEACHER));
+		rolRepository.save(new Rol(NombreRol.TEACHER));
+		rolRepository.save(new Rol(NombreRol.STUDENT));
+		rolRepository.save(new Rol(NombreRol.ADMINISTRATOR));
 
 
 		//studentRepository.save(student);*/

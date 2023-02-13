@@ -11,6 +11,7 @@ import java.util.List;
 
 
 @Entity
+@Table(name = "user")
 public class Usuario implements UserDetails {
 
 	/**
@@ -22,13 +23,14 @@ public class Usuario implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(unique = true)
+	@Column(name = "username", unique = true)
 	private String nombreUsuario;
 
+	@Column(name = "password")
 	private String clave;
 
 	@ManyToOne
-	@JoinColumn(name = "id_rol", nullable = false)
+	@JoinColumn(name = "role_id", nullable = false)
 	private Rol rol;
 
 	@ManyToOne
