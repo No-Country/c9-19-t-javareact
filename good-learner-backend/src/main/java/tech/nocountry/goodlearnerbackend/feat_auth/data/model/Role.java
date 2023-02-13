@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "role")
-public class Rol {
+public class Role {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +17,9 @@ public class Rol {
 
 	@Column(name = "role_name")
     @Enumerated(EnumType.STRING)
-    private NombreRol nombreRol;
+    private RoleName nombreRol;
 
-	public Rol(NombreRol nombreRol) {this.nombreRol = nombreRol;}
+	public Role(RoleName nombreRol) {this.nombreRol = nombreRol;}
 
 	public Long getId() {
 		return id;
@@ -29,11 +29,11 @@ public class Rol {
 		this.id = id;
 	}
 
-	public NombreRol getNombreRol() {
+	public RoleName getNombreRol() {
 		return nombreRol;
 	}
 
-	public void setNombreRol(NombreRol nombreRol) {
+	public void setNombreRol(RoleName nombreRol) {
 		this.nombreRol = nombreRol;
 	}
     

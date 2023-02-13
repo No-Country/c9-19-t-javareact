@@ -7,29 +7,29 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UsuarioDTO;
-import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UsuarioLoginDTO;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserDTO;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserLoginDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.UsuarioService;
 
 @RestController
 @RequestMapping("api/user")
-public class UsuarioController {
+public class UserController {
 
 	@Autowired
 	private UsuarioService usuarioService;
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@Valid @RequestBody UsuarioLoginDTO usuarioLogin, BindingResult bindingResult) {
+	public ResponseEntity<?> login(@Valid @RequestBody UserLoginDTO usuarioLogin, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return new ResponseEntity<String>("El usuario y la clave son obligatorios", HttpStatus.BAD_REQUEST);
 		}
 
-		return new ResponseEntity<UsuarioDTO>(usuarioService.login(usuarioLogin), HttpStatus.OK);
+		return new ResponseEntity<UserDTO>(usuarioService.login(usuarioLogin), HttpStatus.OK);
 
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<?> crear(@Valid @RequestBody UsuarioDTO usuario, BindingResult validaciones)
+	public ResponseEntity<?> crear(@Valid @RequestBody UserDTO usuario, BindingResult validaciones)
 			throws Exception {
 
 		if (validaciones.hasErrors()) {
@@ -37,7 +37,7 @@ public class UsuarioController {
 		}
 		
 		try {
-			return new ResponseEntity<UsuarioDTO>(usuarioService.crear(usuario), HttpStatus.OK);
+			return new ResponseEntity<UserDTO>(usuarioService.crear(usuario), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}

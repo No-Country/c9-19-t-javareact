@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class Usuario implements UserDetails {
+public class User implements UserDetails {
 
 	/**
 	 * 
@@ -31,7 +31,7 @@ public class Usuario implements UserDetails {
 
 	@ManyToOne
 	@JoinColumn(name = "role_id", nullable = false)
-	private Rol rol;
+	private Role rol;
 
 	@ManyToOne
 	@JoinColumn(name = "person_id")
@@ -99,11 +99,11 @@ public class Usuario implements UserDetails {
 		this.clave = clave;
 	}
 
-	public Rol getRol() {
+	public Role getRol() {
 		return rol;
 	}
 
-	public void setRol(Rol rol) {
+	public void setRol(Role rol) {
 		this.rol = rol;
 	}
 

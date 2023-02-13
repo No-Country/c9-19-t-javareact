@@ -5,19 +5,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Usuario;
-import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UsuarioRepository;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.User;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UserRepository;
 
 
 @Service
 public class DetalleUsuarioImpl implements UserDetailsService {
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UserRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = usuarioRepository.buscarPorNombreUsuario(username).orElse(null);
+		User usuario = usuarioRepository.buscarPorNombreUsuario(username).orElse(null);
 		if (usuario == null)
 			throw new UsernameNotFoundException("No existe el usuario");
 		return usuario;

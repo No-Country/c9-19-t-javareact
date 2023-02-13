@@ -4,9 +4,9 @@ package tech.nocountry.goodlearnerbackend.feat_auth.domian.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import tech.nocountry.goodlearnerbackend.feat_auth.data.model.NombreRol;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.RoleName;
 
-public class UsuarioDTO {
+public class UserDTO {
 
 	private Long id;
 	
@@ -20,7 +20,7 @@ public class UsuarioDTO {
 	private String clave;
 	
 	@NotNull
-	private NombreRol rol;
+	private RoleName rol;
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private String token;
@@ -41,11 +41,11 @@ public class UsuarioDTO {
 		this.clave = clave;
 	}
 
-	public NombreRol getRol() {
+	public RoleName getRol() {
 		return rol;
 	}
 
-	public void setRol(NombreRol rol) {
+	public void setRol(RoleName rol) {
 		this.rol = rol;
 	}
 
