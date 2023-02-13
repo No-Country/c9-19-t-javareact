@@ -164,7 +164,7 @@ function FormUsuario({show, handleClose, handleSave, user}: Props) {
                                         <option>--Seleccione un rol del usuario--</option>
                                         <option value="1"> Profesor </option>
                                         <option value="2"> Tutor </option>
-                                        <option value="3"> Alumno </option>
+                                        <option value="3"> Estudiante </option>
                                     </Form.Select>
                                 </Form.Group>
                             </Col>

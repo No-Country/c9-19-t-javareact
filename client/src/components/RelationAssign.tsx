@@ -1,0 +1,151 @@
+
+import { useState, useEffect } from 'react';
+// Models
+import { User } from '../models/User';
+// UI
+import ButtonMain from './UI/ButtonMain';
+import ButtonSecondary from './UI/ButtonSecondary';
+import Modal  from 'react-bootstrap/Modal';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Form from 'react-bootstrap/Form';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+
+export interface Props {
+    show: boolean,
+    user: User,
+    relations: Array<User>, 
+    users: Array<User>,
+    handleClose: () => void,
+    handleSave: (value: Array<User>) => void,
+}
+
+function RelationAssign({show, user, relations, users, handleClose, handleSave}: Props) {
+ 
+    const [newRelations, setNewRelations] = useState<Array<User>>([])
+
+    useEffect(() => {
+        setNewRelations(relations)
+    }, [relations])
+    
+    
+    const handleCloseModal = () => {
+        handleClose();
+    }
+    const handleSaveData = () => {
+        handleSave(relations);
+    }
+
+    const handleChange = (e: { target: { value: string | undefined; }; }) => {
+        let user = users.find((elem) => elem.id === e.target.value);
+        console.log(user)
+        if (user) {
+            setNewRelations([...newRelations, user]);
+        }
+
+    };
+
+    const onClickDeleteRelation = (id: string) => {
+        setNewRelations(newRelations.filter( (r) => r.id != id));
+    }
+      
+    return (
+        <>
+        <Modal 
+            show={show} 
+            onHide={handleCloseModal} 
+            keyboard={false} 
+            backdrop="static"  
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+                <Modal.Title>
+                    {
+                        user.rol_id === '2'
+                        ?
+                        'Asignar estudiante al tutor'
+                        :
+                        'Asignar tutor al estudiante'
+                    }
+                </Modal.Title>
+            </Modal.Header>
+            
+            <Modal.Body>
+                <Container>
+                    <Form>
+                        <Row>
+                            <Col xs={12} md={12}>
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                    <Form.Label>Asignar {user.rol_id === '2' ? 'estudiante' : 'tutor'}</Form.Label>
+                                    <Form.Select 
+                                        name="comision_id"
+                                        onChange={handleChange}
+                                        value={''}
+                                        disabled={user.rol_id === '3' && newRelations.length === 1}
+                                    >
+                                        <option>--Seleccione un {user.rol_id === '2' ? 'estudiante' : 'tutor'} --</option>
+                                        {
+                                            users.map((elem)=> (
+                                                <option value={elem.id}> {elem.name} {elem.last_name}</option>
+                                            ))
+                                        }
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                    </Form>
+                    {
+                        newRelations.length > 0
+                        &&
+                        <Container>                            
+                        <h4> Relaciones </h4>
+                            <ListGroup>
+                                {
+                                    newRelations.map((elem) => (
+                                        <ListGroup.Item className="d-flex justify-content-between align-items-center">
+                                            {elem.name} 
+                                            &nbsp;
+                                            { elem.last_name} 
+                                            <Button
+                                                style={{height: 'fit-content'}}
+                                                variant="danger"
+                                                size='sm' 
+                                                onClick={() => onClickDeleteRelation(elem.id || '0')}
+                                            >
+                                              <i className='fa fa-trash'></i>  
+                                            </Button>    
+                                        </ListGroup.Item>
+                                    ))
+                                }
+                            </ListGroup>
+                        </Container>
+                    }
+                   
+                </Container>
+            </Modal.Body>
+            
+            <Modal.Footer>
+                
+                <ButtonSecondary
+                    text={'Cancelar'}
+                    size="md"
+                    icon='fa fa-times'
+                    onClick={handleCloseModal}
+                />
+                <ButtonMain
+                    text={'Guardar'}
+                    size="md"
+                    icon='fa fa-save'
+                    onClick={handleSaveData}
+                />
+            </Modal.Footer>
+        </Modal>
+        </>
+      );
+    }
+    
+    export default RelationAssign;
