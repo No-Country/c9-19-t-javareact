@@ -27,4 +27,8 @@ public class Shift implements Serializable {
     @Column(name = "shift_name", nullable = false)
     @Enumerated(EnumType.STRING)
     private ShiftName shiftName;
+
+    public Shift(ShiftName shiftName){
+        this.shiftName = shiftName;
+    }
 }

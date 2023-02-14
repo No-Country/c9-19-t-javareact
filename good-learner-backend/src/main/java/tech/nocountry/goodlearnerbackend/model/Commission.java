@@ -32,11 +32,12 @@ public class Commission implements Serializable {
     @JoinColumn(name = "shift_id", nullable = false)
     private Shift shift;
 
-    /*@ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    private Student student;*/
-
-
+    public Commission(String course, String division, int schoolYear, Shift shift){
+        this.course = course;
+        this.division = division;
+        this.schoolYear = schoolYear;
+        this.shift = shift;
+    }
 
 
 }

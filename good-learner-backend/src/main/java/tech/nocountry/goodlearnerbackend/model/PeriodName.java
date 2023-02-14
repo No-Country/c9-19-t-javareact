@@ -3,7 +3,7 @@ package tech.nocountry.goodlearnerbackend.model;
 /**
  * Periodo en el que se encuentran evaluando
  */
-public enum TypePeriodName {
+public enum PeriodName {
     /**
      * Primer Trimestre
      */

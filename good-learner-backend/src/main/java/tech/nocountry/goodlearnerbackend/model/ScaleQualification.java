@@ -23,4 +23,8 @@ public class ScaleQualification implements Serializable {
     @Enumerated(EnumType.STRING)
     private ScaleQualificationName scaleQualificationName;
 
+    public ScaleQualification(ScaleQualificationName scaleQualificationName){
+        this.scaleQualificationName = scaleQualificationName;
+    }
+
 }

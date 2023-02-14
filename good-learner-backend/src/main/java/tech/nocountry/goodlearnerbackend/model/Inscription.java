@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Locale;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -32,5 +33,9 @@ public class Inscription implements Serializable {
     @JoinColumn(name = "commission_id", nullable = false)
     private Commission commission;
 
-
+    public Inscription(LocalDate inscriptionDate, Student student, Commission commission){
+        this.inscriptionDate = inscriptionDate;
+        this.student = student;
+        this.commission = commission;
+    }
 }

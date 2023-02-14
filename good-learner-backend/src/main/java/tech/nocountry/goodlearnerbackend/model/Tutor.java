@@ -25,8 +25,8 @@ public class Tutor extends Person implements Serializable {
     /*@Temporal(TemporalType.DATE)
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;*/
-    @Column(name = "relationship", nullable = false)
-    private String relationship;
+    @Column(name = "work_phone", nullable = false)
+    private String workPhone;
 
 
     /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "")
@@ -40,10 +40,10 @@ public class Tutor extends Person implements Serializable {
             String email,
             LocalDateTime timeStamp,
             String phone,
-            String relationship
+            String workPhone
     ){
         super(firstName, lastName, document, birthDate, email, timeStamp, phone);
-        this.relationship = relationship;
+        this.workPhone = workPhone;
     }
 
 }

@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -41,8 +42,17 @@ public class CommissionSubject implements Serializable {
     private Commission commissionId;
 
     @Column(name = "start_time", nullable = false)
-    private Time startTime;
+    private LocalTime startTime;
 
     @Column(name = "end_time", nullable = false)
-    private Time endTime;
+    private LocalTime endTime;
+
+    public CommissionSubject(Subject subject, Teacher teacher, Day day, Commission commission, LocalTime startTime, LocalTime endTime){
+        this.subjectId = subject;
+        this.teacherId = teacher;
+        this.dayId = day;
+        this.commissionId = commission;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 }

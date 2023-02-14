@@ -43,4 +43,22 @@ public class Qualification {
 
     @Column(name = "message")
     private String message;
+
+    public Qualification(Student student, CommissionSubject commissionSubject, Period period, TypeQualification typeQualification, String message, Integer numericalNote){
+        this.student = student;
+        this.commissionSubject = commissionSubject;
+        this.period = period;
+        this.typeQualification = typeQualification;
+        this.message = message;
+        this.numericalNote = numericalNote;
+    }
+
+    public Qualification(Student student, CommissionSubject commissionSubject, Period period, TypeQualification typeQualification, String message, ScaleQualification scaleQualification){
+        this.student = student;
+        this.commissionSubject = commissionSubject;
+        this.period = period;
+        this.typeQualification = typeQualification;
+        this.message = message;
+        this.scaleQualification = scaleQualification;
+    }
 }
