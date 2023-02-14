@@ -27,7 +27,7 @@ const Layout = () => {
             <div className="sb-sidenav-toggled">
                 <div className="d-flex" id="wrapper">
                     <SideNav/>
-                    <div className="bg-bone " id="page-content-wrapper">
+                    <div className="bg-bone" id="page-content-wrapper">
                     <Nav/>
                     <Outlet />
                     </div>

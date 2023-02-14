@@ -1,3 +1,6 @@
+body{
+  background-color: #f0f1f3 !important;
+}
 .minW-70 {
   min-width: 70%;
 }
@@ -5,7 +8,9 @@
 .login-container {
   background-color: #14238a;
 }
-
+.dropdown-menu{
+  display:none;
+}
 .placeholder-glow .placeholder {
   -webkit-animation: placeholder-glow 2s ease-in-out infinite;
           animation: placeholder-glow 2s ease-in-out infinite;
@@ -58,7 +63,7 @@
 
 #sidebar-wrapper {
   min-height: 100vh;
-  margin-left: -15rem;
+  margin-left: -15rem; 
   transition: margin 0.25s ease-out;
 }
 
@@ -80,6 +85,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 
 @media (min-width: 768px) {
+
   #sidebar-wrapper {
     margin-left: 0;
   }
@@ -90,7 +96,8 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   }
 
   body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
-    margin-left: -15rem;
+    margin-left: -15rem; 
+    margin-left: 0;
   }
 }
 .bg-blue{
@@ -106,12 +113,16 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     background-color: #f0f1f3 !important;
 }
 .bg-blue .list-group-item{
-    background-color: #14238A !important;
+    background-color: #14238A;
     color:white;
 }
 .bg-blue .list-group-item:hover{
     background-color: #8A91C5 !important;
     color:white;
+}
+.active{
+  background-color: #8A91C5 !important;
+  color:white;
 }
 .input-group{
     width:auto;
@@ -124,4 +135,20 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 .form-control-nav{
     border:none;
     background-color: white;
+}
+/* UI */
+.sidebar-off{
+  margin-left:-15rem !important;
+}
+.sidebar-on{
+  margin-left:0rem !important;
+}
+.profiledropdown{
+  position: absolute !important; 
+  inset: 10px 0px auto auto !important; 
+  margin: 0px !important; 
+  transform: translate(0px, 45px)  !important;
+}
+.rounded-circle{
+  padding:5px;
 }

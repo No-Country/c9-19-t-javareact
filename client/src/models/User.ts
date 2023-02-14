@@ -1,5 +1,5 @@
 export class User {
-    id?: string;
+    id?: number;
     rol_id?: string;
     // rol: Rol
     token_id?: string;
@@ -9,7 +9,7 @@ export class User {
     name?: string;
     last_name?: string;
     dni?: number;
-    username?: number;
+    username?: string;
     password?: string;
 
     static parseItem(raw: any): User {
