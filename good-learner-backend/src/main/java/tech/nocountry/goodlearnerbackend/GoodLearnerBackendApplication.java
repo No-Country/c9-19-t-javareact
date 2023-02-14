@@ -3,6 +3,12 @@ package tech.nocountry.goodlearnerbackend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Role;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.RoleName;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.User;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.RoleRepository;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UserRepository;
 import tech.nocountry.goodlearnerbackend.model.*;
 import tech.nocountry.goodlearnerbackend.repository.*;
 
@@ -13,7 +19,6 @@ import java.time.LocalTime;
 
 @SpringBootApplication
 public class GoodLearnerBackendApplication {
-
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(GoodLearnerBackendApplication.class, args);
 		/**----------------------------------------------------------------------------------------------
@@ -60,29 +65,29 @@ public class GoodLearnerBackendApplication {
 		 * 								CARGA DE TEACHER
 		 */
 		TeacherRepository teacherRepository = context.getBean(TeacherRepository.class);
-		Teacher teacherMatemáticas = teacherRepository.save(new Teacher("David", "Ayala", "40975757", LocalDate.of(1995, 9, 15), "david@gmail.com", LocalDateTime.now(), "+5491159117241", "Profesor de Matemáticas", LocalDate.of(2018, 03, 01)));
-		Teacher teacherLiteratura = teacherRepository.save(new Teacher("Romina", "Gomez", "37975757", LocalDate.of(1990, 5, 9), "romina@gmail.com", LocalDateTime.now(), "+5491159117241", "Profesora de Literatura", LocalDate.of(2015, 03, 01)));
+		Teacher profesorMatematicas = teacherRepository.save(new Teacher("David", "Ayala", "40975757", LocalDate.of(1995, 9, 15), "david@gmail.com", LocalDateTime.now(), "+5491159117241", "Profesor de Matemáticas", LocalDate.of(2018, 03, 01)));
+		Teacher profesorLiteratura = teacherRepository.save(new Teacher("Romina", "Gomez", "37975757", LocalDate.of(1990, 5, 9), "romina@gmail.com", LocalDateTime.now(), "+5491159117241", "Profesora de Literatura", LocalDate.of(2015, 03, 01)));
 		/**----------------------------------------------------------------------------------------------
 		 * 								CARGA DE COMISIÓN_ASIGNATURA
 		 */
 		CommissionSubjectRepository commissionSubjectRepository = context.getBean(CommissionSubjectRepository.class);
-		CommissionSubject matematicas6A = commissionSubjectRepository.save(new CommissionSubject(matematicas, teacherMatemáticas, lunes, sextoA, LocalTime.of(7, 30), LocalTime.of(9, 30)));
-		CommissionSubject literatura6A = commissionSubjectRepository.save(new CommissionSubject(literatura, teacherLiteratura, lunes, sextoA, LocalTime.of(9, 45), LocalTime.of(11, 45)));
+		CommissionSubject matematicas6A = commissionSubjectRepository.save(new CommissionSubject(matematicas, profesorMatematicas, lunes, sextoA, LocalTime.of(7, 30), LocalTime.of(9, 30)));
+		CommissionSubject literatura6A = commissionSubjectRepository.save(new CommissionSubject(literatura, profesorLiteratura, lunes, sextoA, LocalTime.of(9, 45), LocalTime.of(11, 45)));
 
 
 		/**----------------------------------------------------------------------------------------------
 		 * 								CARGA DE TUTOR
 		 */
 		TutorRepository tutorRepository = context.getBean(TutorRepository.class);
-		Tutor tutorAyalaDavid = tutorRepository.save(new Tutor("David", "Ayala", "40975757", LocalDate.of(1989, 9, 9), "david@gmail.com", LocalDateTime.now(), "+5491159117241", "4247-6578"));
+		Tutor tutorAyalaDavid = tutorRepository.save(new Tutor("David", "Ayala", "40965757", LocalDate.of(1989, 9, 9), "david@gmail.com", LocalDateTime.now(), "+5491159117241", "4247-6578"));
 		Tutor tutorHugoRamirez = tutorRepository.save(new Tutor("Hugo", "Ramirez", "22456787", LocalDate.of(1975, 11, 15), "hugo@gmail.com", LocalDateTime.now(), "+5491159117241", "4875-5758"));
 
 		/**----------------------------------------------------------------------------------------------
 		 * 								CARGA DE ESTUDIANTES
 		 */
 		StudentRepository studentRepository = context.getBean(StudentRepository.class);
-		Student estudianteJazminAyala = studentRepository.save(new Student("Jazmin", "Ayala", "51787181", LocalDate.of(2012, 10, 19), null, LocalDateTime.now(), null, null, true));
-		Student estudianteAgustinRamirez = studentRepository.save(new Student("Agustin", "Ramirez", "51787181", LocalDate.of(2012, 1, 9), null, LocalDateTime.now(), null, null, true));
+		Student estudianteJazminAyala = studentRepository.save(new Student("Jazmin", "Ayala", "41787181", LocalDate.of(2012, 10, 19), null, LocalDateTime.now(), null, null, true));
+		Student estudianteAgustinRamirez = studentRepository.save(new Student("Agustin", "Ramirez", "51778181", LocalDate.of(2012, 1, 9), null, LocalDateTime.now(), null, null, true));
 		/**----------------------------------------------------------------------------------------------
 		 * 								CARGA DE VÍNCULOS ESTUDIANTE-TUTOR
 		 */
@@ -136,7 +141,7 @@ public class GoodLearnerBackendApplication {
 		TypeQualification recuperatorioMateria = typeQualificationRepository.save(new TypeQualification(TypeQualificationName.RECOVERY_EXAM_SUBJECT));
 		TypeQualification examenDiagnostico = typeQualificationRepository.save(new TypeQualification(TypeQualificationName.DIAGNOSTIC_EXAM));
 		/**----------------------------------------------------------------------------------------------
-		 * 								CARGA DE TIPO DE CALIFICACIONES
+		 * 								CARGA PERIODOS DE CALIFICACIONES
 		 */
 		PeriodRepository periodRepository = context.getBean(PeriodRepository.class);
 		Period primerTrimestre = periodRepository.save(new Period(PeriodName.FIRST_TRIMESTER));
@@ -144,28 +149,35 @@ public class GoodLearnerBackendApplication {
 		Period tercerTrimestre = periodRepository.save(new Period(PeriodName.THIRD_TRIMESTER));
 		Period periodoAnual = periodRepository.save(new Period(PeriodName.ANNUAL));
 		Period periodoPrevios = periodRepository.save(new Period(PeriodName.PREVIOUS));
-
-
-
+		/**----------------------------------------------------------------------------------------------
+		 * 								CARGA DE CALIFICACIONES
+		 */
 		/*QualificationRepository qualificationRepository = context.getBean(QualificationRepository.class);
 		Qualification qualification = new Qualification();*/
 
+		/**----------------------------------------------------------------------------------------------
+		 * 								CARGA DE ROLES DE USUARIOS
+		 */
+		RoleRepository roleRepository = context.getBean(RoleRepository.class);
+		Role rolAdministrador = roleRepository.save(new Role(RoleName.ADMINISTRATOR));
+		Role rolProfesor = roleRepository.save(new Role(RoleName.TEACHER));
+		Role rolEstudianteTutor = roleRepository.save(new Role(RoleName.STUDENT_TUTOR));
 
 
+		/**----------------------------------------------------------------------------------------------
+		 * 								CARGA DE USUARIOS
+		 */
+		PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
+		UserRepository userRepository = context.getBean(UserRepository.class);
 
+		userRepository.save(new User(estudianteAgustinRamirez.getDocument(), passwordEncoder.encode(estudianteAgustinRamirez.getDocument()), rolEstudianteTutor, estudianteAgustinRamirez));
+		userRepository.save(new User(estudianteJazminAyala.getDocument(), passwordEncoder.encode(estudianteJazminAyala.getDocument()), rolEstudianteTutor, estudianteJazminAyala));
 
+		userRepository.save(new User(profesorLiteratura.getDocument(), passwordEncoder.encode(profesorLiteratura.getDocument()), rolProfesor, profesorLiteratura));
+		userRepository.save(new User(profesorMatematicas.getDocument(), passwordEncoder.encode(profesorMatematicas.getDocument()), rolProfesor, profesorMatematicas));
 
-
-
-
-
-
-
-
-
-
-
-
+		userRepository.save(new User(tutorAyalaDavid.getDocument(), passwordEncoder.encode(tutorAyalaDavid.getDocument()), rolEstudianteTutor, tutorAyalaDavid));
+		userRepository.save(new User(tutorHugoRamirez.getDocument(), passwordEncoder.encode(tutorHugoRamirez.getDocument()), rolEstudianteTutor, tutorHugoRamirez));
 
 
 
