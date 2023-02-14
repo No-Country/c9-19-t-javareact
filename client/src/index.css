@@ -113,12 +113,16 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     background-color: #f0f1f3 !important;
 }
 .bg-blue .list-group-item{
-    background-color: #14238A !important;
+    background-color: #14238A;
     color:white;
 }
 .bg-blue .list-group-item:hover{
     background-color: #8A91C5 !important;
     color:white;
+}
+.active{
+  background-color: #8A91C5 !important;
+  color:white;
 }
 .input-group{
     width:auto;
@@ -144,4 +148,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   inset: 10px 0px auto auto !important; 
   margin: 0px !important; 
   transform: translate(0px, 45px)  !important;
+}
+.rounded-circle{
+  padding:5px;
 }

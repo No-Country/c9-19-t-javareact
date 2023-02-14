@@ -16,7 +16,7 @@ export const Nav = () => {
         <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm p-2 mb-4 bg-white rounded animate__animated animate__slideInDown animate__delay-0.5s">
             <div className="container-fluid">
                 <div className="d-flex justify-content-start">
-                <button className="btn bg-white me-4" id="sidebarToggle" onClick={sidebarToggle}><i className="fa-solid fa-bars fa-xl"></i></button>
+                <button className="btn bg-white me-4" id="sidebarToggle" onClick={sidebarToggle}><i className="fa-solid fa-bars fa-2xl"></i></button>
                 <div className="input-group input-group-md">
                     <div className="input-group-prepend p-2">
                     {/* <i className="fa-solid fa-magnifying-glass fa-xl bg-grey"></i> */}
