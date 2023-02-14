@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {  sidebarStatus } from '../app/states/ui';
+import { resetUser } from '../app/states/user';
 import { GoodLearner } from '../app/store';
 
 
@@ -11,7 +12,9 @@ export const Nav = () => {
     const sidebarToggle = () =>{
         dispatch(sidebarStatus())
     }
-
+    const logout = () =>{
+        dispatch(resetUser())
+    }
   return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm p-2 mb-4 bg-white rounded animate__animated animate__slideInDown animate__delay-0.5s">
             <div className="container-fluid">
@@ -34,7 +37,7 @@ export const Nav = () => {
                 <ul className='dropdown-menu text-small shadow profiledropdown'>
                     <li><a className="dropdown-item" href="#">Settings</a></li>
                     <li><hr className="dropdown-divider"/></li>
-                    <li><NavLink className="dropdown-item" to={'/login'}>Sign out</NavLink></li>
+                    <li><NavLink className="dropdown-item"onClick={logout} to={'/login'}>Sign out</NavLink></li>
                 </ul>
                 </div>
                 {/*  <div className="collapse navbar-collapse" id="navbarSupportedContent">

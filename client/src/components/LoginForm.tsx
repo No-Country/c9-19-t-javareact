@@ -2,8 +2,17 @@ import React, { useState } from 'react';
 import ButtonMain from './UI/ButtonMain';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from 'react-redux';
+import { createUser } from '../app/states/user';
+import { PrivateRoutes, Roles, User } from '../models';
+const user = {
+  id: 0,
+  name: 'roberto',
+  username: 'robert',
+  rol_id:'admin'
+}
 const LoginForm = () => {
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -23,7 +32,9 @@ const LoginForm = () => {
     localStorage.setItem("token", "test-token");
     console.log(formData);
     console.log(localStorage.getItem("token"))
-    navigate('/', { replace: true });
+    dispatch(createUser( user ));
+    navigate(`/${PrivateRoutes.DASHBOARD}`, { replace: true });
+    
   };
 
   const handleResetPassword = () => {
