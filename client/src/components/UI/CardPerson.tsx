@@ -5,12 +5,15 @@ interface Props {
   user: User;
   handleUpdateUser: (elem: any) => void;
   handleDeleteUser: (elem: any) => void;
+  handleShowRelations: (user: User) => void;
 }
+const roles = ['Profesor', 'Tutor', 'Estudiante'];
 
 const CardPerson: React.FC<Props> = ({
   user,
   handleUpdateUser,
-  handleDeleteUser
+  handleDeleteUser,
+  handleShowRelations,
 }) => {
   return (
     <Card>
@@ -18,7 +21,7 @@ const CardPerson: React.FC<Props> = ({
         <Card.Title>
           {user.name} {user.last_name}
         </Card.Title>
-        <Card.Text>Rol</Card.Text>
+        <Card.Text>{roles[user.rol_id ? Number(user.rol_id) - 1 : 0]}</Card.Text>
       </Card.Body>
       <Card.Footer>
         <ButtonGroup className="w-100">
@@ -31,6 +34,14 @@ const CardPerson: React.FC<Props> = ({
           <Button variant="danger" onClick={() => handleDeleteUser(user.id)}>
             <i className="fa fa-trash"></i>
           </Button>
+          {
+            (user.rol_id === '2' || user.rol_id === '3')
+            && 
+            <Button variant="info" onClick={() => handleShowRelations(user)}>
+                <i className="fa fa-sitemap"></i>
+            </Button>
+          }
+         
         </ButtonGroup>
       </Card.Footer>
     </Card>

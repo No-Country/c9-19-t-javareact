@@ -5,6 +5,7 @@ import { User } from '../models/User';
 
 // compoents
 import FormUsuario from '../components/formUsuario';
+import RelationAssign from '../components/RelationAssign';
 import ButtonMain from '../components/UI/ButtonMain';
 import CardPerson from '../components/UI/CardPerson';
 
@@ -18,10 +19,20 @@ import { nanoid } from 'nanoid'
 
 function Usuarios() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
-    const [selectedUser, setSelectedUser] = useState({});
-    const [users, setUsers] = useState([{ id: "1", rol_id: "1", name: 'Juan', last_name: 'Guzmán', dni: 12341456 },
-    { id: "2", rol_id: "2", name: 'Marcos', last_name: 'Díaz', dni: 12341456 },
-    { id: "3", rol_id: "3", name: 'Romina', last_name: 'Pérez', dni: 12341456 }])
+    const [selectedUser, setSelectedUser] = useState<User>(new User());
+    const [showRelations, setShowRelations] = useState<boolean>(false);
+    const [usersToReltions, setUsersToReltions] = useState<Array<User>>([]);
+    const [relations, setRelations] = useState<Array<User>>([]);
+    const [users, setUsers] = useState([
+        {id: '1', rol_id: '1', name: 'Juan', last_name: 'Guzmán', dni: 12341456},
+        {id: '2', rol_id: '2', name: 'Marcos', last_name: 'Díaz', dni: 12341456},
+        {id: '3', rol_id: '2', name: 'Luciana', last_name: 'Acosta', dni: 12341456},
+        {id: '4', rol_id: '2', name: 'Abigail', last_name: 'Ávila', dni: 12341456},
+        {id: '5', rol_id: '3', name: 'Romina', last_name: 'Pérez', dni: 12341456},
+        {id: '6', rol_id: '3', name: 'Esteban', last_name: 'Díaz', dni: 12341456},
+        {id: '7', rol_id: '3', name: 'Mariel', last_name: 'Caro', dni: 12341456},
+        {id: '8', rol_id: '3', name: 'Virginia', last_name: 'Sanchez', dni: 12341456},    
+    ])
 
     const handleCloseFormUser = () => {
         setShowFormUser(false);
@@ -65,6 +76,33 @@ function Usuarios() {
         handleCloseFormUser();
     };
 
+    const handleShowRelations = (elem: any) => {
+        let user = User.parseItem(
+                    {'id': elem.id,
+                    'rol_id': elem.rol_id,
+                    'name': elem.name,
+                    'last_name': elem.last_name,
+                    'dni': elem.dni,
+                    }
+                    );
+                
+        setSelectedUser(user);
+        let usersFiltered = []
+        if (user.rol_id === '2') {
+            usersFiltered = users.filter( (d) => d.rol_id === '3')
+        } else {
+            usersFiltered = users.filter( (d) => d.rol_id === '2')
+        }
+        setUsersToReltions(User.parseArray(usersFiltered));
+        setRelations([]);
+        setShowRelations(true);
+    }
+
+    const handleCloseRelations = () => {
+        setShowRelations(false);
+        setSelectedUser(new User());
+    }
+
     return (
         <>
             <Container>
@@ -91,6 +129,7 @@ function Usuarios() {
                                         user={user}
                                         handleUpdateUser={handleUpdateUser}
                                         handleDeleteUser={handleDeleteUser}
+                                        handleShowRelations={handleShowRelations}
                                     />
                                 </Col>
                             ))}
@@ -103,6 +142,13 @@ function Usuarios() {
                     handleSave={handleSaveFormUser}
                     user={selectedUser}
                 />
+                <RelationAssign 
+                    show={showRelations} 
+                    handleClose={handleCloseRelations} 
+                    handleSave={handleSaveFormUser} 
+                    user={selectedUser} 
+                    users={usersToReltions} 
+                    relations={relations}/>
             </Container>
         </>
     );
