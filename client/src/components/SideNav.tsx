@@ -18,6 +18,7 @@ export const SideNav = () => {
     <div className="list-group list-group-flush bg-blue" >
         <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
         <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/usuarios'}><i className="fa-solid fa-user me-3"></i>Usuarios</NavLink>
+        <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/commission'}><i className="fa-solid fa-user me-3"></i>Comision</NavLink>
         {/* <a className="list-group-item list-group-item-action list-group-item  p-3" href="#!"><i className="fa-solid fa-user me-3"></i>Overview</a>
         <a className="list-group-item list-group-item-action list-group-item  p-3" href="#!"><i className="fa-solid fa-user me-3"></i>Events</a>
         <a className="list-group-item list-group-item-action list-group-item  p-3" href="#!"><i className="fa-solid fa-user me-3"></i>Profile</a>

@@ -16,25 +16,17 @@ function App() {
   return (
     <BrowserRouter>
       <RoutesWithNotFound>
-            {/* <Route path="/" element={<Navigate to={PrivateRoutes.USER} />} /> */}
               <Route path={`/${PublicRoutes.LOGIN}`} element={<Login />} />
                <Route element={<AuthGuard privateValidation={true} />}> 
                 <Route path={`/`} element={<Layout />}>
                 <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
                 <Route path={PrivateRoutes.USER} element={<Usuarios />} />
+                <Route element={<RoleGuard rol={Roles.ADMIN} />}>
+                  <Route path={PrivateRoutes.COMMISSION} element={<h1>Comisiones desde administrador</h1>} />
+                </Route> 
                  </Route> 
               </Route>
-               <Route element={<RoleGuard rol={Roles.ADMIN} />}>
-                <Route path={PrivateRoutes.COMMISSION} element={<h1>Role admin</h1>} />
-              </Route> 
-        
-   {/*        <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Layout />}>
-            <Route path="/usuarios" element={<Usuarios />} />
-            <Route index element={<Dashboard />} />
-            <Route path="*" element={<Dashboard />} />
-          </Route> */}
-        
+
         </RoutesWithNotFound>
     </BrowserRouter>
   );
