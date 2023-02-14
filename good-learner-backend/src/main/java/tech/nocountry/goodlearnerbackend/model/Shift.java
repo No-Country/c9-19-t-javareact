@@ -6,6 +6,10 @@ import lombok.*;
 
 import java.io.Serializable;
 
+/**
+ * Turnos que posee la escuela.
+ * Ej: Mañana, Tarde, Vespertino.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

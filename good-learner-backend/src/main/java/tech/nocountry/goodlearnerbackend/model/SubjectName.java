@@ -1,5 +1,8 @@
 package tech.nocountry.goodlearnerbackend.model;
 
+/**
+ * Materias que se dictan en la escuela
+ */
 public enum SubjectName {
     MATHEMATICS,
     LITERATURE,
