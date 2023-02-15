@@ -1,4 +1,5 @@
 import { Card, Button, ButtonGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { User } from '../../models/User';
 
 interface Props {
@@ -13,7 +14,7 @@ const CardPerson: React.FC<Props> = ({
   user,
   handleUpdateUser,
   handleDeleteUser,
-  handleShowRelations,
+  handleShowRelations
 }) => {
   return (
     <Card>
@@ -25,7 +26,7 @@ const CardPerson: React.FC<Props> = ({
       </Card.Body>
       <Card.Footer>
         <ButtonGroup className="w-100">
-          <Button variant="primary">
+          <Button variant="primary" as={Link} to={`/usuario/${user.id}`} state={{ data: user }}>
             <i className="fa fa-eye"></i>
           </Button>
           <Button variant="warning" onClick={() => handleUpdateUser(user)}>
@@ -36,12 +37,12 @@ const CardPerson: React.FC<Props> = ({
           </Button>
           {
             (user.rol_id === '2' || user.rol_id === '3')
-            && 
+            &&
             <Button variant="info" onClick={() => handleShowRelations(user)}>
-                <i className="fa fa-sitemap"></i>
+              <i className="fa fa-sitemap"></i>
             </Button>
           }
-         
+
         </ButtonGroup>
       </Card.Footer>
     </Card>
