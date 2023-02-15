@@ -13,5 +13,7 @@ public enum BondName {
     GRANDMOTHER,
     LEGAL_GUARDIAN,
     FRIEND,
-    NEIGHBOR
+    NEIGHBOR,
+    BROTHER,
+    SISTER
 }

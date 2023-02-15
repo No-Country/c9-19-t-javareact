@@ -53,10 +53,10 @@ public class UserController {
 		}
 	}
 
-	@GetMapping("/area/student")
-	@PreAuthorize("hasAuthority('STUDENT')")
+	@GetMapping("/area/student-tutor")
+	@PreAuthorize("hasAuthority('STUDENT_TUTOR')")
 	public ResponseEntity<?> accessStudent() {
-		return new ResponseEntity<String>("Yor are Student", HttpStatus.OK);
+		return new ResponseEntity<String>("Yor are Student or Tutor", HttpStatus.OK);
 	}
 
 	@GetMapping("/area/teacher")

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -36,6 +35,14 @@ public class User implements UserDetails {
 	@ManyToOne
 	@JoinColumn(name = "person_id")
 	private Person person;
+
+	public User(){}
+	public User(String username, String password, Role rol, Person person){
+		this.nombreUsuario = username;
+		this.clave = password;
+		this.rol = rol;
+		this.person = person;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

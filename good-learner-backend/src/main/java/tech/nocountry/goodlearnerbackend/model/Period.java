@@ -19,7 +19,12 @@ public class Period implements Serializable {
     @Column(name = "id_period", nullable = false, unique = true)
     private Long idPeriod;
 
-    @ManyToOne
-    @JoinColumn(name = "type_period_id", nullable = false)
-    private TypePeriod typePeriod;
+    @Column(name = "period_name", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PeriodName periodName;
+
+    public Period(PeriodName periodName){
+        this.periodName = periodName;
+    }
+
 }

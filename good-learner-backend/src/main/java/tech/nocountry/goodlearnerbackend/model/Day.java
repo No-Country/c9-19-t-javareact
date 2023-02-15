@@ -22,4 +22,8 @@ public class Day implements Serializable {
     @Column(name = "day_name", nullable = false)
     @Enumerated(EnumType.STRING)
     private DayName dayName;
+
+    public Day(DayName dayName){
+        this.dayName = dayName;
+    }
 }

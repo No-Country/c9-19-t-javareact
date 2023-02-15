@@ -21,4 +21,8 @@ public class Subject implements Serializable {
     @Column(name = "subject_name", nullable = false)
     @Enumerated(EnumType.STRING)
     private SubjectName subjectName;
+
+    public Subject(SubjectName subjectName){
+        this.subjectName = subjectName;
+    }
 }

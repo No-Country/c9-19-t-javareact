@@ -27,4 +27,8 @@ public class Bond implements Serializable {
     @Column(name = "bond_name", nullable = false)
     @Enumerated(EnumType.STRING)
     private BondName bondName;
+
+    public Bond(BondName bondName){
+        this.bondName = bondName;
+    }
 }

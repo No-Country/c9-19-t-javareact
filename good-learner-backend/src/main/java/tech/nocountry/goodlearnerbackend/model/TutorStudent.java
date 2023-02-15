@@ -17,6 +17,7 @@ public class TutorStudent implements Serializable {
 
     @Id
     @Column(name = "id_tutor_student", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTutorStudent;
 
     @ManyToOne
@@ -30,5 +31,11 @@ public class TutorStudent implements Serializable {
     @ManyToOne
     @JoinColumn(name = "bond_id", nullable = false)
     private Bond bond;
+
+    public TutorStudent(Student student, Tutor tutor, Bond bond){
+        this.student = student;
+        this.tutor = tutor;
+        this.bond = bond;
+    }
 
 }
