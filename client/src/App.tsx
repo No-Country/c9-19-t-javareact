@@ -6,6 +6,7 @@ import Layout from "./pages/Layout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Usuarios from "./pages/Usuarios";
+import Comsiones from './pages/Comisiones';
 import { RoutesWithNotFound } from './helpers';
 import { PrivateRoutes, PublicRoutes, Roles } from './models';
 import AuthGuard from './helpers/authGuard';
@@ -22,7 +23,7 @@ function App() {
                 <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
                 <Route path={PrivateRoutes.USER} element={<Usuarios />} />
                 <Route element={<RoleGuard rol={Roles.ADMIN} />}>
-                  <Route path={PrivateRoutes.COMMISSION} element={<h1>Comisiones desde administrador</h1>} />
+                  <Route path={PrivateRoutes.COMMISSION} element={<Comsiones/>} />
                 </Route> 
                  </Route> 
               </Route>
