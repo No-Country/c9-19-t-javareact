@@ -24,7 +24,7 @@ function App() {
             <Route path={PrivateRoutes.USER} element={<Usuarios />} />
             <Route element={<RoleGuard rol={Roles.ADMIN} />}>
               <Route path={PrivateRoutes.COMMISSION} element={<h1>Comisiones desde administrador</h1>} />
-              <Route path={`${PrivateRoutes.SINGLEUSERINFO}/:userId`} element={<UsuarioInfo />} />
+              <Route path={`${PrivateRoutes.SINGLEUSERINFO}/:id`} element={<UsuarioInfo />} />
             </Route>
           </Route>
         </Route>
