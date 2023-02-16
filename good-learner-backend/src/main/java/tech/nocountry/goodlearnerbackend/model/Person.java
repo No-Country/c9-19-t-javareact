@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "person")
 @Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Person implements Serializable {
+public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

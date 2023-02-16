@@ -19,10 +19,10 @@ import java.time.LocalDateTime;
 @PrimaryKeyJoinColumn(name="person_id")
 public class Teacher extends Person implements Serializable {
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "school_entry_date", nullable = false)
+    @Column(name = "school_entry_date")
     private LocalDate schoolEntryDate;
 
     public Teacher(

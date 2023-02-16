@@ -21,14 +21,11 @@ public class Student extends Person implements Serializable {
     @Column(name = "id_student", nullable = false)
     private Long studentId;*/
 
-    @Column(name = "alias")
-    private String alias;
+    //@Column(name = "alias")
+    //private String alias;
 
-    @Column(name = "is_regular", nullable = false)
+    @Column(name = "is_regular")
     private Boolean isRegular;
-
-    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "Student")
-    private Student student;*/
 
     public Student(
             String firstName,
@@ -38,11 +35,9 @@ public class Student extends Person implements Serializable {
             String email,
             LocalDateTime timeStamp,
             String phone,
-            String alias,
             Boolean isRegular
     ){
         super(firstName, lastName, document, birthDate, email, timeStamp, phone);
-        this.alias = alias;
         this.isRegular = isRegular;
     }
 
