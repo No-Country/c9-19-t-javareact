@@ -11,13 +11,14 @@ import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.PersonRegisterDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserLoginDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.UsuarioService;
-
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("api/user")
 public class UserController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@Valid @RequestBody UserLoginDTO usuarioLogin, BindingResult bindingResult) {
