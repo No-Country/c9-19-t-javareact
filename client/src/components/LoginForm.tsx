@@ -34,8 +34,8 @@ const LoginForm = () => {
     loginService(formData.email,formData.password)
     console.log(formData);
     console.log(localStorage.getItem("token"))
-    dispatch(createUser( user ));
-    navigate(`/${PrivateRoutes.DASHBOARD}`, { replace: true }); 
+/*     dispatch(createUser( user ));
+    navigate(`/${PrivateRoutes.DASHBOARD}`, { replace: true });  */
     
   };
 
