@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "e2346757-5790-4fd0-b111-f7720e452e06",
+		"name": "Good Learner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22352011"
+	},
+	"item": [
+		{
+			"name": "api/user/register CREATE USER AMINISTRADOR DIRECTOR",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "developer",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "osiris",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombreUsuario\": \"administrador\",\r\n    \"clave\" : \"123\",\r\n    \"rol\": \"ADMINISTRADOR\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/usuario/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuario",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/user/register CREATE USER TEACHER",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "developer",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "osiris",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombreUsuario\": \"administrador\",\r\n    \"clave\" : \"123\",\r\n    \"rol\": \"ADMINISTRADOR\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/usuario/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuario",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/user/register CREATE USER TUTOR",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "developer",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "osiris",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombreUsuario\": \"administrador\",\r\n    \"clave\" : \"123\",\r\n    \"rol\": \"ADMINISTRADOR\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/usuario/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuario",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/user/register CREATE USER STUDENT",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "developer",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "osiris",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombreUsuario\": \"administrador\",\r\n    \"clave\" : \"123\",\r\n    \"rol\": \"ADMINISTRADOR\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/usuario/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuario",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/user/login LOGEAR USER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombreUsuario\": \"administrador\",\r\n    \"clave\" : \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/user/area/administrador AREA ADMINIST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbmlzdHJhZG9yIiwiZXhwIjoxNjc2MjQ2NTU0fQ.j2B6odp3rATbJc_esp35L6zpAaAKmpqWQZZfIWBHCNtoo4Bh2QF2BOS5Wjoof5RE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/user/area/administrador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"area",
+						"administrador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/user/area/student  AREA STUDENT",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/user/area/administrator",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"area",
+						"administrator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/user/area/student  AREA TUTOR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/user/area/administrator",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"area",
+						"administrator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/user/area/teacher AREA TEACHER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/user/area/teacher",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"area",
+						"teacher"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
