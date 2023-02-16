@@ -21,10 +21,11 @@ public class UserDTO {
 	
 	@NotNull
 	private RoleName rol;
-	
+
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private String token;
 
+	//private Long idPerson;
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
@@ -64,8 +65,23 @@ public class UserDTO {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
-	
+
+	//public Long getIdPeron(){return this.idPerson;}
+
+	//public void setIdPerson(Long idPerson){this.idPerson = idPerson; }
+
+	public UserDTO(){}
+	public UserDTO(String username, String password, RoleName rolename){
+		this.nombreUsuario = username;
+		this.clave = password;
+		this.rol = rolename;
+	}
+	public UserDTO(Long id, String username, String password, RoleName rolename){
+		this.id = id;
+		this.nombreUsuario = username;
+		this.clave = password;
+		this.rol = rolename;
+	}
 	
 	
 }

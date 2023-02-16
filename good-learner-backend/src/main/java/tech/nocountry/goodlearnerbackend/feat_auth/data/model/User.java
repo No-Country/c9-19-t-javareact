@@ -1,6 +1,7 @@
 package tech.nocountry.goodlearnerbackend.feat_auth.data.model;
 
 import jakarta.persistence.*;
+import org.aspectj.weaver.patterns.PerObject;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,6 +38,12 @@ public class User implements UserDetails {
 	private Person person;
 
 	public User(){}
+
+	public User(String username, String password, Role rol){
+		this.nombreUsuario = username;
+		this.clave = password;
+		this.rol = rol;
+	}
 	public User(String username, String password, Role rol, Person person){
 		this.nombreUsuario = username;
 		this.clave = password;
@@ -113,5 +120,9 @@ public class User implements UserDetails {
 	public void setRol(Role rol) {
 		this.rol = rol;
 	}
+
+	public Person getPerson(){ return this.person;}
+
+	public void setPerson(Person person){ this.person = person; }
 
 }

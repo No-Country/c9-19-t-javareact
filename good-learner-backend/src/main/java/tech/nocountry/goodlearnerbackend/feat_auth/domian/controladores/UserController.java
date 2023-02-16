@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.PersonRegisterDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserLoginDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.UsuarioService;
@@ -29,7 +30,7 @@ public class UserController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<?> crear(@Valid @RequestBody UserDTO usuario, BindingResult validaciones)
+	public ResponseEntity<?> crear(@Valid @RequestBody PersonRegisterDTO personRegister, BindingResult validaciones)
 			throws Exception {
 
 		if (validaciones.hasErrors()) {
@@ -37,7 +38,8 @@ public class UserController {
 		}
 		
 		try {
-			return new ResponseEntity<UserDTO>(usuarioService.crear(usuario), HttpStatus.OK);
+			return new ResponseEntity<PersonRegisterDTO>(usuarioService.register(personRegister), HttpStatus.OK);
+			//return new ResponseEntity<UserDTO>(usuarioService.crear(user), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -47,16 +49,22 @@ public class UserController {
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	public ResponseEntity<?> accesoSoloAdministrador() throws Exception {
 		try{
-			return new ResponseEntity<>("You are administrator", HttpStatus.OK);
+			return new ResponseEntity<>("You are ADMINISTRATOR", HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@GetMapping("/area/student-tutor")
-	@PreAuthorize("hasAuthority('STUDENT_TUTOR')")
+	@GetMapping("/area/student")
+	@PreAuthorize("hasAuthority('STUDENT')")
 	public ResponseEntity<?> accessStudent() {
-		return new ResponseEntity<String>("Yor are Student or Tutor", HttpStatus.OK);
+		return new ResponseEntity<String>("Yor are STUDENT", HttpStatus.OK);
+	}
+
+	@GetMapping("/area/tutor")
+	@PreAuthorize("hasAuthority('TUTOR')")
+	public ResponseEntity<?> accessTutor() {
+		return new ResponseEntity<String>("Yor are TUTOR", HttpStatus.OK);
 	}
 
 	@GetMapping("/area/teacher")

@@ -25,7 +25,7 @@ public class Tutor extends Person implements Serializable {
     /*@Temporal(TemporalType.DATE)
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;*/
-    @Column(name = "work_phone", nullable = false)
+    @Column(name = "work_phone")
     private String workPhone;
 
 

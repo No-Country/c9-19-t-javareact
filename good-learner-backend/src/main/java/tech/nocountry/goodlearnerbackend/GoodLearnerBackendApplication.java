@@ -86,8 +86,8 @@ public class GoodLearnerBackendApplication {
 		 * 								CARGA DE ESTUDIANTES
 		 */
 		StudentRepository studentRepository = context.getBean(StudentRepository.class);
-		Student estudianteJazminAyala = studentRepository.save(new Student("Jazmin", "Ayala", "41787181", LocalDate.of(2012, 10, 19), null, LocalDateTime.now(), null, null, true));
-		Student estudianteAgustinRamirez = studentRepository.save(new Student("Agustin", "Ramirez", "51778181", LocalDate.of(2012, 1, 9), null, LocalDateTime.now(), null, null, true));
+		Student estudianteJazminAyala = studentRepository.save(new Student("Jazmin", "Ayala", "41787181", LocalDate.of(2012, 10, 19), null, LocalDateTime.now(), null, true));
+		Student estudianteAgustinRamirez = studentRepository.save(new Student("Agustin", "Ramirez", "51778181", LocalDate.of(2012, 1, 9), null, LocalDateTime.now(), null, true));
 		/**----------------------------------------------------------------------------------------------
 		 * 								CARGA DE VÍNCULOS ESTUDIANTE-TUTOR
 		 */
@@ -161,7 +161,8 @@ public class GoodLearnerBackendApplication {
 		RoleRepository roleRepository = context.getBean(RoleRepository.class);
 		Role rolAdministrador = roleRepository.save(new Role(RoleName.ADMINISTRATOR));
 		Role rolProfesor = roleRepository.save(new Role(RoleName.TEACHER));
-		Role rolEstudianteTutor = roleRepository.save(new Role(RoleName.STUDENT_TUTOR));
+		Role rolEstudiante = roleRepository.save(new Role(RoleName.STUDENT));
+		Role rolTutor = roleRepository.save(new Role(RoleName.TUTOR));
 
 
 		/**----------------------------------------------------------------------------------------------
@@ -170,14 +171,14 @@ public class GoodLearnerBackendApplication {
 		PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
 		UserRepository userRepository = context.getBean(UserRepository.class);
 
-		userRepository.save(new User(estudianteAgustinRamirez.getDocument(), passwordEncoder.encode(estudianteAgustinRamirez.getDocument()), rolEstudianteTutor, estudianteAgustinRamirez));
-		userRepository.save(new User(estudianteJazminAyala.getDocument(), passwordEncoder.encode(estudianteJazminAyala.getDocument()), rolEstudianteTutor, estudianteJazminAyala));
+		userRepository.save(new User(estudianteAgustinRamirez.getDocument(), passwordEncoder.encode(estudianteAgustinRamirez.getDocument()), rolEstudiante, estudianteAgustinRamirez));
+		userRepository.save(new User(estudianteJazminAyala.getDocument(), passwordEncoder.encode(estudianteJazminAyala.getDocument()), rolEstudiante, estudianteJazminAyala));
 
 		userRepository.save(new User(profesorLiteratura.getDocument(), passwordEncoder.encode(profesorLiteratura.getDocument()), rolProfesor, profesorLiteratura));
 		userRepository.save(new User(profesorMatematicas.getDocument(), passwordEncoder.encode(profesorMatematicas.getDocument()), rolProfesor, profesorMatematicas));
 
-		userRepository.save(new User(tutorAyalaDavid.getDocument(), passwordEncoder.encode(tutorAyalaDavid.getDocument()), rolEstudianteTutor, tutorAyalaDavid));
-		userRepository.save(new User(tutorHugoRamirez.getDocument(), passwordEncoder.encode(tutorHugoRamirez.getDocument()), rolEstudianteTutor, tutorHugoRamirez));
+		userRepository.save(new User(tutorAyalaDavid.getDocument(), passwordEncoder.encode(tutorAyalaDavid.getDocument()), rolTutor, tutorAyalaDavid));
+		userRepository.save(new User(tutorHugoRamirez.getDocument(), passwordEncoder.encode(tutorHugoRamirez.getDocument()), rolTutor, tutorHugoRamirez));
 
 
 
