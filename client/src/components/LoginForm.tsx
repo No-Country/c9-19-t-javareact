@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { createUser } from '../app/states/user';
 import { PrivateRoutes, Roles, User } from '../models';
+import { loginService } from '../services/loginService';
 const user = {
   id: 0,
   name: 'roberto',
@@ -30,10 +31,11 @@ const LoginForm = () => {
 
   const handleSubmit = () => {
     localStorage.setItem("token", "test-token");
+    loginService(formData.email,formData.password)
     console.log(formData);
     console.log(localStorage.getItem("token"))
     dispatch(createUser( user ));
-    navigate(`/${PrivateRoutes.DASHBOARD}`, { replace: true });
+    navigate(`/${PrivateRoutes.DASHBOARD}`, { replace: true }); 
     
   };
 
