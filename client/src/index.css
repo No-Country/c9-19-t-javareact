@@ -162,3 +162,11 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   background-color: #9c254d !important;
   color: #f0f1f3;
 }
+
+.row-aprove {
+  background-color: #c8e6c9;
+}
+
+.row-disaprove {
+  background-color: #ffcdd2;
+}

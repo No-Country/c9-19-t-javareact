@@ -1,3 +1,4 @@
+import { Qualification } from './Qualification';
 export class User {
     id?: number;
     rol_id?: string;
@@ -11,6 +12,7 @@ export class User {
     dni?: number;
     username?: string;
     password?: string;
+    qualifications?: Array<Qualification>;
 
     static parseItem(raw: any): User {
         const usuario = new User();
@@ -23,6 +25,7 @@ export class User {
         usuario.dni = raw.dni ? raw.dni : undefined;
         usuario.username = raw.username ? raw.username: undefined;
         usuario.password = raw.password ? raw.password : undefined;
+        usuario.qualifications = raw.qualifications ? raw.qualifications : undefined;
         return usuario;
     }
  

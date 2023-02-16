@@ -5,6 +5,7 @@ export const PublicRoutes = {
   export const PrivateRoutes = {
     USER: 'usuarios',
     DASHBOARD: 'dashboard',
-    COMMISSION: 'commission'
+    COMMISSION: 'commission',
+    MY_COMMISSIONS: 'my-commissions'
   };
   

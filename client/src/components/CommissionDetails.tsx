@@ -71,19 +71,9 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
         handleDeleteStudent(studentId)
     }
     
-    // const handleAddStudent = (student: User) => {
-    //     let usersFiltered = [];
-    //     serCurrentSubject(subject)
-    //     usersFiltered = users.filter( (d) => d.rol_id === '1')        
-    //     setUsersToAdd(User.parseArray(usersFiltered));
-    //     setModalTitle('Seleccionar profesor');
-    //     setShowModal(true);
-    // }
-
-    
     const handleClickAddStudent = () => {
         let usersFiltered = []
-        usersFiltered = users.filter( (d) => d.rol_id === '3')        
+        usersFiltered = users.filter( (d) => d.rol_id === '3' && !commission.students?.find(elem => elem.id === d.id) )        
         setUsersToAdd(User.parseArray(usersFiltered));
         setModalTitle('Seleccionar estudiante');
         setShowModal(true);    
@@ -99,7 +89,6 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
         setModalTitle('');
         setShowModal(false);   
     }
-
 
     return (
         <>
