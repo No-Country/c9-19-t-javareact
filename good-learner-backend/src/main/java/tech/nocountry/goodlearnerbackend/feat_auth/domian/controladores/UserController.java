@@ -19,6 +19,7 @@ public class UserController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@Valid @RequestBody UserLoginDTO usuarioLogin, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
