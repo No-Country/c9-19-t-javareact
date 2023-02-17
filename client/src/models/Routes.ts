@@ -3,7 +3,9 @@ export const PublicRoutes = {
 };
 
 export const PrivateRoutes = {
-  USER: 'usuarios',
+  STUDENTS: 'estudiantes',
+  TUTOR: 'tutores',
+  TEACHER: 'profesores',
   DASHBOARD: 'dashboard',
   COMMISSION: 'commission',
   SINGLEUSERINFO: 'usuario',

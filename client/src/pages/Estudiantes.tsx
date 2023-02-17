@@ -14,18 +14,20 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-import { nanoid } from 'nanoid'
-import { useSelector } from 'react-redux';
-import { selectAllUsers } from '../app/states/users';
+import { deleteUser, selectStudents, selectTutors, updateUser } from '../app/states/users';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 
-function Usuarios() {
+function Estudiantes() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
     const [selectedUser, setSelectedUser] = useState<User>(new User());
     const [showRelations, setShowRelations] = useState<boolean>(false);
     const [usersToReltions, setUsersToReltions] = useState<Array<User>>([]);
     const [relations, setRelations] = useState<Array<User>>([]);
-    const users = useSelector(selectAllUsers)
+    const users = useAppSelector(selectStudents)
+    const teachers = useAppSelector(selectTutors)
+
+    const dispatch = useAppDispatch()
 
     const handleCloseFormUser = () => {
         setShowFormUser(false);
@@ -38,56 +40,17 @@ function Usuarios() {
     }
 
     const handleDeleteUser = (userId: string) => {
-        setUsers((prevState) => (
-            prevState.filter(user => user.id !== userId)
-        ))
+        dispatch(deleteUser(userId))
     }
 
     const handleSaveFormUser = (user: any) => {
-        if (user.id === undefined) {
-            console.log('Guardo');
-            user.id = nanoid()
-            setUsers((prevState) => (
-                [...prevState, user]
-            ))
-        } else {
-            console.log('Modifico');
-            setUsers((prevState) => prevState.map((item) => {
-                if (item.id === user.id) {
-                    return {
-                        ...item, name: user.name,
-                        last_name: user.last_name,
-                        dni: user.dni, username: user.username,
-                        password: user.password
-
-                    };
-                }
-                return item;
-            }))
-        }
-
+        dispatch(updateUser(user))
         handleCloseFormUser();
     };
 
-    const handleShowRelations = (elem: any) => {
-        let user = User.parseItem(
-            {
-                'id': elem.id,
-                'rol_id': elem.rol_id,
-                'name': elem.name,
-                'last_name': elem.last_name,
-                'dni': elem.dni,
-            }
-        );
-
+    const handleShowRelations = (user: any) => {
         setSelectedUser(user);
-        let usersFiltered = []
-        if (user.rol_id === '2') {
-            usersFiltered = users.filter((d) => d.rol_id === '3')
-        } else {
-            usersFiltered = users.filter((d) => d.rol_id === '2')
-        }
-        setUsersToReltions(User.parseArray(usersFiltered));
+        setUsersToReltions(teachers);
         setRelations([]);
         setShowRelations(true);
     }
@@ -102,7 +65,7 @@ function Usuarios() {
             <Container>
                 <Row className="header">
                     <Col xs={9}>
-                        <h3 className="header-title">Usuarios</h3>
+                        <h3 className="header-title">Estudiantes</h3>
                         <div className="header-line"></div>
                     </Col>
                     <Col xs={3}>
@@ -148,4 +111,4 @@ function Usuarios() {
     );
 }
 
-export default Usuarios;
+export default Estudiantes;
