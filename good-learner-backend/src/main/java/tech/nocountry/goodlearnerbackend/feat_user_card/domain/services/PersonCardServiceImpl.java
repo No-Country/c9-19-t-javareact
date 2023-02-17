@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.User;
 import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UserRepository;
 import tech.nocountry.goodlearnerbackend.feat_user_card.domain.model.PersonDetailDTO;
 import tech.nocountry.goodlearnerbackend.feat_user_card.domain.services.mapper.PersonDetailMapper;
@@ -36,11 +37,13 @@ public class PersonCardServiceImpl implements PersonCardService {
     public ResponseEntity<PersonDetailDTO> findPerson(Long id) throws Exception {
 
         Optional<Person> personOptional = personRepository.findById(id);
-        //User user = userRepository.buscarPorIdPerson(id).orElse(null);
+
 
         if(personOptional.isPresent()) {
-            //assert user != null;
-            PersonDetailDTO personDetailDTO = personDetailMapper.toPersonDetail(personOptional.get());
+
+            User user = userRepository.buscarPorIdPerson(personOptional.get()).orElse(null);
+
+            PersonDetailDTO personDetailDTO = personDetailMapper.toPersonDetail(user);
             return ResponseEntity.ok(personDetailDTO);
         }
         return ResponseEntity.notFound().build();
@@ -67,14 +70,38 @@ public class PersonCardServiceImpl implements PersonCardService {
 
         person.setFirstName(personDetailDTO.getFirstName());
         person.setLastName(personDetailDTO.getLastName());
-        person.setDocument(personDetailDTO.getDocument());
         person.setBirthDate(personDetailDTO.getBirthDate());
         person.setTimeStamp(LocalDateTime.now());
         person.setEmail(personDetailDTO.getEmail());
         person.setPhone(personDetailDTO.getPhone());
-
         personRepository.save(person);
+
+        User user = userRepository.buscarPorIdPerson(person).orElse(null);
+        personDetailDTO.setIdUser(user.getId());
+        personDetailDTO.setUsername(user.getUsername());
+        personDetailDTO.setRoleName(user.getRol().getNombreRol());
+        personDetailDTO.setDocument(person.getDocument());
 
         return ResponseEntity.ok(personDetailDTO);
     }
+
+    @Override
+    public ResponseEntity<PersonDetailDTO> deletePersonById(Long id) throws Exception {
+        Optional<Person> personOptional = personRepository.findById(id);
+
+        if(personOptional.isEmpty()){
+            log.warn("Trying to delete a non existent Person");
+            return ResponseEntity.notFound().build();
+        }
+
+        Person person = personOptional.get();
+
+        Optional<User> user = userRepository.buscarPorNombreUsuario(person.getDocument());
+
+
+
+        personRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

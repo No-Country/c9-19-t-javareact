@@ -15,7 +15,7 @@ public class JwtProvider {
 	
 	private static final Key LlAVE_SECRETA = new SecretKeySpec("F@cturacionSR12023F@cturacionSR12023F@cturacionSR12023".getBytes(), SignatureAlgorithm.HS512.getJcaName());
 	
-	private static final long TIEMPO_EXPIRACION = 3600_000;
+	private static final long TIEMPO_EXPIRACION = 1_360_000_000;
 
 	public static String generarTokenJWT(String nombreUsuario) {
 		return Jwts.builder().setSubject(nombreUsuario)

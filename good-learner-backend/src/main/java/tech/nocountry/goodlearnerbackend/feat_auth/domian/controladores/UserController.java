@@ -13,14 +13,14 @@ import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserLoginDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.UsuarioService;
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api")
 public class UserController {
 
 	@Autowired
 	private UsuarioService usuarioService;
 
 
-	@PostMapping("/login")
+	@PostMapping("/user/login")
 	public ResponseEntity<?> login(@Valid @RequestBody UserLoginDTO usuarioLogin, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return new ResponseEntity<String>("El usuario y la clave son obligatorios", HttpStatus.BAD_REQUEST);
@@ -30,7 +30,7 @@ public class UserController {
 
 	}
 
-	@PostMapping("/register")
+	@PostMapping("admin/register")
 	public ResponseEntity<?> crear(@Valid @RequestBody PersonRegisterDTO personRegister, BindingResult validaciones)
 			throws Exception {
 
@@ -46,7 +46,7 @@ public class UserController {
 		}
 	}
 
-	@GetMapping("/area/administrator")
+	@GetMapping("user/area/administrator")
 	@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 	public ResponseEntity<?> accesoSoloAdministrador() throws Exception {
 		try{
@@ -56,31 +56,31 @@ public class UserController {
 		}
 	}
 
-	@GetMapping("/area/student")
+	@GetMapping("user/area/student")
 	@PreAuthorize("hasAuthority('STUDENT')")
 	public ResponseEntity<?> accessStudent() {
 		return new ResponseEntity<String>("Yor are STUDENT", HttpStatus.OK);
 	}
 
-	@GetMapping("/area/tutor")
+	@GetMapping("user/area/tutor")
 	@PreAuthorize("hasAuthority('TUTOR')")
 	public ResponseEntity<?> accessTutor() {
 		return new ResponseEntity<String>("Yor are TUTOR", HttpStatus.OK);
 	}
 
-	@GetMapping("/area/teacher")
+	@GetMapping("user/area/teacher")
 	@PreAuthorize("hasAuthority('TEACHER')")
 	public ResponseEntity<?> accessTeacher() {
 		return new ResponseEntity<String>("Yor are Teacher", HttpStatus.OK);
 	}
 
-	@GetMapping("/area/usuario-restringido")
+	@GetMapping("user/area/usuario-restringido")
 	@PreAuthorize("hasAuthority('USUARIO_RESTRINGIDO')")
 	public ResponseEntity<?> accesoSoloUsuarioRestringido() {
 		return new ResponseEntity<>("Eres un usuario restringido", HttpStatus.OK);
 	}
 
-	@GetMapping("/area/usuario-logueado")
+	@GetMapping("user/area/usuario-logueado")
 	public ResponseEntity<?> accesoSoloUsuarioLogueas() {
 		return new ResponseEntity<>("Eres un usuario logueado, no importa tu rol", HttpStatus.OK);
 	}

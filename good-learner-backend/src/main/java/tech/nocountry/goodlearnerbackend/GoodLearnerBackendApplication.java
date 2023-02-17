@@ -21,6 +21,20 @@ import java.time.LocalTime;
 public class GoodLearnerBackendApplication {
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(GoodLearnerBackendApplication.class, args);
+
+		var loadData = true;
+
+		if(loadData){
+			loadDatasource(context);
+		}
+
+		System.out.println("Built Project");
+
+	}
+
+	public static void loadDatasource(ApplicationContext context){
+
+
 		/**----------------------------------------------------------------------------------------------
 		 * 								CARGA DE TURNOS
 		 */
@@ -61,6 +75,11 @@ public class GoodLearnerBackendApplication {
 		Subject italiano = subjectRepository.save(new Subject(SubjectName.ITALIAN));
 		Subject fisica = subjectRepository.save(new Subject(SubjectName.PHYSICAL));
 		Subject educacionFisica = subjectRepository.save(new Subject(SubjectName.PHYSICAL_EDUCATION));
+		/**----------------------------------------------------------------------------------------------
+		 * 								CARGA DE ADMINISTRADOR
+		 */
+		PersonRepository personRepository = context.getBean(PersonRepository.class);
+		Person administradorDirector = personRepository.save(new Person("Director", "Director", "0000", LocalDate.of(1990, 9, 15), "escuela@gmail.com", LocalDateTime.now(), "+5491159117241"));
 		/**----------------------------------------------------------------------------------------------
 		 * 								CARGA DE TEACHER
 		 */
@@ -171,6 +190,8 @@ public class GoodLearnerBackendApplication {
 		PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
 		UserRepository userRepository = context.getBean(UserRepository.class);
 
+		userRepository.save(new User(administradorDirector.getDocument(), passwordEncoder.encode(administradorDirector.getDocument()), rolAdministrador, administradorDirector));
+
 		userRepository.save(new User(estudianteAgustinRamirez.getDocument(), passwordEncoder.encode(estudianteAgustinRamirez.getDocument()), rolEstudiante, estudianteAgustinRamirez));
 		userRepository.save(new User(estudianteJazminAyala.getDocument(), passwordEncoder.encode(estudianteJazminAyala.getDocument()), rolEstudiante, estudianteJazminAyala));
 
@@ -181,18 +202,6 @@ public class GoodLearnerBackendApplication {
 		userRepository.save(new User(tutorHugoRamirez.getDocument(), passwordEncoder.encode(tutorHugoRamirez.getDocument()), rolTutor, tutorHugoRamirez));
 
 
-
-
-		//studentRepository.save(student);*/
-		System.out.println("Hello World");
-
-
-
-
-		/*RoleRepository rolRepository = context.getBean(RoleRepository.class);
-		rolRepository.save(new Role(RoleName.TEACHER));
-		rolRepository.save(new Role(RoleName.STUDENT));
-		rolRepository.save(new Role(RoleName.ADMINISTRATOR));*/
 	}
 
 }

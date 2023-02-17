@@ -32,7 +32,7 @@ public class Person implements Serializable {
     private String lastName;
 
     //@NotEmpty
-    @Column(name = "document", nullable = false)
+    @Column(name = "document", nullable = false, unique = true)
     private String document;
 
     //@NotEmpty
