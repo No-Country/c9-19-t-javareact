@@ -12,8 +12,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
 	@Query("SELECT u FROM User u LEFT JOIN FETCH u.rol r WHERE u.nombreUsuario = :nombreUsuario")
 	public Optional<User> buscarPorNombreUsuario(String nombreUsuario);
-
-	@Query(value = "SELECT * FROM User u WHERE u.person = :id", nativeQuery = true)
-	public Optional<User> buscarPorIdPerson(Long id);
 	
 }

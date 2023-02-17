@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UserRepository;
 import tech.nocountry.goodlearnerbackend.feat_user_card.domain.model.PersonDetailDTO;
 import tech.nocountry.goodlearnerbackend.feat_user_card.domain.services.mapper.PersonDetailMapper;
-import tech.nocountry.goodlearnerbackend.feat_user_card.domain.services.mapper.PersonMapper;
 import tech.nocountry.goodlearnerbackend.model.Person;
 import tech.nocountry.goodlearnerbackend.repository.PersonRepository;
 
@@ -26,8 +25,6 @@ public class PersonCardServiceImpl implements PersonCardService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PersonMapper personMapper;
 
     /**
      *
@@ -50,7 +47,7 @@ public class PersonCardServiceImpl implements PersonCardService {
     }
 
     /**
-     *
+     * Actualizar una Persona
      * @param personDetailDTO
      * @return ResponseEntity
      * @throws Exception
