@@ -13,6 +13,7 @@ import UsuarioInfo from './pages/UsuarioInfo';
 import Profesores from './pages/Profesores';
 import Tutores from './pages/Tutores';
 import Estudiantes from './pages/Estudiantes';
+import AddUser from './pages/AddUser';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
             <Route element={<RoleGuard rol={Roles.ADMIN} />}>
               <Route path={PrivateRoutes.COMMISSION} element={<h1>Comisiones desde administrador</h1>} />
+              <Route path={PrivateRoutes.ADDUSER} element={<AddUser />} />
               <Route path={PrivateRoutes.STUDENTS} element={<Estudiantes />} />
               <Route path={PrivateRoutes.TEACHER} element={<Profesores />} />
               <Route path={PrivateRoutes.TUTOR} element={<Tutores />} />

@@ -9,4 +9,5 @@ export const PrivateRoutes = {
   DASHBOARD: 'dashboard',
   COMMISSION: 'commission',
   SINGLEUSERINFO: 'usuario',
+  ADDUSER: 'agregar-usuario',
 };

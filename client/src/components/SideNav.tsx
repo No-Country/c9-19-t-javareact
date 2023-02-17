@@ -20,11 +20,24 @@ export const SideNav = () => {
         <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
         <Accordion flush style={{ color: "white", background: "inherit" }}>
           <Accordion.Item eventKey="0">
-            <Accordion.Header><i className="fa-solid fa-users me-3"></i>Usuarios</Accordion.Header>
+            <Accordion.Header><i className="fa-solid fa-user-graduate me-3"></i>Estudiantes</Accordion.Header>
             <Accordion.Body className="p-0">
-              <NavLink className="list-group-sub-item list-group-item-action list-group-item  p-3" to={'/profesores'}><i className="fa-solid fa-th-list me-3"></i>Profesores</NavLink>
-              <NavLink className="list-group-sub-item list-group-item-action list-group-item  p-3" to={'/estudiantes'}><i className="fa-solid fa-th-list me-3"></i>Estudiantes</NavLink>
-              <NavLink className="list-group-sub-item list-group-item-action list-group-item  p-3" to={'/tutores'}><i className="fa-solid fa-th-list me-3"></i>Tutores</NavLink>
+              <NavLink className="list-group-sub-item list-group-item-action list-group-item  p-3" to={'/agregar-usuario'} state={{ user: "estudiante" }} > <i className="fa-thin fa-greater-than me-3"></i>Añadir estudiante</NavLink>
+              <NavLink className="list-group-sub-item list-group-item-action list-group-item  p-3" to={'/estudiantes'}><i className="fa-thin fa-greater-than me-3"></i>Todos los estudiantes</NavLink>
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="1">
+            <Accordion.Header><i className="fa-solid fa-users me-3"></i>Tutores</Accordion.Header>
+            <Accordion.Body className="p-0">
+              <NavLink className="list-group-sub-item list-group-item-action list-group-item  p-3" to={'/agregar-usuario'} state={{ user: "tutor" }} > <i className="fa-thin fa-greater-than me-3"></i>Añadir tutor</NavLink>
+              <NavLink className="list-group-sub-item list-group-item-action list-group-item  p-3" to={'/tutores'}><i className="fa-thin fa-greater-than me-3"></i>Todos los tutores</NavLink>
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="2">
+            <Accordion.Header><i className="fa-solid fa-user-tie me-3"></i>Profesores</Accordion.Header>
+            <Accordion.Body className="p-0">
+              <NavLink className="list-group-sub-item list-group-item-action list-group-item  p-3" to={'/agregar-usuario'} state={{ user: "profesor" }} > <i className="fa-thin fa-greater-than me-3"></i>Añadir profesor</NavLink>
+              <NavLink className="list-group-sub-item list-group-item-action list-group-item  p-3" to={'/profesores'}> <i className="fa-thin fa-greater-than me-3"></i>Todos los profesores</NavLink>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
@@ -34,6 +47,6 @@ export const SideNav = () => {
         <a className="list-group-item list-group-item-action list-group-item  p-3" href="#!"><i className="fa-solid fa-user me-3"></i>Profile</a>
         <a className="list-group-item list-group-item-action list-group-item  p-3" href="#!"><i className="fa-solid fa-user me-3"></i>Status</a> */}
       </div>
-    </div>
+    </div >
   )
 }

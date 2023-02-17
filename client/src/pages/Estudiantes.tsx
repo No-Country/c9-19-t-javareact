@@ -68,14 +68,6 @@ function Estudiantes() {
                         <h3 className="header-title">Estudiantes</h3>
                         <div className="header-line"></div>
                     </Col>
-                    <Col xs={3}>
-                        <ButtonMain
-                            text={'Agregar Usuario'}
-                            size="md"
-                            icon="fa fa-add"
-                            onClick={() => setShowFormUser(true)}
-                        />
-                    </Col>
                 </Row>
                 <Row>
                     <Container>
