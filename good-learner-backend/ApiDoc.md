@@ -2,7 +2,7 @@
 
 ---
 
-### Rutas de NO PROTEGIDA
+### Ruta NO PROTEGIDA
 
 #### POST http://127.0.0.1:8080/api/user/login
 * Para logearse un usuario primero deberá estar cargado en el sistema. El administrador será el único que podrá realizar un CRUD sobre Personas-Usuarios entre otras gestiones.
