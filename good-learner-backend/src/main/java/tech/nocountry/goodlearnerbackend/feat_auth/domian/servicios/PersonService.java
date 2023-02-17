@@ -48,7 +48,7 @@ public class PersonService {
                     LocalDateTime.now(),
                     personRegisterDto.getPhone(),
                     true));
-           personRegister.setId(student.getIdPerson());
+           personRegister.setIdPerson(student.getIdPerson());
 
         } else  if(personRegisterDto.getRoleName() == RoleName.TUTOR){
 
@@ -61,7 +61,7 @@ public class PersonService {
                     LocalDateTime.now(),
                     personRegisterDto.getPhone(),
                     null));
-           personRegister.setId(tutor.getIdPerson());
+           personRegister.setIdPerson(tutor.getIdPerson());
 
         } else if (personRegisterDto.getRoleName() == RoleName.TEACHER) {
             Teacher teacher = teacherRepository.save(new Teacher(
@@ -74,7 +74,7 @@ public class PersonService {
                     personRegisterDto.getPhone(),
                     null,
                     null));
-            personRegister.setId(teacher.getIdPerson());
+            personRegister.setIdPerson(teacher.getIdPerson());
         }
         else if (personRegisterDto.getRoleName() == RoleName.ADMINISTRATOR) {
             Person person = personRepository.save(new Person(
@@ -87,7 +87,7 @@ public class PersonService {
                     personRegisterDto.getPhone()
                     )
             );
-            personRegister.setId(person.getIdPerson());
+            personRegister.setIdPerson(person.getIdPerson());
         }
         return personRegister;
     }

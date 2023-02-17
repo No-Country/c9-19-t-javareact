@@ -1,7 +1,6 @@
 package tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.support.ReflectivePropertyAccessor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -9,7 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Role;
-import tech.nocountry.goodlearnerbackend.feat_auth.data.model.RoleName;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.PersonRegisterDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserLoginDTO;
@@ -19,16 +17,7 @@ import tech.nocountry.goodlearnerbackend.feat_auth.data.model.User;
 import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.RoleRepository;
 import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UserRepository;
 import tech.nocountry.goodlearnerbackend.model.Person;
-import tech.nocountry.goodlearnerbackend.model.Student;
-import tech.nocountry.goodlearnerbackend.model.Teacher;
-import tech.nocountry.goodlearnerbackend.model.Tutor;
 import tech.nocountry.goodlearnerbackend.repository.PersonRepository;
-import tech.nocountry.goodlearnerbackend.repository.StudentRepository;
-import tech.nocountry.goodlearnerbackend.repository.TeacherRepository;
-import tech.nocountry.goodlearnerbackend.repository.TutorRepository;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 
 @Service
@@ -60,7 +49,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		personRegister = personService.savePerson(personRegister);
 
-		Person person = personRepository.findById(personRegisterDto.getId()).orElseThrow(()-> new Exception("No existe la persona"));
+		Person person = personRepository.findById(personRegisterDto.getIdPerson()).orElseThrow(()-> new Exception("No existe la persona"));
 		Role rol = rolRepository.findByNombreRol(personRegisterDto.getRoleName()).orElseThrow(()-> new Exception("No existe el rol en la base de datos, inserte primero"));
 
 		usuarioRepository.save(new User(personRegister.getDocument(), passwordEncoder.encode(personRegister.getDocument()), rol, person));

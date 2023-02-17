@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 public class PersonRegisterDTO {
 
-    private Long id;
+    private Long idPerson;
     @NotNull
     @NotBlank
     private String firstName;
