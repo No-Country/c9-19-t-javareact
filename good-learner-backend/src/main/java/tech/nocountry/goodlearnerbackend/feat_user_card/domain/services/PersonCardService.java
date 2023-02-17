@@ -7,4 +7,5 @@ public interface PersonCardService {
 
     public ResponseEntity<PersonDetailDTO> findPerson(Long id) throws Exception;
 
+    public ResponseEntity<?> updatePerson(PersonDetailDTO personDetailDTO) throws Exception;
 }
