@@ -6,9 +6,9 @@ import '../styles/dashboard.css';
 import '../styles/header.css';
 
 const data = [
-    {usuario: 'Estudiantes', cantidad: 180, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap'},
-    {usuario: 'Profesores', cantidad: 6, background: '#E1F1FF', color: '#3F7AFC', icon: 'fa fa-user'},
-    {usuario: 'Tutores', cantidad: 140, background: '#FFF2D8', color: '#FFA002', icon: 'fa fa-users'},
+    {usuario: 'Estudiantes', cantidad: 180, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap', id:1},
+    {usuario: 'Profesores', cantidad: 6, background: '#E1F1FF', color: '#3F7AFC', icon: 'fa fa-user', id:2},
+    {usuario: 'Tutores', cantidad: 140, background: '#FFF2D8', color: '#FFA002', icon: 'fa fa-users', id:3},
 ]
 function Dashboard () {
     return (
@@ -22,8 +22,8 @@ function Dashboard () {
             <Row>
                 {
                     data.map( (user: any) => (
-                        <Col xs={12} md={4} className='d-flex justify-content-center'>
-                            <Card className='card-dash' key={user.id}>
+                        <Col xs={12} md={4} className='d-flex justify-content-center' key={user.id}>
+                            <Card className='card-dash' >
                                 <Card.Body>
                                     <Row>
                                         <Col xs={6} md={6} className='card-line'>
