@@ -10,166 +10,175 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
+import { useAppDispatch } from '../app/hooks';
+import ButtonDanger from './UI/ButtonDanger';
+import DeleteAlert from './UI/DeleteAlert';
 
 export interface Props {
-  show: boolean,
-  handleClose: () => void,
-  handleSave: (value: User) => void,
-  user: User
+    show: boolean,
+    handleClose: () => void,
+    setShowFormUser: React.Dispatch<React.SetStateAction<boolean>>,
+    handleSave: (value: User) => void,
+    user: User
+
 }
 
 const initialForm = User.parseItem(new User());
 
-function FormUsuario({ show, handleClose, handleSave, user }: Props) {
+function FormUsuario({ show, handleClose, handleSave, user, setShowFormUser }: Props) {
 
-  const [form, setForm] = useState<User>(initialForm);
+    const [form, setForm] = useState<User>(initialForm);
+    const [showAlert, setshowAlert] = useState(false);
 
-  useEffect(() => {
-    if (user.id !== undefined) {
-      setForm(user);
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (user.id !== undefined) {
+            setForm(user);
+        }
+    }, [user]);
+
+    const handleCloseModal = () => {
+        handleReset();
+        handleClose();
     }
-  }, [user]);
 
-  const handleCloseModal = () => {
-    handleReset();
-    handleClose();
-  }
-  const handleSaveData = () => {
-    if (!form.name
-      || !form.last_name
-      || !form.dni
-      || !form.username
-      || !form.password
-      || !form.rol_id
-      || (form.rol_id === '3' && !form.comision_id)
-    ) {
-      alert('datos incompletos');
-    } else {
-      handleSave(form);
-      handleReset();
+    const handleSaveData = () => {
+        if (!form.name
+            || !form.last_name
+            || !form.dni
+            || !form.username
+            || !form.password
+            || !form.rol_id
+            || (form.rol_id === '3' && !form.comision_id)
+        ) {
+            alert('datos incompletos');
+        } else {
+            handleSave(form);
+            handleReset();
 
+        }
     }
-  }
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
+    };
 
     const handleReset = () => {
         setForm(initialForm);
-      };
-      
+    };
+
     return (
         <>
-        <Modal 
-            show={show} 
-            onHide={handleCloseModal} 
-            keyboard={false} 
-            backdrop="static"  
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <Modal.Header closeButton>
-                <Modal.Title>
-                    {
-                        form.id !== undefined
-                        ?
-                        'Modificar Usuario'
-                        :
-                        'Agregar Usuario'
-                    }
-                </Modal.Title>
-            </Modal.Header>
-            
-            <Modal.Body>
-                <Container>
-                    <Form>
-                        <Row>
-                            <Col xs={12} md={6}>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Nombre</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Ingrese el nombre"
-                                        name="name"
-                                        value={form.name || ''}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col xs={6} md={6}>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Apellido</Form.Label>
-                                    <Form.Control
-                                         type="text"
-                                         placeholder="Ingrese el apellido"
-                                         name="last_name"
-                                         value={form.last_name || ''}
-                                         onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={12} md={6}>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>DNI</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Ingrese el DNI"
-                                        name="dni"
-                                        value={form.dni || ''}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col xs={6} md={6}>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Nombre de usuario</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Ingrese el nombre de usuario"
-                                        name="username"
-                                        value={form.username || ''}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={12} md={6}>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Contraseña</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Ingrese la Contraseña"
-                                        name="password"
-                                        value={form.password || ''}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col xs={6} md={6}>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Rol</Form.Label>
-                                    <Form.Select 
-                                        name="rol_id"
-                                        value={form.rol_id}
-                                        onChange={handleChange}
-                                    >
-                                        <option>--Seleccione un rol del usuario--</option>
-                                        <option value="1"> Profesor </option>
-                                        <option value="2"> Tutor </option>
-                                        <option value="3"> Estudiante </option>
-                                    </Form.Select>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        {/* <Row>
+            <Modal
+                show={show}
+                onHide={handleCloseModal}
+                keyboard={false}
+                backdrop="static"
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        {
+                            form.id !== undefined
+                                ?
+                                'Modificar Usuario'
+                                :
+                                'Agregar Usuario'
+                        }
+                    </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Container>
+                        <Form>
+                            <Row>
+                                <Col xs={12} md={6}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Nombre</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Ingrese el nombre"
+                                            name="name"
+                                            value={form.name || ''}
+                                            onChange={handleChange}
+                                        />
+                                    </Form.Group>
+                                </Col>
+                                <Col xs={6} md={6}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Apellido</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Ingrese el apellido"
+                                            name="last_name"
+                                            value={form.last_name || ''}
+                                            onChange={handleChange}
+                                        />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={12} md={6}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>DNI</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Ingrese el DNI"
+                                            name="dni"
+                                            value={form.dni || ''}
+                                            onChange={handleChange}
+                                        />
+                                    </Form.Group>
+                                </Col>
+                                <Col xs={6} md={6}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Nombre de usuario</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Ingrese el nombre de usuario"
+                                            name="username"
+                                            value={form.username || ''}
+                                            onChange={handleChange}
+                                        />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={12} md={6}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Contraseña</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Ingrese la Contraseña"
+                                            name="password"
+                                            value={form.password || ''}
+                                            onChange={handleChange}
+                                        />
+                                    </Form.Group>
+                                </Col>
+                                <Col xs={6} md={6}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Rol</Form.Label>
+                                        <Form.Select
+                                            name="rol_id"
+                                            value={form.rol_id}
+                                            onChange={handleChange}
+                                        >
+                                            <option>--Seleccione un rol del usuario--</option>
+                                            <option value="1"> Profesor </option>
+                                            <option value="2"> Tutor </option>
+                                            <option value="3"> Estudiante </option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            {/* <Row>
                             <Col xs={6} md={6}>
                                 {
                                     form.rol_id === '3' 
@@ -189,28 +198,38 @@ function FormUsuario({ show, handleClose, handleSave, user }: Props) {
                                 }
                             </Col>
                         </Row> */}
-                    </Form>
-                </Container>
-            </Modal.Body>
-            
-            <Modal.Footer>
-                
-                <ButtonSecondary
-                    text={'Cancelar'}
-                    size="md"
-                    icon='fa fa-times'
-                    onClick={handleCloseModal}
-                />
-                <ButtonMain
-                    text={'Guardar'}
-                    size="md"
-                    icon='fa fa-save'
-                    onClick={handleSaveData}
-                />
-            </Modal.Footer>
-        </Modal>
+                        </Form>
+                    </Container>
+                </Modal.Body>
+
+                <Modal.Footer className='justify-content-between px-4'>
+                    <ButtonDanger
+                        text={'Eliminar '}
+                        size="md"
+                        icon='fa fa-trash'
+                        onClick={() => {
+                            setShowFormUser(false)
+                            setshowAlert(true)
+                        }} />
+                    <div className="d-flex gap-2">
+                        <ButtonSecondary
+                            text={'Cancelar'}
+                            size="md"
+                            icon='fa fa-times'
+                            onClick={handleCloseModal}
+                        />
+                        <ButtonMain
+                            text={'Guardar'}
+                            size="md"
+                            icon='fa fa-save'
+                            onClick={handleSaveData}
+                        />
+                    </div>
+                </Modal.Footer>
+            </Modal>
+            <DeleteAlert show={showAlert} onHide={() => setshowAlert(false)} userId={user.id} closeForm={handleCloseModal} setShowFormUser={setShowFormUser} />
         </>
-      );
-    }
-    
-    export default FormUsuario;
+    );
+}
+
+export default FormUsuario;

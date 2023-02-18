@@ -5,7 +5,6 @@ import { User } from '../../models/User';
 interface Props {
   user: User;
   handleUpdateUser: (elem: any) => void;
-  handleDeleteUser: (elem: any) => void;
   handleShowRelations: (user: User) => void;
 }
 const roles = ['Profesor', 'Tutor', 'Estudiante'];
@@ -13,7 +12,6 @@ const roles = ['Profesor', 'Tutor', 'Estudiante'];
 const CardPerson: React.FC<Props> = ({
   user,
   handleUpdateUser,
-  handleDeleteUser,
   handleShowRelations
 }) => {
   return (
@@ -31,9 +29,6 @@ const CardPerson: React.FC<Props> = ({
           </Button>
           <Button variant="warning" onClick={() => handleUpdateUser(user)}>
             <i className="fa fa-edit"></i>
-          </Button>
-          <Button variant="danger" onClick={() => handleDeleteUser(user.id)}>
-            <i className="fa fa-trash"></i>
           </Button>
           {
             (user.rol_id === '2' || user.rol_id === '3')

@@ -6,7 +6,6 @@ import { User } from '../models/User';
 // compoents
 import FormUsuario from '../components/formUsuario';
 import RelationAssign from '../components/RelationAssign';
-import ButtonMain from '../components/UI/ButtonMain';
 import CardPerson from '../components/UI/CardPerson';
 
 // UI
@@ -14,7 +13,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-import { deleteUser, selectStudents, selectTutors, updateUser } from '../app/states/users';
+import { selectStudents, selectTutors, updateUser } from '../app/states/users';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 
@@ -37,10 +36,6 @@ function Estudiantes() {
     const handleUpdateUser = (user: User) => {
         setSelectedUser(user);
         setShowFormUser(true);
-    }
-
-    const handleDeleteUser = (userId: string) => {
-        dispatch(deleteUser(userId))
     }
 
     const handleSaveFormUser = (user: any) => {
@@ -77,7 +72,6 @@ function Estudiantes() {
                                     <CardPerson
                                         user={user}
                                         handleUpdateUser={handleUpdateUser}
-                                        handleDeleteUser={handleDeleteUser}
                                         handleShowRelations={handleShowRelations}
                                     />
                                 </Col>
@@ -90,6 +84,7 @@ function Estudiantes() {
                     handleClose={handleCloseFormUser}
                     handleSave={handleSaveFormUser}
                     user={selectedUser}
+                    setShowFormUser={setShowFormUser}
                 />
                 <RelationAssign
                     show={showRelations}
