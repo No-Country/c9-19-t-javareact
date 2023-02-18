@@ -9,7 +9,7 @@ const user = {
   id: 0,
   name: 'roberto',
   username: 'robert',
-  rol_id:'admin'
+  rol_id:'teacher'
 }
 const LoginForm = () => {
   const dispatch = useDispatch()
@@ -30,8 +30,6 @@ const LoginForm = () => {
 
   const handleSubmit = () => {
     localStorage.setItem("token", "test-token");
-    console.log(formData);
-    console.log(localStorage.getItem("token"))
     dispatch(createUser( user ));
     navigate(`/${PrivateRoutes.DASHBOARD}`, { replace: true });
     

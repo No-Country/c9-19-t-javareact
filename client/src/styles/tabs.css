@@ -1,0 +1,22 @@
+.tabs {
+    justify-content: space-evenly;
+    border-bottom: 3px solid #9C254D !important;
+}
+
+.tabs .nav-link {
+    color: #495057;
+}
+
+.tabs .nav-link:hover {
+    color: #9C254D !important;
+    border-color: transparent;
+}
+
+.tabs .nav-tabs,
+.tabs .nav-link.active {
+    color: #f0f1f3 !important;
+    background-color: #9C254D !important;
+    border-top: 3px solid #9C254D !important;
+    border-bottom: 3px solid #9C254D !important;
+    /* border-color: transparent; */
+}

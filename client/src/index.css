@@ -120,7 +120,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     background-color: #8A91C5 !important;
     color:white;
 }
-.active{
+.bg-blue .active{
   background-color: #8A91C5 !important;
   color:white;
 }
@@ -151,4 +151,22 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 .rounded-circle{
   padding:5px;
+}
+
+.btn-agregar-estudiante {
+  float: right;
+  margin-top: 1em;
+}
+
+.badge-main {
+  background-color: #9c254d !important;
+  color: #f0f1f3;
+}
+
+.row-aprove {
+  background-color: #c8e6c9;
+}
+
+.row-disaprove {
+  background-color: #ffcdd2;
 }

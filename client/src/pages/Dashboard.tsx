@@ -23,7 +23,7 @@ function Dashboard () {
                 {
                     data.map( (user: any) => (
                         <Col xs={12} md={4} className='d-flex justify-content-center'>
-                            <Card className='card-dash' key={user.usuario}>
+                            <Card className='card-dash' key={user.id}>
                                 <Card.Body>
                                     <Row>
                                         <Col xs={6} md={6} className='card-line'>

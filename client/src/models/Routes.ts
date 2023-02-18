@@ -7,4 +7,5 @@ export const PrivateRoutes = {
   DASHBOARD: 'dashboard',
   COMMISSION: 'commission',
   SINGLEUSERINFO: 'usuario',
+  MY_COMMISSIONS: 'my-commissions',
 };

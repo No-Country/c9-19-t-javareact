@@ -15,6 +15,7 @@ import Button from 'react-bootstrap/Button';
 
 export interface Props {
     show: boolean,
+    title: string
     user: User,
     relations: Array<User>, 
     users: Array<User>,
@@ -22,7 +23,7 @@ export interface Props {
     handleSave: (value: Array<User>) => void,
 }
 
-function RelationAssign({show, user, relations, users, handleClose, handleSave}: Props) {
+function RelationAssign({show, title, user, relations, users, handleClose, handleSave}: Props) {
  
     const [newRelations, setNewRelations] = useState<Array<User>>([])
 
@@ -35,12 +36,12 @@ function RelationAssign({show, user, relations, users, handleClose, handleSave}:
         handleClose();
     }
     const handleSaveData = () => {
-        handleSave(relations);
+        handleSave(newRelations);
     }
 
     const handleChange = (e: { target: { value: string | undefined; }; }) => {
-        if (newRelations.findIndex(elem => elem. id === e.target.value) === -1) {
-            let user = users.find((elem) => elem.id === e.target.value);
+        if (newRelations.findIndex(elem => elem. id === Number(e.target.value)) === -1) {
+            let user = users.find((elem) => elem.id === Number(e.target.value));
             if (user) {
                 setNewRelations([...newRelations, user]);
             }
@@ -66,13 +67,7 @@ function RelationAssign({show, user, relations, users, handleClose, handleSave}:
         >
             <Modal.Header closeButton>
                 <Modal.Title>
-                    {
-                        user.rol_id === '2'
-                        ?
-                        'Asignar estudiante al tutor'
-                        :
-                        'Asignar tutor al estudiante'
-                    }
+                    { title }
                 </Modal.Title>
             </Modal.Header>
             
@@ -82,17 +77,17 @@ function RelationAssign({show, user, relations, users, handleClose, handleSave}:
                         <Row>
                             <Col xs={12} md={12}>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Asignar {user.rol_id === '2' ? 'estudiante' : 'tutor'}</Form.Label>
+                                    <Form.Label>Asignar {user.rol_id ? user.rol_id === '2' ? 'estudiante' : 'tutor' : 'entidad'}</Form.Label>
                                     <Form.Select 
                                         name="comision_id"
                                         onChange={handleChange}
                                         value={''}
-                                        disabled={user.rol_id === '3' && newRelations.length === 1}
+                                        disabled={(user.rol_id === '3' || user.rol_id === undefined) && newRelations.length === 1}
                                     >
-                                        <option>--Seleccione un {user.rol_id === '2' ? 'estudiante' : 'tutor'} --</option>
+                                        <option>--Seleccione una opción --</option>
                                         {
                                             users.map((elem)=> (
-                                                <option value={elem.id}> {elem.name} {elem.last_name}</option>
+                                                <option key={elem.id} value={elem.id}> {elem.name} {elem.last_name}</option>
                                             ))
                                         }
                                     </Form.Select>
@@ -108,7 +103,7 @@ function RelationAssign({show, user, relations, users, handleClose, handleSave}:
                             <ListGroup>
                                 {
                                     newRelations.map((elem) => (
-                                        <ListGroup.Item className="d-flex justify-content-between align-items-center">
+                                        <ListGroup.Item key={elem.id} className="d-flex justify-content-between align-items-center">
                                             {elem.name} 
                                             &nbsp;
                                             { elem.last_name} 

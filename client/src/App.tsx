@@ -6,6 +6,8 @@ import Layout from "./pages/Layout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Usuarios from "./pages/Usuarios";
+import Commissions from './pages/Commissions';
+import MyCommissions from './pages/MyCommissions';
 import { RoutesWithNotFound } from './helpers';
 import { PrivateRoutes, PublicRoutes, Roles } from './models';
 import AuthGuard from './helpers/authGuard';
@@ -23,14 +25,17 @@ function App() {
             <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
             <Route path={PrivateRoutes.USER} element={<Usuarios />} />
             <Route element={<RoleGuard rol={Roles.ADMIN} />}>
-              <Route path={PrivateRoutes.COMMISSION} element={<h1>Comisiones desde administrador</h1>} />
+              <Route path={PrivateRoutes.COMMISSION} element={<Commissions />} />
               <Route path={`${PrivateRoutes.SINGLEUSERINFO}/:id`} element={<UsuarioInfo />} />
+            </Route>
+            <Route element={<RoleGuard rol={Roles.TEACHER} />}>
+              <Route path={PrivateRoutes.MY_COMMISSIONS} element={<MyCommissions />} />
             </Route>
           </Route>
         </Route>
 
-      </RoutesWithNotFound>
-    </BrowserRouter>
+      </RoutesWithNotFound >
+    </BrowserRouter >
   );
 }
 

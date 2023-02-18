@@ -19,7 +19,9 @@ const Layout = () => {
         }
         if (token === null) {
             navigate('/login', { replace: true });
-        } 
+        } else {
+            navigate('/dashboard', { replace: true });
+        }
     }, [])
     
     return (
