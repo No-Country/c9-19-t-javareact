@@ -1,7 +1,6 @@
-package tech.nocountry.goodlearnerbackend.feat_user_card.domain.model;
+package tech.nocountry.goodlearnerbackend.feat_dashboard.domain.model;
 
 import lombok.*;
-import tech.nocountry.goodlearnerbackend.feat_auth.data.model.RoleName;
 
 
 @RequiredArgsConstructor

@@ -2,7 +2,7 @@
 
 ---
 
-### Ruta NO PROTEGIDA
+### Rutas de NO PROTEGIDA
 
 #### POST http://127.0.0.1:8080/api/user/login
 * Para logearse un usuario primero deberá estar cargado en el sistema. El administrador será el único que podrá realizar un CRUD sobre Personas-Usuarios entre otras gestiones.
@@ -142,3 +142,110 @@ TOKEN: <token>
 {
   
 }
+```
+
+#### GET http://localhost:8080/api/admin/person
+* [Todas las Personas](). Recuperar TODAS personas.
+
+**JSON SALIDA**
+```json
+[
+  [
+    {
+      "id": 1,
+      "fullName": "Director Director"
+    },
+    {
+      "id": 2,
+      "fullName": "David Ayala"
+    },
+    {
+      "id": 3,
+      "fullName": "Romina Gomez"
+    },
+    {
+      "id": 4,
+      "fullName": "David Ayala"
+    },
+    {
+      "id": 5,
+      "fullName": "Hugo Ramirez"
+    },
+    {
+      "id": 6,
+      "fullName": "Jazmin Ayala"
+    },
+    {
+      "id": 7,
+      "fullName": "Agustin Ramirez"
+    }
+  ]
+]
+```
+
+#### GET http://localhost:8080/api/admin/person?page={1}&size={2}
+* [Todas las Personas](). Recuperar personas por paginación.
+
+**JSON SALIDA**
+```json
+[
+  {
+    "id": 2,
+    "fullName": "David Ayala"
+  },
+  {
+    "id": 3,
+    "fullName": "Romina Gomez"
+  }
+]
+```
+
+
+#### GET http://localhost:8080/api/admin/teacher?page={1}&size={2}
+* [Todos los Profesores](). Recuperar profesores por paginación.
+
+**JSON SALIDA**
+```json
+[
+  {
+    "id": 2,
+    "fullName": "David Ayala"
+  },
+  {
+    "id": 3,
+    "fullName": "Romina Gomez"
+  }
+]
+```
+#### GET http://localhost:8080/api/admin/tutor?page={1}&size={2}
+* [Todos los Tutores](). Recuperar tutores por paginación.
+
+**JSON SALIDA**
+```json
+[
+  {
+    "id": 4,
+    "fullName": "David Ayala"
+  },
+  {
+    "id": 5,
+    "fullName": "Hugo Ramirez"
+  }
+]
+```
+#### GET http://localhost:8080/api/admin/student?page={1}&size={2}
+* [Todos los Estudiantes](). Recuperar estudiantes por paginación.
+
+**JSON SALIDA**
+```json
+[
+  {
+    "id": 6,
+    "fullName": "Jazmin Ayala"
+  },
+  {
+    "id": 7,
+    "fullName": "Agustin Ramirez"
+  }
+]
+```
