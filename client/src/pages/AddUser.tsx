@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // Models
 import { User } from '../models/User';
 // UI
@@ -17,25 +17,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const AddUser = () => {
   const data = useLocation()
   const navigate = useNavigate()
-  const [formData, setFormData] = useState<User>({});
-  const [page, setPage] = useState<string>()
-  const user = data.state && data.state.user
   const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    if (!formData.rol_id) {
-      setFormData({
-        ...formData,
-        rol_id: user === "profesor" ? "1" : user === "tutor" ? "2" : user === "estudiante" ? "3" : undefined
-      })
-    }
-    if (!user) {
-      setPage(formData.rol_id === "1" ? "profesores" : formData.rol_id === "2" ? "tutores" : formData.rol_id === "3" ? "estudiantes" : undefined)
-    }
-    if (user && !page) {
-      setPage(user === "profesor" ? "profesores" : user === "tutor" ? "tutores" : "estudiantes")
-    }
-  }, [formData.rol_id])
+  const user = data.state && data.state.user
+  const [formData, setFormData] = useState<User>({
+    rol_id: user === "profesor" ? "1" : user === "tutor" ? "2" : "3"
+  });
+  const page = user === "profesor" ? "profesores" : user === "tutor" ? "tutores" : "estudiantes"
 
   const handleSaveData = async () => {
     dispatch(updateUser(formData))
@@ -149,13 +136,13 @@ const AddUser = () => {
           {/* <Row>
                             <Col xs={6} md={6}>
                                 {
-                                    form.rol_id === '3' 
+                                    formData.rol_id === '3' 
                                     &&
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                         <Form.Label>Comision</Form.Label>
                                         <Form.Select 
                                             name="comision_id"
-                                            value={form.comision_id}
+                                            value={formData.comision_id}
                                             onChange={handleChange}
                                         >
                                             <option>--Seleccione una comisión del alumno--</option>

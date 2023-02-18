@@ -5,7 +5,7 @@ import { User } from '../../models/User';
 interface Props {
   user: User;
   handleUpdateUser: (elem: any) => void;
-  handleShowRelations: (user: User) => void;
+  handleShowRelations?: (user: User) => void;
 }
 const roles = ['Profesor', 'Tutor', 'Estudiante'];
 
@@ -23,15 +23,15 @@ const CardPerson: React.FC<Props> = ({
         <Card.Text>{roles[user.rol_id ? Number(user.rol_id) - 1 : 0]}</Card.Text>
       </Card.Body>
       <Card.Footer>
-        <ButtonGroup className="w-100">
+        <ButtonGroup className="w-100">          
           <Button variant="primary" as={Link} to={`/usuario/${user.id}`} state={{ data: user }}>
-            <i className="fa fa-eye"></i>
+            <i className="fa fa-eye"/>
           </Button>
           <Button variant="warning" onClick={() => handleUpdateUser(user)}>
             <i className="fa fa-edit"></i>
           </Button>
           {
-            (user.rol_id === '2' || user.rol_id === '3')
+           handleShowRelations
             &&
             <Button variant="info" onClick={() => handleShowRelations(user)}>
               <i className="fa fa-sitemap"></i>

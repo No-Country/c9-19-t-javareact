@@ -20,10 +20,6 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 function Profesores() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
     const [selectedUser, setSelectedUser] = useState<User>(new User());
-    const [showRelations, setShowRelations] = useState<boolean>(false);
-    const [usersToReltions, setUsersToReltions] = useState<Array<User>>([]);
-    const [relations, setRelations] = useState<Array<User>>([]);
-    const [modalTitle, setModalTitle] = useState<string>('');
     const users = useAppSelector(selectTeachers)
 
     const dispatch = useAppDispatch()
@@ -43,40 +39,6 @@ function Profesores() {
         handleCloseFormUser();
     };
 
-    const handleShowRelations = (elem: any) => {
-        let user = User.parseItem(
-            {
-                'id': elem.id,
-                'rol_id': elem.rol_id,
-                'name': elem.name,
-                'last_name': elem.last_name,
-                'dni': elem.dni,
-            }
-        );
-
-        setSelectedUser(user);
-        let usersFiltered = []
-        if (user.rol_id === '2') {
-            setModalTitle('Asignar estudiante al tutor')
-            usersFiltered = users.filter( (d) => d.rol_id === '3')
-        } else {
-            setModalTitle('Asignar tutor al estudiante')
-            usersFiltered = users.filter( (d) => d.rol_id === '2')
-        }
-        setUsersToReltions(User.parseArray(usersFiltered));
-        setRelations([]);
-        setShowRelations(true);
-    }
-
-    const handleCloseRelations = () => {
-        setShowRelations(false);
-        setSelectedUser(new User());
-    }
-
-    const handleSaveRelations = (data: Array<User>) => {
-
-    }
-
     return (
         <>
             <Container>
@@ -94,7 +56,6 @@ function Profesores() {
                                     <CardPerson
                                         user={user}
                                         handleUpdateUser={handleUpdateUser}
-                                        handleShowRelations={handleShowRelations}
                                     />
                                 </Col>
                             ))}
@@ -108,14 +69,6 @@ function Profesores() {
                     user={selectedUser}
                     setShowFormUser={setShowFormUser}
                 />
-                <RelationAssign 
-                    show={showRelations}
-                    title={modalTitle} 
-                    handleClose={handleCloseRelations} 
-                    handleSave={handleSaveRelations} 
-                    user={selectedUser} 
-                    users={usersToReltions} 
-                    relations={relations}/>
             </Container>
         </>
     );

@@ -46,6 +46,7 @@ function Estudiantes() {
 
     const handleShowRelations = (user: any) => {
         setSelectedUser(user);
+        setModalTitle('Asignar tutor al estudiante')
         setUsersToReltions(teachers);
         setRelations([]);
         setShowRelations(true);
