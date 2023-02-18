@@ -1,6 +1,6 @@
 import { Qualification } from './Qualification';
 export class User {
-    id?: number;
+    id?: number | string;
     rol_id?: string;
     // rol: Rol
     token_id?: string;
