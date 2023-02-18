@@ -3,22 +3,16 @@ package tech.nocountry.goodlearnerbackend.feat_user_card.domain.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tech.nocountry.goodlearnerbackend.feat_auth.data.model.User;
 import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UserRepository;
-import tech.nocountry.goodlearnerbackend.feat_user_card.data.repository.PersonPageRepository;
 import tech.nocountry.goodlearnerbackend.feat_user_card.domain.model.PersonDetailDTO;
-import tech.nocountry.goodlearnerbackend.feat_user_card.domain.model.PersonResponseDTO;
 import tech.nocountry.goodlearnerbackend.feat_user_card.domain.services.mapper.PersonDetailMapper;
 import tech.nocountry.goodlearnerbackend.model.Person;
 import tech.nocountry.goodlearnerbackend.repository.PersonRepository;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,8 +26,6 @@ public class PersonCardServiceImpl implements PersonCardService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PersonPageRepository personPageRepository;
 
     /**
      *
@@ -112,17 +104,5 @@ public class PersonCardServiceImpl implements PersonCardService {
         return ResponseEntity.noContent().build();
     }
 
-    @Override
-    public List<PersonResponseDTO> loadPersonPage(Pageable pageable) throws Exception {
-        Page page = personPageRepository.findAll(pageable);
-
-        List<PersonResponseDTO> peopleResponse = new ArrayList<>();
-
-        List<Person> people = page.stream().toList();
-        people.forEach(person -> {
-            peopleResponse.add(new PersonResponseDTO(person.getIdPerson(), person.getFirstName() + " " + person.getLastName() ));
-        });
-        return peopleResponse;
-    }
 
 }
