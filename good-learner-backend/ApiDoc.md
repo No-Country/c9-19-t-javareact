@@ -2,7 +2,7 @@
 
 ---
 
-### Ruta NO PROTEGIDA
+### Rutas de NO PROTEGIDA
 
 #### POST http://127.0.0.1:8080/api/user/login
 * Para logearse un usuario primero deberá estar cargado en el sistema. El administrador será el único que podrá realizar un CRUD sobre Personas-Usuarios entre otras gestiones.
@@ -142,3 +142,21 @@ TOKEN: <token>
 {
   
 }
+```
+
+#### GET http://localhost:8080/api/admin/person?page={1}&size={2}
+* [Todas las Personas](). Recuperar personas por paginación.
+
+**JSON SALIDA**
+```json
+[
+  {
+    "id": 3,
+    "fullName": "Romina Gomez"
+  },
+  {
+    "id": 4,
+    "fullName": "David Ayala"
+  }
+]
+```
