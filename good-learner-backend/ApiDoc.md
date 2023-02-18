@@ -142,3 +142,21 @@ TOKEN: <token>
 {
   
 }
+```
+
+#### GET http://localhost:8080/api/admin/person?page={1}&size={2}
+* [Todas las Personas](). Recuperar personas por paginación.
+
+**JSON SALIDA**
+```json
+[
+  {
+    "id": 3,
+    "fullName": "Romina Gomez"
+  },
+  {
+    "id": 4,
+    "fullName": "David Ayala"
+  }
+]
+```
