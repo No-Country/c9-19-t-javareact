@@ -7,7 +7,7 @@ import { SideNav } from '../components/SideNav'
 
 const Layout = () => {
 
-    const navigate = useNavigate();
+/*     const navigate = useNavigate();
 
     const [token, setToken] = useState<string>('')
 
@@ -23,7 +23,7 @@ const Layout = () => {
             navigate('/dashboard', { replace: true });
         }
     }, [])
-    
+     */
     return (
         <>
             <div className="sb-sidenav-toggled">

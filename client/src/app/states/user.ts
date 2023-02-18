@@ -1,36 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User as UserInfo } from '../../models/User';
 import { clearLocalStorage, persistLocalStorage } from '../../helpers';
 
-export const EmptyUserState: UserInfo = {
-  id: 0,
-  name: '',
-  username: '',
-  rol_id:''
+
+export interface userState{
+  id:number,
+  nombreUsuario: string | undefined,
+  rol?: "ADMINISTRATOR" | "TEACHER" | "STUDENT" | "TUTOR" | undefined,
+  token?:string
+}
+
+export const EmptyUserState: userState = {
+  id:0,
+  nombreUsuario: undefined,
+  rol:undefined,
+  token:undefined
 };
-
+export interface User{
+  nombreUsuario?:string,
+  clave?:string
+}
 export const UserKey = 'user';
-
+const initialState = EmptyUserState
 export const userSlice = createSlice({
   name: 'user',
-  initialState: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : EmptyUserState,
+  initialState,
   reducers: {
-    createUser: (state, action) => {
-      persistLocalStorage<UserInfo>(UserKey, action.payload);
+    createUser: (state, action:PayloadAction<userState>) => {
       return action.payload;
     },
-    updateUser: (state, action) => {
-      const result = { ...state, ...action.payload };
-      persistLocalStorage<UserInfo>(UserKey, result);
-      return result;
-    },
     resetUser: () => {
-      clearLocalStorage(UserKey);
-      return EmptyUserState;
+      return initialState;
     }
   }
 });
 
-export const { createUser, updateUser, resetUser } = userSlice.actions;
+export const { createUser, resetUser } = userSlice.actions;
 
 export default userSlice.reducer;

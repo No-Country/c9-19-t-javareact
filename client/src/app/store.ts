@@ -1,13 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { User, User as UserInfo } from '../models';
+import { User } from '../models';
 import { Ui } from '../models/Ui';
-import userSliceReducer from './states/user';
+import userSliceReducer, { userState } from './states/user';
 import uiSliceReducer from './states/ui';
 import usersSliceReducer from './states/users';
+
 export interface GoodLearner {
   users: User[];
-  user: UserInfo;
-  ui: Ui;
+  user: userState;
+  ui: Ui
 }
 
 export const store = configureStore<GoodLearner>({
