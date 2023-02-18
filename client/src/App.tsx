@@ -8,7 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Commissions from './pages/Commissions';
 import MyCommissions from './pages/MyCommissions';
 import { RoutesWithNotFound } from './helpers';
-import { PrivateRoutes, PublicRoutes, Roles } from './models';
+import { Roles } from './models';
 import AuthGuard from './helpers/authGuard';
 import RoleGuard from './helpers/roleGuard';
 import UsuarioInfo from './pages/UsuarioInfo';
@@ -16,6 +16,7 @@ import Profesores from './pages/Profesores';
 import Tutores from './pages/Tutores';
 import Estudiantes from './pages/Estudiantes';
 import AddUser from './pages/AddUser';
+import { PublicRoutes, PrivateRoutes } from './routes';
 
 function App() {
 

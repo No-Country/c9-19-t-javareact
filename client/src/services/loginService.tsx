@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../app/hooks';
 import { createUser } from '../app/states/user';
 import { apiProps, useApi } from '../hooks/useApi';
-import { PrivateRoutes } from '../models';
+import { PrivateRoutes } from '../routes';
 import Swal from 'sweetalert2'
 export interface User{
   nombreUsuario?:string,

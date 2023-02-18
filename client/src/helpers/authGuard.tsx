@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
-import { PrivateRoutes, PublicRoutes } from '../models';
+import { PrivateRoutes, PublicRoutes } from '../routes';
 import { GoodLearner } from '../app/store';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const PrivateValidationFragment = <Outlet />;
-const PublicValidationFragment = <Navigate replace to={PrivateRoutes.USER} />;
+const PublicValidationFragment = <Navigate replace to={PrivateRoutes.DASHBOARD} />;
 
 export const AuthGuard = ({ privateValidation }: Props) => {
   const userState = useSelector((store: GoodLearner) => store.user);
