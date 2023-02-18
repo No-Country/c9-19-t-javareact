@@ -1,25 +1,20 @@
 import React, { useState } from 'react';
 import ButtonMain from './UI/ButtonMain';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { createUser } from '../app/states/user';
-import { PrivateRoutes, Roles, User } from '../models';
+import { Navigate, useNavigate } from "react-router-dom";
+import { PrivateRoutes} from '../models';
 import { loginService } from '../services/loginService';
-const user = {
-  id: 0,
-  name: 'roberto',
-  username: 'robert',
-  rol_id:'admin'
-}
+import { useAppDispatch } from '../app/hooks';
+
 const LoginForm = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
   const [forgotPassword, setForgotPassword] = useState(false);
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,14 +24,19 @@ const LoginForm = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    localStorage.setItem("token", "test-token");
-    loginService(formData.email,formData.password)
-    console.log(formData);
-    console.log(localStorage.getItem("token"))
-/*     dispatch(createUser( user ));
-    navigate(`/${PrivateRoutes.DASHBOARD}`, { replace: true });  */
-    
+  const loginValidation = (username:string,password:string) =>{
+    if((username.length > 5) && (password.length > 5)) return true
+  }
+
+  const handleSubmit = async() => {
+
+     if(loginValidation(formData.email,formData.password)){ 
+      const res = await dispatch(loginService(formData.email,formData.password))
+       res ? (navigate('/dashboard')) : '' 
+     }else{
+      setMessage('Error, por favor, rellena los campos')
+    }
+  
   };
 
   const handleResetPassword = () => {
@@ -68,6 +68,8 @@ const LoginForm = () => {
             />
           </Form.Group>
           <Form.Group className="mb-2" controlId="formBasicCheckbox">
+            { message ? <span>{message}</span> : <span></span> }
+            
             <Button variant="disabled" onClick={() => setForgotPassword(true)}>
               ¿Olvidaste tu contraseña?
             </Button>

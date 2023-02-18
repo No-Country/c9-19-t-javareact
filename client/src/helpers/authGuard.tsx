@@ -12,8 +12,8 @@ const PublicValidationFragment = <Navigate replace to={PrivateRoutes.USER} />;
 
 export const AuthGuard = ({ privateValidation }: Props) => {
   const userState = useSelector((store: GoodLearner) => store.user);
-  console.log(userState)
-  return userState.name ? (
+  console.log(privateValidation)
+  return userState.nombreUsuario ? (
     privateValidation ? (
       PrivateValidationFragment
     ) : (

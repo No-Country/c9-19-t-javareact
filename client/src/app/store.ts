@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {User as UserInfo} from '../models';
 import { Ui } from '../models/Ui';
-import userSliceReducer from './states/user';
+import userSliceReducer, { userState } from './states/user';
 import uiSliceReducer from './states/ui'
 export interface GoodLearner {
-  user: UserInfo;
+  user: userState;
   ui: Ui
 }
 

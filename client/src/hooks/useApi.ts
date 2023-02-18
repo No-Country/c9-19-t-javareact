@@ -1,16 +1,16 @@
-import axios, { AxiosHeaders, AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 export interface apiProps{
     token?:string;
     path?:string;
     method:string;
-    data?:{}
+    body?:{}
 }
 
 const baseUrl= 'http://localhost:8080/api';
 
 
-export const useApi = async({token,path,data,method = 'GET'}:apiProps) => {
+export const useApi = async({token,path,body,method = 'GET'}:apiProps) => {
     let config = `${token ? { } : ''}`;
     let finalUrl = `${ baseUrl }/${ path }`;
     let options: AxiosRequestConfig = {
@@ -18,20 +18,18 @@ export const useApi = async({token,path,data,method = 'GET'}:apiProps) => {
       url: finalUrl,
       headers:{ 
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials':true,
-        'Access-Control-Allow-Origin':'/*'
-
-       /*  Authorization:`bearer ${token}` */
+        'Access-Control-Allow-Origin':'*' ,
+         Authorization:`bearer ${token}` 
       },
-      data:{
-        nombreUsuario:'Cristian',
-        password:'123'
-      }
+      data:body
     }
-   await axios(options)    
-    .then(res=> console.log(res))
-    .catch(err=> console.log(err))
 
+   try {
+    const res = await axios(options)
+    return {status:res.status,data:res.data}
+   } catch (error) {
+    return {status:401,message:'Credenciales incorrectas o error'}
+   }
 
-  return baseUrl;
+           
 }
