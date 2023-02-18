@@ -7,7 +7,12 @@ import java.util.List;
 
 
 public interface DashBoarService {
-    public List<PersonResponseDTO> loadPersonPage(Pageable pageable) throws  Exception;
+    public List<PersonResponseDTO> findAllPeoplePage(Pageable pageable) throws  Exception;
 
-    public List<PersonResponseDTO> loadAllStudent(Pageable pageable) throws Exception;
+    public List<PersonResponseDTO> findAllStudentPage(Pageable pageable) throws Exception;
+
+    public List<PersonResponseDTO> findAllTutorPage(Pageable pageable) throws Exception;
+
+    public List<PersonResponseDTO> findAllTeacherPage(Pageable pageable) throws Exception;
+
 }

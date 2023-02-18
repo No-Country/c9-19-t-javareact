@@ -22,9 +22,9 @@ public class DashboardController {
 
     @GetMapping(path = "/person")
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
-    public ResponseEntity<?> loadPersonPage(Pageable pageable) throws Exception {
+    public ResponseEntity<?> getAllPerson(Pageable pageable) throws Exception {
         try{
-            return ResponseEntity.ok( dashBoarService.loadPersonPage(pageable));
+            return ResponseEntity.ok( dashBoarService.findAllPeoplePage(pageable));
         }
         catch (Exception e){
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -32,12 +32,31 @@ public class DashboardController {
 
     }
 
-
     @GetMapping("/student")
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<?> getAllStudent(Pageable pageable){
         try{
-            return ResponseEntity.ok(dashBoarService.loadAllStudent(pageable));
+            return ResponseEntity.ok(dashBoarService.findAllStudentPage(pageable));
+
+        } catch (Exception e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/tutor")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    public ResponseEntity<?> getAllTutor(Pageable pageable){
+        try{
+            return ResponseEntity.ok(dashBoarService.findAllTutorPage(pageable));
+
+        } catch (Exception e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/teacher")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    public ResponseEntity<?> getAllTeacher(Pageable pageable){
+        try{
+            return ResponseEntity.ok(dashBoarService.findAllTeacherPage(pageable));
 
         } catch (Exception e){
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.feat_user_card.data.repository;
+package tech.nocountry.goodlearnerbackend.feat_dashboard.data.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import tech.nocountry.goodlearnerbackend.model.Student;

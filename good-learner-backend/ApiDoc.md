@@ -190,12 +190,46 @@ TOKEN: <token>
 ```json
 [
   {
+    "id": 2,
+    "fullName": "David Ayala"
+  },
+  {
     "id": 3,
     "fullName": "Romina Gomez"
+  }
+]
+```
+
+
+#### GET http://localhost:8080/api/admin/teacher?page={1}&size={2}
+* [Todos los Profesores](). Recuperar profesores por paginación.
+
+**JSON SALIDA**
+```json
+[
+  {
+    "id": 2,
+    "fullName": "David Ayala"
   },
+  {
+    "id": 3,
+    "fullName": "Romina Gomez"
+  }
+]
+```
+#### GET http://localhost:8080/api/admin/tutor?page={1}&size={2}
+* [Todos los Tutores](). Recuperar tutores por paginación.
+
+**JSON SALIDA**
+```json
+[
   {
     "id": 4,
     "fullName": "David Ayala"
+  },
+  {
+    "id": 5,
+    "fullName": "Hugo Ramirez"
   }
 ]
 ```
@@ -206,12 +240,12 @@ TOKEN: <token>
 ```json
 [
   {
-    "id": 3,
-    "fullName": "Romina Gomez"
+    "id": 6,
+    "fullName": "Jazmin Ayala"
   },
   {
-    "id": 4,
-    "fullName": "David Ayala"
+    "id": 7,
+    "fullName": "Agustin Ramirez"
   }
 ]
 ```
