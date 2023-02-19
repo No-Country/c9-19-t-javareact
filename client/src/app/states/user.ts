@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User as UserInfo } from '../../models/User';
 import { clearLocalStorage, persistLocalStorage } from '../../helpers';
+import { RootState } from '../store';
 
 
 export interface userState{
@@ -34,7 +35,10 @@ export const userSlice = createSlice({
     }
   }
 });
-
+export const selectUser = (state: RootState) => state.user;
+export const selectId = (state: RootState) => state.user.id;
+export const selectName = (state: RootState) => state.user.nombreUsuario;
+export const selectRol = (state: RootState) => state.user.rol;
 export const { createUser, resetUser } = userSlice.actions;
 
 export default userSlice.reducer;

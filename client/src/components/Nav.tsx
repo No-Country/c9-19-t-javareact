@@ -1,14 +1,19 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import {  sidebarStatus } from '../app/states/ui';
-import { resetUser } from '../app/states/user';
-import { GoodLearner } from '../app/store';
+import { useAppSelector } from '../app/hooks';
+import {  selectNavState, sidebarStatus } from '../app/states/ui';
+import { resetUser, selectId, selectName, selectRol } from '../app/states/user';
+import { PrivateRoutes, PublicRoutes } from '../routes';
+
 
 
 export const Nav = () => {
     const dispatch = useDispatch();
-    const useUI = useSelector((store:GoodLearner)=>store.ui)
+    const useUI = useAppSelector(selectNavState)
+    const useName = useAppSelector(selectName)
+    const useRol = useAppSelector(selectRol)
+    const useId = useAppSelector(selectId)
     const sidebarToggle = () =>{
         dispatch(sidebarStatus())
     }
@@ -29,32 +34,17 @@ export const Nav = () => {
                     {/* <input type="text" className="form-control form-control-nav" placeholder="Busqueda" aria-label="Large" aria-describedby="inputGroup-sizing-sm"/> */}
                 </div>
                 </div>
-                 {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon"></span></button> */}
-                <div className="flex-shrink-0 dropdown me-3">
+                 <span className="navbar-text float-start flex-grow-1">{useName} - {useRol}</span> 
+                <div className="flex-shrink-0 dropdown">
                 <a href="#" className="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="mdo" width="32" height="32" className="rounded-circle"/>
                 </a>
                 <ul className='dropdown-menu text-small shadow profiledropdown'>
-                    <li><a className="dropdown-item" href="#">Settings</a></li>
+                    <li><a><NavLink className="dropdown-item" to={`${PrivateRoutes.SINGLEUSERINFO}/${useId}`}>Opciones</NavLink></a></li>
                     <li><hr className="dropdown-divider"/></li>
-                    <li><NavLink className="dropdown-item"onClick={logout} to={'/login'}>Sign out</NavLink></li>
+                    <li><NavLink className="dropdown-item"onClick={logout} to={PublicRoutes.LOGIN}>Salir</NavLink></li>
                 </ul>
                 </div>
-                {/*  <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
-                        <li className="nav-item active"><a className="nav-link" href="#!">Home</a></li>
-                        <li className="nav-item"><a className="nav-link" href="#!">Link</a></li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="#!">Action</a>
-                                <a className="dropdown-item" href="#!">Another action</a>
-                                <div className="dropdown-divider"></div>
-                                <a className="dropdown-item" href="#!">Something else here</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>  */}
             </div>
         </nav>
   )
