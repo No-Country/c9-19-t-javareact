@@ -11,7 +11,7 @@ import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.PersonRegisterDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserLoginDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.UsuarioService;
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
 @RequestMapping("api/user")
 public class UserController {
