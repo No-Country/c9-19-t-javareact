@@ -18,14 +18,14 @@ function App() {
     <BrowserRouter>
       <RoutesWithNotFound>
         <Route path={`/${PublicRoutes.LOGIN}`} element={<Login />} />
-      {/*   <Route element={<AuthGuard privateValidation={true} />}> */}
+         <Route element={<AuthGuard privateValidation={true} />}> 
           <Route path={`/`} element={<Layout />}>
             <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
             <Route path={PrivateRoutes.USER} element={<Usuarios />} />
             <Route path={PrivateRoutes.COMMISSION} element={<h1>Comisiones desde administrador</h1>} />
             <Route path={`${PrivateRoutes.SINGLEUSERINFO}/:id`} element={<UsuarioInfo />} />
           </Route>
-{/*         </Route> */}
+         </Route> 
       </RoutesWithNotFound>
     </BrowserRouter>
   );
