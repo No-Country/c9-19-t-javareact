@@ -50,7 +50,7 @@ function Profesores() {
                 </Row>
                 <Row>
                     <Container>
-                        <Row xs={1} md={2} lg={3} xl={4} className="g-2" style={{padding: '0em 5em'}}>
+                        <Row xs={1} md={2} lg={3} xl={4} className="g-2">
                             {users.map((user: any) => (
                                 <Col key={user.id}>
                                     <CardPerson

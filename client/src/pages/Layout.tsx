@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import { Nav } from '../components/Nav'
+import { TopNav } from '../components/TopNav'
 import { SideNav } from '../components/SideNav'
 
 const Layout = () => {
@@ -27,12 +27,13 @@ const Layout = () => {
     return (
         <>
             <div className="sb-sidenav-toggled">
-                <div className="d-flex" id="wrapper">
-                    <SideNav/>
+                <div className="d-flex">
                     <div className="bg-bone" id="page-content-wrapper">
-                    <Nav/>
-                    <Outlet />
+                    <TopNav/>
+                    <div className="pages-container">
+                        <Outlet />
                     </div>
+                </div>
                 </div>
             </div>
         </>
