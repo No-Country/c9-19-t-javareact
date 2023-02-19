@@ -26,9 +26,15 @@ export const useApi = async({token,path,body,method = 'GET'}:apiProps) => {
 
    try {
     const res = await axios(options)
-    return {status:res.status,data:res.data}
+    return {
+      status:res.status,
+      data:res.data
+    }
    } catch (error) {
-    return {status:401,message:'Credenciales incorrectas o error'}
+    console.log(error)
+    return {
+      status:401,
+      message:'Credenciales incorrectas o expiradas'}
    }
 
            

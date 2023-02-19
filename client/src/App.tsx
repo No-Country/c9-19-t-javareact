@@ -24,7 +24,7 @@ function App() {
     <BrowserRouter>
       <RoutesWithNotFound>
         <Route path={`/${PublicRoutes.LOGIN}`} element={<Login />} />
-      {/*   <Route element={<AuthGuard privateValidation={true} />}> */}
+        <Route element={<AuthGuard privateValidation={true} />}>
           <Route path={`/`} element={<Layout />}>
             <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
               <Route path={PrivateRoutes.COMMISSION} element={<Commissions />} />
@@ -36,6 +36,7 @@ function App() {
             <Route element={<RoleGuard rol={Roles.TEACHER} />}>
               <Route path={PrivateRoutes.MY_COMMISSIONS} element={<MyCommissions />} />
             </Route>
+          </Route>
           </Route>
       </RoutesWithNotFound >
     </BrowserRouter >
