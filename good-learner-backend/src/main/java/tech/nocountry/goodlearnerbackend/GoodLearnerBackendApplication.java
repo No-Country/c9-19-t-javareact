@@ -24,7 +24,7 @@ public class GoodLearnerBackendApplication {
 		ApplicationContext context = SpringApplication.run(GoodLearnerBackendApplication.class, args);
 		LoadResource loadResource = context.getBean(LoadResource.class);
 
-		boolean isLoadData = false;
+		boolean isLoadData = true;
 
 		if(isLoadData){
 			loadResource.loadDatasource(context);
