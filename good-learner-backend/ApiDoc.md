@@ -200,6 +200,8 @@ TOKEN: <token>
 ]
 ```
 
+---
+## Dashboard
 
 #### GET http://localhost:8080/api/admin/teacher?page={1}&size={2}
 * [Todos los Profesores](). Recuperar profesores por paginación.

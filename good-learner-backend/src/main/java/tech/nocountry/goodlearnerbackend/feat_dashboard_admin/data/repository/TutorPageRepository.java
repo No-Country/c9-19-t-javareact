@@ -1,9 +1,13 @@
-package tech.nocountry.goodlearnerbackend.feat_dashboard.data.repository;
+package tech.nocountry.goodlearnerbackend.feat_dashboard_admin.data.repository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import tech.nocountry.goodlearnerbackend.model.Tutor;
 
 @Repository
 public interface TutorPageRepository extends PagingAndSortingRepository<Tutor, Long> {
+
+    @Query(value = "SELECT COUNT(*) FROM Tutor", nativeQuery = true)
+    public Long countTutor();
 }

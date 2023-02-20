@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.feat_dashboard.domain.controller;
+package tech.nocountry.goodlearnerbackend.feat_dashboard_admin.domain.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.nocountry.goodlearnerbackend.feat_dashboard.domain.service.DashBoarService;
+import tech.nocountry.goodlearnerbackend.feat_dashboard_admin.domain.service.DashBoarService;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController

@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.feat_dashboard.domain.model;
+package tech.nocountry.goodlearnerbackend.feat_dashboard_admin.domain.model;
 
 import lombok.*;
 
