@@ -251,3 +251,24 @@ TOKEN: <token>
   }
 ]
 ```
+
+#### GET http://localhost:8080/api/admin/person/count
+* [Cantidad por Rol](). Obtener las cantidades de personas por cada Rol (Estudiante, Profesor y Tutor).
+
+**JSON SALIDA**
+```json
+[
+  {
+    "roleName": "STUDENT",
+    "count": 2
+  },
+  {
+    "roleName": "TEACHER",
+    "count": 2
+  },
+  {
+    "roleName": "TUTOR",
+    "count": 2
+  }
+]
+```
