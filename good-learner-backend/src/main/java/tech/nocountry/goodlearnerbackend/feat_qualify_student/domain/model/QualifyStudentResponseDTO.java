@@ -9,7 +9,7 @@ import tech.nocountry.goodlearnerbackend.model.SubjectName;
 @Getter
 @Setter
 @ToString
-public class QualifyStudentDTO {
+public class QualifyStudentResponseDTO {
     private SubjectName subject;
     private PeriodName periodoName;
     private Integer numberQualification;

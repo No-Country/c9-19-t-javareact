@@ -9,9 +9,10 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ReportQualifications {
+public class ReportQualificationsResponseDTO {
 
     private String fullName;
     private String course;
-    private List<QualifyStudentDTO> qualifications;
+    private Integer year;
+    private List<QualifyStudentResponseDTO> qualifications;
 }
