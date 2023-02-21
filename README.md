@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="client/src/assets/logo-white.png" alt="Logo"  height="110">
+    <img src="https://i.postimg.cc/c1VNkKrg/Good-Learner.png" alt="Logo"  height="110">
   </a>
   <br/>
 <p href="">Cohorte 9 Grupo 19</p>
