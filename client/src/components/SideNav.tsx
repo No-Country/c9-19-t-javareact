@@ -55,7 +55,7 @@ export const SideNav = () => {
         useRol ==='TEACHER' ? 
        ( <div className="list-group list-group-flush bg-blue" >
           <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
-          <Accordion flush style={{ color: "white", background: "inherit" }}>
+{/*           <Accordion flush style={{ color: "white", background: "inherit" }}>
             <Accordion.Item eventKey="0">
               <Accordion.Header><i className="fa-solid fa-user-graduate me-3"></i>Estudiantes</Accordion.Header>
               <Accordion.Body className="p-0">
@@ -63,7 +63,7 @@ export const SideNav = () => {
                 <NavLink className="list-group-sub-item list-group-item-action list-group-item  p-3" to={'/estudiantes'}><i className="fa-thin fa-greater-than me-3"></i>Todos mis estudiantes</NavLink>
               </Accordion.Body>
             </Accordion.Item>
-          </Accordion>
+          </Accordion> */}
           <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/my-commissions'}><i className="fa-solid fa-th-list me-3"></i>Mis Comisiones</NavLink>
         </div>
        ) : (

@@ -39,6 +39,7 @@ export const selectUser = (state: RootState) => state.user;
 export const selectId = (state: RootState) => state.user.id;
 export const selectName = (state: RootState) => state.user.nombreUsuario;
 export const selectRol = (state: RootState) => state.user.rol;
+export const selectToken = (state: RootState) => state.user.token;
 export const { createUser, resetUser } = userSlice.actions;
 
 export default userSlice.reducer;

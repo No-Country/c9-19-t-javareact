@@ -236,3 +236,6 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 .row-disaprove {
   background-color: #ffcdd2;
 }
+.swal2-styled.swal2-confirm{
+ background-color: #9c254d !important
+}

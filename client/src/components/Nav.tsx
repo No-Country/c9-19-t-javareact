@@ -40,7 +40,7 @@ export const Nav = () => {
                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="mdo" width="32" height="32" className="rounded-circle"/>
                 </a>
                 <ul className='dropdown-menu text-small shadow profiledropdown'>
-                    <li><a><NavLink className="dropdown-item" to={`${PrivateRoutes.SINGLEUSERINFO}/${useId}`}>Opciones</NavLink></a></li>
+                    <li><NavLink className="dropdown-item" to={`${PrivateRoutes.SINGLEUSERINFO}/${useId}`}>Opciones</NavLink></li>
                     <li><hr className="dropdown-divider"/></li>
                     <li><NavLink className="dropdown-item"onClick={logout} to={PublicRoutes.LOGIN}>Salir</NavLink></li>
                 </ul>

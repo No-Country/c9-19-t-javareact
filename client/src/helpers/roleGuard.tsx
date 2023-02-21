@@ -10,7 +10,6 @@ interface Props {
 
 function RoleGuard({ rol }: Props) {
   const userState = useSelector((store: GoodLearner) => store.user);
-  console.log(userState.rol)
   return userState.rol === rol ? <Outlet /> :  <Navigate replace to={PrivateRoutes.DASHBOARD} /> ;
 }
 export default RoleGuard;

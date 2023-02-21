@@ -11,7 +11,6 @@ const baseUrl= 'http://localhost:8080/api';
 
 
 export const useApi = async({token,path,body,method = 'GET'}:apiProps) => {
-    let config = `${token ? { } : ''}`;
     let finalUrl = `${ baseUrl }/${ path }`;
     let options: AxiosRequestConfig = {
       method: method,
@@ -19,7 +18,7 @@ export const useApi = async({token,path,body,method = 'GET'}:apiProps) => {
       headers:{ 
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin':'*' ,
-         Authorization:`bearer ${token}` 
+         Authorization:`Bearer ${token}` 
       },
       data:body
     }
