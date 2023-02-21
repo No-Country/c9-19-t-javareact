@@ -5,6 +5,10 @@ package tech.nocountry.goodlearnerbackend.model;
  */
 public enum TypeQualificationName {
     /**
+     * Nota cierre de cada trimestre
+     */
+    TRIMESTRAL,
+    /**
      * Evaluaciones parciales dentro de cada trimestre.
      */
     PARTIAL_EXAM,

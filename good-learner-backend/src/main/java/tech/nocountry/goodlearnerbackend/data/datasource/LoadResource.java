@@ -1,6 +1,5 @@
 package tech.nocountry.goodlearnerbackend.data.datasource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -94,6 +93,8 @@ public class LoadResource {
         StudentRepository studentRepository = context.getBean(StudentRepository.class);
         Student estudianteJazminAyala = studentRepository.save(new Student("Jazmin", "Ayala", "41787181", LocalDate.of(2012, 10, 19), null, LocalDateTime.now(), null, true));
         Student estudianteAgustinRamirez = studentRepository.save(new Student("Agustin", "Ramirez", "51778181", LocalDate.of(2012, 1, 9), null, LocalDateTime.now(), null, true));
+        Student estudianteJulioGonzalez = studentRepository.save(new Student("Julio", "Gonzalez", "45212367", LocalDate.of(2012, 5, 10), null, LocalDateTime.now(), null, true));
+
         /**----------------------------------------------------------------------------------------------
          * 								CARGA DE VÍNCULOS ESTUDIANTE-TUTOR
          */
@@ -146,6 +147,7 @@ public class LoadResource {
         TypeQualification presentacion = typeQualificationRepository.save(new TypeQualification(TypeQualificationName.PRESENTATION));
         TypeQualification recuperatorioMateria = typeQualificationRepository.save(new TypeQualification(TypeQualificationName.RECOVERY_EXAM_SUBJECT));
         TypeQualification examenDiagnostico = typeQualificationRepository.save(new TypeQualification(TypeQualificationName.DIAGNOSTIC_EXAM));
+        TypeQualification calificaciónTrimestral = typeQualificationRepository.save(new TypeQualification(TypeQualificationName.TRIMESTRAL));
         /**----------------------------------------------------------------------------------------------
          * 								CARGA PERIODOS DE CALIFICACIONES
          */
@@ -188,6 +190,19 @@ public class LoadResource {
         userRepository.save(new User(tutorAyalaDavid.getDocument(), passwordEncoder.encode(tutorAyalaDavid.getDocument()), rolTutor, tutorAyalaDavid));
         userRepository.save(new User(tutorHugoRamirez.getDocument(), passwordEncoder.encode(tutorHugoRamirez.getDocument()), rolTutor, tutorHugoRamirez));
 
+        /**----------------------------------------------------------------------------------------------
+         * 								CARGA DE QUALIFICATION
+         */
+        QualificationRepository qualificationRepository = context.getBean(QualificationRepository.class);
+
+        qualificationRepository.save(new Qualification(estudianteAgustinRamirez, matematicas6A, primerTrimestre, calificaciónTrimestral, 7));
+        qualificationRepository.save(new Qualification(estudianteAgustinRamirez, matematicas6A, segundoTrimestre, calificaciónTrimestral, 8));
+        qualificationRepository.save(new Qualification(estudianteAgustinRamirez, matematicas6A, tercerTrimestre, calificaciónTrimestral, 9));
+
+
+        qualificationRepository.save(new Qualification(estudianteAgustinRamirez, literatura6A, primerTrimestre, calificaciónTrimestral, 8));
+        qualificationRepository.save(new Qualification(estudianteAgustinRamirez, literatura6A, segundoTrimestre, calificaciónTrimestral, 8));
+        qualificationRepository.save(new Qualification(estudianteAgustinRamirez, literatura6A, tercerTrimestre, calificaciónTrimestral, 8));
 
     }
 }

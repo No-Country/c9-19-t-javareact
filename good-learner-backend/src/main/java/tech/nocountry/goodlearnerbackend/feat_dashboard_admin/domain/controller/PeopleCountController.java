@@ -3,6 +3,8 @@ package tech.nocountry.goodlearnerbackend.feat_dashboard_admin.domain.controller
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,12 +14,14 @@ import tech.nocountry.goodlearnerbackend.feat_dashboard_admin.domain.service.Peo
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("api/admin")
 public class PeopleCountController {
     @Autowired
     private PeopleCountService peopleCountService;
 
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     @GetMapping("/person/count")
     public ResponseEntity<?> countPersonByRol() throws Exception {
         try{

@@ -61,4 +61,11 @@ public class Qualification {
         this.message = message;
         this.scaleQualification = scaleQualification;
     }
+    public Qualification(Student student, CommissionSubject commissionSubject, Period period, TypeQualification typeQualification, Integer numericalNote){
+        this.student = student;
+        this.commissionSubject = commissionSubject;
+        this.period = period;
+        this.typeQualification = typeQualification;
+        this.numericalNote = numericalNote;
+    }
 }
