@@ -18,7 +18,7 @@ const CardPerson: React.FC<Props> = ({
     <Card>
       <Card.Body className="text-center">
         <Card.Title>
-          {user.name} {user.last_name}
+          {user.fullName} {user.last_name}
         </Card.Title>
         <Card.Text>{roles[user.rol_id ? Number(user.rol_id) - 1 : 0]}</Card.Text>
       </Card.Body>

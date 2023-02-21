@@ -24,7 +24,7 @@ const LoginForm = () => {
   };
 
   const loginValidation = (username:string,password:string) =>{
-    if((username.length > 5) && (password.length > 5)) return true
+    if((username.length >= 4) && (password.length >= 4)) return true
   }
 
   const handleSubmit = async() => {

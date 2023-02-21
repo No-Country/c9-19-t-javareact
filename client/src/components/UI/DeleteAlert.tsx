@@ -19,7 +19,7 @@ const DeleteAlert: React.FC<Props> = (props) => {
 
   const handleDelete = () => {
     console.log(userId)
-    dispatch(deleteUser(userId))
+    dispatch(deleteUser({id:userId}))
     props.onHide()
     closeForm()
   }
