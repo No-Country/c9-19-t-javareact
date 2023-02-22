@@ -1,13 +1,8 @@
 import { useState } from 'react';
 
-// Models
-import { Qualification } from '../models/Qualification';
-import { User } from '../models/User';
-import { Subject } from '../models/Subject';
-
 // compoents
 import TableStudentQualification from '../components/UI/TableStudentQualification';
-
+import Loader from '../components/UI/Loader';
 // UI
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -15,6 +10,7 @@ import Row from 'react-bootstrap/Row';
 
 function MyQualification() {
     
+    const [loading, setLoading] = useState(false);
     const [subjects, setSubjects] = useState([
         {   id: 1, 
             teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'},
@@ -79,6 +75,7 @@ function MyQualification() {
                         
                     </Container>
                 </Row>
+                <Loader show={loading}/>
             </Container>
         </>
     );
