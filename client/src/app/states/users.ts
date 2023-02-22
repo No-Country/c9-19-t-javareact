@@ -3,6 +3,8 @@ import {
   createEntityAdapter,
   createSelector,
   createSlice,
+  Dictionary,
+  EntityId,
   EntityState,
 } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
@@ -19,6 +21,8 @@ const usersAdapter = createEntityAdapter<User>({
 });
 
 export const initialUsersState: EntityState<User> & State = usersAdapter.getInitialState({
+  ids: [],
+  entities: {},
   status: 'idle',
   error: null,
 });
@@ -122,14 +126,11 @@ export const {
   selectAll: selectAllUsers,
   selectById: selectUserById,
   selectIds: selectUsersByIds,
-} = usersAdapter.getSelectors((state: RootState) => state.users);
+} = usersAdapter.getSelectors((state: RootState) => state.users ?? initialUsersState);
 
 export const getUsersStatus = (state: RootState) => state.users.status;
 export const getUsersError = (state: RootState) => state.users.error;
 
-export const selectTutors = (state: RootState) => state.users;
-
-export const selectStudents = (state: RootState) => state.users;
 
 export const selectAllTeachers = createSelector(
   [selectAllUsers],

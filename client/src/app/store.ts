@@ -23,39 +23,46 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
  */
 
-import { configureStore, createAsyncThunk } from '@reduxjs/toolkit';
-import {User as UserInfo} from '../models';
-import { Ui } from '../models/Ui';
-import userSliceReducer, { userState } from './states/user';
+import { configureStore } from '@reduxjs/toolkit';
+import userSliceReducer from './states/user';
 import uiSliceReducer from './states/ui'
 import storage from 'redux-persist/lib/storage';
-import usersSliceReducer, { initialUsersState } from './states/users';
-import { persistReducer } from 'redux-persist';
-import { combineReducers } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
-
-export interface GoodLearner {
-  user: userState,
-  ui: Ui,
-  users: typeof initialUsersState
-}
+import usersSliceReducer from './states/users';
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import persistCombineReducers from 'redux-persist/es/persistCombineReducers';
 
 const persistConfig = {
   key:"root",
-  storage
+  version: 1,
+  storage,
 }
 
-const reducer = combineReducers({
+const persistedReducer = persistCombineReducers(persistConfig, {
   user:userSliceReducer,
   ui:uiSliceReducer,
   users: usersSliceReducer
-})
-const persistedReducer = persistReducer(persistConfig,reducer);
+});
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: [thunk]
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+
+export const persistor = persistStore(store)
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
