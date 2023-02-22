@@ -1,6 +1,7 @@
 package tech.nocountry.goodlearnerbackend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -40,7 +41,7 @@ public class Person implements Serializable {
     private LocalDate birthDate;
 
     //@NotEmpty
-    //@Email
+    @Email
     @Column(name = "email")
     private String email;
 
