@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { getTokenFromLocalStorage } from '../helpers/localStorage';
 
 export interface apiProps{
     token?:string;
@@ -8,10 +9,10 @@ export interface apiProps{
 }
 
 const baseUrl= 'http://localhost:8080/api';
+const token = getTokenFromLocalStorage()
 
 
-export const useApi = async({token,path,body,method = 'GET'}:apiProps) => {
-    let config = `${token ? { } : ''}`;
+export const useApi = async({path,body,method}:apiProps) => {
     let finalUrl = `${ baseUrl }/${ path }`;
     let options: AxiosRequestConfig = {
       method: method,
@@ -19,7 +20,7 @@ export const useApi = async({token,path,body,method = 'GET'}:apiProps) => {
       headers:{ 
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin':'*' ,
-         Authorization:`bearer ${token}` 
+         Authorization:`Bearer ${token}` 
       },
       data:body
     }
