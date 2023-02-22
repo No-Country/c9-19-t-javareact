@@ -13,6 +13,7 @@ export class User {
     username?: string;
     password?: string;
     qualifications?: Array<Qualification>;
+    subjects?: Array<any>;
 
     static parseItem(raw: any): User {
         const usuario = new User();
@@ -26,6 +27,7 @@ export class User {
         usuario.username = raw.username ? raw.username: undefined;
         usuario.password = raw.password ? raw.password : undefined;
         usuario.qualifications = raw.qualifications ? raw.qualifications : undefined;
+        usuario.subjects = raw.subjects ? raw.subjects : new Array<any>();
         return usuario;
     }
  

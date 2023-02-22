@@ -23,12 +23,22 @@ import { useState } from 'react';
     
 
     const getPromedio = (data: Array<Qualification>): string => {
-        let total = 0
-        data.map((q) => total += q.numerical_qualification!);
-        return (total / 3).toFixed(2);
+        let total = 0;
+        let notas = 0;
+        data.map((q) => {
+            if (q.numerical_qualification) {
+                total += q.numerical_qualification!
+                notas += 1 
+            }
+            
+        });
+        return notas > 0 ? (total / notas).toFixed(2) : '-';
     }
 
-    const handleOnChange = (index: number, student: User, qualification: any) => {
+    const handleOnChange = (index: number, student: User, qualification: any, period_id: number) => {
+        if (!qualification) {
+            qualification = {'period_id': period_id}
+        }
         setStudentindex(index);
         setSelectedStudent(student);
         setSelectedQualification(qualification);
@@ -51,7 +61,7 @@ import { useState } from 'react';
             <tbody>
                 {
                     students.map( (student, index) => (
-                        <tr key={index} className={Number(getPromedio(student.qualifications!)) >= 6 ? 'row-aprove' : 'row-disaprove'}>
+                        <tr key={index} className={(Number(getPromedio(student.qualifications!)) > 0 && Number(getPromedio(student.qualifications!))< 6) ? 'row-disaprove' : 'row-aprove'}>
                             <td>{index + 1}</td>
                             <td>{student.name} {student.last_name}</td>
                             <td>{student.dni}</td>
@@ -59,7 +69,7 @@ import { useState } from 'react';
                                 <Form>
                                 <Form.Control
                                         type="text"
-                                        onClick={() => handleOnChange(index, student, student.qualifications![0])}
+                                        onClick={() => handleOnChange(index, student, student.qualifications![0], 1)}
                                         value={ student.qualifications![0] ? student.qualifications![0].numerical_qualification : '-'} 
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
@@ -70,7 +80,7 @@ import { useState } from 'react';
                                 <Form.Control
                                         type="text"
                                         disabled={student.qualifications![0] === undefined}
-                                        onClick={() => handleOnChange(index, student, student.qualifications![1])}
+                                        onClick={() => handleOnChange(index, student, student.qualifications![1], 2)}
                                         value={student.qualifications![1] ? student.qualifications![1].numerical_qualification : '-'}                           
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
@@ -81,7 +91,7 @@ import { useState } from 'react';
                                     <Form.Control
                                         type="text"
                                         disabled={student.qualifications![1] === undefined}
-                                        onClick={() => handleOnChange(index, student, student.qualifications![2])}
+                                        onClick={() => handleOnChange(index, student, student.qualifications![2], 3)}
                                         value={student.qualifications![2] ? student.qualifications![2].numerical_qualification : '-'}
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />

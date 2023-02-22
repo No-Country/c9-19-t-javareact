@@ -49,7 +49,6 @@ export const SideNav = () => {
           </Accordion.Item>
         </Accordion>
         <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/commission'}><i className="fa-solid fa-th-list me-3"></i>Comisiones</NavLink>
-        <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/my-commissions'}><i className="fa-solid fa-th-list me-3"></i>Mis Comisiones</NavLink>
         </div>
       ) : (
         useRol ==='TEACHER' ? 
@@ -66,12 +65,25 @@ export const SideNav = () => {
           </Accordion>
           <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/my-commissions'}><i className="fa-solid fa-th-list me-3"></i>Mis Comisiones</NavLink>
         </div>
-       ) : (
-        <div className="list-group list-group-flush bg-blue" >
-        <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
+       ) : 
+       useRol ==='STUDENT' ? 
+       ( <div className="list-group list-group-flush bg-blue" >
+          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
+          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/my-qualifications'}><i className="fa-solid fa-th-list me-3"></i>Mis Calificaciones</NavLink>
         </div>
-       
-      ))}
+       )
+       :  useRol ==='TUTOR' ? 
+       ( <div className="list-group list-group-flush bg-blue" >
+          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
+          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/my-students'}><i className="fa-solid fa-graduation-cap me-3"></i>Mis Estudiantes</NavLink>
+        </div>
+       )
+       :(
+          <div className="list-group list-group-flush bg-blue" >
+          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
+          </div>
+        
+        ))}
 
 
         {/* <a className="list-group-item list-group-item-action list-group-item  p-3" href="#!"><i className="fa-solid fa-user me-3"></i>Overview</a>

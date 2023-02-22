@@ -7,6 +7,7 @@ export class Qualification {
     message?: string;
     numerical_qualification?: number;
     commission_subject_id?: number;
+    subject_name?: string;
     period_id?: number; 
     period?: Period; 
     scale_qualification_id?: number;
@@ -19,6 +20,7 @@ export class Qualification {
         const qualification = new Qualification();
         qualification.id = raw.id ? raw.id : undefined;
         qualification.message = raw.message ? raw.message : undefined;
+        qualification.subject_name = raw.subject_name ? raw.subject_name : undefined;
         qualification.numerical_qualification = raw.numerical_qualification ? raw.numerical_qualification : undefined;
         qualification.commission_subject_id = raw.commission_subject_id ? raw.commission_subject_id : undefined;  
         qualification.period_id = raw.period_id ? raw.period_id : undefined;  

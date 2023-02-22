@@ -18,8 +18,6 @@ import { Qualification } from '../models/Qualification';
 
 export interface Props {
     subject: Subject;
-    handleAddQualification: (value: number) => void;
-    handleEditQualification: (vale: number) => void;
     backToSubjects: () => void;
 }
 
@@ -37,9 +35,9 @@ function SubjectDetails({
     const [users, setUsers] = useState([
         {id: 1, rol_id: '3', name: 'Juan', last_name: 'Guzmán', dni: 12341456,
             qualifications: [
-                {id: 1, numerical_qualification: 7, period_id: 1}, 
-                {id: 2, numerical_qualification: 8, period_id: 2}, 
-                {id: 3, numerical_qualification: 9, period_id: 3},             
+                // {id: 1, numerical_qualification: 7, period_id: 1}, 
+                // {id: 2, numerical_qualification: 8, period_id: 2}, 
+                // {id: 3, numerical_qualification: 9, period_id: 3},             
             ]
         },
         {id: 2, rol_id: '3', name: 'Marcos', last_name: 'Díaz', dni: 12341456,
@@ -103,7 +101,7 @@ function SubjectDetails({
 
     
     const handleSaveQualification = (value: number) => {
-        let index = users[studentindex].qualifications.findIndex( q => q.period_id === selectedQualification.period_id) 
+        let index = users[studentindex].qualifications.findIndex( q => q.period_id && q.period_id === selectedQualification.period_id) 
         if (index !== -1) {
             users[studentindex].qualifications[index].numerical_qualification = Number(value);
         } else {

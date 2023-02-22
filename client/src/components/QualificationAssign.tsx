@@ -19,7 +19,6 @@ export interface Props {
     qualification: any;
     handleCancelModal: () => void,
     handleSaveQualification: (value: number) => void;
-    setQualification: (value: number) => void;
 }
 
 function QualificationAssign({
@@ -34,7 +33,8 @@ function QualificationAssign({
     const [qualificationValue, SetQualificationValue] = useState(qualification ? qualification.numerical_qualification : 0);
 
     const handleSaveData = () => {
-        handleSaveQualification(qualificationValue);        
+        handleSaveQualification(qualificationValue);   
+        SetQualificationValue(0)     
     }
 
     return (

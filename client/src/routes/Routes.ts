@@ -12,4 +12,7 @@ export const PrivateRoutes = {
   SINGLEUSERINFO: 'usuario',
   MY_COMMISSIONS: 'my-commissions',
   ADDUSER: 'agregar-usuario',
+  MY_QUALIFICATIONS: 'my-qualifications',
+  MY_STUDENTS: 'my-students',
+  
 };

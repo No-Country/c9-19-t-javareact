@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Commissions from './pages/Commissions';
 import MyCommissions from './pages/MyCommissions';
+import MyQualification from './pages/MyQualification';
+import MyStudents from './pages/MyStudents';
 import { RoutesWithNotFound } from './helpers';
 import { Roles } from './models';
 import AuthGuard from './helpers/authGuard';
@@ -35,6 +37,12 @@ function App() {
               <Route path={`${PrivateRoutes.SINGLEUSERINFO}/:id`} element={<UsuarioInfo />} />
             <Route element={<RoleGuard rol={Roles.TEACHER} />}>
               <Route path={PrivateRoutes.MY_COMMISSIONS} element={<MyCommissions />} />
+            </Route>
+            <Route element={<RoleGuard rol={Roles.STUDENT} />}>
+              <Route path={PrivateRoutes.MY_QUALIFICATIONS} element={<MyQualification />} />
+            </Route>
+            <Route element={<RoleGuard rol={Roles.TUTOR} />}>
+              <Route path={PrivateRoutes.MY_STUDENTS} element={<MyStudents />} />
             </Route>
           </Route>
           </Route>
