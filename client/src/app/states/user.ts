@@ -27,7 +27,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    createUser: (state, action:PayloadAction<userState>) => {
+    loginUser: (_state, action:PayloadAction<userState>) => {
       return action.payload;
     },
     resetUser: () => {
@@ -39,6 +39,8 @@ export const selectUser = (state: RootState) => state.user;
 export const selectId = (state: RootState) => state.user.id;
 export const selectName = (state: RootState) => state.user.nombreUsuario;
 export const selectRol = (state: RootState) => state.user.rol;
-export const { createUser, resetUser } = userSlice.actions;
+export const selectToken= (state: RootState) => state.user.token;
+
+export const { loginUser, resetUser } = userSlice.actions;
 
 export default userSlice.reducer;

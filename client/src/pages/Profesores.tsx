@@ -12,28 +12,18 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-import { fetchUsers, getUsersError, getUsersStatus, selectAllUsers, updateUser } from '../app/states/users';
+import { getUsersError, getUsersStatus, selectAllTeachers, updateUser } from '../app/states/users';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 
 function Profesores() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
     const [selectedUser, setSelectedUser] = useState<User>(new User());
-    const teachers = useAppSelector(selectAllUsers)
+    const teachers = useAppSelector(selectAllTeachers)
     const teachersStatus = useAppSelector(getUsersStatus)
     const teachersError = useAppSelector(getUsersError)
 
     const dispatch = useAppDispatch()
-
-    const effectRan = useRef(false)
-
-    useEffect(() => {
-        if (effectRan.current === false) {
-            if (teachersStatus === "idle")
-                dispatch(fetchUsers())
-            effectRan.current = true
-        }
-    }, [teachersStatus, dispatch])
 
     const handleCloseFormUser = () => {
         setShowFormUser(false);
@@ -79,8 +69,8 @@ function Profesores() {
                 </Row>
                 <Row>
                     <Container>
-                        <Row xs={1} md={2} lg={3} xl={4} className="g-2" style={{ padding: '0em 5em' }}>
-                           {content}
+                        <Row xs={1} md={2} lg={3} xl={4} className="g-2">
+                        {content}
                         </Row>
                     </Container>
                 </Row>

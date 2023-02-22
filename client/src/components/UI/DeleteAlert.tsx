@@ -2,6 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useAppDispatch } from '../../app/hooks';
 import { deleteUser } from '../../app/states/users';
+import { useState } from 'react';
 
 
 interface Props {
@@ -18,10 +19,17 @@ const DeleteAlert: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch()
 
   const handleDelete = () => {
-    console.log(userId)
-    dispatch(deleteUser({id:userId}))
-    props.onHide()
-    closeForm()
+    try {
+      dispatch(
+        deleteUser({
+          id: userId,
+        })
+      ).unwrap();
+      props.onHide()
+      closeForm()
+    } catch (err) {
+      console.error('Failed to delete the post', err);
+    }
   }
 
   return (

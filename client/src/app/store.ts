@@ -29,20 +29,22 @@ import { Ui } from '../models/Ui';
 import userSliceReducer, { userState } from './states/user';
 import uiSliceReducer from './states/ui'
 import storage from 'redux-persist/lib/storage';
-import usersSliceReducer from './states/users';
+import usersSliceReducer, { initialUsersState } from './states/users';
 import { persistReducer } from 'redux-persist';
 import { combineReducers } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 
 export interface GoodLearner {
-  user: userState;
-  ui: Ui
+  user: userState,
+  ui: Ui,
+  users: typeof initialUsersState
 }
 
 const persistConfig = {
   key:"root",
   storage
 }
+
 const reducer = combineReducers({
   user:userSliceReducer,
   ui:uiSliceReducer,
@@ -53,7 +55,6 @@ const persistedReducer = persistReducer(persistConfig,reducer);
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: [thunk]
-
 });
 
 export type RootState = ReturnType<typeof store.getState>;

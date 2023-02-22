@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-import { selectStudents, selectTutors, updateUser } from '../app/states/users';
+import { getUsersError, getUsersStatus, selectAllStudents, selectAllTutors, updateUser } from '../app/states/users';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 
@@ -24,8 +24,10 @@ function Tutores() {
     const [usersToReltions, setUsersToReltions] = useState<Array<User>>([]);
     const [relations, setRelations] = useState<Array<User>>([]);
     const [modalTitle, setModalTitle] = useState<string>('');
-    const users = useAppSelector(selectTutors)
-    const students = useAppSelector(selectStudents)
+    const users = useAppSelector(selectAllTutors)
+    const students = useAppSelector(selectAllStudents)
+    const usersStatus = useAppSelector(getUsersStatus)
+    const usersError = useAppSelector(getUsersError)
     const dispatch = useAppDispatch()
 
 
@@ -61,6 +63,23 @@ function Tutores() {
 
     }
 
+    let content;
+
+    if (usersStatus === 'loading') {
+        content = <p>"Loading...</p>
+    } else if (usersStatus === "succeeded") {
+        content = users && users?.length >= 1 && users?.map((user) => (
+            <Col key={user.id}>
+                <CardPerson
+                    user={user}
+                    handleUpdateUser={handleUpdateUser}
+                />
+            </Col>
+        ))
+    } else if (usersStatus === 'failed') {
+        content = <p>{usersError}</p>;
+    }
+
     return (
         <>
             <Container>
@@ -73,15 +92,7 @@ function Tutores() {
                 <Row>
                     <Container>
                         <Row xs={1} md={2} lg={3} xl={4} className="g-2">
-                            {users.map((user: any) => (
-                                <Col key={user.id}>
-                                    <CardPerson
-                                        user={user}
-                                        handleUpdateUser={handleUpdateUser}
-                                        handleShowRelations={handleShowRelations}
-                                    />
-                                </Col>
-                            ))}
+                            {content}
                         </Row>
                     </Container>
                 </Row>
