@@ -35,6 +35,7 @@
 ---
 
 ## Rutas de PROTEGIDAS 
+---
 
 ## ADMINISTRADOR
 
@@ -200,6 +201,8 @@ TOKEN: <token>
 ]
 ```
 
+---
+## Dashboard
 
 #### GET http://localhost:8080/api/admin/teacher?page={1}&size={2}
 * [Todos los Profesores](). Recuperar profesores por paginación.
@@ -248,4 +251,78 @@ TOKEN: <token>
     "fullName": "Agustin Ramirez"
   }
 ]
+```
+
+#### GET http://localhost:8080/api/admin/person/count
+* [Cantidad por Rol](). Obtener las cantidades de personas por cada Rol (Estudiante, Profesor y Tutor).
+
+**JSON SALIDA**
+```json
+[
+  {
+    "roleName": "STUDENT",
+    "count": 2
+  },
+  {
+    "roleName": "TEACHER",
+    "count": 2
+  },
+  {
+    "roleName": "TUTOR",
+    "count": 2
+  }
+]
+```
+---
+## ESTUDIANTE
+---
+#### GET http://localhost:8080/api/student/report
+* [Boletín de un Estudiante](). El estudiante logueado, podrá acceder al boletín de calificaciones del año en que se encuentra cursando. 
+* NOTA: Recordar que se debe ingresar con el token de autentificación.
+
+**JSON ENTRADA**
+```json
+{
+  "year": 2023
+}
+```
+
+**JSON SALIDA**
+```json
+{
+  "fullName": "Agustin Ramirez",
+  "course": "6°A",
+  "qualifications": [
+    {
+      "subject": "MATHEMATICS",
+      "periodoName": "FIRST_TRIMESTER",
+      "numberQualification": 7
+    },
+    {
+      "subject": "MATHEMATICS",
+      "periodoName": "SECOND_TRIMESTER",
+      "numberQualification": 8
+    },
+    {
+      "subject": "MATHEMATICS",
+      "periodoName": "THIRD_TRIMESTER",
+      "numberQualification": 9
+    },
+    {
+      "subject": "LITERATURE",
+      "periodoName": "FIRST_TRIMESTER",
+      "numberQualification": 8
+    },
+    {
+      "subject": "LITERATURE",
+      "periodoName": "SECOND_TRIMESTER",
+      "numberQualification": 8
+    },
+    {
+      "subject": "LITERATURE",
+      "periodoName": "THIRD_TRIMESTER",
+      "numberQualification": 8
+    }
+  ]
+}
 ```

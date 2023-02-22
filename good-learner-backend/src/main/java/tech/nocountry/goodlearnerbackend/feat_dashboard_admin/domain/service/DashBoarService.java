@@ -1,7 +1,7 @@
-package tech.nocountry.goodlearnerbackend.feat_dashboard.domain.service;
+package tech.nocountry.goodlearnerbackend.feat_dashboard_admin.domain.service;
 
 import org.springframework.data.domain.Pageable;
-import tech.nocountry.goodlearnerbackend.feat_dashboard.domain.model.PersonResponseDTO;
+import tech.nocountry.goodlearnerbackend.feat_dashboard_admin.domain.model.PersonResponseDTO;
 
 import java.util.List;
 

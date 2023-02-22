@@ -1,14 +1,14 @@
-package tech.nocountry.goodlearnerbackend.feat_dashboard.domain.service;
+package tech.nocountry.goodlearnerbackend.feat_dashboard_admin.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import tech.nocountry.goodlearnerbackend.feat_dashboard.data.repository.PersonPageRepository;
-import tech.nocountry.goodlearnerbackend.feat_dashboard.data.repository.StudentPageRepository;
-import tech.nocountry.goodlearnerbackend.feat_dashboard.data.repository.TeacherPageRepository;
-import tech.nocountry.goodlearnerbackend.feat_dashboard.data.repository.TutorPageRepository;
-import tech.nocountry.goodlearnerbackend.feat_dashboard.domain.model.PersonResponseDTO;
+import tech.nocountry.goodlearnerbackend.feat_dashboard_admin.data.repository.PersonPageRepository;
+import tech.nocountry.goodlearnerbackend.feat_dashboard_admin.data.repository.StudentPageRepository;
+import tech.nocountry.goodlearnerbackend.feat_dashboard_admin.data.repository.TeacherPageRepository;
+import tech.nocountry.goodlearnerbackend.feat_dashboard_admin.data.repository.TutorPageRepository;
+import tech.nocountry.goodlearnerbackend.feat_dashboard_admin.domain.model.PersonResponseDTO;
 import tech.nocountry.goodlearnerbackend.model.Person;
 import tech.nocountry.goodlearnerbackend.model.Student;
 import tech.nocountry.goodlearnerbackend.model.Teacher;
