@@ -136,7 +136,16 @@ TOKEN: <token>
 ```
 
 #### PUT http://127.0.0.1:8080/api/admin/student/{1}
-* [Inactivar Estudiante](). Puede inactivar un estudiante pasando su ID en el EndPoint.
+* [Switch State Estudiante](). Puede cambiar el estado de un estudiante.
+* Estado false: Estudiante no se encuentra con inscripción del presente año, se cambió de o terminó la escuela.
+* Estado true: Estudiante con inscripción reciente, por lo tanto, es regular.
+  **JSON ENTRADA**
+```json
+{
+  "id": "7",
+  "state": false
+}
+```
 
 **JSON SALIDA**
 ```json
