@@ -1,8 +1,11 @@
 package tech.nocountry.goodlearnerbackend.feat_admin_user_card.domain.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.nocountry.goodlearnerbackend.feat_admin_user_card.domain.model.PersonDetailDTO;
 import tech.nocountry.goodlearnerbackend.feat_admin_user_card.domain.model.StudentResponse;
@@ -54,7 +57,10 @@ public class UserCardController {
      */
     @PutMapping("/student/state")
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
-    public ResponseEntity<?> deleteUserByUsername(@RequestBody SwitchStateStudentRequest switchStateStudentRequest) throws Exception {
+    public ResponseEntity<?> deleteUserByUsername(@Validated @RequestBody SwitchStateStudentRequest switchStateStudentRequest, BindingResult validations) throws Exception {
+        if(validations.hasErrors()){
+            return new ResponseEntity<String>("El Id del Estudiante y nuevo Estado son obligatorios", HttpStatus.BAD_REQUEST);
+        }
         StudentResponse student = personCardService.switchStateStudent(switchStateStudentRequest);
         if(student == null)
             return ResponseEntity.notFound().build();
