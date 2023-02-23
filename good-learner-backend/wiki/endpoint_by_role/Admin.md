@@ -1,48 +1,10 @@
-# API GOOD LEARNER BACKEND
+---
+
+## ADMINISTRADOR - Rutas Protegidas
 
 ---
 
-### Rutas de NO PROTEGIDA
-
-#### POST http://127.0.0.1:8080/api/user/login
-* Para logearse un usuario primero deberá estar cargado en el sistema. El administrador será el único que podrá realizar un CRUD sobre Personas-Usuarios entre otras gestiones.
-* Login de usuario. Devolverá el `jwt` que usaremos para acceder a los recursos protegidos de nuestra aplicación.
-* Por defecto el nombre de usuario y clave serán el Documento que colocó al registrarse.
-* Esta cargado un ADMINISTRADOR como punto de entrada. Se describe a continuación.
-* Para iniciar debera Logearse.
-
-**JSON ENTRADA**
-```json
-{
-  "nombreUsuario": "0000",
-  "clave" : "0000"
-}
-```
-
-**JSON SALIDA**
-```json
-{
-  "id": 1,
-  "nombreUsuario": "0000",
-  "rol": "ADMINISTRATOR",
-  "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIwMDAwIiwiZXhwIjoxNjc2NjU4OTIwfQ.ThSdwAcRseifgFyJbaOWVKOgoxJhZJt5cCvPfqb46IZnnmfPSPJHvzjpSRbz_1I4"
-}
-```
-
-**Cada vez que se ejecute el método login se genera un token que tendrá un tiempo de expiración.**
-
-
----
-
-## Rutas de PROTEGIDAS 
----
-
-## ADMINISTRADOR
-
-## EndPoint o URL
-
-* Para el consumo de estos recursos se debe enviar el Token de autorización.
-##### Es posible en viarlo de dos maneras:
+#### Para el consumo de TODOS estos recursos se debe enviar el TOKEN de autorización. Es posible enviarlo de dos maneras:
 
 * [Headers]()
 ```
@@ -284,57 +246,4 @@ TOKEN: <token>
     "count": 2
   }
 ]
-```
----
-## ESTUDIANTE
----
-#### GET http://localhost:8080/api/student/report
-* [Boletín de un Estudiante](). El estudiante logueado, podrá acceder al boletín de calificaciones del año en que se encuentra cursando. 
-* NOTA: Recordar que se debe ingresar con el token de autentificación.
-
-**JSON ENTRADA**
-```json
-{
-  "year": 2023
-}
-```
-
-**JSON SALIDA**
-```json
-{
-  "fullName": "Agustin Ramirez",
-  "course": "6°A",
-  "qualifications": [
-    {
-      "subject": "MATHEMATICS",
-      "periodoName": "FIRST_TRIMESTER",
-      "numberQualification": 7
-    },
-    {
-      "subject": "MATHEMATICS",
-      "periodoName": "SECOND_TRIMESTER",
-      "numberQualification": 8
-    },
-    {
-      "subject": "MATHEMATICS",
-      "periodoName": "THIRD_TRIMESTER",
-      "numberQualification": 9
-    },
-    {
-      "subject": "LITERATURE",
-      "periodoName": "FIRST_TRIMESTER",
-      "numberQualification": 8
-    },
-    {
-      "subject": "LITERATURE",
-      "periodoName": "SECOND_TRIMESTER",
-      "numberQualification": 8
-    },
-    {
-      "subject": "LITERATURE",
-      "periodoName": "THIRD_TRIMESTER",
-      "numberQualification": 8
-    }
-  ]
-}
 ```
