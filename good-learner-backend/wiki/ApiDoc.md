@@ -135,7 +135,7 @@ TOKEN: <token>
 }
 ```
 
-#### PUT http://127.0.0.1:8080/api/admin/student/{1}
+#### PUT http://127.0.0.1:8080/api/admin/student
 * [Switch State Estudiante](). Puede cambiar el estado de un estudiante.
 * Estado false: Estudiante no se encuentra con inscripción del presente año, se cambió de o terminó la escuela.
 * Estado true: Estudiante con inscripción reciente, por lo tanto, es regular.
