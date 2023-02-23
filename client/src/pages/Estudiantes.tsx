@@ -53,7 +53,7 @@ function Estudiantes() {
         setShowFormUser(true);
     }
 
-    const handleSaveFormUser = (user: any) => {
+    const handleSaveFormUser = (user: Person) => {
         dispatch(updatePerson(user))
         handleCloseFormUser();
     };

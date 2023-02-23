@@ -31,10 +31,19 @@ export const fetchPersons: any = createAsyncThunk('admin/persons', async () => {
   return response.data;
 });
 
+export const fetchPersonData: any = createAsyncThunk('admin/get/personsData', async (id: number) => {
+  const userId = id;
+  const apiPropertyes: apiProps = {
+    path: `admin/person/${userId}`,
+    method: 'get',
+  };
+  const response = await useApi(apiPropertyes);
+  return response.data;
+});
+
 export const createPerson: any = createAsyncThunk(
   'admin/person/register',
   async (person: Person) => {
-    console.log(person)
     const apiPropertyes: apiProps = {
       path: 'admin/register',
       method: 'post',

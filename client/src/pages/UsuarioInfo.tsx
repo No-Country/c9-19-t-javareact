@@ -1,22 +1,36 @@
+import { useEffect, useState } from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
-import { useLocation, useParams } from 'react-router-dom';
-import { useAppSelector } from '../app/hooks';
-import { selectUser } from '../app/states/user';
+import {  useParams } from 'react-router-dom';
+import { useAppDispatch } from '../app/hooks';
+import { fetchPersonData } from '../app/states/Persons';
+import { getAge } from '../helpers/functions';
+import { Person } from '../models/Person';
 import '../styles/UsuarioInfo.css'
 
 const UsuarioInfo = () => {
-/*   const _id = useParams();
-  const state = useLocation(); */
-  const useUser = useAppSelector(selectUser)
+  const id = useParams();
+  const dispatch = useAppDispatch()
+  const [userData, setUserData] = useState<Person>({})
 
-   const { id, nombreUsuario, rol } = useUser;
+  useEffect(() => {
+    async function fetchData() {
+      if (id) {
+        const data = await dispatch(fetchPersonData(id.id));
+        setUserData(data.payload)
+      }
+    }
+  
+    fetchData();
+  }, [id]);
+
+   const { idPerson, document, firstName, birthDate,phone, email, lastName, roleName, username } = userData;
  
 
   return (
     <Container className="d-flex justify-content-center gap-3 gap-sm-5 pt-5">
       <div style={{ alignSelf: "center" }}>
         <Image
-          src={useUser ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
+          src={userData ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
           id="image"
         ></Image>
       </div>
@@ -24,7 +38,7 @@ const UsuarioInfo = () => {
         <Row className="pb-5">
           <Col className="text-center" style={{ color: '#14238A' }}>
             <h3>
-              {nombreUsuario}
+              {firstName} {lastName}
             </h3>
           </Col>
         </Row>
@@ -33,7 +47,23 @@ const UsuarioInfo = () => {
             <h4>Id:</h4>
           </Col>
           <Col xs={8}>
-            <h4>{id}</h4>
+            <h4>{idPerson}</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={4}>
+            <h4>Usuario:</h4>
+          </Col>
+          <Col xs={8}>
+            <h4>{username}</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={4}>
+            <h4>Edad:</h4>
+          </Col>
+          <Col xs={8}>
+            <h4>{getAge(birthDate)}</h4>
           </Col>
         </Row>
         <Row>
@@ -41,7 +71,23 @@ const UsuarioInfo = () => {
             <h4>Dni:</h4>
           </Col>
           <Col xs={8}>
-            <h4>{id}</h4>
+            <h4>{document}</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={4}>
+            <h4>Telefono:</h4>
+          </Col>
+          <Col xs={8}>
+            <h4>{phone}</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={4}>
+            <h4>Email:</h4>
+          </Col>
+          <Col xs={8}>
+            <h4>{email}</h4>
           </Col>
         </Row>
         <Row>
@@ -50,7 +96,7 @@ const UsuarioInfo = () => {
           </Col>
           <Col xs={8}>
             <h4>
-              {rol}
+              {roleName}
             </h4>
           </Col>
         </Row>

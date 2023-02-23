@@ -11,6 +11,7 @@ import { useAppDispatch } from '../app/hooks';
 import ButtonDanger from './UI/ButtonDanger';
 import DeleteAlert from './UI/DeleteAlert';
 import { Person } from '../models/Person';
+import { fetchPersonData } from '../app/states/Persons';
 
 export interface Props {
   show: boolean;
@@ -33,9 +34,14 @@ function FormUsuario({
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (user.id !== undefined) {
-      setForm(user);
+    async function fetchData() {
+      if (user.id) {
+        const data = await dispatch(fetchPersonData(user.id));
+        setForm(data.payload);
+      }
     }
+  
+    fetchData();
   }, [user]);
 
   const handleCloseModal = () => {
