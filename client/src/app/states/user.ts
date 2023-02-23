@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User as UserInfo } from '../../models/User';
-import { clearLocalStorage, persistLocalStorage } from '../../helpers';
 import { RootState } from '../store';
 
 

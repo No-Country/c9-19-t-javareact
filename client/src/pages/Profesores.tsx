@@ -1,43 +1,72 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Models
 import { User } from '../models/User';
 
 // compoents
 import FormUsuario from '../components/formUsuario';
-import RelationAssign from '../components/RelationAssign';
 import CardPerson from '../components/UI/CardPerson';
 
 // UI
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-
-import { selectTeachers, updateUser } from '../app/states/users';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { Person } from '../models/Person';
+import { fetchPersons, getPersonsError, getPersonsStatus, selectAllPersons, updatePerson } from '../app/states/Persons';
 
 
 function Profesores() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
-    const [selectedUser, setSelectedUser] = useState<User>(new User());
-    const users = useAppSelector(selectTeachers)
+    const [selectedUser, setSelectedUser] = useState<Person>({});
+    const teachers = useAppSelector(selectAllPersons)
+    const teachersStatus = useAppSelector(getPersonsStatus)
+    const teachersError = useAppSelector(getPersonsError)
 
     const dispatch = useAppDispatch()
 
+    const effectRan = useRef(false)
+
+    useEffect(() => {
+        if (effectRan.current === false) {
+            if (teachersStatus === "idle")
+                dispatch(fetchPersons())
+            effectRan.current = true
+        }
+    }, [teachersStatus, dispatch])
+
     const handleCloseFormUser = () => {
         setShowFormUser(false);
-        setSelectedUser(new User());
+        setSelectedUser({});
     };
 
-    const handleUpdateUser = (user: User) => {
+    const handleUpdateUser = (user: Person) => {
         setSelectedUser(user);
         setShowFormUser(true);
     }
 
     const handleSaveFormUser = (user: any) => {
-        dispatch(updateUser(user))
+        dispatch(updatePerson(user))
         handleCloseFormUser();
     };
+
+    let content;
+
+    if (teachersStatus === 'loading') {
+        content = <p>"Loading...</p>
+    } else if (teachersStatus === "succeeded") {
+        content = teachers.map((user) => (
+            <Col key={user.id}>
+                <CardPerson
+                    user={user}
+                    handleUpdateUser={handleUpdateUser}
+                />
+            </Col>
+        ))
+    } else if (teachersStatus === 'failed') {
+        content = <p>{teachersError}</p>;
+    }
+
 
     return (
         <>
@@ -50,15 +79,8 @@ function Profesores() {
                 </Row>
                 <Row>
                     <Container>
-                        <Row xs={1} md={2} lg={3} xl={4} className="g-2" style={{padding: '0em 5em'}}>
-                            {users.map((user: any) => (
-                                <Col key={user.id}>
-                                    <CardPerson
-                                        user={user}
-                                        handleUpdateUser={handleUpdateUser}
-                                    />
-                                </Col>
-                            ))}
+                        <Row xs={1} md={2} lg={3} xl={4} className="g-2">
+                        {content}
                         </Row>
                     </Container>
                 </Row>

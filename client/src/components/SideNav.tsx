@@ -5,12 +5,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAppSelector } from '../app/hooks';
 import { sidebarStatus } from '../app/states/ui';
 import { selectId, selectRol } from '../app/states/user';
-import { GoodLearner } from '../app/store';
-
+import { RootState } from '../app/store';
 export const SideNav = () => {
 
   const navigate = useNavigate();
-  const useUI = useSelector((store: GoodLearner) => store.ui);
+  const useUI = useSelector((store: RootState) => store.ui);
   const useRol = useAppSelector(selectRol)
   const useId = useAppSelector(selectId)
   

@@ -7,7 +7,6 @@ interface Props {
   handleUpdateUser: (elem: any) => void;
   handleShowRelations?: (user: User) => void;
 }
-const roles = ['Profesor', 'Tutor', 'Estudiante'];
 
 const CardPerson: React.FC<Props> = ({
   user,
@@ -18,9 +17,8 @@ const CardPerson: React.FC<Props> = ({
     <Card>
       <Card.Body className="text-center">
         <Card.Title>
-          {user.name} {user.last_name}
+          {user.fullName}
         </Card.Title>
-        <Card.Text>{roles[user.rol_id ? Number(user.rol_id) - 1 : 0]}</Card.Text>
       </Card.Body>
       <Card.Footer>
         <ButtonGroup className="w-100">          
