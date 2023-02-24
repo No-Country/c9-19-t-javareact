@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import '../styles/dashboard.css';
 import '../styles/header.css';
+import  {BarChart}  from '../components/barChart';
 
 const data = [
     {usuario: 'Estudiantes', cantidad: 180, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap', id:1},
@@ -14,11 +15,16 @@ function Dashboard () {
     return (
         <Container>
             <Row className='header'>
+
                 <Col xs={12}>
                     <h3 className='header-title'>Administrador</h3>
                     <div className='header-line'></div>
                 </Col>
             </Row>
+            <Row className="mb-5">
+                <BarChart />
+            </Row>
+           
             <Row>
                 {
                     data.map( (user: any) => (
