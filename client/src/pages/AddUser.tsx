@@ -1,7 +1,5 @@
 
 import { useState } from 'react';
-// Models
-import { User } from '../models/User';
 // UI
 import ButtonMain from '../components/UI/ButtonMain';
 import ButtonSecondary from '../components/UI/ButtonSecondary';
@@ -10,8 +8,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import { useAppDispatch } from '../app/hooks';
-import { updateUser } from '../app/states/users';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { createPerson } from '../app/states/Persons';
+import { Person } from '../models/Person';
 
 
 const AddUser = () => {
@@ -19,13 +18,13 @@ const AddUser = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const user = data.state && data.state.user
-  const [formData, setFormData] = useState<User>({
-    rol_id: user === "profesor" ? "1" : user === "tutor" ? "2" : "3"
+  const [formData, setFormData] = useState<Person>({
+    roleName: user === "profesor" ? "TEACHER" : user === "tutor" ? "TUTOR" : "STUDENT"
   });
   const page = user === "profesor" ? "profesores" : user === "tutor" ? "tutores" : "estudiantes"
 
   const handleSaveData = async () => {
-    dispatch(updateUser(formData))
+    dispatch(createPerson(formData))
     handleReset()
     navigate(`/${page}`)
   }
@@ -58,8 +57,8 @@ const AddUser = () => {
                 <Form.Control
                   type="text"
                   placeholder="Ingrese el nombre"
-                  name="name"
-                  value={formData.name || ''}
+                  name="firstName"
+                  value={formData.firstName || ''}
                   onChange={handleChange}
                   required
                 />
@@ -71,8 +70,8 @@ const AddUser = () => {
                 <Form.Control
                   type="text"
                   placeholder="Ingrese el apellido"
-                  name="last_name"
-                  value={formData.last_name || ''}
+                  name="lastName"
+                  value={formData.lastName || ''}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -85,44 +84,56 @@ const AddUser = () => {
                 <Form.Control
                   type="text"
                   placeholder="Ingrese el DNI"
-                  name="dni"
-                  value={formData.dni || ''}
+                  name="document"
+                  value={formData.document || ''}
                   onChange={handleChange}
                 />
               </Form.Group>
             </Col>
-            <Col xs={6} md={6}>
+            <Col xs={12} md={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Nombre de usuario</Form.Label>
+                <Form.Label>Ingrese fecha de nacimiento</Form.Label>
+                <Form.Control
+                  type="date"
+                  placeholder="1980-07-25"
+                  name="birthDate"
+                  value={formData.birthDate || ''}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col xs={12} md={6}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Celular</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Ingrese el nombre de usuario"
-                  name="username"
-                  value={formData.username || ''}
+                  placeholder="Ingrese el telefono"
+                  name="phone"
+                  value={formData.phone || ''}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col xs={12} md={6}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Ingrese su email"
+                  name="email"
+                  value={formData.email || ''}
                   onChange={handleChange}
                 />
               </Form.Group>
             </Col>
           </Row>
           <Row>
-            <Col xs={12} md={6}>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Contraseña</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Ingrese la Contraseña"
-                  name="password"
-                  value={formData.password || ''}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
             {!user && <Col xs={6} md={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Rol</Form.Label>
                 <Form.Select
-                  name="rol_id"
-                  value={formData.rol_id}
+                  name="roleName"
+                  value={formData.roleName}
                   onChange={handleChange}
                 >
                   <option>--Seleccione un rol del usuario--</option>

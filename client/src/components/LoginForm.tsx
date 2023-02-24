@@ -5,10 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { loginService } from '../services/loginService';
 import { useAppDispatch } from '../app/hooks';
 
+export interface FormData {
+  username: string,
+  password: string
+}
+
 const LoginForm = () => {
   const dispatch = useAppDispatch()
-  const [formData, setFormData] = useState({
-    email: '',
+  const [formData, setFormData] = useState<FormData>({
+    username: '',
     password: '',
   });
 
@@ -23,14 +28,14 @@ const LoginForm = () => {
     }));
   };
 
-  const loginValidation = (username:string,password:string) =>{
-    if((username.length > 5) && (password.length > 5)) return true
+  const loginValidation = (formData : FormData) =>{
+    const {username,password} = formData;
+    return username.length >= 4 && password.length >= 4
   }
 
   const handleSubmit = async() => {
-
-     if(loginValidation(formData.email,formData.password)){ 
-      const res = await dispatch(loginService(formData.email,formData.password))
+     if(loginValidation(formData)){ 
+      const res = await dispatch(loginService(formData))
        res ? (navigate('/dashboard')) : '' 
      }else{
       setMessage('Error, por favor, rellena los campos')
@@ -39,19 +44,19 @@ const LoginForm = () => {
   };
 
   const handleResetPassword = () => {
-    console.log(formData.email);
+    console.log(formData.username);
   };
 
   return (
     <Form className="d-flex flex-column px-4 py-5 bg-white rounded">
       {!forgotPassword ? (
         <>
-          <Form.Group className="mb-2" controlId="formBasicEmail">
+          <Form.Group className="mb-2" controlId="formBasicUsername">
             <Form.Label></Form.Label>
             <Form.Control
-              type="email"
-              placeholder="Ingresá tu email"
-              name="email"
+              type="username"
+              placeholder="Ingresá tu usuario"
+              name="username"
               onChange={handleOnChange}
               style={{ height: '4rem' }}
             />

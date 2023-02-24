@@ -1,7 +1,8 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useAppDispatch } from '../../app/hooks';
-import { deleteUser } from '../../app/states/users';
+import { deletePerson } from '../../app/states/Persons';
+import { Person } from '../../models/Person';
 
 
 interface Props {
@@ -9,17 +10,16 @@ interface Props {
   onHide: () => void;
   closeForm: () => void;
   setShowFormUser: React.Dispatch<React.SetStateAction<boolean>>;
-  userId: string;
+  user: Person;
 }
 
 const DeleteAlert: React.FC<Props> = (props) => {
-  const { userId, closeForm, setShowFormUser, ...other } = props
+  const { user, closeForm, setShowFormUser, ...other } = props
 
   const dispatch = useAppDispatch()
 
   const handleDelete = () => {
-    console.log(userId)
-    dispatch(deleteUser(userId))
+    dispatch(deletePerson(user))
     props.onHide()
     closeForm()
   }
