@@ -11,7 +11,7 @@ import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.PersonRegisterDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserLoginDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.UsuarioService;
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api")
 public class UserController {
@@ -30,7 +30,7 @@ public class UserController {
 
 	}
 
-	@PostMapping("admin/register")
+	@PostMapping("/admin/register")
 	public ResponseEntity<?> crear(@Valid @RequestBody PersonRegisterDTO personRegister, BindingResult validaciones)
 			throws Exception {
 

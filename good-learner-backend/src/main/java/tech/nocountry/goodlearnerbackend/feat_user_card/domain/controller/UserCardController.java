@@ -9,7 +9,7 @@ import tech.nocountry.goodlearnerbackend.feat_user_card.domain.services.PersonCa
 
 
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/admin")
 public class UserCardController {
