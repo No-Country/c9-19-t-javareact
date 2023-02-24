@@ -13,13 +13,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { Person } from '../models/Person';
-import { fetchPersons, getPersonsError, getPersonsStatus, selectAllPersons, updatePerson } from '../app/states/Persons';
+import { fetchPersons, getAllTeachers, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
 
 
 function Profesores() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
     const [selectedUser, setSelectedUser] = useState<Person>({});
-    const teachers = useAppSelector(selectAllPersons)
+    const teachers = useAppSelector(getAllTeachers)
     const teachersStatus = useAppSelector(getPersonsStatus)
     const teachersError = useAppSelector(getPersonsError)
 

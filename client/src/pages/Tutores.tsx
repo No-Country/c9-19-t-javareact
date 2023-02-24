@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { fetchPersons, getPersonsError, getPersonsStatus, selectAllPersons, updatePerson } from '../app/states/Persons';
+import { fetchPersons, getAllStudents, getAllTutors, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
 import { Person } from '../models/Person';
 import { User } from '../models';
 
@@ -22,8 +22,8 @@ function Tutores() {
     const [usersToReltions, setUsersToReltions] = useState<Array<User>>([]);
     const [relations, setRelations] = useState<Array<User>>([]);
     const [modalTitle, setModalTitle] = useState<string>('');
-    const users = useAppSelector(selectAllPersons)
-    const students = useAppSelector(selectAllPersons)
+    const users = useAppSelector(getAllTutors)
+    const students = useAppSelector(getAllStudents)
     const usersStatus = useAppSelector(getPersonsStatus)
     const usersError = useAppSelector(getPersonsError)
     const dispatch = useAppDispatch()

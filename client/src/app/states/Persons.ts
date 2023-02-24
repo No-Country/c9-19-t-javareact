@@ -1,6 +1,7 @@
 import {
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
   createSlice,
   EntityState,
   PayloadAction,
@@ -104,8 +105,8 @@ const personsSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(createPerson.fulfilled, (state, action: PayloadAction<Person>) => {
-        const {idPerson, firstName, lastName} = action.payload;
-        const newPerson = {id: idPerson, fullName: `${firstName} ${lastName}`}
+        const {idPerson, firstName, lastName, roleName} = action.payload;
+        const newPerson = {id: idPerson, fullName: `${firstName} ${lastName}`, roleName: roleName}
         personsAdapter.addOne(state, newPerson);
       })
       .addCase(deletePerson.fulfilled, (state, action) => {
@@ -134,5 +135,20 @@ export const {
 export const getPersonsStatus = (state: RootState) => state.persons.status;
 export const getPersonsError = (state: RootState) => state.persons.error;
 
+
+export const getAllTeachers = createSelector(
+  [selectAllPersons ],
+  (persons) => persons.filter((person) => person.roleName === "TEACHER")
+);
+
+export const getAllTutors = createSelector(
+  [selectAllPersons ],
+  (persons) => persons.filter((person) => person.roleName === "TUTOR")
+);
+
+export const getAllStudents = createSelector(
+  [selectAllPersons ],
+  (persons) => persons.filter((person) => person.roleName === "STUDENT")
+);
 
 export default personsSlice.reducer;
