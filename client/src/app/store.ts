@@ -13,6 +13,8 @@ import {
   REGISTER,
 } from 'redux-persist'
 import persistCombineReducers from 'redux-persist/es/persistCombineReducers';
+import Persons from './states/Persons';
+import personsSlice from './states/Persons';
 
 const persistConfig = {
   key:"root",
@@ -23,7 +25,7 @@ const persistConfig = {
 const persistedReducer = persistCombineReducers(persistConfig, {
   user:userSliceReducer,
   ui:uiSliceReducer,
-  persons: usersSliceReducer
+  persons: personsSlice
 });
 
 export const store = configureStore({

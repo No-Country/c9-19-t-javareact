@@ -8,9 +8,10 @@ export const persistLocalStorage = <T,>(key: string, value: T) => {
   
 
   export const getTokenFromLocalStorage = () => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem('token')
+    console.log(token)
     if(token) {
-      return JSON.parse(token)
+      return token
     }
     else {
       return undefined

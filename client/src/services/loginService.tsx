@@ -18,8 +18,14 @@ export const loginService = (formData: FormData) => {
     };
     const res = await useApi(apiPropertyes)
     res.status !==200 ? 
-      Swal.fire('Error','Usuario Incorrecto','error') : 
-      dispatch(createUser(res.data))
+    
+      
+      Swal.fire('Error','Usuario Incorrecto','error')
+       : 
+      (
+        localStorage.setItem('token',res.data.token),
+        dispatch(createUser(res.data))
+      )
     return 'error no manejado'
       
   }

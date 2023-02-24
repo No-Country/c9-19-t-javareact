@@ -30,6 +30,31 @@ export const fetchPersons: any = createAsyncThunk('admin/persons', async () => {
   const response = await useApi(apiPropertyes);
   return response.data;
 });
+export const fetchTutor: any = createAsyncThunk('admin/tutor', async () => {
+  const apiPropertyes: apiProps = {
+    path: 'admin/tutor',
+    method: 'get',
+  };
+  const response = await useApi(apiPropertyes);
+  return response.data;
+});
+export const fetchTeachers: any = createAsyncThunk('admin/teacher', async () => {
+  const apiPropertyes: apiProps = {
+    path: 'admin/teacher',
+    method: 'get',
+  };
+  const response = await useApi(apiPropertyes);
+  
+  return response.data;
+});
+export const fetchStundents: any = createAsyncThunk('admin/student', async () => {
+  const apiPropertyes: apiProps = {
+    path: 'admin/student',
+    method: 'get',
+  };
+  const response = await useApi(apiPropertyes);
+  return response.data;
+});
 
 export const fetchPersonData: any = createAsyncThunk('admin/get/personsData', async (id: number) => {
   const userId = id;
@@ -86,7 +111,7 @@ export const deletePerson: any = createAsyncThunk(
   }
 );
 
-const personsSlice = createSlice({
+export const personsSlice = createSlice({
   name: 'persons',
   initialState: initialPersonsState,
   reducers: {},
@@ -97,9 +122,51 @@ const personsSlice = createSlice({
       })
       .addCase(fetchPersons.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        personsAdapter.upsertMany(state, action.payload);
+        console.log(action.payload)
+        personsAdapter.setAll(state,action.payload);
       })
       .addCase(fetchPersons.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+      //Fetch teacher
+      .addCase(fetchTeachers.pending, (state, _action) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchTeachers.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        console.log(action.payload)
+        personsAdapter.setAll(state, action.payload);
+      })
+      .addCase(fetchTeachers.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      
+            //Fetch student
+      .addCase(fetchStundents.pending, (state, _action) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchStundents.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        console.log(action.payload)
+        personsAdapter.setAll(state, action.payload);
+      })
+      .addCase(fetchStundents.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+                  //Fetch tutor
+      .addCase(fetchTutor.pending, (state, _action) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchTutor.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        console.log(action.payload)
+        personsAdapter.setAll(state, action.payload);
+      })
+      .addCase(fetchTutor.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
@@ -122,8 +189,10 @@ const personsSlice = createSlice({
           console.log(action.payload);
           return;
         }
+        
         personsAdapter.upsertOne(state, action.payload);
-      });
+      })
+      .addDefaultCase((state, action) => {});
   },
 });
 

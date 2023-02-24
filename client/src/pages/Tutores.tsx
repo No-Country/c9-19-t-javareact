@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { fetchPersons, getPersonsError, getPersonsStatus, selectAllPersons, updatePerson } from '../app/states/Persons';
+import { fetchPersons, fetchTutor, getPersonsError, getPersonsStatus, selectAllPersons, updatePerson } from '../app/states/Persons';
 import { Person } from '../models/Person';
 import { User } from '../models';
 
@@ -31,12 +31,17 @@ function Tutores() {
     const effectRan = useRef(false)
 
     useEffect(() => {
+
+        dispatch(fetchTutor())
+/* 
+        dispatch(fetchTutor())
         if (effectRan.current === false) {
+            
             if (usersStatus === "idle")
-                dispatch(fetchPersons())
+        
             effectRan.current = true
-        }
-    }, [usersStatus, dispatch])
+        } */
+    }, [ dispatch])
 
 
     const handleCloseFormUser = () => {

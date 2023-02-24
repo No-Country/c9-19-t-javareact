@@ -5,11 +5,15 @@ import Card from 'react-bootstrap/Card';
 import '../styles/dashboard.css';
 import '../styles/header.css';
 
+
+
+
 const data = [
     {usuario: 'Estudiantes', cantidad: 180, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap', id:1},
     {usuario: 'Profesores', cantidad: 6, background: '#E1F1FF', color: '#3F7AFC', icon: 'fa fa-user', id:2},
     {usuario: 'Tutores', cantidad: 140, background: '#FFF2D8', color: '#FFA002', icon: 'fa fa-users', id:3},
 ]
+
 function Dashboard () {
     return (
         <Container>
@@ -43,6 +47,7 @@ function Dashboard () {
                         </Col>   
                         ))
                 }
+                
             </Row>
         </Container>
     )

@@ -9,10 +9,11 @@ export interface apiProps{
 }
 
 const baseUrl= 'http://localhost:8080/api';
-const token = getTokenFromLocalStorage()
+
 
 
 export const useApi = async({path,body,method}:apiProps) => {
+    const token = getTokenFromLocalStorage()
     let finalUrl = `${ baseUrl }/${ path }`;
     let options: AxiosRequestConfig = {
       method: method,
@@ -24,7 +25,6 @@ export const useApi = async({path,body,method}:apiProps) => {
       },
       data:body
     }
-
    try {
     const res = await axios(options)
     return {

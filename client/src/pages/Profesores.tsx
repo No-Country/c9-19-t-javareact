@@ -13,7 +13,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { Person } from '../models/Person';
-import { fetchPersons, getPersonsError, getPersonsStatus, selectAllPersons, updatePerson } from '../app/states/Persons';
+import { fetchPersons, fetchTeachers, getPersonsError, getPersonsStatus, selectAllPersons, updatePerson } from '../app/states/Persons';
 
 
 function Profesores() {
@@ -28,12 +28,14 @@ function Profesores() {
     const effectRan = useRef(false)
 
     useEffect(() => {
+        dispatch(fetchTeachers())
+/*         dispatch(fetchTeachers())
         if (effectRan.current === false) {
+
             if (teachersStatus === "idle")
-                dispatch(fetchPersons())
             effectRan.current = true
-        }
-    }, [teachersStatus, dispatch])
+        } */
+    }, [ dispatch])
 
     const handleCloseFormUser = () => {
         setShowFormUser(false);

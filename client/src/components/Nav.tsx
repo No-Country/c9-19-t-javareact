@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import {  selectNavState, sidebarStatus } from '../app/states/ui';
 import { resetUser, selectId, selectName, selectRol } from '../app/states/user';
+import { clearLocalStorage } from '../helpers';
 import { PrivateRoutes, PublicRoutes } from '../routes';
 
 
@@ -18,6 +19,7 @@ export const Nav = () => {
         dispatch(sidebarStatus())
     }
     const logout = () =>{
+        clearLocalStorage('token')
         dispatch(resetUser())
     }
   return (

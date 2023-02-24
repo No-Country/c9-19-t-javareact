@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { fetchPersons, getPersonsError, getPersonsStatus, selectAllPersons, updatePerson } from '../app/states/Persons';
+import { fetchPersons, fetchStundents, getPersonsError, getPersonsStatus, selectAllPersons, updatePerson } from '../app/states/Persons';
 import { Person } from '../models/Person';
 
 
@@ -33,14 +33,11 @@ function Estudiantes() {
 
     
     const effectRan = useRef(false)
-
+    console.log(effectRan)
     useEffect(() => {
-        if (effectRan.current === false) {
-            if (studentsStatus === "idle")
-                dispatch(fetchPersons())
-            effectRan.current = true
-        }
-    }, [studentsStatus, dispatch])
+
+        dispatch(fetchStundents())
+    }, [ dispatch])
 
 
     const handleCloseFormUser = () => {
