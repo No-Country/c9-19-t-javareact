@@ -1,4 +1,4 @@
-# Good Learner c9-19-t-javareact
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -10,7 +10,7 @@
   <h3 align="center">GoodLearner</h3>
 
   <p align="center">
-    Sistema de gestion para colegios.
+    Con GoodLearner podrás mantener un seguimiento detallado del rendimiento académico de tus hijos o estudiantes. La aplicación está diseñada para proporcionar a los tutores y padres un acceso fácil y rápido a las notas y evaluaciones de los estudiantes, lo que les permite estar al tanto del progreso y desempeño de sus hijos en la escuela. Con nuestra aplicación de gestión de notas, los profesores pueden cargar las notas de los estudiantes y los administradores pueden anticipar y reforzar el rendimiento académico. Además, nuestra herramienta permite corroborar con los profesores las razones detrás del bajo rendimiento. Con una interfaz intuitiva y características muy valiosas, nuestra aplicación es una herramienta esencial para cualquier institución educativa.
     <br />
 	·
     <a href=""><strong>View Demo »</strong></a>
@@ -64,21 +64,21 @@
      <li>
       <a href="#about-the-project">SpringBoot</a>
     </li>
-
+     <li>
+      <a href="#about-the-project">MYSQL</a>
+    </li>
   </div>
 </details>
 
 <details>
   <summary>Colaboradores</summary>
   <div>
-    <li><a href="#contributing">Josefina Anschütz - Project Manager</a></li>
-    <li><a href="#about-the-project">Agustin Palavecino - Frontend </a></li>
-    <li><a href="#getting-started">Cristian Gomez - Frontend</a></li>
-    <li><a href="#contributing">Fernando Bouchet - Frontend</a></li>
-    <li><a href="#usage">David Ayala - Backend</a></li>
-    <li><a href="#usage">Christian Herrera - Backend</a></li>
-    <li><a href="#license">Guillermo Oscar Núñez - Backend</a></li>
-
+    <li><a href="https://www.linkedin.com/in/josefina-anschutz/">Josefina Anschütz - Project Manager / ux ui</a></li>
+    <li><a href="https://www.linkedin.com/in/agustin-adrian-palavecino/">Agustin Palavecino - Frontend </a></li>
+    <li><a href="https://www.linkedin.com/in/cristiangomezdev/">Cristian Gomez - Frontend</a></li>
+    <li><a href="https://www.linkedin.com/in/fernandobouchet/">Fernando Bouchet - Frontend</a></li>
+    <li><a href="https://www.linkedin.com/in/david-ayala-developer/">David Ayala - Backend</a></li>
+    <li><a href="https://www.linkedin.com/in/chris-herrera-dev/">Chris Herrera - Backend</a></li>
   </div>
 </details>
 
@@ -91,6 +91,6 @@
 </details>
 <details>
   <summary>About</summary>
-<p>Sistema de gestion para alumnos</p>
+<p>Good Learner es una aplicación de gestión de notas desarrollada por un equipo de profesionales altamente capacitados en la industria de la desarrollo. Nuestro equipo trabajó arduamente para crear una plataforma escalable que pueda adaptarse a las necesidades cambiantes del entorno escolar</p>
 </details>
 </div>
