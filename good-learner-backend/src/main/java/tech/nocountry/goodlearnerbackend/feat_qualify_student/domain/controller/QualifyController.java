@@ -23,8 +23,6 @@ import tech.nocountry.goodlearnerbackend.repository.StudentRepository;
 
 import java.util.*;
 
-
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class QualifyController {

@@ -13,8 +13,6 @@ import tech.nocountry.goodlearnerbackend.feat_admin_count.domain.service.PeopleC
 
 import java.util.ArrayList;
 import java.util.List;
-
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("api/admin")
 public class PeopleCountController {
