@@ -120,7 +120,7 @@ TOKEN: <token>
 ```
 
 #### GET http://localhost:8080/api/admin/person
-* [Todas las Personas](). Recuperar TODAS personas.
+* [Todas las Personas](). Recuperar TODAS personas con su Rol.
 
 **JSON SALIDA**
 ```json
