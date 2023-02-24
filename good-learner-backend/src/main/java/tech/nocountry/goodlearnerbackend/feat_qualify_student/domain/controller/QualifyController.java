@@ -10,8 +10,6 @@ import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.model.Repor
 import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.model.ReportYearRequestDTO;
 import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.service.mapper.ReportQualifyService;
 
-
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/student")
 public class QualifyController {
