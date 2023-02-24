@@ -6,7 +6,7 @@ export class Subject {
     // commission_id?: number;
     teacher_id?: number;
     teacher?: User;
-    subject_name?: string;
+    subjectName?: string;
     qualifications?: Array<Qualification>
 
     static parseItem(raw: any): Subject {
@@ -15,7 +15,7 @@ export class Subject {
         // subject.commission_id = raw.commission_id ? raw.commission_id : undefined;
         subject.teacher_id = raw.teacher_id ? raw.teacher_id : undefined;
         subject.teacher = raw.teacher ? raw.teacher : undefined;  
-        subject.subject_name = raw.subject_name ? raw.subject_name : undefined;  
+        subject.subjectName = raw.subjectName ? raw.subjectName : undefined;  
         subject.qualifications = raw.qualifications ? raw.qualifications : [];
         return subject;
     }

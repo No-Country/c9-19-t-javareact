@@ -16,6 +16,7 @@ import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchReport, getReport, getReportError, getReportStatus } from '../app/states/Report';
 
+import { selectId } from '../app/states/user'
 
 function MyQualification() {
    
@@ -23,6 +24,7 @@ function MyQualification() {
     const qualificationsStatus = useAppSelector(getReportStatus);
     const qualificationsError = useAppSelector(getReportError);
     const currentYear = 2023;
+    const id = useAppSelector(selectId)
 
     // const [subjects, setSubjects] = useState([
     //     {   id: 1, 
@@ -69,7 +71,7 @@ function MyQualification() {
     useEffect(() => {
         if (effectRan.current === false) {
             if (qualificationsStatus === "idle")
-                dispatch(fetchReport(currentYear));
+                dispatch(fetchReport({'idStudent': id, 'schoolYear': currentYear}));
             effectRan.current = true
         }
     }, [getReportStatus, dispatch])
