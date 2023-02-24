@@ -1,13 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
-// Models
-import { Qualification } from '../models/Qualification';
-import { User } from '../models/User';
-import { Subject } from '../models/Subject';
-
 // compoents
 import TableStudentQualification from '../components/UI/TableStudentQualification';
-
+import Loader from '../components/UI/Loader';
 // UI
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -25,7 +20,7 @@ function MyQualification() {
     const qualificationsError = useAppSelector(getReportError);
     const currentYear = 2023;
     const id = useAppSelector(selectId)
-
+    const [loading, setLoading] = useState(false);
     // const [subjects, setSubjects] = useState([
     //     {   id: 1, 
     //         teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'},
@@ -72,6 +67,10 @@ function MyQualification() {
         if (effectRan.current === false) {
             if (qualificationsStatus === "idle")
                 dispatch(fetchReport({'idStudent': id, 'schoolYear': currentYear}));
+            if (qualificationsStatus === "loading")
+                setLoading(true);
+            if (qualificationsStatus === "succeeded")
+                setLoading(false);
             effectRan.current = true
         }
     }, [getReportStatus, dispatch])
@@ -99,7 +98,7 @@ function MyQualification() {
                             {
                                 qualificationsStatus === 'loading' 
                                 ?
-                                <p>"Loading...</p>
+                                <Loader show={loading}/>
                                 :
                                 qualificationsStatus === "succeeded"
                                 ?
