@@ -15,8 +15,8 @@ import { Qualification } from '../../models/Qualification';
         let total = 0;
         let notas = 0;
         data.map((q) => {
-            if (q.numerical_qualification) {
-                total += q.numerical_qualification!
+            if (q.numberQualification) {
+                total += q.numberQualification!
                 notas += 1 
             }
             
@@ -44,17 +44,17 @@ import { Qualification } from '../../models/Qualification';
                             <td>{subject.subject_name }</td>
                             <td style={{textAlign: '-webkit-center'}}>
                                 {
-                                    subject.qualifications![0] ? subject.qualifications![0].numerical_qualification : '-'
+                                    subject.qualifications![0] ? subject.qualifications![0].numberQualification : '-'
                                 }
                             </td>
                             <td style={{textAlign: '-webkit-center'}}>
                             {
-                                    subject.qualifications![1] ? subject.qualifications![0].numerical_qualification : '-'
+                                    subject.qualifications![1] ? subject.qualifications![0].numberQualification : '-'
                                 }
                             </td>
                             <td style={{textAlign: '-webkit-center'}}>
                             {
-                                    subject.qualifications![2] ? subject.qualifications![0].numerical_qualification : '-'
+                                    subject.qualifications![2] ? subject.qualifications![0].numberQualification : '-'
                                 }
                             </td>
                             <td> <strong> {getPromedio(subject.qualifications!)}</strong> </td>

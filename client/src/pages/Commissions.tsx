@@ -22,9 +22,9 @@ function Commissions() {
     const [showCommissions, setShowCommissions] = useState(true);
     const [commissionIndex, setCommissionIndex] = useState<number>(0);
     // const [commissions, setCommissions] = useState<Array<Commission>>(getAllCommissions)
-    const commissions = useAppSelector(getAllCommissions)
-    const commissionsStatus = useAppSelector(getCommissionsStatus)
-    const commissionsError = useAppSelector(getCommissionsError)
+    const commissions = useAppSelector(getAllCommissions);
+    const commissionsStatus = useAppSelector(getCommissionsStatus);
+    const commissionsError = useAppSelector(getCommissionsError);
     // const [commissions, setCommissions] = useState<Array<Commission>>([
     //     {id: 1, course: '2', division: 'A', school_year: 2022, 
     //         subjects: [

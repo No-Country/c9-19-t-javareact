@@ -46,7 +46,6 @@ import {
         })
         .addCase(fetchCommissions.fulfilled, (state, action) => {
           state.status = 'succeeded';
-          console.log(action.payload)
           commissionsAdapter.upsertMany(state, action.payload);
         })
         .addCase(fetchCommissions.rejected, (state, action) => {
