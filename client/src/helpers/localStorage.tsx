@@ -6,6 +6,9 @@ export const persistLocalStorage = <T,>(key: string, value: T) => {
     localStorage.removeItem(key);
   };
   
+  export const setTokenToLocalStorage = (value: string) => {
+    localStorage.setItem("token", JSON.stringify(value) )
+  }
 
   export const getTokenFromLocalStorage = () => {
     const token = localStorage.getItem("token")

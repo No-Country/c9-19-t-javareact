@@ -105,7 +105,7 @@ const personsSlice = createSlice({
       })
       .addCase(createPerson.fulfilled, (state, action: PayloadAction<Person>) => {
         const {idPerson, firstName, lastName} = action.payload;
-        const newPerson = {id: idPerson, fullName: `${firstName} ${lastName}}`}
+        const newPerson = {id: idPerson, fullName: `${firstName} ${lastName}`}
         personsAdapter.addOne(state, newPerson);
       })
       .addCase(deletePerson.fulfilled, (state, action) => {

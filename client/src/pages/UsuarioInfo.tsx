@@ -10,7 +10,8 @@ import '../styles/UsuarioInfo.css'
 const UsuarioInfo = () => {
   const id = useParams();
   const dispatch = useAppDispatch()
-  const [userData, setUserData] = useState<Person>({})
+  const [userData, setUserData] = useState<Person>({
+  })
 
   useEffect(() => {
     async function fetchData() {
@@ -23,7 +24,7 @@ const UsuarioInfo = () => {
     fetchData();
   }, [id]);
 
-   const { idPerson, document, firstName, birthDate,phone, email, lastName, roleName, username } = userData;
+  const { idPerson, document, firstName, birthDate,phone, email, lastName, roleName, username } = userData;
  
 
   return (
@@ -38,7 +39,7 @@ const UsuarioInfo = () => {
         <Row className="pb-5">
           <Col className="text-center" style={{ color: '#14238A' }}>
             <h3>
-              {firstName} {lastName}
+             {`${firstName} ${lastName}` || "-"}
             </h3>
           </Col>
         </Row>
@@ -47,7 +48,7 @@ const UsuarioInfo = () => {
             <h4>Id:</h4>
           </Col>
           <Col xs={8}>
-            <h4>{idPerson}</h4>
+            <h4>{idPerson || "-"}</h4>
           </Col>
         </Row>
         <Row>
@@ -55,7 +56,7 @@ const UsuarioInfo = () => {
             <h4>Usuario:</h4>
           </Col>
           <Col xs={8}>
-            <h4>{username}</h4>
+            <h4>{username || "-"}</h4>
           </Col>
         </Row>
         <Row>
@@ -63,7 +64,7 @@ const UsuarioInfo = () => {
             <h4>Edad:</h4>
           </Col>
           <Col xs={8}>
-            <h4>{getAge(birthDate)}</h4>
+            <h4>{birthDate && getAge(birthDate) || "-"}</h4>
           </Col>
         </Row>
         <Row>
@@ -71,7 +72,7 @@ const UsuarioInfo = () => {
             <h4>Dni:</h4>
           </Col>
           <Col xs={8}>
-            <h4>{document}</h4>
+            <h4>{document || "-"}</h4>
           </Col>
         </Row>
         <Row>
@@ -79,7 +80,7 @@ const UsuarioInfo = () => {
             <h4>Telefono:</h4>
           </Col>
           <Col xs={8}>
-            <h4>{phone}</h4>
+            <h4>{phone || "-"}</h4>
           </Col>
         </Row>
         <Row>
@@ -87,7 +88,7 @@ const UsuarioInfo = () => {
             <h4>Email:</h4>
           </Col>
           <Col xs={8}>
-            <h4>{email}</h4>
+            <h4>{email || "-"}</h4>
           </Col>
         </Row>
         <Row>
@@ -96,7 +97,7 @@ const UsuarioInfo = () => {
           </Col>
           <Col xs={8}>
             <h4>
-              {roleName}
+              {roleName || "-"}
             </h4>
           </Col>
         </Row>

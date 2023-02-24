@@ -9,10 +9,9 @@ export interface apiProps{
 }
 
 const baseUrl= 'http://localhost:8080/api';
-const token = getTokenFromLocalStorage()
-
 
 export const useApi = async({path,body,method}:apiProps) => {
+  const token = getTokenFromLocalStorage()
     let finalUrl = `${ baseUrl }/${ path }`;
     let options: AxiosRequestConfig = {
       method: method,
@@ -20,7 +19,7 @@ export const useApi = async({path,body,method}:apiProps) => {
       headers:{ 
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin':'*' ,
-         Authorization:`Bearer ${token}` 
+        Authorization:`Bearer ${token}` 
       },
       data:body
     }
@@ -37,6 +36,4 @@ export const useApi = async({path,body,method}:apiProps) => {
       status:401,
       message:'Credenciales incorrectas o expiradas'}
    }
-
-           
 }
