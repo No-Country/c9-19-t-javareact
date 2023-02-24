@@ -97,7 +97,7 @@ TOKEN: <token>
 }
 ```
 
-#### PUT http://127.0.0.1:8080/api/admin/student
+#### PUT http://127.0.0.1:8080/api/admin/student/state
 * [Switch State Estudiante](). Puede cambiar el estado de un estudiante.
 * Estado false: Estudiante no se encuentra con inscripción del presente año, se cambió de o terminó la escuela.
 * Estado true: Estudiante con inscripción reciente, por lo tanto, es regular.
@@ -120,41 +120,46 @@ TOKEN: <token>
 ```
 
 #### GET http://localhost:8080/api/admin/person
-* [Todas las Personas](). Recuperar TODAS personas.
+* [Todas las Personas](). Recuperar TODAS personas con su Rol.
 
 **JSON SALIDA**
 ```json
 [
-  [
-    {
-      "id": 1,
-      "fullName": "Director Director"
-    },
-    {
-      "id": 2,
-      "fullName": "David Ayala"
-    },
-    {
-      "id": 3,
-      "fullName": "Romina Gomez"
-    },
-    {
-      "id": 4,
-      "fullName": "David Ayala"
-    },
-    {
-      "id": 5,
-      "fullName": "Hugo Ramirez"
-    },
-    {
-      "id": 6,
-      "fullName": "Jazmin Ayala"
-    },
-    {
-      "id": 7,
-      "fullName": "Agustin Ramirez"
-    }
-  ]
+  {
+    "id": 6,
+    "fullName": "Jazmin Ayala",
+    "roleName": "STUDENT"
+  },
+  {
+    "id": 7,
+    "fullName": "Agustin Ramirez",
+    "roleName": "STUDENT"
+  },
+  {
+    "id": 8,
+    "fullName": "Julio Gonzalez",
+    "roleName": "STUDENT"
+  },
+  {
+    "id": 2,
+    "fullName": "David Ayala",
+    "roleName": "TEACHER"
+  },
+  {
+    "id": 3,
+    "fullName": "Romina Gomez",
+    "roleName": "TEACHER"
+  },
+  {
+    "id": 4,
+    "fullName": "David Ayala",
+    "roleName": "TUTOR"
+  },
+  {
+    "id": 5,
+    "fullName": "Hugo Ramirez",
+    "roleName": "TUTOR"
+  }
 ]
 ```
 
