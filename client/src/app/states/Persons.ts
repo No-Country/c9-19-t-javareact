@@ -58,9 +58,8 @@ export const createPerson: any = createAsyncThunk(
 export const updatePerson: any = createAsyncThunk(
   'admin/person/update',
   async (person: Person) => {
-    const { id } = person;
     const apiPropertyes: apiProps = {
-      path: `admin/person/${id}`,
+      path: `admin/person`,
       method: 'put',
       body: person,
     };
@@ -118,12 +117,13 @@ const personsSlice = createSlice({
         personsAdapter.removeOne(state, id);
       })
       .addCase(updatePerson.fulfilled, (state, action) => {
-        if (!action.payload?.id) {
+        if (!action.payload) {
           console.log(`Update could not complete`);
-          console.log(action.payload);
           return;
         }
-        personsAdapter.upsertOne(state, action.payload);
+        const {idPerson, firstName, lastName, roleName} = action.payload;
+        const updatedPerson = {id: idPerson, fullName: `${firstName} ${lastName}`, roleName: roleName}
+        personsAdapter.upsertOne(state, updatedPerson);
       });
   },
 });

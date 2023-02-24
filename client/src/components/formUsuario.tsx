@@ -82,7 +82,7 @@ function FormUsuario({
       >
         <Modal.Header closeButton>
           <Modal.Title>
-            {form.id !== undefined ? 'Modificar Usuario' : 'Agregar Usuario'}
+            Modificar Usuario {form.roleName === "STUDENT" ? "estudiante" : form.roleName === "TUTOR" ? "tutor" : "profesor"}
           </Modal.Title>
         </Modal.Header>
 
