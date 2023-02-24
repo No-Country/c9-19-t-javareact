@@ -135,12 +135,11 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   background-color: #8A91C5 !important;
   color:white;
 }
-.active{
+/* .active{
   background-color: #4B57A5 !important;
   color:white;
   border-right:4px solid #0000;
-
-}
+} */
 .list-group-item.active{
   border-top-width:0px !important;
   border-color:#8A91C5 !important;
