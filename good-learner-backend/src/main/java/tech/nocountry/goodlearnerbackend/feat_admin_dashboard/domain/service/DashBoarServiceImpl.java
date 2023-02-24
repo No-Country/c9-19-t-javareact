@@ -8,7 +8,11 @@ import tech.nocountry.goodlearnerbackend.feat_admin_dashboard.data.repository.Pe
 import tech.nocountry.goodlearnerbackend.feat_admin_dashboard.data.repository.StudentPageRepository;
 import tech.nocountry.goodlearnerbackend.feat_admin_dashboard.data.repository.TeacherPageRepository;
 import tech.nocountry.goodlearnerbackend.feat_admin_dashboard.data.repository.TutorPageRepository;
+import tech.nocountry.goodlearnerbackend.feat_admin_dashboard.domain.model.PersonByRoleResponseDTO;
 import tech.nocountry.goodlearnerbackend.feat_admin_dashboard.domain.model.PersonResponseDTO;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.RoleName;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.model.User;
+import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UserRepository;
 import tech.nocountry.goodlearnerbackend.model.Person;
 import tech.nocountry.goodlearnerbackend.model.Student;
 import tech.nocountry.goodlearnerbackend.model.Teacher;
@@ -31,14 +35,21 @@ public class DashBoarServiceImpl implements DashBoarService {
     private TeacherPageRepository teacherPageRepository;
 
     @Override
-    public List<PersonResponseDTO> findAllPeoplePage(Pageable pageable) throws Exception {
-        Page page = personPageRepository.findAll(pageable);
+    public List<PersonByRoleResponseDTO> findAllPeoplePage(Pageable pageable) throws Exception {
+        List<Student> students= studentPageRepository.findAll(pageable).stream().toList();
+        List<Teacher> teachers = teacherPageRepository.findAll(pageable).stream().toList();
+        List<Tutor> tutors = tutorPageRepository.findAll(pageable).stream().toList();
 
-        List<PersonResponseDTO> peopleResponse = new ArrayList<>();
+        List<PersonByRoleResponseDTO> peopleResponse = new ArrayList<>();
 
-        List<Person> people = page.stream().toList();
-        people.forEach(person -> {
-            peopleResponse.add(new PersonResponseDTO(person.getIdPerson(), person.getFirstName() + " " + person.getLastName() ));
+        students.forEach(student -> {
+            peopleResponse.add(new PersonByRoleResponseDTO(student.getIdPerson(), student.getFirstName() + " " +  student.getLastName(), RoleName.STUDENT));
+        });
+        teachers.forEach(teacher -> {
+            peopleResponse.add(new PersonByRoleResponseDTO(teacher.getIdPerson(), teacher.getFirstName() + " " +  teacher.getLastName(), RoleName.TEACHER));
+        });
+        tutors.forEach(tutor -> {
+            peopleResponse.add(new PersonByRoleResponseDTO(tutor.getIdPerson(), tutor.getFirstName() + " " +  tutor.getLastName(), RoleName.TUTOR));
         });
         return peopleResponse;
     }
