@@ -13,7 +13,7 @@ public interface IRelationshipService {
 
     ResponseEntity<?> findRelationByStudentTutor(ReadRelationRequest relationRequest);
 
-    RelationTutorStudentResponse updateRelation(RelationStudentTutorRequest relationStudentTutorRequest);
+    ResponseEntity<?> updateRelation(RelationStudentTutorRequest relationStudentTutorRequest);
 
     boolean deleteRelation(RelationStudentTutorRequest relationStudentTutorRequest);
 

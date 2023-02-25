@@ -82,10 +82,33 @@ public class RelationshipServiceImpl implements IRelationshipService{
     }
 
     @Override
-    public RelationTutorStudentResponse updateRelation(RelationStudentTutorRequest relationStudentTutorRequest) {
+    public ResponseEntity<?> updateRelation(RelationStudentTutorRequest relationStudentTutorRequest) {
 
+        RelationTutorStudentResponse relationStudentTutor = null;
 
-        return null;
+        Optional<Student> student = studentRepository.findById(relationStudentTutorRequest.getIdStudent());
+        Optional<Tutor> tutor = tutorRepository.findById(relationStudentTutorRequest.getIdTutor());
+        Optional<Bond> bond = bondRepository.findBondByName(relationStudentTutorRequest.getRelation());
+
+        if(student.isPresent() && tutor.isPresent() && bond.isPresent()){
+            List<TutorStudent> tutorStudentList = tutorStudentRepository.findRelationByTutorAndStudent(student.get(), tutor.get());
+
+            if(!tutorStudentList.isEmpty()){
+                TutorStudent tutorStudent = tutorStudentList.get(0);
+                tutorStudent.setBond(bond.get());
+                tutorStudentRepository.save(tutorStudent);
+
+                relationStudentTutor = new RelationTutorStudentResponse(
+                        tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
+                        tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
+                        tutorStudent.getBond().getBondName()
+                );
+
+                return ResponseEntity.ok(relationStudentTutor);
+            }
+            return new ResponseEntity<String>("El Estudiante y Tutor no posee Relación que pueda ser actualizada.", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("No se ha encontrado al estudiante o tutor.", HttpStatus.NOT_FOUND);
     }
 
     @Override
