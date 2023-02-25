@@ -81,6 +81,7 @@ function Tutores() {
                 <CardPerson
                     user={user}
                     handleUpdateUser={handleUpdateUser}
+                    handleShowRelations={handleShowRelations}
                 />
             </Col>
         ))

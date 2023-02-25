@@ -87,7 +87,7 @@ function RelationAssign({show, title, user, relations, users, handleClose, handl
                                         <option>--Seleccione una opción --</option>
                                         {
                                             users.map((elem)=> (
-                                                <option key={elem.id} value={elem.id}> {elem.name} {elem.last_name}</option>
+                                                <option key={elem.id} value={elem.id}> {elem.fullName}</option>
                                             ))
                                         }
                                     </Form.Select>
@@ -104,9 +104,7 @@ function RelationAssign({show, title, user, relations, users, handleClose, handl
                                 {
                                     newRelations.map((elem) => (
                                         <ListGroup.Item key={elem.id} className="d-flex justify-content-between align-items-center">
-                                            {elem.name} 
-                                            &nbsp;
-                                            { elem.last_name} 
+                                            {elem.fullName} 
                                             <Button
                                                 style={{height: 'fit-content'}}
                                                 variant="danger"

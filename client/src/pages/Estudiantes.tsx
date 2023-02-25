@@ -84,6 +84,7 @@ function Estudiantes() {
                 <CardPerson
                     user={user}
                     handleUpdateUser={handleUpdateUser}
+                    handleShowRelations={handleShowRelations}
                 />
             </Col>
         ))
