@@ -12,10 +12,23 @@ public class CommissionMapper {
     //CommissionMapper INSTANCE = Mappers.getMapper( CommissionMapper.class );
 
     public CommissionDTO commissionToCommissionDTO(Commission commission) {
-        return null;
+        CommissionDTO commissionDTO = new CommissionDTO();
+        commissionDTO.setCommissionId(commission.getCommissionId());
+        commissionDTO.setCourse(commission.getCourse());
+        commissionDTO.setDivision(commission.getDivision());
+        commissionDTO.setSchoolYear(commission.getSchoolYear());
+        commissionDTO.setShiftName(commission.getShift().getShiftName());
+        return commissionDTO;
+
     }
 
     public Commission commissionDTOToCommission(CommissionDTO commissionDTO) {
-        return null;
+        Commission commission = new Commission();
+        commission.setCommissionId(commissionDTO.getCommissionId());
+        commission.setCourse(commissionDTO.getCourse());
+        commission.setDivision(commissionDTO.getDivision());
+        commission.setSchoolYear(commissionDTO.getSchoolYear());
+        commission.setShift(commissionDTO.getShift());
+        return commission;
     }
 }

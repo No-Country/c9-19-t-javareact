@@ -13,6 +13,7 @@ public class CommissionDTO {
     private String division;
     private int schoolYear;
     private ShiftName shiftName;
+    private Shift shift;
 
     public CommissionDTO() {}
 
