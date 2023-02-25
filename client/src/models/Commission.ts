@@ -2,16 +2,17 @@ import {User} from './User';
 import {Subject} from './Subject';
 
 export class Commission {
-    id?: number;
+    commissionId?: number;
     course?: string;
     division?: string;
     school_year?: number;
+    shiftName?: string;
     subjects?: Array<Subject>; 
     students?: Array<User>;
 
     static parseItem(raw: any): Commission {
         const commission = new Commission();
-        commission.id = raw.id ? raw.id : undefined;
+        commission.commissionId = raw.commissionId ? raw.commissionId : undefined;
         commission.course = raw.course ? raw.course : undefined;
         commission.division = raw.division ? raw.division : undefined;
         commission.school_year = raw.school_year ? raw.school_year : undefined;  

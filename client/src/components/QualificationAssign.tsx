@@ -30,7 +30,7 @@ function QualificationAssign({
 }: Props) {
 
 
-    const [qualificationValue, SetQualificationValue] = useState(qualification ? qualification.numerical_qualification : 0);
+    const [qualificationValue, SetQualificationValue] = useState(qualification ? qualification.numberQualification : 0);
 
     const handleSaveData = () => {
         handleSaveQualification(qualificationValue);   

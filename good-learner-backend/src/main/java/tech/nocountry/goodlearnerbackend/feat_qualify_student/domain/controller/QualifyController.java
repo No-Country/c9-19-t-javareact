@@ -86,7 +86,7 @@ public class QualifyController {
         }
     }
 
-    @GetMapping("/person/report")
+    @PostMapping("/person/report")
     public ResponseEntity<?> getReports(@Validated @RequestBody StudentReportRequestDTO studentReportRequestDto, BindingResult validations){
         if(validations.hasErrors())
             return new ResponseEntity<String>("El ID del estudiante y el año escolar son obligatorios", HttpStatus.BAD_REQUEST);
