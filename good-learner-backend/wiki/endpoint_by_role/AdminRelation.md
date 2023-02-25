@@ -82,3 +82,16 @@ TOKEN: <token>
   "relation": "NEIGHBOR"
 }
 ```
+
+
+#### DELETE http://localhost:8080/api/person/relationship
+* [Crear una Relación]() Puede eliminar una relación de base de datos. Solo deberá enviar el ID del estudiante y el ID del Tutor.
+
+**JSON ENTRADA**
+```json
+{
+  "idStudent": 7,
+  "idTutor": 4
+}
+```
+* [Respuesta]() 204 No Content
