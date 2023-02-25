@@ -9,15 +9,21 @@ import tech.nocountry.goodlearnerbackend.feat_show_commission.domain.service.ICo
 
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.noContent;
+
 @Controller
 public class ShowCommissionController {
     @Autowired
     private ICommissionService commissionService;
 
-    @GetMapping("/commissions")
+    @GetMapping("api/commissions")
     public ResponseEntity<List<CommissionDTO>> showCommissions() {
         List<CommissionDTO> commissionDTOList = commissionService.getAllCommissions();
-        return ResponseEntity.ok(commissionDTOList);
+        if (commissionDTOList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(commissionDTOList);
+        }
     }
 
 }
