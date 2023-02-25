@@ -32,13 +32,10 @@ public class RelationshipStudentTutorController {
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<?> createdRelation(@Validated @RequestBody RelationStudentTutorRequest relationStudentTutorRequest, BindingResult validations){
         try {
-
             if(validations.hasErrors()) {
             return new ResponseEntity<String>("Los valores del vinculo y los ID de Estudiante y Tutor son Obligatorios", HttpStatus.BAD_REQUEST);
         }
-            ResponseEntity<?> response =  iRelationshipService.createdRelation(relationStudentTutorRequest);
-
-            return response;
+            return iRelationshipService.createdRelation(relationStudentTutorRequest);
         }
         catch ( Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -56,5 +53,18 @@ public class RelationshipStudentTutorController {
        } catch (Exception e){
            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
        }
+    }
+    @PutMapping("/relationship")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    public ResponseEntity<?> updateRelation(@Validated @RequestBody RelationStudentTutorRequest relationStudentTutorRequest, BindingResult validations){
+        try {
+            if(validations.hasErrors()) {
+                return new ResponseEntity<String>("Los valores del vinculo y los ID de Estudiante y Tutor son Obligatorios", HttpStatus.BAD_REQUEST);
+            }
+            return  iRelationshipService.updateRelation(relationStudentTutorRequest);
+        }
+        catch ( Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
