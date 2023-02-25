@@ -41,18 +41,7 @@ TOKEN: <token>
 
 #### POST http://localhost:8080/api/person/relationship
 * [Crear una Relación]() Puede crear relación entre un estudiante y un profesor, debera enviar el ID del estudiante y tutor, además la relación que los vinculara.
-* [Relaciones permitidas]() `FATHER,
-  MOTHER,
-  AUNT,
-  UNCLE,
-  COUSIN,
-  GRANDFATHER,
-  GRANDMOTHER,
-  LEGAL_GUARDIAN,
-  FRIEND,
-  NEIGHBOR,
-  BROTHER,
-  SISTER`
+* [Relaciones permitidas]() `FATHER, MOTHER, AUNT, UNCLE, COUSIN, GRANDFATHER, GRANDMOTHER, LEGAL_GUARDIAN, FRIEND, NEIGHBOR, BROTHER, SISTER`
 
 **JSON ENTRADA**
 ```json
@@ -69,5 +58,27 @@ TOKEN: <token>
   "fullNameStudent": "Juan Ramirez",
   "fullNameTutor": "David David",
   "relation": "FATHER"
+}
+```
+
+#### PUT http://localhost:8080/api/person/relationship
+* [Crear una Relación]() Puede actualizar una relación entre un estudiante y un profesor, debera enviar el ID del estudiante y tutor, además la relación que los vinculara. La relación deberá existir para poder ser actualizada.
+* [Relaciones permitidas]() `FATHER, MOTHER, AUNT, UNCLE, COUSIN, GRANDFATHER, GRANDMOTHER, LEGAL_GUARDIAN, FRIEND, NEIGHBOR, BROTHER, SISTER`
+
+**JSON ENTRADA**
+```json
+{
+  "idStudent": 7,
+  "idTutor": 5,
+  "relation": "NEIGHBOR"
+}
+```
+
+**JSON SALIDA**
+```json
+{
+  "fullNameStudent": "Juan Ramirez",
+  "fullNameTutor": "Hugo Hugo",
+  "relation": "NEIGHBOR"
 }
 ```
