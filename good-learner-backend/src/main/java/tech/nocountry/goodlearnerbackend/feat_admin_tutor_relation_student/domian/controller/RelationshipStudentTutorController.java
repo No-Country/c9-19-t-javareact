@@ -67,4 +67,21 @@ public class RelationshipStudentTutorController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/relationship")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    public ResponseEntity<?> deleteRelation(@Validated @RequestBody ReadRelationRequest relationRequest, BindingResult validations){
+        try {
+            if(validations.hasErrors()) {
+                return new ResponseEntity<String>("Los valores del vinculo y los ID de Estudiante y Tutor son Obligatorios", HttpStatus.BAD_REQUEST);
+            }
+            if(iRelationshipService.deleteRelation(relationRequest)){
+                return ResponseEntity.noContent().build();
+            }
+            return new ResponseEntity<>("No se encontró el estudiante o Tutor.", HttpStatus.NOT_FOUND);
+        }
+        catch ( Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

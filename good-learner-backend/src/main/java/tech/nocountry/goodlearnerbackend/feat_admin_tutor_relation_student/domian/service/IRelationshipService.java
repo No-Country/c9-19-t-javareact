@@ -15,7 +15,7 @@ public interface IRelationshipService {
 
     ResponseEntity<?> updateRelation(RelationStudentTutorRequest relationStudentTutorRequest);
 
-    boolean deleteRelation(RelationStudentTutorRequest relationStudentTutorRequest);
+    boolean deleteRelation(ReadRelationRequest relationRequest);
 
     List<RelationStudentTutorRequest> findAllRelationByIdStudent(Long idStudent);
 

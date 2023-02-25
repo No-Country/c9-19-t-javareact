@@ -112,7 +112,16 @@ public class RelationshipServiceImpl implements IRelationshipService{
     }
 
     @Override
-    public boolean deleteRelation(RelationStudentTutorRequest relationStudentTutorRequest) {
+    public boolean deleteRelation(ReadRelationRequest relationRequest) {
+        Optional<Student> student = studentRepository.findById(relationRequest.getIdStudent());
+        Optional<Tutor> tutor = tutorRepository.findById(relationRequest.getIdTutor());
+        if(student.isPresent() && tutor.isPresent()){
+            List<TutorStudent> tutorStudentList = tutorStudentRepository.findRelationByTutorAndStudent(student.get(), tutor.get());
+            tutorStudentList.forEach(tutorStudent -> {
+                tutorStudentRepository.delete(tutorStudent);
+            });
+            return true;
+        }
         return false;
     }
 
