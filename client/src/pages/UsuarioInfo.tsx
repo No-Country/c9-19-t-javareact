@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
 import {  useParams } from 'react-router-dom';
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchPersonData } from '../app/states/Persons';
+import { selectId } from '../app/states/user';
 import { getAge } from '../helpers/functions';
 import { Person } from '../models/Person';
 import '../styles/UsuarioInfo.css'
 
 const UsuarioInfo = () => {
-  const id = useParams();
   const dispatch = useAppDispatch()
+  const id = useAppSelector(selectId)
+
   const [userData, setUserData] = useState<Person>({
   })
 
   useEffect(() => {
     async function fetchData() {
       if (id) {
-        const data = await dispatch(fetchPersonData(id.id));
+        const data = await dispatch(fetchPersonData(id));
         setUserData(data.payload)
       }
     }

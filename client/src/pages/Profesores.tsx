@@ -14,6 +14,8 @@ import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { Person } from '../models/Person';
 import { fetchPersons, getAllTeachers, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
+import UserInfo from '../components/UI/UserInfo';
+import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
 
 
 function Profesores() {
@@ -22,8 +24,8 @@ function Profesores() {
     const teachers = useAppSelector(getAllTeachers)
     const teachersStatus = useAppSelector(getPersonsStatus)
     const teachersError = useAppSelector(getPersonsError)
-
     const dispatch = useAppDispatch()
+    const InfoModalState = useAppSelector(getUserInfoModalState)
 
     const effectRan = useRef(false)
 
@@ -91,6 +93,7 @@ function Profesores() {
                     user={selectedUser}
                     setShowFormUser={setShowFormUser}
                 />
+                <UserInfo show={InfoModalState} onHide={() => dispatch(handleShowInfoModal())}/>
             </Container>
         </>
     );
