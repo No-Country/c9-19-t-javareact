@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import '../styles/dashboard.css';
 import '../styles/header.css';
 import  {BarChart}  from '../components/barChart';
-
+import  {PieChart}  from '../components/PieChart';
 const data = [
     {usuario: 'Estudiantes', cantidad: 180, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap', id:1},
     {usuario: 'Profesores', cantidad: 6, background: '#E1F1FF', color: '#3F7AFC', icon: 'fa fa-user', id:2},
@@ -21,14 +21,12 @@ function Dashboard () {
                     <div className='header-line'></div>
                 </Col>
             </Row>
-            <Row className="mb-5">
-                <BarChart />
-            </Row>
+
            
             <Row>
                 {
                     data.map( (user: any) => (
-                        <Col xs={12} md={4} className='d-flex justify-content-center' key={user.id}>
+                        <Col xs={12} md={4} className='d-flex justify-content-center mb-2' key={user.id}>
                             <Card className='card-dash' >
                                 <Card.Body>
                                     <Row>
@@ -49,6 +47,15 @@ function Dashboard () {
                         </Col>   
                         ))
                 }
+            </Row>
+            <Row className="mb-2" xs={12}>
+            <Col xs={12} md={12}>
+                <BarChart />
+
+                </Col>
+{/*                 <Col xs={12} md={4}>
+                <PieChart/>
+                </Col> */}
             </Row>
         </Container>
     )

@@ -27,11 +27,7 @@ export const Nav = () => {
                 <button className="btn bg-white me-4" id="sidebarToggle" onClick={sidebarToggle}><i className="fa-solid fa-bars fa-2xl"></i></button>
                 <div className="input-group input-group-md">
                     <div className="input-group-prepend p-2">
-                    {/* <i className="fa-solid fa-magnifying-glass fa-xl bg-grey"></i> */}
-
-                        {/*  <span className="input-group-text" id="inputGroup-sizing-lg">🔎</span> */}
-                    </div>
-                    {/* <input type="text" className="form-control form-control-nav" placeholder="Busqueda" aria-label="Large" aria-describedby="inputGroup-sizing-sm"/> */}
+                    </div>        
                 </div>
                 </div>
                  <span className="navbar-text float-start flex-grow-1">{useName} - {useRol}</span> 
