@@ -38,7 +38,7 @@ function Tutores() {
         }
     }, [usersStatus, dispatch])
 
-
+    console.log(users)
     const handleCloseFormUser = () => {
         setShowFormUser(false);
         setSelectedUser({});

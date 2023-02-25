@@ -13,8 +13,9 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { fetchPersons, getAllStudents, getAllTeachers, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
+import { fetchPersons, getAllStudents, getAllTeachers, getAllTutors, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
 import { Person } from '../models/Person';
+import { setRelation } from '../app/states/Relation';
 
 
 function Estudiantes() {
@@ -25,7 +26,7 @@ function Estudiantes() {
     const [relations, setRelations] = useState<Array<User>>([]);
     const [modalTitle, setModalTitle] = useState<string>('');
     const students = useAppSelector(getAllStudents)
-    const teachers = useAppSelector(getAllTeachers)
+    const tutors = useAppSelector(getAllTutors)
     const studentsStatus = useAppSelector(getPersonsStatus)
     const studentsError = useAppSelector(getPersonsError)
 
@@ -41,7 +42,6 @@ function Estudiantes() {
             effectRan.current = true
         }
     }, [studentsStatus, dispatch])
-
 
     const handleCloseFormUser = () => {
         setShowFormUser(false);
@@ -61,7 +61,7 @@ function Estudiantes() {
     const handleShowRelations = (user: any) => {
         setSelectedUser(user);
         setModalTitle('Asignar tutor al estudiante')
-        setUsersToReltions(teachers);
+        setUsersToReltions(tutors);
         setRelations([]);
         setShowRelations(true);
     }
@@ -71,8 +71,8 @@ function Estudiantes() {
         setSelectedUser({});
     }
 
-    const handleSaveRelations = (data: Array<User>) => {
-
+    const handleSaveRelations = (data: any) => {
+        dispatch(setRelation(data))
     }
 
     let content

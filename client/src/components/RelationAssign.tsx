@@ -22,10 +22,30 @@ export interface Props {
     handleClose: () => void,
     handleSave: (value: Array<User>) => void,
 }
+export const bonds = [
+    {id:1,name:'FATHER'},
+    {id:2,name:'MOTHER'},
+    {id:3,name:'BROTHER'},
+    {id:4,name:'SISTER'},
+    {id:5,name:'GRANDFATHER'},
+    {id:6,name:'GRANDMOTHER'},
+    {id:7,name:'AUNT'},
+    {id:8,name:'UNCLE'},
+    {id:9,name:'COUSIN'},
+    {id:10,name:'FRIEND'},
+    {id:11,name:'LEGAL_GUARDIAN'},
+    {id:12,name:'NEIGHBOR'}
+]
 
+export interface  bondProps{
+    
+        idStudent: string | number | undefined,
+        idTutor: string | number | undefined,
+        relation: string | undefined   
+}
 function RelationAssign({show, title, user, relations, users, handleClose, handleSave}: Props) {
- 
     const [newRelations, setNewRelations] = useState<Array<User>>([])
+    const [newBond, setBond] = useState<string | undefined>(undefined)
 
     useEffect(() => {
         setNewRelations(relations)
@@ -36,7 +56,17 @@ function RelationAssign({show, title, user, relations, users, handleClose, handl
         handleClose();
     }
     const handleSaveData = () => {
-        handleSave(newRelations);
+        if(newRelations.length !== 0 && newBond !== undefined ){
+
+            let relation:bondProps = {
+                idStudent: user.rol_id === 'student' ? newRelations[0].id : user.id,
+                idTutor: user.rol_id === 'student' ? user.id : newRelations[0].id,
+                relation: newBond   
+            }
+            handleSave(relation);
+
+        }
+
     }
 
     const handleChange = (e: { target: { value: string | undefined; }; }) => {
@@ -46,6 +76,15 @@ function RelationAssign({show, title, user, relations, users, handleClose, handl
                 setNewRelations([...newRelations, user]);
             }
         }
+       
+
+    };
+    const handleChangeRelation = (e: { target: { value: number; }; }) => {
+        if(e.target.value !== undefined){
+            setBond(bonds[e.target.value-1].name)
+        }
+            
+        
        
 
     };
@@ -75,9 +114,28 @@ function RelationAssign({show, title, user, relations, users, handleClose, handl
                 <Container>
                     <Form>
                         <Row>
+                                                        {/* ADDING BONDS */}
                             <Col xs={12} md={12}>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Asignar {user.rol_id ? user.rol_id === '2' ? 'estudiante' : 'tutor' : 'entidad'}</Form.Label>
+                                    <Form.Label>Asignar parentesco</Form.Label>
+                                    <Form.Select 
+                                        name="comision_id"
+                                        onChange={handleChangeRelation}
+                                        value={''}
+                                        /*  disabled={newBond.id ? false : false}  */
+                                    >
+                                        <option>{newBond ? newBond : '--Seleccione una opción -- '}</option>
+                                        {
+                                            bonds.map((elem)=> (
+                                                <option key={elem.id} value={elem.id}> {elem.name}</option>
+                                            ))
+                                        }
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                            <Col xs={12} md={12}>
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                    <Form.Label>Asignar  {user.rol_id ? user.rol_id === '2' ? 'estudiante' : 'tutor' : 'entidad'}</Form.Label>
                                     <Form.Select 
                                         name="comision_id"
                                         onChange={handleChange}
@@ -93,6 +151,7 @@ function RelationAssign({show, title, user, relations, users, handleClose, handl
                                     </Form.Select>
                                 </Form.Group>
                             </Col>
+
                         </Row>
                     </Form>
                     {
@@ -104,7 +163,7 @@ function RelationAssign({show, title, user, relations, users, handleClose, handl
                                 {
                                     newRelations.map((elem) => (
                                         <ListGroup.Item key={elem.id} className="d-flex justify-content-between align-items-center">
-                                            {elem.fullName} 
+                                            {elem.name} ({newBond})
                                             <Button
                                                 style={{height: 'fit-content'}}
                                                 variant="danger"

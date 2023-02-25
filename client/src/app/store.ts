@@ -4,6 +4,8 @@ import commissionsSlice from './states/Commissions';
 import reportSlice from './states/Report';
 import userSliceReducer from './states/user';
 import uiSliceReducer from './states/ui'
+import relationsSlice from './states/Relation'
+
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
@@ -29,6 +31,7 @@ const persistedReducer = persistCombineReducers(persistConfig, {
   persons: personsliceReducer,
   report: reportSlice,
   commissions: commissionsSlice,
+  relation: relationsSlice
 });
 
 export const store = configureStore({
