@@ -24,14 +24,17 @@ TOKEN: <token>
 ```json
 [
   {
+    "idRelation": 2,
+    "idStudent": 7,
     "fullNameStudent": "Juan Ramirez",
+    "idTutor": 5,
     "fullNameTutor": "Hugo Hugo",
     "relation": "NEIGHBOR"
   }
 ]
 ```
 
-#### GET http://localhost:8080/api/admin/relationship/tutor/7
+#### GET http://localhost:8080/api/admin/relationship/tutor/5
 * [Buscar una Relación]() Puede buscar las relaciones que tiene un tutor debera enviar en el Endpoint el ID del Tutor.
 * [Respuesta]() Lista de todas las relaciones que tiene el tutor.
 
@@ -39,12 +42,18 @@ TOKEN: <token>
 ```json
 [
   {
+    "idRelation": 2,
+    "idStudent": 7,
     "fullNameStudent": "Juan Ramirez",
+    "idTutor": 5,
     "fullNameTutor": "Hugo Hugo",
     "relation": "NEIGHBOR"
   },
   {
+    "idRelation": 12,
+    "idStudent": 8,
     "fullNameStudent": "Julio Gonzalez",
+    "idTutor": 5,
     "fullNameTutor": "Hugo Hugo",
     "relation": "FATHER"
   }
@@ -75,7 +84,7 @@ TOKEN: <token>
 ```
 
 #### PUT http://localhost:8080/api/admin/relationship
-* [Crear una Relación]() Puede actualizar una relación entre un estudiante y un profesor, debera enviar el ID del estudiante y tutor, además la relación que los vinculara. La relación deberá existir para poder ser actualizada.
+* [Actualizar una Relación]() Puede actualizar una relación entre un estudiante y un profesor, debera enviar el ID del estudiante y tutor, además la relación que los vinculara. La relación deberá existir para poder ser actualizada.
 * [Relaciones permitidas]() `FATHER, MOTHER, AUNT, UNCLE, COUSIN, GRANDFATHER, GRANDMOTHER, LEGAL_GUARDIAN, FRIEND, NEIGHBOR, BROTHER, SISTER`
 
 **JSON ENTRADA**
@@ -96,9 +105,14 @@ TOKEN: <token>
 }
 ```
 
+#### DELETE http://localhost:8080/api/admin/relationship/12
+* [Eliminar una Relación]() Puede eliminar una relación de base de datos. Solo deberá enviar el ID de la Relación en el Endpoint.
+
+* [Respuesta]() 204 No Content
+
 
 #### DELETE http://localhost:8080/api/admin/relationship
-* [Crear una Relación]() Puede eliminar una relación de base de datos. Solo deberá enviar el ID del estudiante y el ID del Tutor.87
+* [Eliminar una Relación]() Puede eliminar una relación de base de datos. Deberá enviar el ID del estudiante y el ID del Tutor en el Body.
 
 **JSON ENTRADA**
 ```json
