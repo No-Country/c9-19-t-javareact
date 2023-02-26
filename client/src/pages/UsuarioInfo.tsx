@@ -30,7 +30,10 @@ const UsuarioInfo = () => {
  
 
   return (
-    <Container className="d-flex justify-content-center gap-3 gap-sm-5 pt-5">
+    <Container className="d-flex flex-column flex-lg-row align-items-center justify-content-center gap-3 gap-sm-5">
+
+
+      
       <div style={{ alignSelf: "center" }}>
         <Image
           src={userData ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}

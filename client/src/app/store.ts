@@ -19,7 +19,7 @@ const persistConfig = {
   key:"root",
   version: 1,
   storage,
-  blacklist:[ 'persons', 'selectedPerson' ]
+  blacklist:[ 'persons', 'selectedPerson', 'ui' ]
 }
 
 const persistedReducer = persistCombineReducers(persistConfig, {
