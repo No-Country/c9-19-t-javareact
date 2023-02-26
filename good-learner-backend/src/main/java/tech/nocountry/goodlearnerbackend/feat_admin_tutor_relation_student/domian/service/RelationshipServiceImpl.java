@@ -35,6 +35,51 @@ public class RelationshipServiceImpl implements IRelationshipService{
     private BondRepository bondRepository;
 
     @Override
+    public ResponseEntity<?> findRelationByStudent(Long idStudent) {
+        Optional<Student> student = studentRepository.findById(idStudent);
+        if(student.isPresent()){
+            List<RelationTutorStudentResponse> relationsList = new ArrayList<>();
+
+            List<TutorStudent> tutorStudents = tutorStudentRepository.findRelationByStudent(student.get());
+
+            if(tutorStudents.size() == 0) {
+                return new ResponseEntity<>("El Estudiante no posee ninguna relación", HttpStatus.NO_CONTENT);
+            }
+            tutorStudents.forEach(tutorStudent -> {
+                relationsList.add(new RelationTutorStudentResponse(
+                        tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
+                        tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
+                        tutorStudent.getBond().getBondName()
+                ));
+            });
+            return ResponseEntity.ok(relationsList);
+        }
+        return new ResponseEntity<String>("No se encontró el Estudiante", HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public ResponseEntity<?> findRelationByTutor(Long idTutor) {
+        Optional<Tutor> tutor = tutorRepository.findById(idTutor);
+        if(tutor.isPresent()){
+            List<RelationTutorStudentResponse> relationsList = new ArrayList<>();
+
+            List<TutorStudent> tutorStudents = tutorStudentRepository.findRelationByTutor(tutor.get());
+            if(tutorStudents.size() == 0) {
+                return new ResponseEntity<>("El Tutor no posee ninguna relación", HttpStatus.NO_CONTENT);
+            }
+            tutorStudents.forEach(tutorStudent -> {
+                relationsList.add(new RelationTutorStudentResponse(
+                        tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
+                        tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
+                        tutorStudent.getBond().getBondName()
+                ));
+            });
+            return ResponseEntity.ok(relationsList);
+        }
+        return new ResponseEntity<String>("No se encontró el Tutor", HttpStatus.NOT_FOUND);
+    }
+
+    @Override
     public ResponseEntity<?> createdRelation(RelationStudentTutorRequest relationStudentTutorRequest) {
         RelationTutorStudentResponse relationStudentTutor = null;
 
@@ -59,26 +104,6 @@ public class RelationshipServiceImpl implements IRelationshipService{
             return ResponseEntity.ok(relationStudentTutor);
         }
         return new ResponseEntity<String>("No se ha encontrado al estudiante o tutor.", HttpStatus.NOT_FOUND);
-    }
-
-    @Override
-    public ResponseEntity<?> findRelationByStudentTutor(ReadRelationRequest relationRequest) {
-        Optional<Student> student = studentRepository.findById(relationRequest.getIdStudent());
-        Optional<Tutor> tutor = tutorRepository.findById(relationRequest.getIdTutor());
-        if(student.isPresent() && tutor.isPresent() ){
-            List<RelationTutorStudentResponse> relationsList = new ArrayList<>();
-
-            List<TutorStudent> tutorStudents = tutorStudentRepository.findRelationByTutorAndStudent(student.get(), tutor.get());
-            tutorStudents.forEach(tutorStudent -> {
-                relationsList.add(new RelationTutorStudentResponse(
-                        tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
-                        tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
-                        tutorStudent.getBond().getBondName()
-                ));
-            });
-            return ResponseEntity.ok(relationsList);
-        }
-        return new ResponseEntity<String>("No se encontró el Estudiante o el Tutor", HttpStatus.NOT_FOUND);
     }
 
     @Override
