@@ -3,6 +3,7 @@ import personsliceReducer from './states/Persons';
 import commissionsSlice from './states/Commissions';
 import reportSlice from './states/Report';
 import userSliceReducer from './states/user';
+import selectedPersonSliceReducer from './states/SelectedPerson';
 import uiSliceReducer from './states/ui'
 import storage from 'redux-persist/lib/storage';
 import {
@@ -20,7 +21,7 @@ const persistConfig = {
   key:"root",
   version: 1,
   storage,
-  blacklist:[ 'persons', 'commissions', 'report']
+  blacklist:[ 'persons', 'selectedPerson', 'ui', 'commissions', 'report']
 }
 
 const persistedReducer = persistCombineReducers(persistConfig, {
@@ -29,6 +30,7 @@ const persistedReducer = persistCombineReducers(persistConfig, {
   persons: personsliceReducer,
   report: reportSlice,
   commissions: commissionsSlice,
+  selectedPerson: selectedPersonSliceReducer
 });
 
 export const store = configureStore({

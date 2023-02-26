@@ -11,6 +11,7 @@ import tech.nocountry.goodlearnerbackend.feat_auth.data.model.Role;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.PersonRegisterDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserDTO;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.dto.UserLoginDTO;
+import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.mapper.UserMapper;
 import tech.nocountry.goodlearnerbackend.feat_auth.domian.servicios.mapper.UsuarioMapper;
 import tech.nocountry.goodlearnerbackend.feat_auth.jwt.JwtProvider;
 import tech.nocountry.goodlearnerbackend.feat_auth.data.model.User;
@@ -43,6 +44,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private PersonRepository personRepository;
+
+	@Autowired
+	private UserMapper userMapper;
 
 	public PersonRegisterDTO register(PersonRegisterDTO personRegisterDto) throws  Exception {
 		PersonRegisterDTO personRegister = personRegisterDto;
@@ -80,8 +84,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		User usuario = usuarioRepository.buscarPorNombreUsuario(usuarioLoginDTO.getNombreUsuario()).orElse(null);
 		
-		UserDTO usuarioDTO = usuarioMapper.toUsuarioDTO(usuario);
-
+		//UserDTO usuarioDTO = usuarioMapper.toUsuarioDTO(usuario);
+		UserDTO usuarioDTO = userMapper.userDTO(usuario);
 		usuarioDTO.setToken(token);
 		return usuarioDTO;
 	}	

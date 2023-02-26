@@ -1,9 +1,12 @@
 import { Card, Button, ButtonGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { User } from '../../models/User';
+import { useAppDispatch } from '../../app/hooks';
+import { setSelectedPerson } from '../../app/states/SelectedPerson';
+import { handleShowInfoModal } from '../../app/states/ui';
+import { User } from '../../models';
+import { Person } from '../../models/Person';
 
 interface Props {
-  user: User;
+  user: Person;
   handleUpdateUser: (elem: any) => void;
   handleShowRelations?: (user: User) => void;
 }
@@ -13,6 +16,9 @@ const CardPerson: React.FC<Props> = ({
   handleUpdateUser,
   handleShowRelations
 }) => {
+
+  const dispatch = useAppDispatch()
+
   return (
     <Card>
       <Card.Body className="text-center">
@@ -21,21 +27,20 @@ const CardPerson: React.FC<Props> = ({
         </Card.Title>
       </Card.Body>
       <Card.Footer>
-        <ButtonGroup className="w-100">          
-          <Button variant="primary" as={Link} to={`/usuario/${user.id}`} state={{ data: user }}>
+        <ButtonGroup className="w-100" onClick={() => dispatch(setSelectedPerson(user))}>          
+          <Button variant="primary" onClick={() => dispatch(handleShowInfoModal())}>
             <i className="fa fa-eye"/>
           </Button>
           <Button variant="warning" onClick={() => handleUpdateUser(user)}>
             <i className="fa fa-edit"></i>
           </Button>
           {
-           handleShowRelations
+          handleShowRelations
             &&
             <Button variant="info" onClick={() => handleShowRelations(user)}>
               <i className="fa fa-sitemap"></i>
             </Button>
           }
-
         </ButtonGroup>
       </Card.Footer>
     </Card>
