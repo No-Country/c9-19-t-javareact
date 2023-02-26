@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import personsliceReducer from './states/Persons';
 import userSliceReducer from './states/user';
+import selectedPersonSliceReducer from './states/SelectedPerson';
 import uiSliceReducer from './states/ui'
 import storage from 'redux-persist/lib/storage';
 import {
@@ -18,13 +19,14 @@ const persistConfig = {
   key:"root",
   version: 1,
   storage,
-  blacklist:[ 'persons' ]
+  blacklist:[ 'persons', 'selectedPerson', 'ui' ]
 }
 
 const persistedReducer = persistCombineReducers(persistConfig, {
   user:userSliceReducer,
   ui:uiSliceReducer,
-  persons: personsliceReducer
+  persons: personsliceReducer,
+  selectedPerson: selectedPersonSliceReducer
 });
 
 export const store = configureStore({
