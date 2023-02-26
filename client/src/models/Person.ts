@@ -1,4 +1,4 @@
-export class Person {
+export interface Person {
     id?:number;
     idPerson?: number;
     firstName?: string;
