@@ -1,9 +1,10 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // Models
 import { Commission } from '../models/Commission';
 import { User } from '../models/User';
 import { Subject } from '../models/Subject';
+import { CommissionSubject } from '../models/CommissionSubject';
 
 // Components
 import TableSubjects from './UI/TableSubjects';
@@ -19,6 +20,8 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { getAllTeachers, getAllStudents, fetchPersons, getPersonsStatus } from '../app/states/Persons'
 
 export interface Props {
     commission: Commission,
@@ -32,37 +35,36 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
     
     const [modalTitle, setModalTitle] = useState<string>('');
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [usersToAdd, setUsersToAdd] = useState<Array<User>>([]);
-    const [currentSubject, setCurrentSubject] = useState<Subject>(new Subject());
+    const [addTeacher, setAddTeacher] = useState<boolean>(false);
+    const [currentSubject, setCurrentSubject] = useState<CommissionSubject>(new CommissionSubject());
     const [subjectIndex, setSubjectIndex] = useState<number>(0);
+    const personsStatus = useAppSelector(getPersonsStatus)
+    const teachers = useAppSelector(getAllTeachers);
+    const students = useAppSelector(getAllStudents);
 
-    const [users, setUsers] = useState([
-        {id: 1, rol_id: '1', name: 'Juan', last_name: 'Guzmán', dni: 12341456},
-        {id: 2, rol_id: '1', name: 'Marcos', last_name: 'Díaz', dni: 12341456},
-        {id: 3, rol_id: '1', name: 'Luciana', last_name: 'Acosta', dni: 12341456},
-        {id: 4, rol_id: '1', name: 'Abigail', last_name: 'Ávila', dni: 12341456},
-        {id: 5, rol_id: '1', name: 'Romina', last_name: 'Pérez', dni: 12341456},
-        {id: 6, rol_id: '3', name: 'Esteban', last_name: 'Díaz', dni: 12341456},
-        {id: 7, rol_id: '3', name: 'Mariel', last_name: 'Caro', dni: 12341456},
-        {id: 8, rol_id: '3', name: 'Virginia', last_name: 'Sanchez', dni: 12341456},    
-    ]);
+    const dispatch = useAppDispatch()
 
-    const handleUpdateTeacher = (subject: Subject, index: number) => {
-        let usersFiltered = [];
+    const effectRan = useRef(false)
+
+    useEffect(() => {
+        if (effectRan.current === false) {
+            if (personsStatus === "idle")
+                dispatch(fetchPersons())
+            effectRan.current = true
+        }
+    }, [personsStatus, dispatch])
+
+    const handleUpdateTeacher = (subject: CommissionSubject, index: number) => {
         setCurrentSubject(subject);
         setSubjectIndex(index);
-        usersFiltered = users.filter( (d) => d.rol_id === '1' && d.id != subject.teacher_id)        
-        setUsersToAdd(User.parseArray(usersFiltered));
         setModalTitle('Seleccionar profesor');
         setShowModal(true);
     }
     
-    const handleAddTeacher = (subject: Subject, index: number) => {
-        let usersFiltered = [];
+    const handleAddTeacher = (subject: CommissionSubject, index: number) => {
         setCurrentSubject(subject);
         setSubjectIndex(index);
-        usersFiltered = users.filter( (d) => d.rol_id === '1')        
-        setUsersToAdd(User.parseArray(usersFiltered));
+        setAddTeacher(true);
         setModalTitle('Seleccionar profesor');
         setShowModal(true);
     }
@@ -72,9 +74,7 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
     }
     
     const handleClickAddStudent = () => {
-        let usersFiltered = []
-        usersFiltered = users.filter( (d) => d.rol_id === '3' && !commission.students?.find(elem => elem.id === d.id) )        
-        setUsersToAdd(User.parseArray(usersFiltered));
+        setAddTeacher(false);
         setModalTitle('Seleccionar estudiante');
         setShowModal(true);    
     }
@@ -85,7 +85,7 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
     }
 
     const handleSave = (data: Array<any>) => {
-        handleSaveNewData(data, currentSubject.id || 1, subjectIndex);
+        handleSaveNewData(data, currentSubject.idCommissionSubject || 1, subjectIndex);
         setModalTitle('');
         setShowModal(false);   
     }
@@ -105,7 +105,7 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
             <Tabs defaultActiveKey="1" justify className='tabs'>
                 <Tab title='Profesores' eventKey="1">
                     <TableSubjects
-                        subjects={commission.subjects!}
+                        subjects={commission.subjects}
                         handleUpdateTeacher={handleUpdateTeacher}
                         handleAddTeacher={handleAddTeacher}
                     />
@@ -118,10 +118,10 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
                         icon="fa fa-add"
                         onClick={() => handleClickAddStudent()}
                     />
-                    <TableStudents
+                    {/* <TableStudents
                         students={commission.students!}
                         handleDeleteStudent={handleClickDeleteStudent}
-                    />
+                    /> */}
                 </Tab>
             </Tabs>
             <RelationAssign 
@@ -130,7 +130,7 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
                 handleClose={handleCloseModal} 
                 handleSave={handleSave} 
                 user={new User()} 
-                users={usersToAdd} 
+                users={addTeacher ? students : teachers} 
                 relations={[]}
             />
         </Container>

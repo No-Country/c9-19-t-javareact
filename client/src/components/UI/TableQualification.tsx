@@ -26,8 +26,8 @@ import { useState } from 'react';
         let total = 0;
         let notas = 0;
         data.map((q) => {
-            if (q.numerical_qualification) {
-                total += q.numerical_qualification!
+            if (q.numberQualification) {
+                total += q.numberQualification!
                 notas += 1 
             }
             
@@ -70,7 +70,7 @@ import { useState } from 'react';
                                 <Form.Control
                                         type="text"
                                         onClick={() => handleOnChange(index, student, student.qualifications![0], 1)}
-                                        value={ student.qualifications![0] ? student.qualifications![0].numerical_qualification : '-'} 
+                                        value={ student.qualifications![0] ? student.qualifications![0].numberQualification : '-'} 
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
                                 </Form>    
@@ -81,7 +81,7 @@ import { useState } from 'react';
                                         type="text"
                                         disabled={student.qualifications![0] === undefined}
                                         onClick={() => handleOnChange(index, student, student.qualifications![1], 2)}
-                                        value={student.qualifications![1] ? student.qualifications![1].numerical_qualification : '-'}                           
+                                        value={student.qualifications![1] ? student.qualifications![1].numberQualification : '-'}                           
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
                                 </Form>    
@@ -92,7 +92,7 @@ import { useState } from 'react';
                                         type="text"
                                         disabled={student.qualifications![1] === undefined}
                                         onClick={() => handleOnChange(index, student, student.qualifications![2], 3)}
-                                        value={student.qualifications![2] ? student.qualifications![2].numerical_qualification : '-'}
+                                        value={student.qualifications![2] ? student.qualifications![2].numberQualification : '-'}
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
                                 </Form>    
