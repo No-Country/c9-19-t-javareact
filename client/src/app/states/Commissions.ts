@@ -30,9 +30,21 @@ import {
       method: 'get',
     };
     const response = await useApi(apiPropertyes);
-    console.log(response.data);
-    return response.data;
+    return Commission.parseArray(response.data);
   });
+
+  
+  export const updateTeacher: any = createAsyncThunk('commissions/teacher/update',
+    async (body) => {
+      const apiPropertyes: apiProps = {
+        path: `commissions/teacher/update`,
+        method: 'put',
+        body: body,
+      };
+      const response = await useApi(apiPropertyes);
+      return response.data;
+    }
+  );
   
   
   const commissionsSlice = createSlice({
@@ -52,6 +64,15 @@ import {
           state.status = 'failed';
           state.error = action.error.message;
         })
+        .addCase(updateTeacher.fulfilled, (state, action) => {
+          if (!action.payload) {
+            console.log(`Update could not complete`);
+            return;
+          }
+          // const {commissionId, firstName, lastName, roleName} = action.payload;
+          // const updatedCommission = {commissionId: commissionId, fullName: `${firstName} ${lastName}`, roleName: roleName}
+          // commissionsAdapter.upsertOne(state.entities, updatedPerson);
+        });
     },
   });
   
