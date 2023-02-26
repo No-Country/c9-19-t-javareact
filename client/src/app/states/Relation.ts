@@ -47,8 +47,8 @@ import {
     ;
     export const deleteRelation: any = createAsyncThunk('commissions', async (id) => {
         const apiPropertyes: apiProps = {
-          path: `commissions`,
-          method: `get/${id}`,
+          path: `person/relationship/${id}`,
+          method: `delete`,
            }
         const response = await useApi(apiPropertyes);
         console.log(response.data);
@@ -57,9 +57,10 @@ import {
 
 
         ;
-    export const fetchRelation: any = createAsyncThunk('commissions', async (id) => {
+    export const fetchRelation: any = createAsyncThunk('commissions', async ({id,path}:any) => {
+        console.log(id,path)
     const apiPropertyes: apiProps = {
-      path: `commissions/${id}`,
+      path: `admin/relationship/${path}/${id}`,
       method: 'get',
     };
     const response = await useApi(apiPropertyes);

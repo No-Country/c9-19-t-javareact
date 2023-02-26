@@ -21,6 +21,8 @@ export interface Props {
     users: Array<User>,
     handleClose: () => void,
     handleSave: (value: Array<User>) => void,
+    handleDel: (id:number) => void,
+    handleFetch: (id:number,path:string) => void,
 }
 export const bonds = [
     {id:1,name:'FATHER'},
@@ -43,10 +45,11 @@ export interface  bondProps{
         idTutor: string | number | undefined,
         relation: string | undefined   
 }
-function RelationAssign({show, title, user, relations, users, handleClose, handleSave}: Props) {
+function RelationAssign({show, title, user, relations, users, handleClose, handleSave,handleDel}: Props) {
     const [newRelations, setNewRelations] = useState<Array<User>>([])
     const [newBond, setBond] = useState<string | undefined>(undefined)
-
+    console.log(user,users)
+    
     useEffect(() => {
         setNewRelations(relations)
     }, [relations])
@@ -90,9 +93,10 @@ function RelationAssign({show, title, user, relations, users, handleClose, handl
     };
 
     const onClickDeleteRelation = (id: number) => {
+        handleDel(id)
         setNewRelations(newRelations.filter( (r) => r.id != id));
     }
-      
+        console.log(newRelations)
     return (
         <>
         <Modal 
@@ -161,19 +165,20 @@ function RelationAssign({show, title, user, relations, users, handleClose, handl
                         <h4> Relaciones </h4>
                             <ListGroup>
                                 {
-                                    newRelations.map((elem) => (
-                                        <ListGroup.Item key={elem.id} className="d-flex justify-content-between align-items-center">
-                                            {elem.name} ({newBond})
+                                    newRelations.map(({fullNameTutor,relation}:Any) => (
+                                         <ListGroup.Item key={1} className="d-flex justify-content-between align-items-center">
+                                            {fullNameTutor} ({relation})
                                             <Button
+                                                key={1}
                                                 style={{height: 'fit-content'}}
                                                 variant="danger"
                                                 size='sm' 
-                                                onClick={() => onClickDeleteRelation(elem.id)}
+                                                onClick={() => onClickDeleteRelation(1)}
                                             >
                                               <i className='fa fa-trash'></i>  
                                             </Button>    
                                         </ListGroup.Item>
-                                    ))
+                                    )) 
                                 }
                             </ListGroup>
                         </Container>

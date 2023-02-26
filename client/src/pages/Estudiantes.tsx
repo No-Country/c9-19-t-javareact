@@ -15,7 +15,7 @@ import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchPersons, getAllStudents, getAllTeachers, getAllTutors, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
 import { Person } from '../models/Person';
-import { setRelation } from '../app/states/Relation';
+import { deleteRelation, fetchRelation, setRelation } from '../app/states/Relation';
 
 
 function Estudiantes() {
@@ -39,6 +39,7 @@ function Estudiantes() {
         if (effectRan.current === false) {
             if (studentsStatus === "idle")
                 dispatch(fetchPersons())
+                
             effectRan.current = true
         }
     }, [studentsStatus, dispatch])
@@ -58,13 +59,18 @@ function Estudiantes() {
         handleCloseFormUser();
     };
 
-    const handleShowRelations = (user: any) => {
+    const handleShowRelations = async(user: any) => {
+
+        let {payload} = await dispatch(fetchRelation({id:user.id,path:'student'}))
+        console.log(payload)
         setSelectedUser(user);
         setModalTitle('Asignar tutor al estudiante')
         setUsersToReltions(tutors);
-        setRelations([]);
+        setRelations(payload);
         setShowRelations(true);
+
     }
+   
 
     const handleCloseRelations = () => {
         setShowRelations(false);
@@ -74,7 +80,9 @@ function Estudiantes() {
     const handleSaveRelations = (data: any) => {
         dispatch(setRelation(data))
     }
-
+    const handleDelRelations = (id: number) => {
+        dispatch(deleteRelation(id))
+    }
     let content
     if (studentsStatus === 'loading') {
         content = <p>"Loading...</p>
@@ -119,6 +127,7 @@ function Estudiantes() {
                 <RelationAssign
                     show={showRelations}
                     title={modalTitle} 
+                    handleDel={handleDelRelations}
                     handleClose={handleCloseRelations} 
                     handleSave={handleSaveRelations} 
                     user={selectedUser} 
