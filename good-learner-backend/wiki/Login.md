@@ -27,7 +27,8 @@
   "id": 1,
   "nombreUsuario": "0000",
   "rol": "ADMINISTRATOR",
-  "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIwMDAwIiwiZXhwIjoxNjc2NjU4OTIwfQ.ThSdwAcRseifgFyJbaOWVKOgoxJhZJt5cCvPfqb46IZnnmfPSPJHvzjpSRbz_1I4"
+  "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIwMDAwIiwiZXhwIjoxNjc3NDQwOTAwfQ.IKLrYFerTnYl041YJefhCt5DJWDLoBWTz4veDscPVyw4Hzuf3_vak-1KZ9gCxGXi",
+  "idPerson": 1
 }
 ```
 
