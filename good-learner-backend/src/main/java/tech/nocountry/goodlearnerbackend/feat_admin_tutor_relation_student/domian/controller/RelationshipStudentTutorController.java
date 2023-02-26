@@ -16,7 +16,7 @@ import tech.nocountry.goodlearnerbackend.repository.TutorStudentRepository;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("api/person")
+@RequestMapping("api/admin")
 public class RelationshipStudentTutorController {
 
     @Autowired
@@ -28,6 +28,27 @@ public class RelationshipStudentTutorController {
     @Autowired
     private TutorRepository tutorRepository;
 
+    @GetMapping("/relationship/student/{idStudent}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    public ResponseEntity<?> selectRelationshipByIdStudent(@PathVariable Long idStudent){
+        try {
+
+            return iRelationshipService.findRelationByStudent(idStudent);
+        } catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/relationship/tutor/{idTutor}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    public ResponseEntity<?> selectRelationshipByIdTutor(@PathVariable Long idTutor){
+        try {
+
+            return iRelationshipService.findRelationByTutor(idTutor);
+        } catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @PostMapping("/relationship")
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<?> createdRelation(@Validated @RequestBody RelationStudentTutorRequest relationStudentTutorRequest, BindingResult validations){
@@ -42,18 +63,6 @@ public class RelationshipStudentTutorController {
         }
     }
 
-    @GetMapping("/relationship")
-    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
-    public ResponseEntity<?> selectRelationship(@Validated @RequestBody ReadRelationRequest relationRequest, BindingResult validations){
-       try{
-           if(validations.hasErrors()) {
-               return new ResponseEntity<>("Los campos ID del Tutor y Estudiante son Obligatorios", HttpStatus.BAD_REQUEST);
-           }
-           return iRelationshipService.findRelationByStudentTutor(relationRequest);
-       } catch (Exception e){
-           return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-       }
-    }
     @PutMapping("/relationship")
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<?> updateRelation(@Validated @RequestBody RelationStudentTutorRequest relationStudentTutorRequest, BindingResult validations){
