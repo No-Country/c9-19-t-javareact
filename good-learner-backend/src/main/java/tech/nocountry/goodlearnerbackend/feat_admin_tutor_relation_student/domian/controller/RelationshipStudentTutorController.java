@@ -77,6 +77,19 @@ public class RelationshipStudentTutorController {
         }
     }
 
+    @DeleteMapping("/relationship/{idRelation}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    public ResponseEntity<?> deleteRelationById(@PathVariable Long idRelation){
+        try {
+            if(iRelationshipService.deleteRelationById(idRelation)){
+                return ResponseEntity.noContent().build();
+            }
+            return new ResponseEntity<>("No se encontró la relación a pretende eliminar.", HttpStatus.NO_CONTENT);
+        }
+        catch ( Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @DeleteMapping("/relationship")
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<?> deleteRelation(@Validated @RequestBody ReadRelationRequest relationRequest, BindingResult validations){

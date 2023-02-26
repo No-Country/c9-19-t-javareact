@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import tech.nocountry.goodlearnerbackend.feat_admin_tutor_relation_student.domian.model.request.ReadRelationRequest;
 import tech.nocountry.goodlearnerbackend.feat_admin_tutor_relation_student.domian.model.request.RelationStudentTutorRequest;
+import tech.nocountry.goodlearnerbackend.feat_admin_tutor_relation_student.domian.model.response.DetailRelationTutorResponse;
 import tech.nocountry.goodlearnerbackend.feat_admin_tutor_relation_student.domian.model.response.RelationTutorStudentResponse;
 import tech.nocountry.goodlearnerbackend.model.*;
 import tech.nocountry.goodlearnerbackend.repository.BondRepository;
@@ -38,7 +39,7 @@ public class RelationshipServiceImpl implements IRelationshipService{
     public ResponseEntity<?> findRelationByStudent(Long idStudent) {
         Optional<Student> student = studentRepository.findById(idStudent);
         if(student.isPresent()){
-            List<RelationTutorStudentResponse> relationsList = new ArrayList<>();
+            List<DetailRelationTutorResponse> relationsList = new ArrayList<>();
 
             List<TutorStudent> tutorStudents = tutorStudentRepository.findRelationByStudent(student.get());
 
@@ -46,8 +47,11 @@ public class RelationshipServiceImpl implements IRelationshipService{
                 return new ResponseEntity<>("El Estudiante no posee ninguna relación", HttpStatus.NO_CONTENT);
             }
             tutorStudents.forEach(tutorStudent -> {
-                relationsList.add(new RelationTutorStudentResponse(
+                relationsList.add(new DetailRelationTutorResponse(
+                        tutorStudent.getIdTutorStudent(),
+                        tutorStudent.getStudent().getIdPerson(),
                         tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
+                        tutorStudent.getTutor().getIdPerson(),
                         tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
                         tutorStudent.getBond().getBondName()
                 ));
@@ -61,15 +65,18 @@ public class RelationshipServiceImpl implements IRelationshipService{
     public ResponseEntity<?> findRelationByTutor(Long idTutor) {
         Optional<Tutor> tutor = tutorRepository.findById(idTutor);
         if(tutor.isPresent()){
-            List<RelationTutorStudentResponse> relationsList = new ArrayList<>();
+            List<DetailRelationTutorResponse> relationsList = new ArrayList<>();
 
             List<TutorStudent> tutorStudents = tutorStudentRepository.findRelationByTutor(tutor.get());
             if(tutorStudents.size() == 0) {
                 return new ResponseEntity<>("El Tutor no posee ninguna relación", HttpStatus.NO_CONTENT);
             }
             tutorStudents.forEach(tutorStudent -> {
-                relationsList.add(new RelationTutorStudentResponse(
+                relationsList.add(new DetailRelationTutorResponse(
+                        tutorStudent.getIdTutorStudent(),
+                        tutorStudent.getStudent().getIdPerson(),
                         tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
+                        tutorStudent.getTutor().getIdPerson(),
                         tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
                         tutorStudent.getBond().getBondName()
                 ));
@@ -134,6 +141,17 @@ public class RelationshipServiceImpl implements IRelationshipService{
             return new ResponseEntity<String>("El Estudiante y Tutor no posee Relación que pueda ser actualizada.", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<String>("No se ha encontrado al estudiante o tutor.", HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public boolean deleteRelationById(Long idRelation) {
+        Optional<TutorStudent> tutorStudent = tutorStudentRepository.findById(idRelation);
+        if(tutorStudent.isPresent()){
+            tutorStudentRepository.delete(tutorStudent.get());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
