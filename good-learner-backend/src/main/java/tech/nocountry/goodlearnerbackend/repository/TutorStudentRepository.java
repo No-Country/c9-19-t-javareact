@@ -14,4 +14,10 @@ public interface TutorStudentRepository extends JpaRepository<TutorStudent, Long
 
     @Query(value = "SELECT ts FROM TutorStudent ts WHERE ts.student = :student and ts.tutor = :tutor")
     public List<TutorStudent> findRelationByTutorAndStudent(Student student, Tutor tutor);
+
+    @Query(value = "SELECT ts FROM TutorStudent ts WHERE ts.student = :student")
+    public List<TutorStudent> findRelationByStudent(Student student);
+
+    @Query(value = "SELECT ts FROM TutorStudent ts WHERE ts.tutor = :tutor")
+    public List<TutorStudent> findRelationByTutor(Tutor tutor);
 }
