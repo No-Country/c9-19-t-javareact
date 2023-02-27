@@ -62,7 +62,6 @@ function Estudiantes() {
     const handleShowRelations = async(user: any) => {
 
         let {payload} = await dispatch(fetchRelation({id:user.id,path:'student'}))
-        console.log(payload)
         setSelectedUser(user);
         setModalTitle('Asignar tutor al estudiante')
         setUsersToReltions(tutors);
