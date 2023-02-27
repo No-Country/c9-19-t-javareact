@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tech.nocountry.goodlearnerbackend.feat_admin_inscription.domain.model.request.InscriptionRequest;
+import tech.nocountry.goodlearnerbackend.feat_admin_inscription.domain.model.request.InscriptionUpdateRequest;
 import tech.nocountry.goodlearnerbackend.feat_admin_inscription.domain.model.response.InscriptionResponse;
 import tech.nocountry.goodlearnerbackend.model.Commission;
 import tech.nocountry.goodlearnerbackend.model.Inscription;
@@ -78,7 +79,7 @@ public class InscriptionServiceImpl implements IInscriptionService{
     }
 
     @Override
-    public ResponseEntity<?> updateInscriptionById() {
+    public ResponseEntity<?> updateInscriptionById(InscriptionUpdateRequest inscriptionRequest) {
         return null;
     }
 }
