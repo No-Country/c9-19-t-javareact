@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,8 @@ public class InscriptionController {
     @Autowired
     private IInscriptionService iInscriptionService;
 
-    @PostMapping("inscription")
+    @PostMapping("/inscription")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<?> createdInscription(@Validated @RequestBody InscriptionRequest inscriptionRequest, BindingResult validations){
         if(validations.hasErrors()){
             return new ResponseEntity<>(
@@ -27,6 +29,26 @@ public class InscriptionController {
         }
         try{
             return iInscriptionService.createdInscriptionFromStudent(inscriptionRequest);
+        } catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/inscription/{idInscription}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    public ResponseEntity<?> findInscription(@PathVariable Long idInscription){
+        try{
+            return iInscriptionService.findInscriptionById(idInscription);
+        } catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/inscription/{idInscription}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    public ResponseEntity<?> deleteInscription(@PathVariable Long idInscription){
+        try{
+            return iInscriptionService.deleteInscriptionById(idInscription);
         } catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -52,4 +52,33 @@ public class InscriptionServiceImpl implements IInscriptionService{
         }
         return new ResponseEntity<>("No se ha encontrado al Estudiante o Comisión", HttpStatus.NOT_FOUND);
     }
+
+    @Override
+    public ResponseEntity<?> findInscriptionById(Long idInscription) {
+        Optional<Inscription> inscription = inscriptionRepository.findById(idInscription);
+        if(inscription.isPresent()){
+            return ResponseEntity.ok(new InscriptionResponse(
+                    inscription.get().getIdInscription(),
+                    inscription.get().getInscriptionDate(),
+                    inscription.get().getCommission().getCommissionId(),
+                    inscription.get().getStudent().getIdPerson()
+            ));
+        }
+        return new ResponseEntity<>("No se ha encontrado inscripción", HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public ResponseEntity<?> deleteInscriptionById(Long idInscription) {
+        Optional<Inscription> inscription = inscriptionRepository.findById(idInscription);
+        if(inscription.isPresent()){
+            inscriptionRepository.delete(inscription.get());
+            return ResponseEntity.noContent().build();
+        }
+        return new ResponseEntity<>("No se ha encontrado inscripción", HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public ResponseEntity<?> updateInscriptionById() {
+        return null;
+    }
 }
