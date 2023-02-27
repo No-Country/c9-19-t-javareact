@@ -13,6 +13,8 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchPersons, getAllStudents, getAllTutors, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
 import { Person } from '../models/Person';
 import { User } from '../models';
+import UserInfo from '../components/UI/UserInfo';
+import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
 
 
 function Tutores() {
@@ -27,6 +29,7 @@ function Tutores() {
     const usersStatus = useAppSelector(getPersonsStatus)
     const usersError = useAppSelector(getPersonsError)
     const dispatch = useAppDispatch()
+    const InfoModalState = useAppSelector(getUserInfoModalState)
 
     const effectRan = useRef(false)
 
@@ -68,7 +71,6 @@ function Tutores() {
     }
 
     const handleSaveRelations = (data: Array<User>) => {
-
     }
 
     let content;
@@ -120,6 +122,7 @@ function Tutores() {
                     user={selectedUser} 
                     users={usersToReltions} 
                     relations={relations}/>
+                <UserInfo show={InfoModalState} onHide={() => dispatch(handleShowInfoModal())}/>
             </Container>
         </>
     );

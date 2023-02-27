@@ -3,22 +3,31 @@ package tech.nocountry.goodlearnerbackend.feat_show_commission.domain.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.nocountry.goodlearnerbackend.feat_show_commission.domain.dto.CommissionDTO;
+import tech.nocountry.goodlearnerbackend.feat_show_commission.domain.dto.CommissionSubjectDTO;
 import tech.nocountry.goodlearnerbackend.feat_show_commission.domain.mapper.CommissionMapper;
+import tech.nocountry.goodlearnerbackend.feat_show_commission.domain.mapper.CommissionSubjectMapper;
 import tech.nocountry.goodlearnerbackend.model.Commission;
+import tech.nocountry.goodlearnerbackend.model.CommissionSubject;
 import tech.nocountry.goodlearnerbackend.repository.CommissionRepository;
+import tech.nocountry.goodlearnerbackend.repository.CommissionSubjectRepository;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class CommissionServiceImpl implements ICommissionService{
+public class ShowShowCommissionServiceImpl implements IShowCommissionService {
 
     @Autowired
     private CommissionRepository commissionRepository;
 
     @Autowired
+    private CommissionSubjectRepository CommissionSubjectRepository;
+
+    @Autowired
     private CommissionMapper commissionMapper;
+
+    @Autowired
+    private CommissionSubjectMapper commissionSubjectMapper;
 
     @Override
     public List<CommissionDTO> getAllCommissions() {
@@ -35,6 +44,12 @@ public class CommissionServiceImpl implements ICommissionService{
         } else {
             throw new RuntimeException("Commission not found for id :: " + id);
         }
+    }
+
+    @Override
+    public List<CommissionSubjectDTO> getCommissionSubjectsById(Commission commission) {
+        List<CommissionSubject> optionalCommissionSubject = CommissionSubjectRepository.findByCommissionId(commission);
+        return optionalCommissionSubject.stream().map(commissionSubjectMapper::commissionSubjectToCommissionSubjectDTO).collect(Collectors.toList());
     }
 
     @Override

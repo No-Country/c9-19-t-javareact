@@ -11,7 +11,7 @@ import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchReport, getReport, getReportError, getReportStatus } from '../app/states/Report';
 
-import { selectId } from '../app/states/user'
+import { selectIdPerson } from '../app/states/user'
 
 function MyQualification() {
    
@@ -19,47 +19,8 @@ function MyQualification() {
     const qualificationsStatus = useAppSelector(getReportStatus);
     const qualificationsError = useAppSelector(getReportError);
     const currentYear = 2023;
-    const id = useAppSelector(selectId)
+    const id = useAppSelector(selectIdPerson);
     const [loading, setLoading] = useState(false);
-    // const [subjects, setSubjects] = useState([
-    //     {   id: 1, 
-    //         teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'},
-    //         subject_name: 'Lengua',
-    //         qualifications: [
-    //             {id: 1, numberQualification: 10, period_id: 1}, 
-    //             {id: 2, numberQualification: 10, period_id: 2}, 
-    //             {id: 3, numberQualification: 10, period_id: 3}
-    //         ]
-    //     },    
-    //     {   id: 2, 
-    //         teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'},
-    //         subject_name: 'Matermática',
-    //         qualifications: [
-    //             {id: 3, numberQualification: 10, period_id: 1}, 
-    //             {id: 4, numberQualification: 10, period_id: 2}, 
-    //             {id: 5, numberQualification: 10, period_id: 3}
-    //         ]
-    //     },    
-    //     {   id: 3, 
-    //         teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'},
-    //         subject_name: 'Inglés',
-    //         qualifications: [
-    //             {id: 6, numberQualification: 10, period_id: 1}, 
-    //             {id: 7, numberQualification: 10, period_id: 2}, 
-    //             {id: 8, numberQualification: 10, period_id: 3}
-    //         ]
-    //     },    
-    //     {   id: 4, 
-    //         teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'},
-    //         subject_name: 'Ciencias Natuales',
-    //         qualifications: [
-    //             {id: 9, numberQualification: 10, period_id: 1}, 
-    //             {id: 10, numberQualification: 10, period_id: 2}, 
-    //             {id: 11, numberQualification: 10, period_id: 3}
-    //         ]
-    //     },   
-    // ]);
-
     const dispatch = useAppDispatch();
     const effectRan = useRef(false);
 

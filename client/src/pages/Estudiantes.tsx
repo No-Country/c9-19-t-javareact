@@ -16,6 +16,8 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchPersons, getAllStudents, getAllTeachers, getAllTutors, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
 import { Person } from '../models/Person';
 import { deleteRelation, fetchRelation, setRelation } from '../app/states/Relation';
+import UserInfo from '../components/UI/UserInfo';
+import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
 
 
 function Estudiantes() {
@@ -29,6 +31,7 @@ function Estudiantes() {
     const tutors = useAppSelector(getAllTutors)
     const studentsStatus = useAppSelector(getPersonsStatus)
     const studentsError = useAppSelector(getPersonsError)
+    const InfoModalState = useAppSelector(getUserInfoModalState)
 
     const dispatch = useAppDispatch()
 
@@ -132,6 +135,7 @@ function Estudiantes() {
                     user={selectedUser} 
                     users={usersToReltions} 
                     relations={relations}/>
+                <UserInfo show={InfoModalState} onHide={() => dispatch(handleShowInfoModal())}/>
             </Container>
         </>
     );

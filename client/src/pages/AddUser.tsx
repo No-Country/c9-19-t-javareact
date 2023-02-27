@@ -23,8 +23,9 @@ const AddUser = () => {
   });
   const page = user === "profesor" ? "profesores" : user === "tutor" ? "tutores" : "estudiantes"
 
-  const handleSaveData = async () => {
-    dispatch(createPerson(formData))
+  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    await dispatch(createPerson(formData))
     handleReset()
     navigate(`/${page}`)
   }
@@ -49,7 +50,7 @@ const AddUser = () => {
             <div className="header-line"></div>
           </Col>
         </Row>
-        <Form className="px-5">
+        <Form className="px-5" onSubmit={handleSubmit}>
           <Row>
             <Col xs={12} md={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -73,6 +74,7 @@ const AddUser = () => {
                   name="lastName"
                   value={formData.lastName || ''}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -82,11 +84,12 @@ const AddUser = () => {
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>DNI</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="Ingrese el DNI"
                   name="document"
                   value={formData.document || ''}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -95,10 +98,10 @@ const AddUser = () => {
                 <Form.Label>Ingrese fecha de nacimiento</Form.Label>
                 <Form.Control
                   type="date"
-                  placeholder="1980-07-25"
                   name="birthDate"
-                  value={formData.birthDate || ''}
+                  value={formData.birthDate || ""}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -106,11 +109,12 @@ const AddUser = () => {
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Celular</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="Ingrese el telefono"
                   name="phone"
                   value={formData.phone || ''}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -123,6 +127,7 @@ const AddUser = () => {
                   name="email"
                   value={formData.email || ''}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -137,35 +142,14 @@ const AddUser = () => {
                   onChange={handleChange}
                 >
                   <option>--Seleccione un rol del usuario--</option>
-                  <option value="1"> Profesor </option>
-                  <option value="2"> Tutor </option>
-                  <option value="3"> Estudiante </option>
+                  <option value="TEACHER"> Profesor </option>
+                  <option value="TUTOR"> Tutor </option>
+                  <option value="STUDENT"> Estudiante </option>
                 </Form.Select>
               </Form.Group>
             </Col>}
           </Row>
-          {/* <Row>
-                            <Col xs={6} md={6}>
-                                {
-                                    formData.rol_id === '3' 
-                                    &&
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Comision</Form.Label>
-                                        <Form.Select 
-                                            name="comision_id"
-                                            value={formData.comision_id}
-                                            onChange={handleChange}
-                                        >
-                                            <option>--Seleccione una comisión del alumno--</option>
-                                            <option value="1"> Comisión 1 </option>
-                                            <option value="2"> Comisión 2 </option>
-                                        </Form.Select>
-                                    </Form.Group>
-                                }
-                            </Col>
-                        </Row> */}
-        </Form>
-        <Row xs={4} className="justify-content-center mt-5 gap-5"> <ButtonSecondary
+          <Row xs={4} className="justify-content-center mt-5 gap-5"> <ButtonSecondary
           text={'Reset'}
           size="md"
           icon='fa fa-times'
@@ -174,10 +158,11 @@ const AddUser = () => {
           <ButtonMain
             text={'Guardar'}
             size="md"
+            type='submit'
             icon='fa fa-save'
-            onClick={handleSaveData}
-          /></Row>
-
+          />
+        </Row>
+        </Form>
       </Container>
     </>
   )

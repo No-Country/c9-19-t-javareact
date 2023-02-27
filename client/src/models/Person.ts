@@ -1,8 +1,9 @@
-export class Person {
+export interface Person {
     id?:number;
     idPerson?: number;
     firstName?: string;
     lastName?: string;
+    fullName?:string;
     document?: string;
     birthDate?: Date;
     email?: string;

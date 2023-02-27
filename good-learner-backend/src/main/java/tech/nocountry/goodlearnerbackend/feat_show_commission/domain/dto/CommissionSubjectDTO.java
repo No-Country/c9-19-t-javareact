@@ -4,8 +4,10 @@ import lombok.*;
 import tech.nocountry.goodlearnerbackend.model.Day;
 import tech.nocountry.goodlearnerbackend.model.Subject;
 import tech.nocountry.goodlearnerbackend.model.Teacher;
+import tech.nocountry.goodlearnerbackend.model.Commission;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,29 +16,11 @@ public class CommissionSubjectDTO {
     private Long idCommissionSubject;
     private Subject subject;
     private Teacher teacher;
-    private Day day;
-    private CommissionDTO commission;
-    private LocalTime startTime;
-    private LocalTime endTime;
-
     public CommissionSubjectDTO() {}
 
-    public CommissionSubjectDTO(Long idCommissionSubject, Subject subject, Teacher teacher, Day day, CommissionDTO commission, LocalTime startTime, LocalTime endTime) {
+    public CommissionSubjectDTO(Long idCommissionSubject, Subject subject, Teacher teacher) {
         this.idCommissionSubject = idCommissionSubject;
-        this.subject = subject;
         this.teacher = teacher;
-        this.day = day;
-        this.commission = commission;
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
-
-    public CommissionSubjectDTO(Subject subject, Teacher teacher, Day day, CommissionDTO commission, LocalTime startTime, LocalTime endTime) {
         this.subject = subject;
-        this.teacher = teacher;
-        this.day = day;
-        this.commission = commission;
-        this.startTime = startTime;
-        this.endTime = endTime;
     }
 }

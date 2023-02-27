@@ -34,7 +34,7 @@ function App() {
               <Route path={PrivateRoutes.STUDENTS} element={<Estudiantes />} />
               <Route path={PrivateRoutes.TEACHER} element={<Profesores />} />
               <Route path={PrivateRoutes.TUTOR} element={<Tutores />} />
-              <Route path={`${PrivateRoutes.SINGLEUSERINFO}/:id`} element={<UsuarioInfo />} />
+              <Route path={`${PrivateRoutes.SINGLEUSERINFO}`} element={<UsuarioInfo />} />
             <Route element={<RoleGuard rol={Roles.TEACHER} />}>
               <Route path={PrivateRoutes.MY_COMMISSIONS} element={<MyCommissions />} />
             </Route>

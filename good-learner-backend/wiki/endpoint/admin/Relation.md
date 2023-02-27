@@ -77,7 +77,10 @@ TOKEN: <token>
 **JSON SALIDA**
 ```json
 {
+  "idRelation": 14,
+  "idStudent": 7,
   "fullNameStudent": "Juan Ramirez",
+  "idTutor": 4,
   "fullNameTutor": "David David",
   "relation": "FATHER"
 }
