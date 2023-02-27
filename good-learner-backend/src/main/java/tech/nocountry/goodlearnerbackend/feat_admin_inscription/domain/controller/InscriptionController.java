@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.nocountry.goodlearnerbackend.feat_admin_inscription.domain.model.request.InscriptionRequest;
+import tech.nocountry.goodlearnerbackend.feat_admin_inscription.domain.model.request.InscriptionUpdateRequest;
 import tech.nocountry.goodlearnerbackend.feat_admin_inscription.domain.service.IInscriptionService;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -24,11 +25,26 @@ public class InscriptionController {
     public ResponseEntity<?> createdInscription(@Validated @RequestBody InscriptionRequest inscriptionRequest, BindingResult validations){
         if(validations.hasErrors()){
             return new ResponseEntity<>(
-                    "Lo datos fecha de inscripción, ID de la comisión y ID del estudiante son Obligatorios.",
+                    "Los datos fecha de inscripción, ID de la comisión y ID del estudiante son Obligatorios.",
                     HttpStatus.BAD_REQUEST);
         }
         try{
             return iInscriptionService.createdInscriptionFromStudent(inscriptionRequest);
+        } catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/inscription")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    public ResponseEntity<?> updateInscription(@Validated @RequestBody InscriptionUpdateRequest inscriptionRequest, BindingResult validations){
+        if(validations.hasErrors()){
+            return new ResponseEntity<>(
+                    "Los datos fecha de inscripción, ID de la comisión y ID del estudiante son Obligatorios.",
+                    HttpStatus.BAD_REQUEST);
+        }
+        try{
+            return iInscriptionService.updateInscriptionById(inscriptionRequest);
         } catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

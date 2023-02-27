@@ -19,6 +19,8 @@
 
 ---
 
+---
+
 #### POST http://localhost:8080/api/admin/inscription
 * [Crear una Inscripción]() Puede crear una inscripción pasando en el body.
 
@@ -43,6 +45,39 @@
 }
 ```
 * [409 Conflict]() El estudiante ya posee inscripción en la comisión
+
+----
+
+----
+
+#### PUT http://localhost:8080/api/admin/inscription
+* [Actualizar una Inscripción]() Puede actualizar una inscripción pasando en el body.
+
+**JSON ENTRADA**
+```json
+{
+  "idInscription": 11,
+  "inscriptionDate": "2023-02-25",
+  "idCommission": 1,
+  "idStudent": 6
+}
+```
+##### Respuestas posibles:
+
+* [200 OK]() Inscription creada con éxito.
+
+**JSON SALIDA**
+```json
+{
+  "idInscription": 11,
+  "inscriptionDate": "2023-02-25",
+  "idCommission": 1,
+  "idStudent": 6
+}
+```
+* [400 Bad Request]() Los datos fecha de inscripción, ID de la comisión y ID del estudiante son Obligatorios.
+
+---
 
 ---
 
