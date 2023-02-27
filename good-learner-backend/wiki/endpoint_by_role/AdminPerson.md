@@ -48,6 +48,8 @@ TOKEN: <token>
 }
 ```
 
+---
+
 #### GET http://127.0.0.1:8080/api/admin/person/{1}
 * [Seleccionar una Persona](). Puede buscar una persona pasando su ID en el EndPoint.
 
@@ -66,6 +68,7 @@ TOKEN: <token>
   "roleName": "ADMINISTRATOR"
 }
 ```
+---
 
 #### PUT http://127.0.0.1:8080/api/admin/person
 * [Actualizar una Persona](). Para actualizar una Persona en body, debera cargar la nueva información, tenga en cuenta que existe datos sensibles que no pueden ser cambiados, tales como el DNI y USUARIO.
@@ -97,6 +100,8 @@ TOKEN: <token>
 }
 ```
 
+---
+
 #### PUT http://127.0.0.1:8080/api/admin/student/state
 * [Switch State Estudiante](). Puede cambiar el estado de un estudiante.
 * Estado false: Estudiante no se encuentra con inscripción del presente año, se cambió de o terminó la escuela.
@@ -118,6 +123,7 @@ TOKEN: <token>
   "isRegular": false
 }
 ```
+---
 
 #### GET http://localhost:8080/api/admin/person
 * [Todas las Personas](). Recuperar TODAS personas con su Rol.
@@ -162,6 +168,8 @@ TOKEN: <token>
   }
 ]
 ```
+
+---
 
 #### GET http://localhost:8080/api/admin/person?page={1}&size={2}
 * [Todas las Personas](). Recuperar personas por paginación.
@@ -231,6 +239,7 @@ TOKEN: <token>
   }
 ]
 ```
+---
 
 #### GET http://localhost:8080/api/admin/person/count
 * [Cantidad por Rol](). Obtener las cantidades de personas por cada Rol (Estudiante, Profesor y Tutor).

@@ -80,6 +80,34 @@ public class InscriptionServiceImpl implements IInscriptionService{
 
     @Override
     public ResponseEntity<?> updateInscriptionById(InscriptionUpdateRequest inscriptionRequest) {
-        return null;
+        Optional<Inscription> inscriptionOptional = inscriptionRepository.findById(inscriptionRequest.getIdInscription());
+
+        if(inscriptionOptional.isEmpty()){
+            return new ResponseEntity<>("No se ha encontrado Inscripción para poder actualizar", HttpStatus.NOT_FOUND);
+        }
+
+        Optional<Student> studentOptional = studentRepository.findById(inscriptionRequest.getIdStudent());
+        Optional<Commission> commissionOptional = commissionRepository.findById(inscriptionRequest.getIdCommission());
+
+        if(studentOptional.isPresent() && commissionOptional.isPresent()){
+
+            Inscription inscription = inscriptionOptional.get();
+
+            inscription.setInscriptionDate(inscriptionRequest.getInscriptionDate());
+            inscription.setCommission(commissionOptional.get());
+            inscription.setStudent(studentOptional.get());
+
+            inscriptionRepository.save(inscription);
+
+            return ResponseEntity.ok(
+                    new InscriptionResponse(
+                            inscription.getIdInscription(),
+                            inscription.getInscriptionDate(),
+                            inscription.getCommission().getCommissionId(),
+                            inscription.getStudent().getIdPerson()
+                    )
+            );
+        }
+        return new ResponseEntity<>("No se ha encontrado al Estudiante o Comisión", HttpStatus.NOT_FOUND);
     }
 }
