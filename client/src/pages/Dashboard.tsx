@@ -14,15 +14,15 @@ function Dashboard () {
     return (
         <Container>
             <Row className='header'>
-                <Col xs={12}>
+                <Col>
                     <h3 className='header-title'>Administrador</h3>
                     <div className='header-line'></div>
                 </Col>
             </Row>
-            <Row>
+            <Row className="gap-4 gap-lg-0">
                 {
                     data.map( (user: any) => (
-                        <Col xs={12} md={4} className='d-flex justify-content-center' key={user.id}>
+                        <Col xs={12} lg={4} className='d-flex justify-content-center' key={user.id}>
                             <Card className='card-dash' >
                                 <Card.Body>
                                     <Row>
