@@ -85,8 +85,8 @@
 <details>
   <summary>Fotos</summary>
   <ol>
-    <li><img src="" /></li>
-    <li><img src=""/></li>
+    <li><img src="https://i.postimg.cc/QtsQQzSG/preview.jpg" /></li>
+    <li><img src="https://i.postimg.cc/RhYJDp10/preview2.jpg"/></li>
   </ol>
 </details>
 <details>
