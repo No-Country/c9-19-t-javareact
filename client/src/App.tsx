@@ -27,15 +27,21 @@ function App() {
     <BrowserRouter>
       <RoutesWithNotFound>
         <Route path={`/${PublicRoutes.LOGIN}`} element={<Login />} />
+        {/* Rutas Privadas */}
         <Route element={<AuthGuard privateValidation={true} />}>
           <Route path={`/`} element={<Layout />}>
-            <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
               <Route path={PrivateRoutes.COMMISSION} element={<Commissions />} />
               <Route path={PrivateRoutes.ADDUSER} element={<AddUser />} />
               <Route path={PrivateRoutes.STUDENTS} element={<Estudiantes />} />
               <Route path={PrivateRoutes.TEACHER} element={<Profesores />} />
               <Route path={PrivateRoutes.TUTOR} element={<Tutores />} />
               <Route path={`${PrivateRoutes.SINGLEUSERINFO}/:id`} element={<UsuarioInfo />} />
+              <Route path={PrivateRoutes.DASHBOARD_STUDENT_TUTOR} element={<h1>Dashboard Student | tutor</h1>} />
+
+              {/* Rutas Especificas */}
+              <Route element={<RoleGuard rol={Roles.ADMIN} />}>
+                <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
+              </Route>
             <Route element={<RoleGuard rol={Roles.TEACHER} />}>
               <Route path={PrivateRoutes.MY_COMMISSIONS} element={<MyCommissions />} />
             </Route>

@@ -31,7 +31,10 @@ const LoginForm = () => {
 
      if(loginValidation(formData.email,formData.password)){ 
       const res = await dispatch(loginService(formData.email,formData.password))
-       res ? (navigate('/dashboard')) : '' 
+
+      if(res.rol === 'ADMINISTRATOR'){navigate('/dashboard')}
+      if(res.rol === 'TEACHER'){navigate('/dashboard-teacher')}
+      if((res.rol === 'STUDENT') || (res.rol === 'TUTOR')){navigate('/dashboard-student')}
      }else{
       setMessage('Error, por favor, rellena los campos')
     }

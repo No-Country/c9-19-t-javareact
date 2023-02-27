@@ -68,13 +68,13 @@ export const SideNav = () => {
        ) : 
        useRol ==='STUDENT' ? 
        ( <div className="list-group list-group-flush bg-blue" >
-          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
+          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard-student'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
           <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/my-qualifications'}><i className="fa-solid fa-th-list me-3"></i>Mis Calificaciones</NavLink>
         </div>
        )
        :  useRol ==='TUTOR' ? 
        ( <div className="list-group list-group-flush bg-blue" >
-          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
+          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard-student'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
           <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/my-students'}><i className="fa-solid fa-graduation-cap me-3"></i>Mis Estudiantes</NavLink>
         </div>
        )

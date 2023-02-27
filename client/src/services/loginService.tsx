@@ -23,7 +23,7 @@ export const loginService = (user:string,password:string) => {
     res.status !==200 ? 
       Swal.fire('Error','Usuario Incorrecto','error') : 
       dispatch(createUser(res.data))
-    return 'error no manejado'
+    return res.data
       
   }
 }

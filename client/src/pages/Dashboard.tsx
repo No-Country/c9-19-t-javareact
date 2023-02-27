@@ -30,7 +30,7 @@ export const dataChart = {
     },
     {
       label: 'No regulares',
-      data: labels.map(() => faker.datatype.number({ min: 1, max: 10 })),
+      data: labels.map(() => faker.datatype.number({ min: 1, max: 4 })),
       backgroundColor: 'rgba(174,174,174,0.8)',
     },
   ],
