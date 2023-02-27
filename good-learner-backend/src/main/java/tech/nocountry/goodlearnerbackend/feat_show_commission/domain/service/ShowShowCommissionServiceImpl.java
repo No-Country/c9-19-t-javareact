@@ -14,10 +14,8 @@ import tech.nocountry.goodlearnerbackend.repository.CommissionSubjectRepository;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
-
 @Service
-public class CommissionServiceImpl implements ICommissionService{
+public class ShowShowCommissionServiceImpl implements IShowCommissionService {
 
     @Autowired
     private CommissionRepository commissionRepository;

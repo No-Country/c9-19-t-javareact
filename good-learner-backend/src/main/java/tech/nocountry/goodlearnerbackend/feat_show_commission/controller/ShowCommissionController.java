@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tech.nocountry.goodlearnerbackend.feat_show_commission.domain.dto.CommissionSubjectDTO;
 import tech.nocountry.goodlearnerbackend.feat_show_commission.domain.dto.CommissionDTO;
-import tech.nocountry.goodlearnerbackend.feat_show_commission.domain.service.ICommissionService;
+import tech.nocountry.goodlearnerbackend.feat_show_commission.domain.service.IShowCommissionService;
 import tech.nocountry.goodlearnerbackend.feat_show_commission.domain.mapper.CommissionMapper;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("api")
 public class ShowCommissionController {
     @Autowired
-    private ICommissionService commissionService;
+    private IShowCommissionService commissionService;
 
     @Autowired
     private CommissionMapper commissionMapper;

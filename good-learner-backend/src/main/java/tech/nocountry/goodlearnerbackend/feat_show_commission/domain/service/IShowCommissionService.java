@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public interface ICommissionService {
+public interface IShowCommissionService {
     List<CommissionDTO> getAllCommissions();
 
     List<CommissionSubjectDTO> getCommissionSubjectsById(Commission commission);
