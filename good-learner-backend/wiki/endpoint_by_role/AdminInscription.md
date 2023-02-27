@@ -64,7 +64,7 @@
 ```
 ##### Respuestas posibles:
 
-* [200 OK]() Inscription creada con éxito.
+* [200 OK]() Inscripción actualizada con éxito.
 
 **JSON SALIDA**
 ```json
