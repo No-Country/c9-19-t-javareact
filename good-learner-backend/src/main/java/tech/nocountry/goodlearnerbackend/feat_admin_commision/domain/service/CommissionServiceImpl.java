@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tech.nocountry.goodlearnerbackend.feat_admin_commision.domain.model.request.CommissionRequest;
+import tech.nocountry.goodlearnerbackend.feat_admin_commision.domain.model.request.CommissionUpdateRequest;
 import tech.nocountry.goodlearnerbackend.feat_admin_commision.domain.model.response.CommissionCreatedResponse;
 import tech.nocountry.goodlearnerbackend.feat_admin_commision.domain.model.response.CommissionWithStudentResponse;
 import tech.nocountry.goodlearnerbackend.feat_admin_commision.domain.model.response.StudentResponse;
@@ -82,14 +83,29 @@ public class CommissionServiceImpl implements ICommissionService {
     }
 
     @Override
-    public ResponseEntity<?> updateCommission(CommissionRequest commissionRequest) {
-        return null;
+    public ResponseEntity<?> updateCommission(CommissionUpdateRequest commissionRequest) {
+        Optional<Commission> commissionOptional = commissionRepository.findById(commissionRequest.getIdCommission());
+        if(commissionOptional.isPresent()){
+            Commission commission = commissionOptional.get();
+            commission.setCourse(commissionRequest.getCourse());
+            commission.setDivision(commissionRequest.getDivision());
+            commission.setShift(commissionOptional.get().getShift());
+            commission.setSchoolYear(commissionRequest.getYear());
+
+            commissionRepository.save(commission);
+            return ResponseEntity.ok(commissionRequest);
+        }
+        return new ResponseEntity<>("No se ha encontrado comisión para actualizar", HttpStatus.NOT_FOUND);
     }
 
-    @Override
-    public boolean deleteCommission(Long idCommission) {
-        return false;
-    }
+    /*@Override
+    public ResponseEntity<?> deleteCommission(Long idCommission) {
+        Optional<Commission> commissionOptional = commissionRepository.findById(idCommission);
+        if(commissionOptional.isPresent()){
+            return new ResponseEntity<>("Comisión eliminada con éxito", HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>("No se ha encontrado Comisión con el ID ingresado", HttpStatus.NOT_FOUND);
+    }*/
 
 
 }

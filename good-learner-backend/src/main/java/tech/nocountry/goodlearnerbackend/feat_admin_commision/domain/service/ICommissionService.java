@@ -2,6 +2,7 @@ package tech.nocountry.goodlearnerbackend.feat_admin_commision.domain.service;
 
 import org.springframework.http.ResponseEntity;
 import tech.nocountry.goodlearnerbackend.feat_admin_commision.domain.model.request.CommissionRequest;
+import tech.nocountry.goodlearnerbackend.feat_admin_commision.domain.model.request.CommissionUpdateRequest;
 
 public interface ICommissionService {
 
@@ -9,7 +10,7 @@ public interface ICommissionService {
 
     public ResponseEntity<?> createCommission(CommissionRequest commissionRequest);
 
-    public ResponseEntity<?> updateCommission(CommissionRequest commissionRequest);
+    public ResponseEntity<?> updateCommission(CommissionUpdateRequest commissionRequest);
 
-    public boolean deleteCommission(Long idCommission);
+    //public ResponseEntity<?> deleteCommission(Long idCommission);
 }
