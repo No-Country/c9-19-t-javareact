@@ -45,7 +45,12 @@ public class CommissionServiceImpl implements ICommissionService {
 
             inscriptions.forEach(inscription -> {
                 students.add(new StudentResponse(
-                        inscription.getStudent().getFirstName() + " " + inscription.getStudent().getLastName()
+                        inscription.getIdInscription(),
+                        inscription.getStudent().getIdPerson(),
+                        inscription.getStudent().getFirstName(),
+                        inscription.getStudent().getLastName(),
+                        inscription.getStudent().getDocument(),
+                        inscription.getStudent().getIsRegular()
                 ));
             });
 

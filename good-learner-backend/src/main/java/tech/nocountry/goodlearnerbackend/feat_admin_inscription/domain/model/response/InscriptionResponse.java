@@ -19,4 +19,6 @@ public class InscriptionResponse {
     private Long idCommission;
     @NotNull
     private Long idStudent;
+
+    private String document;
 }
