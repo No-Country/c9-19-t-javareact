@@ -1,50 +1,63 @@
-import React from 'react'
+import { Container, Navbar, Nav as Topnav, NavDropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
-import {  selectNavState, sidebarStatus } from '../app/states/ui';
-import { resetUser, selectId, selectName, selectRol } from '../app/states/user';
+import { resetUser, selectName, selectRol } from '../app/states/user';
 import { PrivateRoutes, PublicRoutes } from '../routes';
-
-
+import { SideNav } from './SideNav';
 
 export const Nav = () => {
     const dispatch = useDispatch();
-    const useUI = useAppSelector(selectNavState)
     const useName = useAppSelector(selectName)
     const useRol = useAppSelector(selectRol)
-    const sidebarToggle = () =>{
-        dispatch(sidebarStatus())
-    }
-    const logout = () =>{
+
+    const logout = () => {
         dispatch(resetUser())
     }
-  return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm p-2 mb-4 bg-white rounded animate__animated animate__slideInDown animate__delay-0.5s">
-            <div className="container-fluid">
-                <div className="d-flex justify-content-start">
-                <button className="btn bg-white me-4" id="sidebarToggle" onClick={sidebarToggle}><i className="fa-solid fa-bars fa-2xl"></i></button>
-                <div className="input-group input-group-md">
-                    <div className="input-group-prepend p-2">
-                    {/* <i className="fa-solid fa-magnifying-glass fa-xl bg-grey"></i> */}
 
-                        {/*  <span className="input-group-text" id="inputGroup-sizing-lg">🔎</span> */}
-                    </div>
-                    {/* <input type="text" className="form-control form-control-nav" placeholder="Busqueda" aria-label="Large" aria-describedby="inputGroup-sizing-sm"/> */}
-                </div>
-                </div>
-                 <span className="navbar-text float-start flex-grow-1">{useName} - {useRol}</span> 
-                <div className="flex-shrink-0 dropdown">
-                <a href="#" className="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="mdo" width="32" height="32" className="rounded-circle"/>
-                </a>
-                <ul className='dropdown-menu text-small shadow profiledropdown'>
-                    <li><NavLink className="dropdown-item" to={`${PrivateRoutes.SINGLEUSERINFO}`}>Opciones</NavLink></li>
-                    <li><hr className="dropdown-divider"/></li>
-                    <li><NavLink className="dropdown-item"onClick={logout} to={PublicRoutes.LOGIN}>Salir</NavLink></li>
-                </ul>
-                </div>
-            </div>
-        </nav>
-  )
+    return (
+        <Navbar expand={'sm'} collapseOnSelect className="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm mb-4 bg-white rounded animate__animated animate__slideInDown animate__delay-0.5s p-0">
+            <Container fluid>
+                <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${'sm'}`} />
+                <Navbar.Offcanvas className={"position-absolute"}
+                    id={`offcanvasNavbar-expand-${'sm'}`}
+                    aria-labelledby={`offcanvasNavbarLabel-expand-${'sm'}`}
+                    placement="start"
+                    style={{ width: 'fit-content', border: 'none', background: "transparent" }}
+                >
+                    <SideNav />
+                </Navbar.Offcanvas>
+                <Topnav className="flex-shrink-0 dropdown" style={{ marginLeft: "auto" }}>
+                    <NavDropdown
+                        title={
+                            <img
+                                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width="32" height="32"
+                                className="rounded-circle"
+                                alt="Current user"
+                            />
+                        }
+                        id={`offcanvasNavbarDropdown-expand-${'sm'}`}
+                    >
+                        <NavDropdown.Item as={Link} to={"#"} disabled>
+                        {`${useName} ${useRol}`}
+                        </NavDropdown.Item>
+                        <NavDropdown.Item
+                            as={Link}
+                            to={`${PrivateRoutes.SINGLEUSERINFO}`}
+                        >
+                            Ajustes
+                        </NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item
+                            as={Link}
+                            to={PublicRoutes.LOGIN}
+                            onClick={logout}
+                        >
+                            Cerrar sesión
+                        </NavDropdown.Item>
+                    </NavDropdown>
+                </Topnav>
+            </Container>
+        </Navbar>
+    )
 }
