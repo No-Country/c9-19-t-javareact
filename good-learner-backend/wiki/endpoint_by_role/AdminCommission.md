@@ -37,7 +37,7 @@
 ##### Respuestas posibles
 * [200 OK]() Comisión Creada con éxito
 
-  **JSON ENTRADA**
+**JSON ENTRADA**
 ```json
 {
   "course": "5°",
@@ -75,6 +75,7 @@
 ```
 ##### Respuestas posibles
 * [200 OK]() Actualizada con éxito 
+
 **JSON REPUESTA**
 ```json
 {
