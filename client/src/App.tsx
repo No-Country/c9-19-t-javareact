@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import DashboardTeacher from "./pages/DashboardTeacher";
 import Commissions from './pages/Commissions';
 import MyCommissions from './pages/MyCommissions';
 import MyQualification from './pages/MyQualification';
@@ -37,6 +38,9 @@ function App() {
               <Route path={`${PrivateRoutes.SINGLEUSERINFO}/:id`} element={<UsuarioInfo />} />
             <Route element={<RoleGuard rol={Roles.TEACHER} />}>
               <Route path={PrivateRoutes.MY_COMMISSIONS} element={<MyCommissions />} />
+            </Route>
+            <Route element={<RoleGuard rol={Roles.TEACHER} />}>
+              <Route path={PrivateRoutes.DASHBOARD_TEACHER} element={<DashboardTeacher />} />
             </Route>
             <Route element={<RoleGuard rol={Roles.STUDENT} />}>
               <Route path={PrivateRoutes.MY_QUALIFICATIONS} element={<MyQualification />} />

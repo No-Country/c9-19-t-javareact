@@ -14,5 +14,6 @@ export const PrivateRoutes = {
   ADDUSER: 'agregar-usuario',
   MY_QUALIFICATIONS: 'my-qualifications',
   MY_STUDENTS: 'my-students',
+  DASHBOARD_TEACHER: 'dashboard-teacher',
   
 };

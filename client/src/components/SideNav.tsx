@@ -53,7 +53,7 @@ export const SideNav = () => {
       ) : (
         useRol ==='TEACHER' ? 
        ( <div className="list-group list-group-flush bg-blue" >
-          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
+          <NavLink className="list-group-item list-group-item-action list-group-item  p-3" to={'/dashboard-teacher'}><i className="fa-solid fa-dashboard me-3"></i>Dashboard</NavLink>
           <Accordion flush style={{ color: "white", background: "inherit" }}>
             <Accordion.Item eventKey="0">
               <Accordion.Header><i className="fa-solid fa-user-graduate me-3"></i>Estudiantes</Accordion.Header>
