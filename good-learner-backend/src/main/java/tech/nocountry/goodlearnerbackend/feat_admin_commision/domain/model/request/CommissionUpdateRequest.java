@@ -9,7 +9,9 @@ import tech.nocountry.goodlearnerbackend.model.ShiftName;
 @Getter
 @Setter
 @ToString
-public class CommissionRequest {
+public class CommissionUpdateRequest {
+    @NotNull
+    private Long idCommission;
     @NotNull
     private String course;
     @NotNull
