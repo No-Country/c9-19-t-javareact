@@ -6,4 +6,8 @@ import tech.nocountry.goodlearnerbackend.feat_admin_inscription.domain.model.req
 public interface IInscriptionService {
 
     public ResponseEntity<?> createdInscriptionFromStudent(InscriptionRequest inscriptionRequest);
+    public ResponseEntity<?> deleteInscriptionById(Long idInscription);
+    public ResponseEntity<?> findInscriptionById(Long idInscription);
+
+    public ResponseEntity<?> updateInscriptionById();
 }
