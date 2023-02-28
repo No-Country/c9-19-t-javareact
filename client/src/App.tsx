@@ -50,11 +50,11 @@ function App() {
             </Route> */}
             <Route element={<RoleGuard rol={Roles.STUDENT} />}>
               <Route path={PrivateRoutes.MY_QUALIFICATIONS} element={<MyQualification />} />
-              <Route path={PrivateRoutes.DASHBOARD_STUDENT_TUTOR} element={<DashboardStudent />} />
+              <Route path={PrivateRoutes.DASHBOARD_STUDENT} element={<DashboardStudent />} />
             </Route>
             <Route element={<RoleGuard rol={Roles.TUTOR} />}>
               <Route path={PrivateRoutes.MY_STUDENTS} element={<MyStudents />} />
-              <Route path={PrivateRoutes.DASHBOARD_STUDENT_TUTOR} element={<DashboardTutor />} />
+              <Route path={PrivateRoutes.DASHBOARD_TUTOR} element={<DashboardTutor />} />
             </Route>
           </Route>
         </Route>
