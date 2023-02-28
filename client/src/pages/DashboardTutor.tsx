@@ -41,7 +41,7 @@ function DashboardTeacher () {
             <Row className='header'>
 
                 <Col xs={12}>
-                    <h3 className='header-title'>Teacher</h3>
+                    <h3 className='header-title'>Tutor</h3>
                     <div className='header-line'></div>
                 </Col>
             </Row>

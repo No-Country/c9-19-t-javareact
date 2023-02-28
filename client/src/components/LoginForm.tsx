@@ -24,7 +24,7 @@ const LoginForm = () => {
   };
 
   const loginValidation = (username:string,password:string) =>{
-    if((username.length > 5) && (password.length > 5)) return true
+    if((username.length > 3) && (password.length > 3)) return true
   }
 
   const handleSubmit = async() => {
@@ -34,7 +34,8 @@ const LoginForm = () => {
 
       if(res.rol === 'ADMINISTRATOR'){navigate('/dashboard')}
       if(res.rol === 'TEACHER'){navigate('/dashboard-teacher')}
-      if((res.rol === 'STUDENT') || (res.rol === 'TUTOR')){navigate('/dashboard-student')}
+      if(res.rol === 'STUDENT'){navigate('/dashboard-student')}
+      if(res.rol === 'TUTOR'){navigate('/dashboard-tutor')}
      }else{
       setMessage('Error, por favor, rellena los campos')
     }

@@ -25,23 +25,18 @@ export const dataChart = {
       label: 'Desaprobados',
       data: labels.map(() => faker.datatype.number({ min: 1, max: 10 })),
       backgroundColor: 'rgba(156, 37, 77, 0.8)',
-    },
-    {
-      label: 'No regulares',
-      data: labels.map(() => faker.datatype.number({ min: 1, max: 4})),
-      backgroundColor: 'rgba(156, 37, 77, 0.8)',
     }
   ],
 };
 
 /*  */
-function DashboardTeacher () {
+function DashboardStudent () {
     return (
         <Container>
             <Row className='header'>
 
                 <Col xs={12}>
-                    <h3 className='header-title'>Teacher</h3>
+                    <h3 className='header-title'>Student</h3>
                     <div className='header-line'></div>
                 </Col>
             </Row>
@@ -84,4 +79,4 @@ function DashboardTeacher () {
     )
 }
 
-export default DashboardTeacher;
+export default DashboardStudent;
