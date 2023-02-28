@@ -13,8 +13,6 @@ import tech.nocountry.goodlearnerbackend.feat_admin_user_card.domain.model.Switc
 import tech.nocountry.goodlearnerbackend.feat_admin_user_card.domain.services.PersonCardService;
 
 
-
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/admin")
 public class UserCardController {

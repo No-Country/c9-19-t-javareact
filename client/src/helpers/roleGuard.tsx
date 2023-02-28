@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 import { Roles } from '../models';
-import { GoodLearner } from '../app/store';
+import { RootState } from '../app/store';
 import { PrivateRoutes } from '../routes';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 function RoleGuard({ rol }: Props) {
-  const userState = useSelector((store: GoodLearner) => store.user);
+  const userState = useSelector((store: RootState) => store.user);
   console.log(userState.rol)
   return userState.rol === rol ? <Outlet /> :  <Navigate replace to={PrivateRoutes.DASHBOARD} /> ;
 }

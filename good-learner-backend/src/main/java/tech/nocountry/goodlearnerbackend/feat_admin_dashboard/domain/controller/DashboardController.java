@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.nocountry.goodlearnerbackend.feat_admin_dashboard.domain.service.DashBoarService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/admin")
 public class DashboardController {

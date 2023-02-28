@@ -1,4 +1,4 @@
-# Good Learner c9-19-t-javareact
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -78,18 +78,19 @@
     <li><a href="https://www.linkedin.com/in/cristiangomezdev/">Cristian Gomez - Frontend</a></li>
     <li><a href="https://www.linkedin.com/in/fernandobouchet/">Fernando Bouchet - Frontend</a></li>
     <li><a href="https://www.linkedin.com/in/david-ayala-developer/">David Ayala - Backend</a></li>
+    <li><a href="https://www.linkedin.com/in/chris-herrera-dev/">Chris Herrera - Backend</a></li>
   </div>
 </details>
 
 <details>
   <summary>Fotos</summary>
   <ol>
-    <li><img src="" /></li>
-    <li><img src=""/></li>
+    <li><img src="https://i.postimg.cc/QtsQQzSG/preview.jpg" /></li>
+    <li><img src="https://i.postimg.cc/RhYJDp10/preview2.jpg"/></li>
   </ol>
 </details>
 <details>
   <summary>About</summary>
-<p>Good Learner es una aplicación de gestión de notas desarrollada por un equipo de profesionales altamente capacitados en la industria de la tecnología educativa. Nuestro equipo trabajó arduamente para crear una plataforma escalable que pueda adaptarse a las necesidades cambiantes del entorno escolar</p>
+<p>Good Learner es una aplicación de gestión de notas desarrollada por un equipo de profesionales altamente capacitados en la industria de la desarrollo. Nuestro equipo trabajó arduamente para crear una plataforma escalable que pueda adaptarse a las necesidades cambiantes del entorno escolar</p>
 </details>
 </div>

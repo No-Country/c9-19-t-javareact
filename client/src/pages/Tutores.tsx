@@ -1,7 +1,4 @@
-import { useState } from 'react';
-
-// Models
-import { User } from '../models/User';
+import { useEffect, useRef, useState } from 'react';
 
 // compoents
 import FormUsuario from '../components/formUsuario';
@@ -12,35 +9,52 @@ import CardPerson from '../components/UI/CardPerson';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-
-import { selectStudents, selectTutors, updateUser } from '../app/states/users';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { fetchPersons, getAllStudents, getAllTutors, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
+import { Person } from '../models/Person';
+import { User } from '../models';
+import UserInfo from '../components/UI/UserInfo';
+import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
+import Loader from '../components/UI/Loader';
 
 
 function Tutores() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
-    const [selectedUser, setSelectedUser] = useState<User>(new User());
+    const [selectedUser, setSelectedUser] = useState<Person>({});
     const [showRelations, setShowRelations] = useState<boolean>(false);
     const [usersToReltions, setUsersToReltions] = useState<Array<User>>([]);
     const [relations, setRelations] = useState<Array<User>>([]);
     const [modalTitle, setModalTitle] = useState<string>('');
-    const users = useAppSelector(selectTutors)
-    const students = useAppSelector(selectStudents)
+    const users = useAppSelector(getAllTutors)
+    const students = useAppSelector(getAllStudents)
+    const usersStatus = useAppSelector(getPersonsStatus)
+    const usersError = useAppSelector(getPersonsError)
     const dispatch = useAppDispatch()
+    const InfoModalState = useAppSelector(getUserInfoModalState)
+
+    const effectRan = useRef(false)
+
+    useEffect(() => {
+        if (effectRan.current === false) {
+            if (usersStatus === "idle")
+                dispatch(fetchPersons())
+            effectRan.current = true
+        }
+    }, [usersStatus, dispatch])
 
 
     const handleCloseFormUser = () => {
         setShowFormUser(false);
-        setSelectedUser(new User());
+        setSelectedUser({});
     };
 
-    const handleUpdateUser = (user: User) => {
+    const handleUpdateUser = (user: Person) => {
         setSelectedUser(user);
         setShowFormUser(true);
     }
 
-    const handleSaveFormUser = (user: any) => {
-        dispatch(updateUser(user))
+    const handleSaveFormUser = (user: Person) => {
+        dispatch(updatePerson(user))
         handleCloseFormUser();
     };
 
@@ -54,11 +68,35 @@ function Tutores() {
 
     const handleCloseRelations = () => {
         setShowRelations(false);
-        setSelectedUser(new User());
+        setSelectedUser({});
     }
 
     const handleSaveRelations = (data: Array<User>) => {
+    }
 
+    let content;
+
+    if (usersStatus === 'loading') {
+        content = <Loader show={true} />
+    } else if (usersStatus === "succeeded") {
+        content = 
+            <Row>
+        <Container>
+        <Row xs={1} md={2} lg={3} xl={4} className="g-2">
+        {users.map((user) => (
+        <Col key={user.id}>
+            <CardPerson
+                user={user}
+                handleUpdateUser={handleUpdateUser}
+                handleShowRelations={handleShowRelations}
+            />
+        </Col>
+    ))}
+        </Row>
+    </Container>
+</Row>
+    } else if (usersStatus === 'failed') {
+        content = <p>{usersError}</p>;
     }
 
     return (
@@ -70,21 +108,7 @@ function Tutores() {
                         <div className="header-line"></div>
                     </Col>
                 </Row>
-                <Row>
-                    <Container>
-                        <Row xs={1} md={2} lg={3} xl={4} className="g-2">
-                            {users.map((user: any) => (
-                                <Col key={user.id}>
-                                    <CardPerson
-                                        user={user}
-                                        handleUpdateUser={handleUpdateUser}
-                                        handleShowRelations={handleShowRelations}
-                                    />
-                                </Col>
-                            ))}
-                        </Row>
-                    </Container>
-                </Row>
+                {content}
                 <FormUsuario
                     show={showFormUser}
                     handleClose={handleCloseFormUser}
@@ -100,6 +124,7 @@ function Tutores() {
                     user={selectedUser} 
                     users={usersToReltions} 
                     relations={relations}/>
+                <UserInfo show={InfoModalState} onHide={() => dispatch(handleShowInfoModal())}/>
             </Container>
         </>
     );

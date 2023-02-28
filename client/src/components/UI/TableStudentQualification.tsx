@@ -11,16 +11,21 @@ import { Qualification } from '../../models/Qualification';
 
     
 
-    const getPromedio = (data: Array<Qualification>): string => {
+    const getPromedio = (data: any): string => {
         let total = 0;
         let notas = 0;
-        data.map((q) => {
-            if (q.numerical_qualification) {
-                total += q.numerical_qualification!
-                notas += 1 
-            }
-            
-        });
+        if (data.FIRST_TRIMESTER) {
+            total += data.FIRST_TRIMESTER;
+            notas += 1 
+        }
+        if (data.SECOND_TRIMESTER) {
+            total += data.SECOND_TRIMESTER;
+            notas += 1 
+        }
+        if (data.THIRD_TRIMESTER) {
+            total += data.THIRD_TRIMESTER;
+            notas += 1 
+        }
         return notas > 0 ? (total / notas).toFixed(2) : '-';
     }
 
@@ -41,20 +46,20 @@ import { Qualification } from '../../models/Qualification';
                     subjects.map( (subject, index) => (
                         <tr key={index} className={(Number(getPromedio(subject.qualifications!)) > 0 && Number(getPromedio(subject.qualifications!))< 6) ? 'row-disaprove' : 'row-aprove'}>
                             <td>{index + 1}</td>
-                            <td>{subject.subject_name }</td>
+                            <td>{subject.subjectName }</td>
                             <td style={{textAlign: '-webkit-center'}}>
                                 {
-                                    subject.qualifications![0] ? subject.qualifications![0].numerical_qualification : '-'
+                                    subject.qualifications.FIRST_TRIMESTER ? subject.qualifications.FIRST_TRIMESTER : '-'
                                 }
                             </td>
                             <td style={{textAlign: '-webkit-center'}}>
                             {
-                                    subject.qualifications![1] ? subject.qualifications![0].numerical_qualification : '-'
+                                    subject.qualifications.SECOND_TRIMESTER ? subject.qualifications.SECOND_TRIMESTER : '-'
                                 }
                             </td>
                             <td style={{textAlign: '-webkit-center'}}>
                             {
-                                    subject.qualifications![2] ? subject.qualifications![0].numerical_qualification : '-'
+                                    subject.qualifications.THIRD_TRIMESTER ? subject.qualifications.THIRD_TRIMESTER : '-'
                                 }
                             </td>
                             <td> <strong> {getPromedio(subject.qualifications!)}</strong> </td>

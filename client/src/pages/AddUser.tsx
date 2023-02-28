@@ -1,7 +1,5 @@
 
 import { useState } from 'react';
-// Models
-import { User } from '../models/User';
 // UI
 import ButtonMain from '../components/UI/ButtonMain';
 import ButtonSecondary from '../components/UI/ButtonSecondary';
@@ -10,8 +8,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import { useAppDispatch } from '../app/hooks';
-import { updateUser } from '../app/states/users';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { createPerson } from '../app/states/Persons';
+import { Person } from '../models/Person';
 
 
 const AddUser = () => {
@@ -19,13 +18,14 @@ const AddUser = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const user = data.state && data.state.user
-  const [formData, setFormData] = useState<User>({
-    rol_id: user === "profesor" ? "1" : user === "tutor" ? "2" : "3"
+  const [formData, setFormData] = useState<Person>({
+    roleName: user === "profesor" ? "TEACHER" : user === "tutor" ? "TUTOR" : "STUDENT"
   });
   const page = user === "profesor" ? "profesores" : user === "tutor" ? "tutores" : "estudiantes"
 
-  const handleSaveData = async () => {
-    dispatch(updateUser(formData))
+  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    await dispatch(createPerson(formData))
     handleReset()
     navigate(`/${page}`)
   }
@@ -45,12 +45,12 @@ const AddUser = () => {
     <>
       <Container>
         <Row className="header">
-          <Col xs={9}>
+          <Col>
             <h3 className="header-title">Añadir {user || "usuario"}</h3>
             <div className="header-line"></div>
           </Col>
         </Row>
-        <Form className="px-5">
+        <Form onSubmit={handleSubmit}>
           <Row>
             <Col xs={12} md={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -58,8 +58,8 @@ const AddUser = () => {
                 <Form.Control
                   type="text"
                   placeholder="Ingrese el nombre"
-                  name="name"
-                  value={formData.name || ''}
+                  name="firstName"
+                  value={formData.firstName || ''}
                   onChange={handleChange}
                   required
                 />
@@ -71,9 +71,10 @@ const AddUser = () => {
                 <Form.Control
                   type="text"
                   placeholder="Ingrese el apellido"
-                  name="last_name"
-                  value={formData.last_name || ''}
+                  name="lastName"
+                  value={formData.lastName || ''}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -83,78 +84,72 @@ const AddUser = () => {
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>DNI</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="Ingrese el DNI"
-                  name="dni"
-                  value={formData.dni || ''}
+                  name="document"
+                  value={formData.document || ''}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
             </Col>
-            <Col xs={6} md={6}>
+            <Col xs={12} md={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Nombre de usuario</Form.Label>
+                <Form.Label>Ingrese fecha de nacimiento</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="Ingrese el nombre de usuario"
-                  name="username"
-                  value={formData.username || ''}
+                  type="date"
+                  name="birthDate"
+                  value={formData.birthDate || ""}
                   onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col xs={12} md={6}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Celular</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Ingrese el telefono"
+                  name="phone"
+                  value={formData.phone || ''}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col xs={12} md={6}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Ingrese su email"
+                  name="email"
+                  value={formData.email || ''}
+                  onChange={handleChange}
+                  required
                 />
               </Form.Group>
             </Col>
           </Row>
           <Row>
-            <Col xs={12} md={6}>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Contraseña</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Ingrese la Contraseña"
-                  name="password"
-                  value={formData.password || ''}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
             {!user && <Col xs={6} md={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Rol</Form.Label>
                 <Form.Select
-                  name="rol_id"
-                  value={formData.rol_id}
+                  name="roleName"
+                  value={formData.roleName}
                   onChange={handleChange}
                 >
                   <option>--Seleccione un rol del usuario--</option>
-                  <option value="1"> Profesor </option>
-                  <option value="2"> Tutor </option>
-                  <option value="3"> Estudiante </option>
+                  <option value="TEACHER"> Profesor </option>
+                  <option value="TUTOR"> Tutor </option>
+                  <option value="STUDENT"> Estudiante </option>
                 </Form.Select>
               </Form.Group>
             </Col>}
           </Row>
-          {/* <Row>
-                            <Col xs={6} md={6}>
-                                {
-                                    formData.rol_id === '3' 
-                                    &&
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Comision</Form.Label>
-                                        <Form.Select 
-                                            name="comision_id"
-                                            value={formData.comision_id}
-                                            onChange={handleChange}
-                                        >
-                                            <option>--Seleccione una comisión del alumno--</option>
-                                            <option value="1"> Comisión 1 </option>
-                                            <option value="2"> Comisión 2 </option>
-                                        </Form.Select>
-                                    </Form.Group>
-                                }
-                            </Col>
-                        </Row> */}
-        </Form>
-        <Row xs={4} className="justify-content-center mt-5 gap-5"> <ButtonSecondary
+          <Row xs={4} className="justify-content-center mt-5 gap-5"> <ButtonSecondary
           text={'Reset'}
           size="md"
           icon='fa fa-times'
@@ -163,10 +158,11 @@ const AddUser = () => {
           <ButtonMain
             text={'Guardar'}
             size="md"
+            type='submit'
             icon='fa fa-save'
-            onClick={handleSaveData}
-          /></Row>
-
+          />
+        </Row>
+        </Form>
       </Container>
     </>
   )
