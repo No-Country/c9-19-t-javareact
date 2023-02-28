@@ -7,7 +7,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import { apiProps, useApi } from "../../hooks/useApi";
-import { Commission } from "../../models/Commission";
+
 import { RootState } from "../store";
 
 export interface State {
@@ -19,11 +19,9 @@ export interface bondProps {
   idTutor: string | number | undefined;
   relation: string | undefined;
 }
-const relationsAdapter = createEntityAdapter<Commission>({
-  selectId: (commission) => commission.commissionId || 0,
-});
+const relationsAdapter = createEntityAdapter<any>({ });
 
-export const initialRelationsState: EntityState<Commission> & State =
+export const initialRelationsState: EntityState<any> & State =
   relationsAdapter.getInitialState({
     status: "idle",
     error: null,
@@ -47,7 +45,7 @@ export const setRelation: any = createAsyncThunk(
   }
 );
 export const deleteRelation: any = createAsyncThunk(
-  "commissions",
+  "admin/relationship/",
   async (id) => {
     const apiPropertyes: apiProps = {
       path: `admin/relationship/${id}`,
@@ -58,7 +56,7 @@ export const deleteRelation: any = createAsyncThunk(
   }
 );
 export const fetchRelation: any = createAsyncThunk(
-  "commissions",
+  "admin/relationship/path/id",
   async ({ id, path }: any) => {
     const apiPropertyes: apiProps = {
       path: `admin/relationship/${path}/${id}`,
@@ -86,14 +84,22 @@ const relationsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-/*       .addCase(deleteRelation.fulfilled, (state, action) => {
+      .addCase(setRelation.fulfilled, (state, action: any) => {
+        console.log(action.payload)
+        const {idTutor, idStudent, relation} = action.payload;
+        const newRelation = {idTutor: idTutor, idStudent: idStudent, relation: relation}
+        relationsAdapter.addOne(state, newRelation);
+      })
+      .addCase(deleteRelation.fulfilled, (state, action) => {
+        console.log(action.payload)
         if (!action.payload?.id) {
           console.log('Delete could not complete');
           return;
         }
-        const { id } = action.payload;
-        relationsAdapter.removeOne(state, id);
-      }) */
+        const { idRelation } = action.payload;
+        relationsAdapter.removeOne(state, idRelation);
+      }) 
+      
   },
 });
 

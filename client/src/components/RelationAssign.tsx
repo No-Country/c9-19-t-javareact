@@ -87,6 +87,7 @@ function RelationAssign({
     let user = users.find((elem) => elem.id === Number(e.target.value));
     console.log(newRelations)
     if (user) {
+      console.log(relations)
       setNewRelations([
         ...newRelations,
         {
