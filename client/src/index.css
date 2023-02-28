@@ -257,3 +257,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 .list-group-item+.list-group-item.active {
   margin-top:unset;
 }
+
+.card {
+  position: unset!important;
+}

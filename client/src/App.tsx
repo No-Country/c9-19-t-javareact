@@ -29,12 +29,12 @@ function App() {
         <Route element={<AuthGuard privateValidation={true} />}>
           <Route path={`/`} element={<Layout />}>
             <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
-              <Route path={PrivateRoutes.COMMISSION} element={<Commissions />} />
-              <Route path={PrivateRoutes.ADDUSER} element={<AddUser />} />
-              <Route path={PrivateRoutes.STUDENTS} element={<Estudiantes />} />
-              <Route path={PrivateRoutes.TEACHER} element={<Profesores />} />
-              <Route path={PrivateRoutes.TUTOR} element={<Tutores />} />
-              <Route path={`${PrivateRoutes.SINGLEUSERINFO}`} element={<UsuarioInfo />} />
+            <Route path={PrivateRoutes.COMMISSION} element={<Commissions />} />
+            <Route path={PrivateRoutes.ADDUSER} element={<AddUser />} />
+            <Route path={PrivateRoutes.STUDENTS} element={<Estudiantes />} />
+            <Route path={PrivateRoutes.TEACHER} element={<Profesores />} />
+            <Route path={PrivateRoutes.TUTOR} element={<Tutores />} />
+            <Route path={PrivateRoutes.SINGLEUSERINFO} element={<UsuarioInfo />} />
             <Route element={<RoleGuard rol={Roles.TEACHER} />}>
               <Route path={PrivateRoutes.MY_COMMISSIONS} element={<MyCommissions />} />
             </Route>
@@ -45,7 +45,7 @@ function App() {
               <Route path={PrivateRoutes.MY_STUDENTS} element={<MyStudents />} />
             </Route>
           </Route>
-          </Route>
+        </Route>
       </RoutesWithNotFound >
     </BrowserRouter >
   );

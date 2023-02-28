@@ -45,7 +45,7 @@ export const Nav = () => {
                             as={Link}
                             to={`${PrivateRoutes.SINGLEUSERINFO}`}
                         >
-                            Ajustes
+                            Mi perfil
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item

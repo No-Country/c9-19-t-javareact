@@ -17,6 +17,7 @@ import Row from 'react-bootstrap/Row';
 
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchCommissions, getAllCommissions, getCommissionsError, getCommissionsStatus } from '../app/states/Commissions';
+import Loader from '../components/UI/Loader';
 
 function Commissions() {
     const [selectedCommission, setSelectedCommission] = useState<Commission>(new Commission());
@@ -92,7 +93,7 @@ function Commissions() {
                             ?
                                 commissionsStatus === 'loading' 
                                 ?
-                                <p>"Loading...</p>
+                                <Loader show={true}/>
                                 :
                                 commissionsStatus === "succeeded"
                                 ?

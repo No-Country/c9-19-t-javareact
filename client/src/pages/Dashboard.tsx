@@ -15,7 +15,7 @@ function Dashboard () {
         <Container>
             <Row className='header'>
                 <Col>
-                    <h3 className='header-title'>Administrador</h3>
+                    <h3 className='header-title'>Dashboard</h3>
                     <div className='header-line'></div>
                 </Col>
             </Row>
