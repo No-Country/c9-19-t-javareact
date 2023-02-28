@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // Models
 import { User } from "../models/User";
 // UI
@@ -211,7 +211,7 @@ function RelationAssign({
                       idTutor,
                       relation,
                     }: any) => (
-                      <>
+                      <React.Fragment key={idRelation}>
                         <ListGroup.Item
                           key={1}
                           className="d-flex justify-content-between align-items-center mt-2"
@@ -263,7 +263,7 @@ function RelationAssign({
                             </Button>
                           </div>
                         </ListGroup.Item>
-                      </>
+                      </React.Fragment>
                     )
                   )}
                 </ListGroup>

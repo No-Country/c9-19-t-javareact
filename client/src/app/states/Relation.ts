@@ -6,7 +6,9 @@ import {
   EntityState,
   PayloadAction,
 } from "@reduxjs/toolkit";
+import { nanoid } from "nanoid";
 import { apiProps, useApi } from "../../hooks/useApi";
+import { Relations } from "../../models/Relations";
 
 import { RootState } from "../store";
 
@@ -19,9 +21,9 @@ export interface bondProps {
   idTutor: string | number | undefined;
   relation: string | undefined;
 }
-const relationsAdapter = createEntityAdapter<any>({ });
+const relationsAdapter = createEntityAdapter<Relations>({ });
 
-export const initialRelationsState: EntityState<any> & State =
+export const initialRelationsState: EntityState<Relations> & State =
   relationsAdapter.getInitialState({
     status: "idle",
     error: null,
@@ -29,8 +31,8 @@ export const initialRelationsState: EntityState<any> & State =
 
 export const setRelation: any = createAsyncThunk(
   "person/relationship",
-  async ({ idStudent, idTutor, relation }: bondProps) => {
-    console.log(idStudent, idTutor, relation);
+  async (data : any) => {
+    const { idStudent, idTutor, relation } = data;
     const apiPropertyes: apiProps = {
       path: `admin/relationship`,
       method: "post",
@@ -78,16 +80,21 @@ const relationsSlice = createSlice({
       })
       .addCase(fetchRelation.fulfilled, (state, action) => {
         state.status = "succeeded";
-        relationsAdapter.upsertMany(state, action.payload);
+        let fetchedData = []
+        if(action.payload) 
+        fetchedData = action.payload.map((relation: any) => ({
+          ...relation,
+          id: relation.idRelation
+        }))
+        relationsAdapter.upsertMany(state, fetchedData);
       })
       .addCase(fetchRelation.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
-      .addCase(setRelation.fulfilled, (state, action: any) => {
-        console.log(action.payload)
-        const {idTutor, idStudent, relation} = action.payload;
-        const newRelation = {idTutor: idTutor, idStudent: idStudent, relation: relation}
+      .addCase(setRelation.fulfilled, (state, action) => {
+        state.status="succeeded"
+        const newRelation = {...action.payload, id: action.payload.idRelation}
         relationsAdapter.addOne(state, newRelation);
       })
       .addCase(deleteRelation.fulfilled, (state, action) => {
