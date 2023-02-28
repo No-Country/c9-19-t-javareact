@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { loginService } from '../services/loginService';
 import { useAppDispatch } from '../app/hooks';
+import Swal from 'sweetalert2'
 
 export interface FormData {
   username: string;
@@ -26,10 +27,24 @@ const LoginForm = () => {
     }));
   };
 
+  const loginValidation = (username:string,password:string) =>{
+    if((username.length > 3) && (password.length > 3)) return true
+  }
+
   const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await dispatch(loginService(formData));
-    res ? navigate('/dashboard') : '';
+     if(loginValidation(formData.username,formData.password)){ 
+      const res = await dispatch(loginService(formData))
+
+      if(res.rol === 'ADMINISTRATOR'){navigate('/dashboard')}
+      if(res.rol === 'TEACHER'){navigate('/dashboard-teacher')}
+      if(res.rol === 'STUDENT'){navigate('/dashboard-student')}
+      if(res.rol === 'TUTOR'){navigate('/dashboard-tutor')}
+     }else{
+      Swal.fire('Error','Por favor, rellena los campos','error') : 
+      // setMessage('Error, por favor, rellena los campos')
+    }
+  
   };
 
   const handleResetPassword = () => {
