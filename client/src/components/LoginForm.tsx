@@ -41,7 +41,7 @@ const LoginForm = () => {
       if(res.rol === 'STUDENT'){navigate('/dashboard-student')}
       if(res.rol === 'TUTOR'){navigate('/dashboard-tutor')}
      }else{
-      Swal.fire('Error','Por favor, rellena los campos','error') : 
+      Swal.fire('Error','Por favor, rellena los campos','error');
       // setMessage('Error, por favor, rellena los campos')
     }
   
