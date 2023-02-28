@@ -15,5 +15,5 @@ public class CommissionWithStudentResponse {
     private String course;
     private Integer year;
     private ShiftName shift;
-    private List<StudentResponse> studentResponseList;
+    private List<StudentResponse> students;
 }

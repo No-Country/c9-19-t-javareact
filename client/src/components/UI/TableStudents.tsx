@@ -1,10 +1,10 @@
-import { User } from '../../models/User';
+import { Student } from '../../models/Student';
 import Table from 'react-bootstrap/Table';
 import ButtonOutlineMain from './ButtonOutlineMain';
 import Badge from 'react-bootstrap/Badge';
 
 interface Props {
-  students: Array<User>;
+  students: Array<Student>;
   handleDeleteStudent: (value: number) => void;
 }
 
@@ -28,8 +28,8 @@ const TableStudents: React.FC<Props> = ({
                 students.map( (student, index) => (
                     <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{student.name} {student.last_name}</td>
-                        <td>{student.dni}</td>
+                        <td>{student.firstName} {student.lastName}</td>
+                        <td>{student.document}</td>
                         <td>
                             <Badge bg="primary">
                                 Regular
@@ -40,7 +40,7 @@ const TableStudents: React.FC<Props> = ({
                                 text={'Eliminar estudiante'}
                                 size="md"
                                 icon="fa fa-trash"
-                                onClick={() => handleDeleteStudent(student.id!)}
+                                onClick={() => handleDeleteStudent(student.idInscription!)}
                             />
                         </td>
                     </tr>

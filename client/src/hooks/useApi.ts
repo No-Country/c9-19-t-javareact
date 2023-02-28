@@ -23,7 +23,6 @@ export const useApi = async({path,body,method}:apiProps) => {
       },
       data:body
     }
-
    try {
     const res = await axios(options)
     return {
