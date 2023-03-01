@@ -12,7 +12,7 @@ import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-import { getRelationsStatus } from "../app/states/Relation";
+import { getRelationsStatus, selectRelations } from "../app/states/Relation";
 import { useAppSelector } from "../app/hooks";
 
 export interface Props {
@@ -42,8 +42,8 @@ export const bonds = [
 ];
 
 export interface bondProps {
-  idStudent: string | number | undefined;
-  idTutor: string | number | undefined;
+  idStudent:  number | string;
+  idTutor:  number | undefined;
   relation: string | undefined;
 }
 
@@ -60,67 +60,63 @@ function RelationAssign({
   const [newRelations, setNewRelations] = useState<Array>([]);
   const [newBond, setBond] = useState<string | undefined>(undefined);
   const [isAdded, setAdded] = useState<Boolean>(false);
-  const relationStatus = useAppSelector(getRelationsStatus);
+  const relationsStatus = useAppSelector(selectRelations)
+
 
   useEffect(() => {
     setNewRelations(relations);
   }, [relations]);
-
+ 
   const handleCloseModal = () => {
     handleClose();
   };
-  const handleSaveData = () => {
+/*    const handleSaveData = ({
+    idStudent,
+    idTutor
+   }) => {
     if (newRelations.length !== 0 && newBond !== undefined) {
-      console.log("aca", newRelations, user);
       let relation: bondProps = {
-        idStudent: user.rol_id === "student" ? newRelations[1].id : user.id,
-        idTutor: user.rol_id === "student" ? user.id : newRelations[1].idTutor,
+        idStudent: idStudent === "student" ? newRelations[1].id : user.id,
+        idTutor: idTutor === "student" ? user.id : newRelations[1].idTutor,
         relation: newBond,
       };
-      console.log("handleSave argument:", relation);
       handleSave(relation);
+      handleClose()
     }
-  };
+  };  */
 
-  const handleChange = (e: { target: { value: string | undefined } }) => {
-    console.log(e.target)
-    let user = users.find((elem) => elem.id === Number(e.target.value));
-    console.log(newRelations)
-    if (user) {
-      console.log(relations)
-      setNewRelations([
+  const handleChange = (e: { target: { value: number | undefined } }) => {
+    let userFilter = users.find((elem) => elem.id === Number(e.target.value));
+    let idStudent = user.roleName === 'STUDENT' ? user.id : userFilter.id;
+    let idTutor = user.roleName === 'TUTOR' ? user.id : userFilter.id;
+    let relation= {
+      idStudent:idStudent,
+      idTutor:idTutor,
+      relation:newBond
+    }
+
+    if (user) {  
+      handleSave(relation)  
+      setAdded(false)
+        setNewRelations([
         ...newRelations,
         {
           fullNameTutor: user.fullName,
           idTutor: user.id,
           relation: newBond,
         },
-      ]);
-    }
-
-    /*      if(user && newBond){
-        console.log('llega a entrar',newRelations)
-        handleSave({
-            idStudent: user.id,
-            idTutor: newRelations.idTutor,
-            relation: newBond,
-        })
-            
-    }  */
-  
+      ]);  
+    }  
   };
   const handleChangeRelation = (e: { target: { value: number } }) => {
     if (e.target.value !== undefined) {
       setBond(bonds[e.target.value - 1].name);
     }
   };
-
   const onClickDeleteRelation = (id: number) => {
     handleDel(id);
     setAdded(true);
-    setNewRelations(relations.filter((r) => console.log(r)));
   };
-
   return (
     <>
       <Modal
@@ -199,75 +195,51 @@ function RelationAssign({
                 </Col>
               </Row>
             </Form>
-            {newRelations.length > 0 && (
+            {relationsStatus !== undefined && (
               <Container>
-                <ListGroup>
-                  {newRelations.map(
-                    ({
-                      fullNameStudent,
-                      fullNameTutor,
-                      idRelation,
-                      idStudent,
-                      idTutor,
-                      relation,
-                    }: any) => (
-                      <React.Fragment key={idRelation}>
-                        <ListGroup.Item
-                          key={1}
-                          className="d-flex justify-content-between align-items-center mt-2"
-                        >
-                          {fullNameTutor} ({relation})
-                          <div className="d-flex justify-content-right">
-                            {idRelation ? (
-                              <Button
-                                className="mr-1"
-                                key={1}
-                                style={{ height: "fit-content" }}
-                                variant="danger"
-                                size="sm"
-                                onClick={() =>
-                                  onClickDeleteRelation(idRelation)
-                                }
-                              >
-                                <i className="fa fa-trash"></i>
-                              </Button>
-                            ) : (
-                              ""
-                            )}
-                            {console.log(
-                              fullNameStudent,
-                              fullNameTutor,
-                              idRelation,
-                              idStudent,
-                              idTutor,
-                              relation
-                            )}
-                            <Button
-                              className="mr-1"
-                              key={2}
-                              style={{
-                                height: "fit-content",
-                                marginLeft: "8px",
-                              }}
-                              variant="warning"
-                              size="sm"
-                              onClick={() =>
-                                handleSave({
-                                  idStudent: user.id,
-                                  idTutor: idTutor,
-                                  relation: newBond,
-                                })
-                              }
-                            >
-                              <i className="fa fa-save"></i>
-                            </Button>
-                          </div>
-                        </ListGroup.Item>
-                      </React.Fragment>
-                    )
-                  )}
-                </ListGroup>
-              </Container>
+  <ListGroup>
+    
+    {relationsStatus.map(
+      ({
+        fullNameStudent,
+        fullNameTutor,
+        idRelation,
+        idStudent,
+        idTutor,
+        relation,
+        id
+      }: any) => {
+        // Agrega la condición aquí
+        if ((idStudent === user.id)||(idTutor === user.id)) {
+          return (
+            <ListGroup.Item
+              key={id}
+              className="d-flex justify-content-between align-items-center mt-2"
+            >
+              {user.roleName === 'TUTOR' ? fullNameStudent:fullNameTutor} ({relation})
+              <div className="d-flex justify-content-right">
+                <Button
+                  className="mr-1"
+                  key={1}
+                  style={{ height: "fit-content" }}
+                  variant="danger"
+                  size="sm"
+                  onClick={() =>
+                    onClickDeleteRelation({ idRelation: idRelation, id: id })
+                  }
+                >
+                  <i className="fa fa-trash"></i>
+                </Button>
+              </div>
+            </ListGroup.Item>
+          );
+        } else {
+          return null; // Si el idStudent no coincide con user.id, no muestra nada
+        }
+      }
+    )}
+  </ListGroup>
+</Container>
             )}
           </Container>
         </Modal.Body>

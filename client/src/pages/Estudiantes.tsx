@@ -80,9 +80,23 @@ function Estudiantes() {
     }
 
     const handleSaveRelations = (data: any) => {
-        dispatch(setRelation(data))
-    }
+        console.log(data);
+        let shouldDispatch = true;
+    
+        if (relations.length > 0) {
+            relations?.map((elem) => {
+                if ((elem.idTutor === data.idTutor) && (elem.idStudent === data.idStudent)) {
+                    shouldDispatch = false;
+                }
+            });
+        }
+    
+        if (shouldDispatch) {
+            dispatch(setRelation(data));
+        }
+    };
     const handleDelRelations = (id: number) => {
+        
         dispatch(deleteRelation(id))
     }
     let content

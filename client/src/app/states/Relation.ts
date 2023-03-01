@@ -11,6 +11,7 @@ import { apiProps, useApi } from "../../hooks/useApi";
 import { Relations } from "../../models/Relations";
 
 import { RootState } from "../store";
+import { FormData } from '../../components/LoginForm';
 
 export interface State {
   status: string;
@@ -48,13 +49,14 @@ export const setRelation: any = createAsyncThunk(
 );
 export const deleteRelation: any = createAsyncThunk(
   "admin/relationship/",
-  async (id) => {
+  async ({idRelation,id}) => {
     const apiPropertyes: apiProps = {
-      path: `admin/relationship/${id}`,
+      path: `admin/relationship/${idRelation}`,
       method: `delete`,
     };
     const response = await useApi(apiPropertyes);
-    return response.data;
+    const responseId = {...response,data:{idRelation:idRelation,id:id}}
+    return responseId;
   }
 );
 export const fetchRelation: any = createAsyncThunk(
@@ -92,18 +94,16 @@ const relationsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-      .addCase(setRelation.fulfilled, (state, action) => {
+       .addCase(setRelation.fulfilled, (state, action) => {
         state.status="succeeded"
         const newRelation = {...action.payload, id: action.payload.idRelation}
         relationsAdapter.addOne(state, newRelation);
-      })
+      }) 
       .addCase(deleteRelation.fulfilled, (state, action) => {
-        console.log(action.payload)
-        if (!action.payload?.id) {
-          console.log('Delete could not complete');
+         if (!action.payload?.status) {
           return;
-        }
-        const { idRelation } = action.payload;
+        } 
+        const { idRelation } = action.payload.data;
         relationsAdapter.removeOne(state, idRelation);
       }) 
       
