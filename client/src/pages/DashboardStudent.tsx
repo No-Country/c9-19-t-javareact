@@ -8,10 +8,10 @@ import  {BarChart}  from '../components/barChart';
 import faker from 'faker';
 
 const data = [
-    {usuario: 'Estudiantes', cantidad: 180, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap', id:1},
-    {usuario: 'Comisiones', cantidad: 4, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-school', id:2}
+    {usuario: 'Materias', cantidad: 10, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap', id:1},
+    {usuario: 'Profesores', cantidad: 7, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-school', id:2}
 ]
-const labels = ['comision 1', 'comision 2', 'comision 3', 'comision 4'];
+const labels = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'];
 
 export const dataChart = {
   labels,

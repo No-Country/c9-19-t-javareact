@@ -4,11 +4,13 @@ import { Student } from '../../models/Student';
 interface Props {
   student: Student
   handleSelect: (value: Student) => void;
+  showSubjects: boolean,
 }
 
 const CardStudent: React.FC<Props> = ({
   student,
-  handleSelect
+  handleSelect,
+  showSubjects
 }) => {
 
   const handleSelectCard = () => {
@@ -20,10 +22,15 @@ const CardStudent: React.FC<Props> = ({
       <Card.Header as="h5" className="card-commission-header">{student.firstName } {student.lastName}</Card.Header>
       <Card.Body className="text-center">
         <Card.Text>
-          {/* {commission.students!.length} estudiantes */}          
-          <Badge className="badge-main">
-            15 Materias
-          </Badge>{' '}
+          {/* {commission.students!.length} estudiantes */}   
+          {
+          showSubjects
+          &&
+            <Badge className="badge-main">
+              15 Materias
+            </Badge>
+          }       
+        
         </Card.Text>
       </Card.Body>
     </Card>

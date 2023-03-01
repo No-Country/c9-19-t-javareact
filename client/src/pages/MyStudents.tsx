@@ -88,6 +88,7 @@ function MyStudents() {
                                     <Col key={student.idPerson}>
                                         <CardStudent
                                             student={student}
+                                            showSubjects={true}
                                             handleSelect={handleSelectStudent}
                                         />
                                     </Col>

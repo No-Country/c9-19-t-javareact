@@ -17,8 +17,9 @@ import { getAge } from '../../helpers/functions';
 import { Person } from '../../models/Person';
 import { Subject } from '../../models/Subject';
 import Loader from './Loader';
+import CardStudent from './CardStudent';
 import { apiProps, useApi } from '../../hooks/useApi';
-import TableStudentQualification from './TableStudentQualification'
+import TableStudentQualification from './TableStudentQualification';
 interface Props {
   show: boolean;
   onHide: () => void;
@@ -28,35 +29,41 @@ const UserInfo: React.FC<Props> = (props) => {
   const [personData, setPersonData] = useState<Person>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [qualifications, setQualifications] = useState<Array<Subject>>(new Array());
-  
+  const [students, setStudents] = useState<Array<any>>(new Array());
+
   const user = useAppSelector(getSelectedPerson);
   const dispatch = useAppDispatch();
   const currentYear = 2023;
-
-
-  console.log(user)
 
   useEffect(() => {
     async function fetchData() {
       if (user?.id) {
         const data = await dispatch(fetchPersonData(user.id));
-        console.log(data)
+        // console.log(data.payload)
         if (data.payload) {
           setPersonData(data.payload);
-          console.log(personData)
-          if (data.payload.roleName === 'STUDENT') {
-            setLoading(true);
-            const apiPropertyes: apiProps = {
-              path: `person/report`,
-              method: 'post',
-              body: {'idStudent': user.id, 'schoolYear': currentYear}
+            if (data.payload.roleName === 'STUDENT') {
+              setLoading(true);
+              const apiPropertyes: apiProps = {
+                path: `person/report`,
+                method: 'post',
+                body: {'idStudent': user.id, 'schoolYear': currentYear}
 
-            };
-            const response = await useApi(apiPropertyes);
-            console.log(response.data)
-            setQualifications(response.data.subjectQualificationsList);
-            setLoading(false);
-          }
+              };
+              const response = await useApi(apiPropertyes);
+              setQualifications(response.data.subjectQualificationsList);
+              setLoading(false);
+            }
+            if (data.payload.roleName === 'TUTOR') {
+              setLoading(true);
+              const apiPropertyes: apiProps = {
+                path: `tutor/students/${data.payload.idPerson}`,
+                method: 'get',
+              };
+              const response = await useApi(apiPropertyes);
+              setStudents(response.data);
+              setLoading(false);
+            }
         } else {
           handleClose();
         }
@@ -69,6 +76,10 @@ const UserInfo: React.FC<Props> = (props) => {
     props.onHide(), setPersonData({});
     dispatch(setSelectedPerson(undefined));
   };
+
+  const handleSelectStudent = () => {
+
+  }
 
   const {
     idPerson,
@@ -156,7 +167,7 @@ const UserInfo: React.FC<Props> = (props) => {
                       <h5>{email || ""}</h5>
                     </Col>
                   </Row>
-                   { 
+                  { 
                   (!loading && personData.roleName === 'STUDENT' && qualifications.length > 0)
                   &&
                       <Row>
@@ -167,6 +178,29 @@ const UserInfo: React.FC<Props> = (props) => {
                         />
                          </Col>
                       </Row>
+                    }
+                    { 
+                    (!loading && personData.roleName === 'TUTOR' && students.length > 0)
+                    &&
+                        <Row>
+                          <Col xs={12}>
+                            <div style={{marginTop: '1em'}}>
+                                  <h5> <strong> Estudiantes a cargo </strong></h5>
+                                  <hr></hr>
+                            </div>
+                            <Row xs={1} md={2} lg={3} xl={4} className="g-2">
+                                {students.map((student: any, index: number) => (
+                                    <Col key={student.idPerson}>
+                                        <CardStudent
+                                            student={student}
+                                            showSubjects={false}
+                                            handleSelect={(handleSelectStudent)}
+                                        />
+                                    </Col>
+                                    ))}
+                                </Row>
+                          </Col>
+                        </Row>
                     }
                    
                 </Container>
