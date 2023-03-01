@@ -5,7 +5,7 @@ export interface Person {
     lastName?: string;
     fullName?:string;
     document?: string;
-    birthDate?: Date;
+    birthDate?: string;
     email?: string;
     phone?: string;
     idUser?: number;

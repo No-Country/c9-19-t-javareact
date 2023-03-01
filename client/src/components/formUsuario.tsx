@@ -58,7 +58,7 @@ function FormUsuario({
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e : any) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -146,7 +146,6 @@ function FormUsuario({
                     <Form.Label>Ingrese fecha de nacimiento</Form.Label>
                     <Form.Control
                       type="date"
-                      placeholder="1980-07-25"
                       name="birthDate"
                       value={form.birthDate || ''}
                       onChange={handleChange}
@@ -231,25 +230,22 @@ function FormUsuario({
         </Modal.Body>
 
         <Modal.Footer className="justify-content-between px-4">
-          <ButtonDanger
+         {/* <ButtonDanger
             text={'Eliminar '}
-            size="md"
             icon="fa fa-trash"
             onClick={() => {
               setShowFormUser(false);
               setshowAlert(true);
             }}
-          />
+          />*/}
           <div className="d-flex gap-2">
             <ButtonSecondary
               text={'Cancelar'}
-              size="md"
               icon="fa fa-times"
               onClick={handleCloseModal}
             />
             <ButtonMain
               text={'Guardar'}
-              size="md"
               icon="fa fa-save"
               onClick={handleSaveData}
             />

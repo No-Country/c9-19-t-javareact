@@ -35,7 +35,7 @@ export const dataChart = {
 };
 
 /*  */
-function DashboardTeacher () {
+function DashboardTutor () {
     return (
         <Container>
             <Row className='header'>
@@ -84,4 +84,4 @@ function DashboardTeacher () {
     )
 }
 
-export default DashboardTeacher;
+export default DashboardTutor;

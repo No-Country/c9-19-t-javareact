@@ -28,7 +28,6 @@ const DeleteAlert: React.FC<Props> = (props) => {
     <>
       <Modal
         {...other}
-        size="xs"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
