@@ -33,6 +33,9 @@ const UserInfo: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch();
   const currentYear = 2023;
 
+
+  console.log(user)
+
   useEffect(() => {
     async function fetchData() {
       if (user?.id) {

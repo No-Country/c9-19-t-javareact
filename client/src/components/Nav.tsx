@@ -41,12 +41,13 @@ export const Nav = () => {
                         <NavDropdown.Item as={Link} to={"#"} disabled>
                         {`${useName} ${useRol}`}
                         </NavDropdown.Item>
-                        <NavDropdown.Item
+
+{ useRol === "ADMINISTRATOR"      &&                   <NavDropdown.Item
                             as={Link}
                             to={`${PrivateRoutes.SINGLEUSERINFO}`}
                         >
                             Mi perfil
-                        </NavDropdown.Item>
+                        </NavDropdown.Item>}
                         <NavDropdown.Divider />
                         <NavDropdown.Item
                             as={Link}

@@ -1,4 +1,4 @@
-export const getAge = (date: Date) => {
+export const getAge = (date: string) => {
   const birthDay = new Date(date)
   const today = new Date()
   const difference = today.getTime() - birthDay.getTime()
