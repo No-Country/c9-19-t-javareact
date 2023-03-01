@@ -1,92 +1,65 @@
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // Models
-import { User } from '../models';
-import { Commission } from '../models/Commission';
-import { Subject } from '../models/Subject';
+import { Student } from '../models/Student';
 
 // Components
 import CardStudent from '../components/UI/CardStudent';
 import TableStudentQualification from '../components/UI/TableStudentQualification';
+import Loader from '../components/UI/Loader';
 ;
 // UI
 import '../styles/sub-header.css';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
 
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { fetchStudents, getStudents, getStudentsError, getStudentsStatus } from '../app/states/Students';
+
+import { selectIdPerson } from '../app/states/user'
+import { apiProps, useApi } from '../hooks/useApi';
 
 
 function MyStudents() {
     const [showStudentQualification, setShowStudentQualification] = useState<boolean>(false);
-    const [selectedStudent, setSelectedStudent] = useState(null);
-    const [studentIndex, setStudentIndex] = useState(null);
+    const [selectedStudent, setSelectedStudent] = useState<Student>(new Student());
+    const [selectedStudentSubjects, setSelectedStudentSubjects] = useState<Array<any>>(new Array());
+    const students = useAppSelector(getStudents);
+    const studentsStatus = useAppSelector(getStudentsStatus);
+    const studentsError = useAppSelector(getStudentsError);
+    const [loading, setLoading] = useState(false);
+    const dispatch = useAppDispatch();
+    const effectRan = useRef(false);
+    const id = useAppSelector(selectIdPerson);
+    const currentYear = 2023;
 
-    const [students, setStudents] = useState([
-        {
-            id: 2, rol_id: '3', name: 'Marcos', last_name: 'Ávila', dni: 12341456,
-            subjects: [
-                {   id: 1, 
-                    teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'},
-                    subject_name: 'Lengua',
-                    qualifications: [
-                        {id: 1, numberQualification: 10, period_id: 1}, 
-                        {id: 2, numberQualification: 10, period_id: 2}, 
-                        {id: 3, numberQualification: 10, period_id: 3}
-                    ]
-                },    
-                {   id: 2, 
-                    teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'},
-                    subject_name: 'Matermática',
-                    qualifications: [
-                        {id: 3, numberQualification: 10, period_id: 1}, 
-                        {id: 4, numberQualification: 10, period_id: 2}, 
-                        {id: 5, numberQualification: 10, period_id: 3}
-                    ]
-                },    
-                {   id: 3, 
-                    teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'},
-                    subject_name: 'Inglés',
-                    qualifications: [
-                        {id: 6, numberQualification: 10, period_id: 1}, 
-                        {id: 7, numberQualification: 10, period_id: 2}, 
-                        {id: 8, numberQualification: 10, period_id: 3}
-                    ]
-                },    
-                {   id: 4, 
-                    teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'},
-                    subject_name: 'Ciencias Natuales',
-                    qualifications: [
-                        {id: 9, numberQualification: 10, period_id: 1}, 
-                        {id: 10, numberQualification: 10, period_id: 2}, 
-                        {id: 11, numberQualification: 10, period_id: 3}
-                    ]
-                }
-            ]
-        },
-        {
-            id: 3, rol_id: '3', name: 'Luciana', last_name: 'Ávila', dni: 12341456,
-            subjects: []
-        },
-        {
-            id: 4, rol_id: '3', name: 'Abigail', last_name: 'Ávila', dni: 12341456,
-            subjects: []
+    useEffect(() => {
+        if (effectRan.current === false) {
+            if (studentsStatus === "idle")
+                dispatch(fetchStudents(id));
+            if (studentsStatus === "loading")
+                setLoading(true);
+            if (studentsStatus === "succeeded")
+                setLoading(false);
+            effectRan.current = true
         }
-    ]);
-
-
-    const handleSelectStudent = (data: any, index: any) => {
-        // obtener detalle de comision
-        setShowStudentQualification(true);
+    }, [getStudentsStatus, dispatch])
+    
+    const handleSelectStudent = async (data: Student) => {
         setSelectedStudent(data);
-        setStudentIndex(index);
-    }
-
-    const backToStudents = () => {
-        setShowStudentQualification(false);
-        setSelectedStudent(null);
-        setStudentIndex(null);
+        setLoading(true);
+        const apiPropertyes: apiProps = {
+          path: `person/report`,
+          method: 'post',
+          body: {'idStudent': data.idPerson, 'schoolYear': currentYear}
+        };
+        const response = await useApi(apiPropertyes);
+        if (response.data) {
+            setSelectedStudentSubjects(response.data.subjectQualificationsList)
+            setShowStudentQualification(true);
+        }
+        setLoading(false);
     }
 
     return (
@@ -103,34 +76,48 @@ function MyStudents() {
                         {
                             !showStudentQualification
                             &&
-                            <Row xs={1} md={2} lg={3} xl={4} className="g-2">
+                            
+                                studentsStatus === 'loading' 
+                                ?
+                                <Loader show={loading}/>
+                                :
+                                studentsStatus === "succeeded"
+                                ?
+                                <Row xs={1} md={2} lg={3} xl={4} className="g-2">
                                 {students.map((student: any, index: number) => (
-                                    <Col key={student.id}>
+                                    <Col key={student.idPerson}>
                                         <CardStudent
                                             student={student}
-                                            index={index}
                                             handleSelect={handleSelectStudent}
                                         />
                                     </Col>
-                                ))}
-                            </Row>
+                                    ))}
+                                </Row>
+                                :
+                                <p>{studentsError}</p>
                         }
                         {
                             (showStudentQualification && selectedStudent)
                             &&
                             <Container>
                             <Row>
-                                <Col xs={12} className="sub-header">
+                                <Col xs={12} className="sub-header mt-5">
                                     <div style={{marginBottom: '2em'}}>
-                                        <span> <strong> Materias del estudiante {selectedStudent.name} {selectedStudent.last_name} </strong></span>
-                                        <Button variant="outline-secondary" style={{float: 'right'}} onClick={backToStudents}> <i className='fa fa-arrow-left'></i> Volver a mis estudiantes </Button>{' '}
+                                        <span> <strong> Materias del estudiante {selectedStudent.firstName} {selectedStudent.lastName} </strong></span>
                                     </div>
                                     <div className="sub-header-line"></div>
                                 </Col>
                             </Row>
-                            <TableStudentQualification
-                                subjects={selectedStudent.subjects}
-                            />
+                            {
+                                selectedStudentSubjects.length > 0
+                                ?
+                                <TableStudentQualification
+                                    subjects={selectedStudentSubjects}
+                                />
+                                :
+                                <p>  Sin calificaciones cargadas</p>
+                            }
+                          
                         </Container>
                            
                         }

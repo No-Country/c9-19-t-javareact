@@ -8,10 +8,11 @@ import  {BarChart}  from '../components/barChart';
 import faker from 'faker';
 
 const data = [
-    {usuario: 'Estudiantes', cantidad: 180, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap', id:1},
-    {usuario: 'Comisiones', cantidad: 4, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-school', id:2}
+    {usuario: 'Estudiantes', cantidad: 4, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap', id:1},
+    {usuario: 'Materias', cantidad: 40, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-book', id:2},
+    {usuario: 'Profesores', cantidad: 18, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-user-tie', id:3}
 ]
-const labels = ['comision 1', 'comision 2', 'comision 3', 'comision 4'];
+const labels = ['Estudiante 1', 'Estudiante 2', 'Estudiante 3', 'Estudiante 4'];
 
 export const dataChart = {
   labels,
@@ -26,11 +27,6 @@ export const dataChart = {
       data: labels.map(() => faker.datatype.number({ min: 1, max: 10 })),
       backgroundColor: 'rgba(156, 37, 77, 0.8)',
     },
-    {
-      label: 'No regulares',
-      data: labels.map(() => faker.datatype.number({ min: 1, max: 4})),
-      backgroundColor: 'rgba(156, 37, 77, 0.8)',
-    }
   ],
 };
 
@@ -50,7 +46,7 @@ function DashboardTeacher () {
             <Row>
                 {
                     data.map( (user: any) => (
-                        <Col xs={12} md={6} className='d-flex justify-content-center mb-2' key={user.id}>
+                        <Col xs={12} md={4} className='d-flex justify-content-center mb-2' key={user.id}>
                             <Card className='card-dash' >
                                 <Card.Body>
                                     <Row>
@@ -64,6 +60,7 @@ function DashboardTeacher () {
                                             <span className='card-amount'> {user.usuario}</span>
                                             <span> <strong> {user.cantidad} </strong> </span>
                                         </Col>
+
                                     </Row>
                                 </Card.Body>
                             </Card>
