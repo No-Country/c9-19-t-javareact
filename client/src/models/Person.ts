@@ -1,10 +1,11 @@
-export class Person {
+export interface Person {
     id?:number;
     idPerson?: number;
     firstName?: string;
     lastName?: string;
+    fullName?:string;
     document?: string;
-    birthDate?: Date;
+    birthDate?: string;
     email?: string;
     phone?: string;
     idUser?: number;

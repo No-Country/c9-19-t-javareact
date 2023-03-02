@@ -18,9 +18,9 @@ export const loginService = (formData: FormData) => {
     };
     const res = await useApi(apiPropertyes)
     res.status !==200 ? 
-      Swal.fire('Error','Usuario Incorrecto','error') : 
+      Swal.fire('Error','Usuario o contraseña incorrectos','error') : 
       dispatch(createUser(res.data))
-    return 'error no manejado'
+    return res.data
       
   }
 }

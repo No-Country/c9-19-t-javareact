@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.time.LocalTime;
 
 @Getter
@@ -27,7 +26,7 @@ public class CommissionSubject implements Serializable {
     private Subject subjectId;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", nullable = false)
+    @JoinColumn(name = "teacher_id")
     //@Column(name = "teacher_id")
     private Teacher teacherId;
 

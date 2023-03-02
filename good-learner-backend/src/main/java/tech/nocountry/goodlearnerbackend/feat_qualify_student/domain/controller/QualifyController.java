@@ -12,13 +12,17 @@ import tech.nocountry.goodlearnerbackend.feat_auth.data.model.User;
 import tech.nocountry.goodlearnerbackend.feat_auth.data.repository.UserRepository;
 import tech.nocountry.goodlearnerbackend.feat_auth.jwt.JwtProvider;
 import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.model.request.StudentReportRequestDTO;
+import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.model.request.SubjectQualificationsDTO;
 import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.model.response.ReportQualificationsResponseDTO;
 import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.model.request.ReportYearRequestDTO;
 import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.model.response.response2.Reports;
 import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.model.response.response2.SubjectQualifications;
 import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.service.mapper.ReportQualifyService;
+import tech.nocountry.goodlearnerbackend.feat_teacher.domain.dto.TeacherCommissionsDTO;
 import tech.nocountry.goodlearnerbackend.model.*;
+import tech.nocountry.goodlearnerbackend.repository.CommissionSubjectRepository;
 import tech.nocountry.goodlearnerbackend.repository.PersonRepository;
+import tech.nocountry.goodlearnerbackend.repository.QualificationRepository;
 import tech.nocountry.goodlearnerbackend.repository.StudentRepository;
 
 import java.util.*;
@@ -32,9 +36,15 @@ public class QualifyController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private QualificationRepository qualificationRepository;
+    @Autowired
     private PersonRepository personRepository;
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private CommissionSubjectRepository commissionSubjectRepository;
+
 
     @GetMapping("/student/report")
     @PreAuthorize("hasAuthority('STUDENT')")
@@ -86,7 +96,7 @@ public class QualifyController {
         }
     }
 
-    @GetMapping("/person/report")
+    @PostMapping("/person/report")
     public ResponseEntity<?> getReports(@Validated @RequestBody StudentReportRequestDTO studentReportRequestDto, BindingResult validations){
         if(validations.hasErrors())
             return new ResponseEntity<String>("El ID del estudiante y el año escolar son obligatorios", HttpStatus.BAD_REQUEST);
@@ -146,6 +156,53 @@ public class QualifyController {
 
         return ResponseEntity.ok(reports);
 
+    }
+
+
+    @GetMapping("/report/subject/{commissionSubjectId}")
+    public ResponseEntity<?> gerReportsBySubject(@PathVariable Long commissionSubjectId) {
+
+        Optional<CommissionSubject> commissionSubjecOptional = commissionSubjectRepository.findById(commissionSubjectId);
+        if(commissionSubjecOptional.isPresent()){
+
+            CommissionSubject commissionSubject = commissionSubjecOptional.get();
+            List<Qualification> qualificationList = qualificationRepository.findByCommissionSubject(commissionSubject);
+
+            List<SubjectQualificationsDTO> subjectQualificationsList = new ArrayList<>();
+
+            for(int i=0; i< qualificationList.size(); i++){
+                Qualification qualification = qualificationList.get(i);
+                PeriodName periodName =  qualification.getPeriod().getPeriodName();
+                Integer note = qualification.getNumericalNote();
+
+
+                boolean existePerson = false;
+                int position = -1;
+                for (int j=0; j< subjectQualificationsList.size(); j++){
+                    if(qualification.getStudent().getIdPerson() == subjectQualificationsList.get(j).getIdPerson()){
+                        position = j;
+                        existePerson = true;
+                        break;
+                    }
+                }
+                if(!existePerson){
+                    Map<PeriodName, Integer> notas = new HashMap<>();
+                    notas.put(periodName, note );
+                    SubjectQualificationsDTO data = new SubjectQualificationsDTO();
+                    data.setQualifications(notas);
+                    data.setIdPerson(qualification.getStudent().getIdPerson());
+                    data.setDocument(qualification.getStudent().getDocument());
+                    data.setFirstName(qualification.getStudent().getFirstName());
+                    data.setLastName(qualification.getStudent().getLastName());
+                    subjectQualificationsList.add(data);
+                }
+                else{
+                    subjectQualificationsList.get(position).getQualifications().put(periodName, note);
+                }
+            }
+            return ResponseEntity.ok(subjectQualificationsList);
+        }
+        return new ResponseEntity<>("No se ha encontrado la materia", HttpStatus.NOT_FOUND);
     }
 
 }

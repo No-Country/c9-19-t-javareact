@@ -1,47 +1,52 @@
 import { User } from '../../models/User';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
-import { Qualification } from '../../models/Qualification';
+import { Student } from '../../models/Student';
 import { useState } from 'react';
 
     interface Props {
-    students: Array<User>;
+    students: Array<Student>;
     setStudentindex: (value: number) => void;
-    setSelectedStudent: (value: User) => void;
     setSelectedQualification: (value: any) => void;
+    setSelectedStudent: (value: any) => void;
     setShowModal: (value: boolean) => void;
+    setPeriod: (value: number) => void
     }
 
     const TableQualification: React.FC<Props> = ({
         students,
         setStudentindex,
-        setSelectedStudent,
         setSelectedQualification,
         setShowModal,
+        setPeriod,
+        setSelectedStudent,
     }) => {
 
     
 
-    const getPromedio = (data: Array<Qualification>): string => {
+    const getPromedio = (data: any): string => {
         let total = 0;
         let notas = 0;
-        data.map((q) => {
-            if (q.numerical_qualification) {
-                total += q.numerical_qualification!
-                notas += 1 
-            }
-            
-        });
+        if (data.FIRST_TRIMESTER) {
+            total += data.FIRST_TRIMESTER;
+            notas += 1 
+        }
+        if (data.SECOND_TRIMESTER) {
+            total += data.SECOND_TRIMESTER;
+            notas += 1 
+        }
+        if (data.THIRD_TRIMESTER) {
+            total += data.THIRD_TRIMESTER;
+            notas += 1 
+        }
         return notas > 0 ? (total / notas).toFixed(2) : '-';
     }
 
-    const handleOnChange = (index: number, student: User, qualification: any, period_id: number) => {
-        if (!qualification) {
-            qualification = {'period_id': period_id}
-        }
+    const handleOnChange = (index: number, qualification: any, period_id: number, student: Student) => {
+        setPeriod(period_id)
         setStudentindex(index);
-        setSelectedStudent(student);
         setSelectedQualification(qualification);
+        setSelectedStudent(student);
         setShowModal(true);
     }
 
@@ -60,17 +65,17 @@ import { useState } from 'react';
             </thead>
             <tbody>
                 {
-                    students.map( (student, index) => (
-                        <tr key={index} className={(Number(getPromedio(student.qualifications!)) > 0 && Number(getPromedio(student.qualifications!))< 6) ? 'row-disaprove' : 'row-aprove'}>
+                    students.map( (student: Student, index: number) => (
+                        <tr key={student.idPerson} className={(Number(getPromedio(student.qualifications!)) > 0 && Number(getPromedio(student.qualifications!))< 6) ? 'row-disaprove' : 'row-aprove'}>
                             <td>{index + 1}</td>
-                            <td>{student.name} {student.last_name}</td>
-                            <td>{student.dni}</td>
+                            <td>{student.firstName} {student.lastName}</td>
+                            <td>{student.document}</td>
                             <td style={{textAlign: '-webkit-center'}}>
                                 <Form>
                                 <Form.Control
                                         type="text"
-                                        onClick={() => handleOnChange(index, student, student.qualifications![0], 1)}
-                                        value={ student.qualifications![0] ? student.qualifications![0].numerical_qualification : '-'} 
+                                        onClick={() => handleOnChange(index, student.qualifications!.FIRST_TRIMESTER, 1, student)}
+                                        value={ student.qualifications!.FIRST_TRIMESTER ? student.qualifications!.FIRST_TRIMESTER : '-'} 
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
                                 </Form>    
@@ -79,9 +84,9 @@ import { useState } from 'react';
                                 <Form>
                                 <Form.Control
                                         type="text"
-                                        disabled={student.qualifications![0] === undefined}
-                                        onClick={() => handleOnChange(index, student, student.qualifications![1], 2)}
-                                        value={student.qualifications![1] ? student.qualifications![1].numerical_qualification : '-'}                           
+                                        disabled={student.qualifications!.FIRST_TRIMESTER === undefined}
+                                        onClick={() => handleOnChange(index, student.qualifications!.SECOND_TRIMESTER, 2, student)}
+                                        value={student.qualifications!.SECOND_TRIMESTER ? student.qualifications!.SECOND_TRIMESTER : '-'}                           
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
                                 </Form>    
@@ -90,9 +95,9 @@ import { useState } from 'react';
                                 <Form>
                                     <Form.Control
                                         type="text"
-                                        disabled={student.qualifications![1] === undefined}
-                                        onClick={() => handleOnChange(index, student, student.qualifications![2], 3)}
-                                        value={student.qualifications![2] ? student.qualifications![2].numerical_qualification : '-'}
+                                        disabled={student.qualifications!.SECOND_TRIMESTER === undefined}
+                                        onClick={() => handleOnChange(index, student.qualifications!.THIRD_TRIMESTER, 3, student)}
+                                        value={student.qualifications!.THIRD_TRIMESTER ? student.qualifications!.THIRD_TRIMESTER : '-'}
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
                                 </Form>    

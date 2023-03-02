@@ -4,11 +4,12 @@ interface Props {
   text?: string;
   size?: 'sm' | 'lg' | undefined;
   className?: string | undefined;
+  type?: "button" | "submit" | "reset" | undefined;
   icon?: string | undefined;
-  onClick: () => void;
+  onClick?: () => void | undefined;
 }
 
-const ButtonMain: React.FC<Props> = ({ className, text, size, icon, onClick }) => {
+const ButtonMain: React.FC<Props> = ({ className,type, text, size, icon, onClick }) => {
   return (
     <>
       <style type="text/css">
@@ -38,9 +39,10 @@ const ButtonMain: React.FC<Props> = ({ className, text, size, icon, onClick }) =
       </style>
       <Button
         className={className}
+        type={type}
         variant="main"
         size={size || 'sm'}
-        onClick={() => onClick()}
+        onClick={onClick ? () => onClick() : () => {return} }
       >
         {text || 'Button'}
         {

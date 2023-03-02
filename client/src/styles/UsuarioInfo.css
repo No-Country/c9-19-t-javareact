@@ -4,9 +4,24 @@
   height: auto;
 }
 
+.modal-content {
+  margin:auto;
+}
+
 @media (min-width: 768px) {
+  .modal-content {
+    width:90%!important;
+    margin:auto;
+  }
+  .rows-container {
+    height:200px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly;
+  }
   #image {
-    width: 220px;
+    width: 200px;
     height: auto;
   }
 }
+

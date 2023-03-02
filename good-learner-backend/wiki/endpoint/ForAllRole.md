@@ -52,4 +52,32 @@ TOKEN: <token>
     }
   ]
 }
+
+```
+---
+#### GET http://localhost:8080/api/tutor/students/4
+* [Estudiantes a cargo de un tutor](). Una tutor lo admin ogeada, podrá acceder a los estudiantes que tiene a cargo un tutor específico.
+* NOTA: Recordar que se debe ingresar con el token de autentificación.
+
+
+**JSON SALIDA**
+```json
+[
+  {
+    "idPerson": 6,
+    "firstName": "Jazmin",
+    "lastName": "Ayala",
+    "document": "41787181",
+    "idTutorStudent": 1,
+    "regular": true
+  },
+  {
+    "idPerson": 7,
+    "firstName": "Agustin",
+    "lastName": "Ramirez",
+    "document": "51778181",
+    "idTutorStudent": 2,
+    "regular": true
+  }
+]
 ```

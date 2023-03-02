@@ -1,19 +1,13 @@
-import {User} from './User';
-
 export class Subject {
-    id?: number;
-    // commission_id?: number;
-    teacher_id?: number;
-    teacher?: User;
-    subject_name?: string;
+    subjectId?: number;
+    subjectName?: string;
+    commissionSubjectId?: number;
 
     static parseItem(raw: any): Subject {
         const subject = new Subject();
-        subject.id = raw.id ? raw.id : undefined;
-        // subject.commission_id = raw.commission_id ? raw.commission_id : undefined;
-        subject.teacher_id = raw.teacher_id ? raw.teacher_id : undefined;
-        subject.teacher = raw.teacher ? raw.teacher : undefined;  
-        subject.subject_name = raw.subject_name ? raw.subject_name : undefined;  
+        subject.subjectId = raw.subjectId ? raw.subjectId : undefined;
+        subject.subjectName = raw.subjectName ? raw.subjectName : undefined;  
+        subject.commissionSubjectId = raw.commissionSubjectId ? raw.commissionSubjectId : undefined;  
         return subject;
     }
  

@@ -5,6 +5,7 @@ import { RootState } from '../store';
 
 export interface userState{
   id:number,
+  idPerson:number,
   nombreUsuario: string | undefined,
   rol?: "ADMINISTRATOR" | "TEACHER" | "STUDENT" | "TUTOR" | undefined,
   token?:string
@@ -12,6 +13,7 @@ export interface userState{
 
 export const EmptyUserState: userState = {
   id:0,
+  idPerson:0,
   nombreUsuario: undefined,
   rol:undefined,
   token:undefined
@@ -39,6 +41,7 @@ export const userSlice = createSlice({
 });
 export const selectUser = (state: RootState) => state.user;
 export const selectId = (state: RootState) => state.user.id;
+export const selectIdPerson = (state: RootState) => state.user.idPerson;
 export const selectName = (state: RootState) => state.user.nombreUsuario;
 export const selectRol = (state: RootState) => state.user.rol;
 

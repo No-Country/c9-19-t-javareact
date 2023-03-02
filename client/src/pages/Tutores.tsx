@@ -13,6 +13,9 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchPersons, getAllStudents, getAllTutors, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
 import { Person } from '../models/Person';
 import { User } from '../models';
+import UserInfo from '../components/UI/UserInfo';
+import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
+import Loader from '../components/UI/Loader';
 
 
 function Tutores() {
@@ -27,6 +30,7 @@ function Tutores() {
     const usersStatus = useAppSelector(getPersonsStatus)
     const usersError = useAppSelector(getPersonsError)
     const dispatch = useAppDispatch()
+    const InfoModalState = useAppSelector(getUserInfoModalState)
 
     const effectRan = useRef(false)
 
@@ -68,23 +72,29 @@ function Tutores() {
     }
 
     const handleSaveRelations = (data: Array<User>) => {
-
     }
 
     let content;
 
     if (usersStatus === 'loading') {
-        content = <p>"Loading...</p>
+        content = <Loader show={true} />
     } else if (usersStatus === "succeeded") {
-        content = users.map((user) => (
-            <Col key={user.id}>
-                <CardPerson
-                    user={user}
-                    handleUpdateUser={handleUpdateUser}
-                    handleShowRelations={handleShowRelations}
-                />
-            </Col>
-        ))
+        content = 
+            <Row>
+        <Container>
+        <Row xs={1} md={2} lg={3} xl={4} className="g-2">
+        {users.map((user) => (
+        <Col key={user.id}>
+            <CardPerson
+                user={user}
+                handleUpdateUser={handleUpdateUser}
+                handleShowRelations={handleShowRelations}
+            />
+        </Col>
+    ))}
+        </Row>
+    </Container>
+</Row>
     } else if (usersStatus === 'failed') {
         content = <p>{usersError}</p>;
     }
@@ -98,13 +108,7 @@ function Tutores() {
                         <div className="header-line"></div>
                     </Col>
                 </Row>
-                <Row>
-                    <Container>
-                        <Row xs={1} md={2} lg={3} xl={4} className="g-2">
-                            {content}
-                        </Row>
-                    </Container>
-                </Row>
+                {content}
                 <FormUsuario
                     show={showFormUser}
                     handleClose={handleCloseFormUser}
@@ -120,6 +124,7 @@ function Tutores() {
                     user={selectedUser} 
                     users={usersToReltions} 
                     relations={relations}/>
+                <UserInfo show={InfoModalState} onHide={() => dispatch(handleShowInfoModal())}/>
             </Container>
         </>
     );

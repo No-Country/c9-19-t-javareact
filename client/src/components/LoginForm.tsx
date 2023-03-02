@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import ButtonMain from './UI/ButtonMain';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { loginService } from '../services/loginService';
 import { useAppDispatch } from '../app/hooks';
+import Swal from 'sweetalert2'
 
 export interface FormData {
-  username: string,
-  password: string
+  username: string;
+  password: string;
 }
 
 const LoginForm = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<FormData>({
     username: '',
     password: '',
   });
-
   const [forgotPassword, setForgotPassword] = useState(false);
-  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,17 +27,22 @@ const LoginForm = () => {
     }));
   };
 
-  const loginValidation = (formData : FormData) =>{
-    const {username,password} = formData;
-    return username.length >= 4 && password.length >= 4
+  const loginValidation = (username:string,password:string) =>{
+    if((username.length > 3) && (password.length > 3)) return true
   }
 
-  const handleSubmit = async() => {
-     if(loginValidation(formData)){ 
+  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+     if(loginValidation(formData.username,formData.password)){ 
       const res = await dispatch(loginService(formData))
-       res ? (navigate('/dashboard')) : '' 
+
+      if(res.rol === 'ADMINISTRATOR'){navigate('/dashboard')}
+      if(res.rol === 'TEACHER'){navigate('/dashboard-teacher')}
+      if(res.rol === 'STUDENT'){navigate('/dashboard-student')}
+      if(res.rol === 'TUTOR'){navigate('/dashboard-tutor')}
      }else{
-      setMessage('Error, por favor, rellena los campos')
+      Swal.fire('Error','Por favor, rellena los campos','error');
+      // setMessage('Error, por favor, rellena los campos')
     }
   
   };
@@ -48,42 +52,46 @@ const LoginForm = () => {
   };
 
   return (
-    <Form className="d-flex flex-column px-4 py-5 bg-white rounded">
-      {!forgotPassword ? (
-        <>
-          <Form.Group className="mb-2" controlId="formBasicUsername">
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="username"
-              placeholder="Ingresá tu usuario"
-              name="username"
-              onChange={handleOnChange}
-              style={{ height: '4rem' }}
-            />
-          </Form.Group>
-          <Form.Group className="mb-2" controlId="formBasicPassword">
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Ingresá tu contraseña"
-              name="password"
-              onChange={handleOnChange}
-              style={{ height: '4rem' }}
-            />
-          </Form.Group>
-          <Form.Group className="mb-2" controlId="formBasicCheckbox">
+    <Form
+      className="d-flex flex-column px-4 py-5 bg-white rounded"
+      onSubmit={handleSubmit}
+    >
+      {/*      {!forgotPassword ? ( */}
+      <>
+        <Form.Group className="mb-2" controlId="formBasicUsername">
+          <Form.Label></Form.Label>
+          <Form.Control
+            required
+            type="username"
+            placeholder="Ingresá tu usuario"
+            name="username"
+            onChange={handleOnChange}
+            style={{ height: '4rem' }}
+            minLength={4}
+          />
+        </Form.Group>
+        <Form.Group className="mb-2" controlId="formBasicPassword">
+          <Form.Label></Form.Label>
+          <Form.Control
+          required
+            type="password"
+            placeholder="Ingresá tu contraseña"
+            name="password"
+            onChange={handleOnChange}
+            style={{ height: '4rem' }}
+            minLength={4}
+          />
+        </Form.Group>
+        {/*          <Form.Group className="mb-2" controlId="formBasicCheckbox">
             { message ? <span>{message}</span> : <span></span> }
             
             <Button variant="disabled" onClick={() => setForgotPassword(true)}>
               ¿Olvidaste tu contraseña?
             </Button>
-          </Form.Group>
-          <ButtonMain
-            text={'INICIAR SESIÓN'}
-            size="lg"
-            onClick={handleSubmit}
-          />
-        </>
+  </Form.Group> */}
+        <ButtonMain type="submit" text={'INICIAR SESIÓN'} size="lg" className='mt-4' />
+      </>
+      {/*
       ) : (
         <>
           <Form.Group className="mb-2" controlId="formBasicEmail">
@@ -113,7 +121,7 @@ const LoginForm = () => {
             </Button>
           </Form.Group>
         </>
-      )}
+      )}*/}
     </Form>
   );
 };

@@ -14,6 +14,9 @@ import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { Person } from '../models/Person';
 import { fetchPersons, getAllTeachers, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
+import UserInfo from '../components/UI/UserInfo';
+import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
+import Loader from '../components/UI/Loader';
 
 
 function Profesores() {
@@ -22,8 +25,8 @@ function Profesores() {
     const teachers = useAppSelector(getAllTeachers)
     const teachersStatus = useAppSelector(getPersonsStatus)
     const teachersError = useAppSelector(getPersonsError)
-
     const dispatch = useAppDispatch()
+    const InfoModalState = useAppSelector(getUserInfoModalState)
 
     const effectRan = useRef(false)
 
@@ -53,16 +56,23 @@ function Profesores() {
     let content;
 
     if (teachersStatus === 'loading') {
-        content = <p>"Loading...</p>
+        content = <Loader show={true} />
     } else if (teachersStatus === "succeeded") {
-        content = teachers.map((user) => (
+        content =
+        <Row>
+        <Container>
+            <Row xs={1} md={2} lg={3} xl={4} className="g-2">
+                {teachers.map((user) => (
             <Col key={user.id}>
                 <CardPerson
                     user={user}
                     handleUpdateUser={handleUpdateUser}
                 />
             </Col>
-        ))
+        ))}
+        </Row>
+        </Container>
+        </Row>
     } else if (teachersStatus === 'failed') {
         content = <p>{teachersError}</p>;
     }
@@ -77,13 +87,7 @@ function Profesores() {
                         <div className="header-line"></div>
                     </Col>
                 </Row>
-                <Row>
-                    <Container>
-                        <Row xs={1} md={2} lg={3} xl={4} className="g-2">
-                        {content}
-                        </Row>
-                    </Container>
-                </Row>
+                {content}
                 <FormUsuario
                     show={showFormUser}
                     handleClose={handleCloseFormUser}
@@ -91,6 +95,7 @@ function Profesores() {
                     user={selectedUser}
                     setShowFormUser={setShowFormUser}
                 />
+                <UserInfo show={InfoModalState} onHide={() => dispatch(handleShowInfoModal())}/>
             </Container>
         </>
     );
