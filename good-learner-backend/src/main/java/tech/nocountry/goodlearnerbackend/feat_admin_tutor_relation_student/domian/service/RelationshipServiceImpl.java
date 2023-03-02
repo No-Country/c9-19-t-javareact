@@ -2,7 +2,9 @@ package tech.nocountry.goodlearnerbackend.feat_admin_tutor_relation_student.domi
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import tech.nocountry.goodlearnerbackend.feat_admin_tutor_relation_student.domian.model.request.ReadRelationRequest;
 import tech.nocountry.goodlearnerbackend.feat_admin_tutor_relation_student.domian.model.request.RelationStudentTutorRequest;
@@ -86,7 +88,7 @@ public class RelationshipServiceImpl implements IRelationshipService{
 
     @Override
     public ResponseEntity<?> createdRelation(RelationStudentTutorRequest relationStudentTutorRequest) {
-        DetailRelationTutorResponse relationStudentTutor = null;
+        RelationTutorStudentResponse relationStudentTutor = null;
 
         Optional<Student> student = studentRepository.findById(relationStudentTutorRequest.getIdStudent());
         Optional<Tutor> tutor = tutorRepository.findById(relationStudentTutorRequest.getIdTutor());
@@ -101,16 +103,9 @@ public class RelationshipServiceImpl implements IRelationshipService{
 
             TutorStudent tutorStudent = tutorStudentRepository.save(new TutorStudent(student.get(), tutor.get(), bond.get()));
 
-            relationStudentTutor = new DetailRelationTutorResponse(
-                    tutorStudent.getIdTutorStudent(),
-                    tutorStudent.getStudent().getIdPerson(),
+            relationStudentTutor = new RelationTutorStudentResponse(
                     tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
-<<<<<<< HEAD
                     tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getLastName(),
-=======
-                    tutorStudent.getTutor().getIdPerson(),
-                    tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
->>>>>>> af989fc40e425bc9b04b34b35004e8a9175c3828
                     tutorStudent.getBond().getBondName()
                     );
             return ResponseEntity.ok(relationStudentTutor);
