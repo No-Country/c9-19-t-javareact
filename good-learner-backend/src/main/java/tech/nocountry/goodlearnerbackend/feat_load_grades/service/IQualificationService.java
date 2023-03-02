@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public interface ILoadQualificationService {
+public interface IQualificationService {
 
     List<LoadQualificationDTO> getAllQualifications();
 
     Optional<LoadQualificationDTO> getQualificationsById(Long idPerson);
 
     ResponseEntity<?> createQualifyStudent(QualifyStudentRequest qualifyStudent);
+
+    ResponseEntity<?> deleteByIdQualifyStudent(Long idQualifyStudent);
 }

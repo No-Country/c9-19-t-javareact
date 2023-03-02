@@ -26,3 +26,11 @@
   "idStudent": 6
 }
 ```
+
+---
+#### POST http://localhost:8080/api/teacher/qualification/8
+* [Eliminar una Calificación](). El profesor podrá eliminar una calificación trimestral de un estudiante, pasando en el endpoint el ID de la calificación.
+
+##### Respuestas posibles
+* [2004 OK]() Calificación eliminada con éxito.
+* [404 OK]() No se ha encontrado Calificación por su ID.

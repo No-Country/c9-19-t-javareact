@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LoadQualificationServiceImpl implements ILoadQualificationService{
+public class QualificationServiceImpl implements IQualificationService {
 
     @Autowired
     private QualificationRepository qualificationRepository;
@@ -30,11 +30,11 @@ public class LoadQualificationServiceImpl implements ILoadQualificationService{
     private final TypeQualificationRepository typeQualificationRepository;
 
     @Autowired
-    public LoadQualificationServiceImpl(QualificationRepository qualificationRepository, QualifyStudentMapper qualifyStudentMapper,
-                                        StudentRepository studentRepository,
-                                        CommissionSubjectRepository commissionSubjectRepository,
-                                        PeriodRepository periodRepository,
-                                        TypeQualificationRepository typeQualificationRepository) {
+    public QualificationServiceImpl(QualificationRepository qualificationRepository, QualifyStudentMapper qualifyStudentMapper,
+                                    StudentRepository studentRepository,
+                                    CommissionSubjectRepository commissionSubjectRepository,
+                                    PeriodRepository periodRepository,
+                                    TypeQualificationRepository typeQualificationRepository) {
         this.qualificationRepository = qualificationRepository;
         this.qualifyStudentMapper = qualifyStudentMapper;
         this.studentRepository = studentRepository;
@@ -84,6 +84,15 @@ public class LoadQualificationServiceImpl implements ILoadQualificationService{
             }
         }
         return new ResponseEntity<>("No se ha encontrado al estudiante o a la comisión.", HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public ResponseEntity<?> deleteByIdQualifyStudent(Long idQualifyStudent) {
+        if(qualificationRepository.existsById(idQualifyStudent)){
+            qualificationRepository.deleteById(idQualifyStudent);
+            return ResponseEntity.noContent().build();
+        }
+        return new ResponseEntity<>("No se ha encontrado Calificación por su ID", HttpStatus.NOT_FOUND);
     }
 
 }
