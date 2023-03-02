@@ -126,7 +126,7 @@ function MyCommissions() {
                 "idStudent": idStudent,
                 "idCommissionSubject": selectedSubject.commissionSubjectId,
                 "periodName": periodName,
-                "numericalQualification": newQualification
+                "numericalQualification": Number(newQualification)
               }
         }
         const response = await useApi(apiPropertyes);
