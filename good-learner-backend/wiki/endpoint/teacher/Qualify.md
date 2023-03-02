@@ -9,8 +9,8 @@
 [Periodos]() `FIRST_TRIMESTER, SECOND_TRIMESTER, THIRD_TRIMESTER, ANNUAL, PREVIOUS`
 
 ##### Respuestas Posibles
-[201 OK Created]() - Se creó con éxito la calificación.
-[400 Bad Request]() - Cuando falta algún dato en json de entrada.
+- [201 OK Created]() - Se creó con éxito la calificación.
+- [400 Bad Request]() - Cuando falta algún dato en json de entrada.
 
 **JSON ENTRADA**
 ```json
@@ -41,9 +41,9 @@
 * [Periodos]() `FIRST_TRIMESTER, SECOND_TRIMESTER, THIRD_TRIMESTER, ANNUAL, PREVIOUS`
 
 ##### Respuestas Posibles
-[201 OK Created]() - Se creo con éxito la calificación.
-[404 Not Found]() - No se encontró la calificación por su ID.
-[400 Bad Request]() - Cuando falta algún dato en json de entrada.
+- [201 OK Created]() - Se creo con éxito la calificación.
+- [404 Not Found]() - No se encontró la calificación por su ID.
+- [400 Bad Request]() - Cuando falta algún dato en json de entrada.
 
 **JSON ENTRADA**
 ```json
@@ -75,5 +75,5 @@
 * [Eliminar una Calificación](). El profesor podrá eliminar una calificación trimestral de un estudiante, pasando en el endpoint el ID de la calificación.
 
 ##### Respuestas posibles
-* [204 OK]() Calificación eliminada con éxito.
-* [404 OK]() No se ha encontrado Calificación por su ID.
+- [204 OK]() Calificación eliminada con éxito.
+- [404 OK]() No se ha encontrado Calificación por su ID.
