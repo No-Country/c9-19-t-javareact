@@ -5,16 +5,18 @@ import '../../styles/card-commission.css';
  
 interface Props {
   commission: Commission;
-  handleSelect: (value: Commission) => void;
+  index: number;
+  handleSelect: (value: Commission, value2: number) => void;
 }
 
 const CardCommission: React.FC<Props> = ({
   commission,
+  index,
   handleSelect,
 }) => {
 
   const handleSelectCard = () => {
-    handleSelect(commission);
+    handleSelect(commission, index);
   }
 
   return (

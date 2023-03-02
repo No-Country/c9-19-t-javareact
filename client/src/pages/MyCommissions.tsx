@@ -130,10 +130,7 @@ function MyCommissions() {
               }
         }
         const response = await useApi(apiPropertyes);
-        console.log(response);
-        if (response.data) {
-           
-        }
+       
         setLoading(false);
         setQualifications(qualifications);
         setShowModal(false);
