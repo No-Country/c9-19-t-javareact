@@ -1,3 +1,4 @@
+import { QualificationTrimestral } from "./QualificationTrimestral";
 
 export class Student {
     id?: number
@@ -10,6 +11,7 @@ export class Student {
     birthDate?: Date;
     email?: string;
     phone?: string;
+    qualifications?: QualificationTrimestral;
 
     static parseItem(raw: any): Student {
         const student = new Student();
@@ -23,6 +25,7 @@ export class Student {
             student.birthDate = raw.birthDate ? raw.birthDate : undefined;
             student.email = raw.email ? raw.email : undefined;
             student.phone = raw.phone ? raw.phone : undefined;
+            student.qualifications = raw.qualifications ? raw.qualifications : undefined;
         return student;
     }
  

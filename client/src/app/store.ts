@@ -3,6 +3,7 @@ import personsliceReducer from './states/Persons';
 import commissionsSlice from './states/Commissions';
 import reportSlice from './states/Report';
 import studentsSlice from './states/Students';
+import teacherCommissionsSlice from './states/TeacherCommissions';
 import userSliceReducer from './states/user';
 import selectedPersonSliceReducer from './states/SelectedPerson';
 import uiSliceReducer from './states/ui'
@@ -22,7 +23,7 @@ const persistConfig = {
   key:"root",
   version: 1,
   storage,
-  blacklist:[ 'persons', 'selectedPerson', 'ui', 'commissions', 'report', 'students']
+  blacklist:[ 'persons', 'selectedPerson', 'ui', 'commissions', 'report', 'students', 'teacherCommissions']
 }
 
 const persistedReducer = persistCombineReducers(persistConfig, {
@@ -31,6 +32,7 @@ const persistedReducer = persistCombineReducers(persistConfig, {
   persons: personsliceReducer,
   report: reportSlice,
   students: studentsSlice,
+  teacherCommissions: teacherCommissionsSlice,
   commissions: commissionsSlice,
   selectedPerson: selectedPersonSliceReducer
 });

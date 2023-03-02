@@ -7,18 +7,16 @@ import '../../styles/card-subjects.css';
 
 interface Props {
   subject: Subject;
-  handleSelect: (value: Subject, value2: number) => void;
-  index: number;
+  handleSelect: (value: Subject) => void;
 }
 
 const CardSubject: React.FC<Props> = ({
   subject,
   handleSelect,
-  index,
 }) => {
 
   const handleSelectCard = () => {
-    handleSelect(subject, index);
+    handleSelect(subject);
   }
 
   return (
@@ -26,7 +24,7 @@ const CardSubject: React.FC<Props> = ({
         <Card onClick={handleSelectCard} className="card-subject">
         <Card.Body className="text-center">
             <Card.Text>
-                {subject.subject_name}        
+                {subject.subjectName}        
             </Card.Text>
         </Card.Body>
         </Card>

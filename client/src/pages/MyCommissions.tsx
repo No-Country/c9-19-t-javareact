@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 // Models
 import { Commission } from '../models/Commission';
-import { User } from '../models/User';
+import { Student } from '../models/Student';
 import { Subject } from '../models/Subject';
 
 // compoents
@@ -14,74 +14,63 @@ import SubjectDetails from '../components/SubjectDetails';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Loader from '../components/UI/Loader';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { fetchTeacherCommissions, getTeacherCommissions, getTeacherCommissionsStatus, getTeacherCommissionsError } from '../app/states/TeacherCommissions';
+
+import { selectIdPerson } from '../app/states/user'
+import { apiProps, useApi } from '../hooks/useApi';
 
 function MyCommissions() {
     const [selectedCommission, setSelectedCommission] = useState<Commission>(new Commission());
     const [showCommissions, setShowCommissions] = useState(true);
     const [showSubjets, setShowSubjets] = useState(false);
     const [showQualification, setShowQualification] = useState(false);
-    const [commissionIndex, setCommissionIndex] = useState<number>(0);
-    const [selectedSubject, setSelectedSubject] = useState<Subject>(new Subject());
-    const [subjectIndex, setSubjectIndex] = useState<number>(0);
-    const [commissions, setCommissions] = useState<Array<Commission>>([
-        {id: 1, course: '2', division: 'A', school_year: 2022, 
-            subjects: [
-                {
-                    id: 1,
-                    subject_name: 'Lengua',
-                    teacher_id: 2,
-                    teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'} 
-                },
-                {
-                    id: 2,
-                    subject_name: 'Matemática',
-                    teacher_id: 2,
-                    teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'} 
-                }
-            ],
-            students: [
-                {id: 7, rol_id: '3', name: 'Mariel', last_name: 'Caro', dni: 12341456},
-                {id: 8, rol_id: '3', name: 'Virginia', last_name: 'Sanchez', dni: 12341456}
-            ]
-        },
-        {id: 2, course: '2', division: 'B', school_year: 2022,
-                subjects: [
-                    {
-                        id: 1,
-                        subject_name: 'Lengua',
-                        teacher_id: 2,
-                        teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'} 
-                    },
-                ]
-        },
-        {id: 3, course: '2', division: 'C', school_year: 2022,
-                subjects: [
-                    {
-                        id: 1,
-                        subject_name: 'Lengua',
-                        teacher_id: 2,
-                        teacher: {id: 2, name: 'Marcos', last_name: 'Díaz'} 
-                    },
-                ]
-        },    
-    ]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedSubject, setSelectedSubject] = useState<Subject>(new Subject()); 
+    const [qualifications, setQualifications] = useState<Array<Student>>(new Array());    
+    const commissions = useAppSelector(getTeacherCommissions);
+    const commissionsStatus = useAppSelector(getTeacherCommissionsStatus);
+    const commissionsError = useAppSelector(getTeacherCommissionsError);
+    const [loading, setLoading] = useState(false);
+    const dispatch = useAppDispatch();
+    const effectRan = useRef(false);
+    const id = useAppSelector(selectIdPerson);
 
-    
+    useEffect(() => {
+        if (effectRan.current === false) {
+            if (commissionsStatus === "idle")
+                dispatch(fetchTeacherCommissions(id));
+            if (commissionsStatus === "loading")
+                setLoading(true);
+            if (commissionsStatus === "succeeded")
+                setLoading(false);
+            effectRan.current = true
+        }
+    }, [getTeacherCommissionsStatus, dispatch])
 
-    const handleSelectCommission = (data: Commission, index: number) => {
+    const handleSelectCommission = (data: Commission) => {
         // obtener detalle de comision
         setSelectedCommission(data);
         setShowCommissions(false);
         setShowSubjets(true);
-        setCommissionIndex(index);
     }
 
-    const handleSelectSubject = (data: Subject, index: number) => {
+    const handleSelectSubject = async (data: Subject) => {
         // obtener detalle de comision
         setSelectedSubject(data);
-        setShowSubjets(false);
-        setShowQualification(true);
-        setCommissionIndex(index);
+        setLoading(true);
+        const apiPropertyes: apiProps = {
+            path: `report/subject/${data.commissionSubjectId}`,
+            method: 'get',
+        }
+        const response = await useApi(apiPropertyes);
+        if (response.data) {
+            setQualifications(response.data)
+            setShowSubjets(false);
+            setShowQualification(true);
+        }
+        setLoading(false);
     }
 
     
@@ -96,6 +85,37 @@ function MyCommissions() {
         setShowQualification(false);
         setShowSubjets(true);
     }
+
+    const handleSaveNewQualification = (i: number, period: number, newQualification: number) => {
+        switch(period) {
+            case 1:
+                if (qualifications[i].qualifications!.FIRST_TRIMESTER === undefined) {
+
+                } else {
+
+                }
+                qualifications[i].qualifications!.FIRST_TRIMESTER = Number(newQualification);
+                break;
+            case 2:
+                if (qualifications[i].qualifications!.SECOND_TRIMESTER === undefined) {
+
+                } else {
+
+                }
+                qualifications[i].qualifications!.SECOND_TRIMESTER = Number(newQualification);
+                break;
+            case 3:
+                if (qualifications[i].qualifications!.THIRD_TRIMESTER === undefined) {
+
+                } else {
+
+                }
+                qualifications[i].qualifications!.THIRD_TRIMESTER = Number(newQualification);
+                break;                         
+        }
+        setQualifications(qualifications);
+        setShowModal(false);
+    } 
 
     return (
         <>
@@ -118,18 +138,27 @@ function MyCommissions() {
                     <Container style={{padding: '0em 5em'}}>
                         {
                             showCommissions
-                            &&
-                            <Row xs={1} md={2} lg={3} xl={4} className="g-2">
-                                {commissions.map((commission: any, index: number) => (
-                                    <Col key={commission.id}>
-                                        <CardCommission
-                                            commission={commission}
-                                            index={index}
-                                            handleSelect={handleSelectCommission}
-                                        />
-                                    </Col>
-                                ))}
-                            </Row>
+                                ?
+                                commissionsStatus === 'loading' 
+                                ?
+                                <Loader show={loading}/>
+                                :
+                                commissionsStatus === "succeeded"
+                                ?
+                                <Row xs={1} md={2} lg={3} xl={4} className="g-2">
+                                    {commissions.map((commission: Commission) => (
+                                        <Col key={commission.commissionId}>
+                                            <CardCommission
+                                                commission={commission}
+                                                handleSelect={handleSelectCommission}
+                                            />
+                                        </Col>
+                                    ))}
+                                </Row>
+                                :
+                                <p>{commissionsError}</p>
+                            :
+                            null
                         }
                         {
                             showSubjets
@@ -146,8 +175,17 @@ function MyCommissions() {
                             &&
                             <SubjectDetails
                                 subject={selectedSubject}
+                                qualifications={qualifications}
                                 backToSubjects={backToSubjects}
+                                showModal={showModal}
+                                saveQualification={handleSaveNewQualification}
+                                setShowModal={setShowModal}
                             />
+                        }
+                        {
+                            loading
+                            &&
+                            <Loader show={loading}/>
                         }
                     </Container>
                 </Row>

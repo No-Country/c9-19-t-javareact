@@ -12,11 +12,12 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import { CommissionSubject } from '../models/CommissionSubject';
 
 export interface Props {
     commission: Commission;
-    subjects: Array<Subject>;
-    handleSelect: (value: Subject, value2: number) => void;
+    subjects: Array<CommissionSubject>;
+    handleSelect: (value: Subject) => void;
     backToCommissions: () => void; 
 }
 
@@ -41,11 +42,10 @@ function MySubjects({
             </Col>
         </Row>
        <Row xs={1} md={2} lg={3} xl={4} className="g-2 mt-2">
-            {subjects.map((subject: any, index: number) => (
-                <Col key={subject.id}>
+            {subjects.map((subject: any) => (
+                <Col key={subject.subjectId}>
                     <CardSubject
                         subject={subject}
-                        index={index}
                         handleSelect={handleSelect}
                     />
                 </Col>

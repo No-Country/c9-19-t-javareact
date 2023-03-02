@@ -13,6 +13,8 @@ import '../styles/sub-header.css';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+
 
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchStudents, getStudents, getStudentsError, getStudentsStatus } from '../app/states/Students';
@@ -62,6 +64,11 @@ function MyStudents() {
         setLoading(false);
     }
 
+    const backToStudents = () => {
+        setShowStudentQualification(false);
+        setSelectedStudent(new Student());
+    }
+
     return (
         <>
             <Container>
@@ -75,8 +82,7 @@ function MyStudents() {
                     <Container style={{padding: '0em 5em'}}>
                         {
                             !showStudentQualification
-                            &&
-                            
+                            ? 
                                 studentsStatus === 'loading' 
                                 ?
                                 <Loader show={loading}/>
@@ -96,15 +102,18 @@ function MyStudents() {
                                 </Row>
                                 :
                                 <p>{studentsError}</p>
+                            :
+                            null
                         }
                         {
                             (showStudentQualification && selectedStudent)
                             &&
                             <Container>
                             <Row>
-                                <Col xs={12} className="sub-header mt-5">
+                                <Col xs={12} className="sub-header">
                                     <div style={{marginBottom: '2em'}}>
                                         <span> <strong> Materias del estudiante {selectedStudent.firstName} {selectedStudent.lastName} </strong></span>
+                                        <Button variant="outline-secondary" style={{float: 'right'}} onClick={backToStudents}> <i className='fa fa-arrow-left'></i> Volver a mis estudiantes </Button>{' '}
                                     </div>
                                     <div className="sub-header-line"></div>
                                 </Col>

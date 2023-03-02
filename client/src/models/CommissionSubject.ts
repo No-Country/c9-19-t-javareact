@@ -6,6 +6,8 @@ export class CommissionSubject {
     idCommissionSubject?: number;
     subject?: Subject;
     teacher?: Teacher;
+    subjectId?: Number;
+    subjectName?: String;
 
     static parseItem(raw: any): CommissionSubject {
         const commissionSubject = new CommissionSubject();
