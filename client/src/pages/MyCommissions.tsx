@@ -86,33 +86,55 @@ function MyCommissions() {
         setShowSubjets(true);
     }
 
-    const handleSaveNewQualification = (i: number, period: number, newQualification: number) => {
+    const handleSaveNewQualification = async (i: number, period: number, newQualification: number, idStudent: number) => {
+        let periodName = '';
+        let method = '';
+        setLoading(true);
         switch(period) {
             case 1:
+                periodName = 'FIRST_TRIMESTER';
                 if (qualifications[i].qualifications!.FIRST_TRIMESTER === undefined) {
-
+                    method = 'POST';
                 } else {
-
+                    method = 'PUT';
                 }
                 qualifications[i].qualifications!.FIRST_TRIMESTER = Number(newQualification);
                 break;
             case 2:
+                periodName = 'SECOND_TRIMESTER';
                 if (qualifications[i].qualifications!.SECOND_TRIMESTER === undefined) {
-
+                    method = 'POST';
                 } else {
-
+                    method = 'PUT';
                 }
                 qualifications[i].qualifications!.SECOND_TRIMESTER = Number(newQualification);
                 break;
             case 3:
+                periodName = 'THIRD_TRIMESTER';
                 if (qualifications[i].qualifications!.THIRD_TRIMESTER === undefined) {
-
+                    method = 'POST';
                 } else {
-
+                    method = 'PUT';
                 }
                 qualifications[i].qualifications!.THIRD_TRIMESTER = Number(newQualification);
                 break;                         
         }
+        const apiPropertyes: apiProps = {
+            path: `teacher/qualification`,
+            method: method,
+            body:  {
+                "idStudent": idStudent,
+                "idCommissionSubject": selectedSubject.commissionSubjectId,
+                "periodName": periodName,
+                "numericalQualification": newQualification
+              }
+        }
+        const response = await useApi(apiPropertyes);
+        console.log(response);
+        if (response.data) {
+           
+        }
+        setLoading(false);
         setQualifications(qualifications);
         setShowModal(false);
     } 
