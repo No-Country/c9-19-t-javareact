@@ -7,6 +7,8 @@ import teacherCommissionsSlice from './states/TeacherCommissions';
 import userSliceReducer from './states/user';
 import selectedPersonSliceReducer from './states/SelectedPerson';
 import uiSliceReducer from './states/ui'
+import relationsSlice from './states/Relation'
+
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
@@ -34,6 +36,7 @@ const persistedReducer = persistCombineReducers(persistConfig, {
   students: studentsSlice,
   teacherCommissions: teacherCommissionsSlice,
   commissions: commissionsSlice,
+  relation: relationsSlice,
   selectedPerson: selectedPersonSliceReducer
 });
 
