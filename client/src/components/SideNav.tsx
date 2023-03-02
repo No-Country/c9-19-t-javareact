@@ -42,7 +42,7 @@ export const SideNav = () => {
         useRol ==='TEACHER' ? 
        ( <div className="list-group list-group-flush bg-blue" >
           <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/dashboard-teacher'} href="/dashboard-teacher"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
-          <Accordion flush style={{ color: "white", background: "inherit" }}>
+{/*           <Accordion flush style={{ color: "white", background: "inherit" }}>
             <Accordion.Item eventKey="0">
               <Accordion.Header><i className="fa-solid fa-user-graduate me-3"></i>Estudiantes</Accordion.Header>
               <Accordion.Body className="p-0">
@@ -50,7 +50,7 @@ export const SideNav = () => {
                 <Nav.Link className="list-group-sub-item list-group-item-action list-group-item p-3" as={Link} to={'/estudiantes'} href="/estudiantes"><i className="fa-thin fa-greater-than me-3"></i>Todos mis estudiantes</Nav.Link>
               </Accordion.Body>
             </Accordion.Item>
-          </Accordion>
+          </Accordion> */}
           <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/my-commissions'}
           href="/my-commissions"><i className="fa-solid fa-th-list me-3"></i>Mis Comisiones</Nav.Link>
         </div>
@@ -63,7 +63,7 @@ export const SideNav = () => {
        )
        : 
        ( <div className="list-group list-group-flush bg-blue" >
-          <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/dashboard-tiutor'} href="/dashboard-tutor"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
+          <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/dashboard-tutor'} href="/dashboard-tutor"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
           <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/my-students'} href="/my-students"><i className="fa-solid fa-graduation-cap me-3"></i>Mis Estudiantes</Nav.Link>
         </div>
        )

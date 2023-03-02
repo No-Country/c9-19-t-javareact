@@ -5,7 +5,7 @@ import { User } from '../models/User';
 
 // compoents
 import FormUsuario from '../components/formUsuario';
-import RelationAssign from '../components/RelationAssign';
+import RelationAssignStudent from '../components/RelationAssignStudent';
 import CardPerson from '../components/UI/CardPerson';
 
 // UI
@@ -19,6 +19,7 @@ import { deleteRelation, fetchRelation, setRelation } from '../app/states/Relati
 import UserInfo from '../components/UI/UserInfo';
 import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
 import Loader from '../components/UI/Loader';
+
 
 
 function Estudiantes() {
@@ -142,7 +143,7 @@ function Estudiantes() {
                     user={selectedUser}
                     setShowFormUser={setShowFormUser}
                 />
-                <RelationAssign
+                <RelationAssignStudent
                     show={showRelations}
                     title={modalTitle} 
                     handleDel={handleDelRelations}
