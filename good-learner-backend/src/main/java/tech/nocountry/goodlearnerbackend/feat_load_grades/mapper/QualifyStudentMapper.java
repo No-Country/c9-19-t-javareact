@@ -1,16 +1,14 @@
 package tech.nocountry.goodlearnerbackend.feat_load_grades.mapper;
 
-import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
-import tech.nocountry.goodlearnerbackend.feat_load_grades.dto.LoadQualificationDTO;
+import tech.nocountry.goodlearnerbackend.feat_load_grades.model.response.LoadQualificationDTO;
 import tech.nocountry.goodlearnerbackend.model.Qualification;
 
-import java.util.List;
 import java.util.Optional;
 
 //@Mapper
 @Component
-public class LoadQualificationMapper {
+public class QualifyStudentMapper {
     public Optional<LoadQualificationDTO> mapToLoadQualificationDTO(Qualification qualification) {
         if (qualification == null) {
             return Optional.empty();
