@@ -15,7 +15,7 @@ import { Person } from '../models/Person';
 import { User } from '../models';
 import UserInfo from '../components/UI/UserInfo';
 import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
-import Loader from '../components/UI/Loader';
+import { deleteRelation, fetchRelation, setRelation } from '../app/states/Relation';
 
 
 function Tutores() {
@@ -42,7 +42,6 @@ function Tutores() {
         }
     }, [usersStatus, dispatch])
 
-
     const handleCloseFormUser = () => {
         setShowFormUser(false);
         setSelectedUser({});
@@ -57,12 +56,15 @@ function Tutores() {
         dispatch(updatePerson(user))
         handleCloseFormUser();
     };
-
-    const handleShowRelations = (user: any) => {
+    const handleDelRelations = (id: any) => {
+        dispatch(deleteRelation(id))
+    }
+    const handleShowRelations = async(user: any) => {
+        let {payload} = await dispatch(fetchRelation({id:user.id,path:'tutor'}))
         setSelectedUser(user);
         setModalTitle('Asignar estudiante al tutor')
         setUsersToReltions(students);
-        setRelations([]);
+        setRelations(payload);
         setShowRelations(true);
     }
 
@@ -71,8 +73,21 @@ function Tutores() {
         setSelectedUser({});
     }
 
-    const handleSaveRelations = (data: Array<User>) => {
-    }
+    const handleSaveRelations = (data: any) => {
+        let shouldDispatch = true;
+    
+        if (relations.length > 0) {
+            relations?.map((elem) => {
+                if ((elem.idTutor === data.idTutor) && (elem.idStudent === data.idStudent)) {
+                    shouldDispatch = false;
+                }
+            });
+        }
+    
+        if (shouldDispatch) {
+            dispatch(setRelation(data));
+        }
+    };
 
     let content;
 
@@ -121,6 +136,7 @@ function Tutores() {
                     title={modalTitle} 
                     handleClose={handleCloseRelations} 
                     handleSave={handleSaveRelations} 
+                    handleDel={handleDelRelations}
                     user={selectedUser} 
                     users={usersToReltions} 
                     relations={relations}/>
