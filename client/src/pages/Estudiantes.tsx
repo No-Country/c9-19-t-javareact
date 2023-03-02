@@ -5,7 +5,7 @@ import { User } from '../models/User';
 
 // compoents
 import FormUsuario from '../components/formUsuario';
-import RelationAssign from '../components/RelationAssign';
+import RelationAssignStudent from '../components/RelationAssignStudent';
 import CardPerson from '../components/UI/CardPerson';
 
 // UI
@@ -19,14 +19,16 @@ import { deleteRelation, fetchRelation, setRelation } from '../app/states/Relati
 import UserInfo from '../components/UI/UserInfo';
 import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
 import Loader from '../components/UI/Loader';
+import { FamilyRelationship } from '../models/FamilyRelationship';
+
 
 
 function Estudiantes() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
     const [selectedUser, setSelectedUser] = useState<Person>({});
     const [showRelations, setShowRelations] = useState<boolean>(false);
-    const [usersToReltions, setUsersToReltions] = useState<Array<User>>([]);
-    const [relations, setRelations] = useState<Array<User>>([]);
+    const [usersToReltions, setUsersToReltions] = useState<Array<Person>>([]);
+    const [relations, setRelations] = useState<Array<FamilyRelationship>>([]);
     const [modalTitle, setModalTitle] = useState<string>('');
     const students = useAppSelector(getAllStudents)
     const tutors = useAppSelector(getAllTutors)
@@ -69,6 +71,7 @@ function Estudiantes() {
         setSelectedUser(user);
         setModalTitle('Asignar tutor al estudiante')
         setUsersToReltions(tutors);
+        console.log(payload);
         setRelations(payload);
         setShowRelations(true);
 
@@ -142,7 +145,7 @@ function Estudiantes() {
                     user={selectedUser}
                     setShowFormUser={setShowFormUser}
                 />
-                <RelationAssign
+                <RelationAssignStudent
                     show={showRelations}
                     title={modalTitle} 
                     handleDel={handleDelRelations}
