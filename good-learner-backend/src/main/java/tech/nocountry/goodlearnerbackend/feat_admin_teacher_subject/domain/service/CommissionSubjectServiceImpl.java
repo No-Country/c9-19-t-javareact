@@ -48,4 +48,9 @@ public class CommissionSubjectServiceImpl implements ICommissionSubjectService{
         }
         return new ResponseEntity<>("No se ha encontrado a la comisión/asignatura.", HttpStatus.NOT_FOUND);
     }
+
+    @Override
+    public ResponseEntity<?> deleteTeacherSubject(TeacherSubjectRequest teacherSubjectRequest) {
+        return null;
+    }
 }

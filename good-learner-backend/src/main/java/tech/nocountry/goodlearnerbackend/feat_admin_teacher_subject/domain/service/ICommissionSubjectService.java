@@ -6,4 +6,6 @@ import tech.nocountry.goodlearnerbackend.feat_admin_teacher_subject.domain.model
 public interface ICommissionSubjectService {
 
     public ResponseEntity<?> updateTeacherSubject(TeacherSubjectRequest teacherSubjectRequest);
+
+    public ResponseEntity<?> deleteTeacherSubject(TeacherSubjectRequest teacherSubjectRequest);
 }
