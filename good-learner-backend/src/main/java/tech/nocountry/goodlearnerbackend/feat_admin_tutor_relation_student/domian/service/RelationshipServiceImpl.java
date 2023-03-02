@@ -88,7 +88,7 @@ public class RelationshipServiceImpl implements IRelationshipService{
 
     @Override
     public ResponseEntity<?> createdRelation(RelationStudentTutorRequest relationStudentTutorRequest) {
-        RelationTutorStudentResponse relationStudentTutor = null;
+        DetailRelationTutorResponse relationStudentTutor = null;
 
         Optional<Student> student = studentRepository.findById(relationStudentTutorRequest.getIdStudent());
         Optional<Tutor> tutor = tutorRepository.findById(relationStudentTutorRequest.getIdTutor());
@@ -103,8 +103,11 @@ public class RelationshipServiceImpl implements IRelationshipService{
 
             TutorStudent tutorStudent = tutorStudentRepository.save(new TutorStudent(student.get(), tutor.get(), bond.get()));
 
-            relationStudentTutor = new RelationTutorStudentResponse(
+            relationStudentTutor = new DetailRelationTutorResponse(
+                    tutorStudent.getIdTutorStudent(),
+                    tutorStudent.getStudent().getIdPerson(),
                     tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
+                    tutorStudent.getTutor().getIdPerson(),
                     tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getLastName(),
                     tutorStudent.getBond().getBondName()
                     );
