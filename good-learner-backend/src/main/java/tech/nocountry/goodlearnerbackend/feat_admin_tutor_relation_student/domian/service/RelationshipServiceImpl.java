@@ -52,7 +52,7 @@ public class RelationshipServiceImpl implements IRelationshipService{
                         tutorStudent.getStudent().getIdPerson(),
                         tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
                         tutorStudent.getTutor().getIdPerson(),
-                        tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
+                        tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getLastName(),
                         tutorStudent.getBond().getBondName()
                 ));
             });
@@ -77,7 +77,7 @@ public class RelationshipServiceImpl implements IRelationshipService{
                         tutorStudent.getStudent().getIdPerson(),
                         tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
                         tutorStudent.getTutor().getIdPerson(),
-                        tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
+                        tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getLastName(),
                         tutorStudent.getBond().getBondName()
                 ));
             });
@@ -105,7 +105,7 @@ public class RelationshipServiceImpl implements IRelationshipService{
 
             relationStudentTutor = new RelationTutorStudentResponse(
                     tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
-                    tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
+                    tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getLastName(),
                     tutorStudent.getBond().getBondName()
                     );
             return ResponseEntity.ok(relationStudentTutor);
@@ -132,7 +132,7 @@ public class RelationshipServiceImpl implements IRelationshipService{
 
                 relationStudentTutor = new RelationTutorStudentResponse(
                         tutorStudent.getStudent().getFirstName() + " " + tutorStudent.getStudent().getLastName(),
-                        tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getFirstName(),
+                        tutorStudent.getTutor().getFirstName() + " " + tutorStudent.getTutor().getLastName(),
                         tutorStudent.getBond().getBondName()
                 );
 
