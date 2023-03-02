@@ -1,13 +1,13 @@
-package tech.nocountry.goodlearnerbackend.feat_load_grades.service;
+package tech.nocountry.goodlearnerbackend.feat_teacher_qualify.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import tech.nocountry.goodlearnerbackend.feat_load_grades.model.request.QualifyStudentRequest;
-import tech.nocountry.goodlearnerbackend.feat_load_grades.model.response.LoadQualificationDTO;
-import tech.nocountry.goodlearnerbackend.feat_load_grades.service.mapper.QualifyStudentMapper;
-import tech.nocountry.goodlearnerbackend.feat_load_grades.model.response.QualifyStudentResponse;
+import tech.nocountry.goodlearnerbackend.feat_teacher_qualify.model.request.QualifyStudentRequest;
+import tech.nocountry.goodlearnerbackend.feat_teacher_qualify.model.response.LoadQualificationDTO;
+import tech.nocountry.goodlearnerbackend.feat_teacher_qualify.service.mapper.QualifyStudentMapper;
+import tech.nocountry.goodlearnerbackend.feat_teacher_qualify.model.response.QualifyStudentResponse;
 import tech.nocountry.goodlearnerbackend.model.*;
 import tech.nocountry.goodlearnerbackend.repository.*;
 
