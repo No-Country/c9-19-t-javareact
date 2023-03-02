@@ -4,8 +4,6 @@
 
 ---
 
----
-
 #### POST http://localhost:8080/api/teacher/qualification
 * [Calificar Estudiante](). El profesor podrá calificar a un estudiante colocándole nota numérica a uno de los tres trimestres.
 [Periodos]() `FIRST_TRIMESTER, SECOND_TRIMESTER, THIRD_TRIMESTER, ANNUAL, PREVIOUS`
