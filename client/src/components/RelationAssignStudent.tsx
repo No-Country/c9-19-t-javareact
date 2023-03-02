@@ -25,7 +25,7 @@ export interface Props {
   handleClose: () => void;
   handleSave: (value: FamilyRelationship) => void;
   handleDel: (id: number) => void;
-  // handleFetch: (id: number, path: string) => void;
+
 }
 export const bonds = [
   { id: 1, name: "FATHER" },
@@ -71,20 +71,6 @@ function RelationAssignStudent({
   const handleCloseModal = () => {
     handleClose();
   };
-/*    const handleSaveData = ({
-    idStudent,
-    idTutor
-   }) => {
-    if (newRelations.length !== 0 && newBond !== undefined) {
-      let relation: bondProps = {
-        idStudent: idStudent === "student" ? newRelations[1].id : user.id,
-        idTutor: idTutor === "student" ? user.id : newRelations[1].idTutor,
-        relation: newBond,
-      };
-      handleSave(relation);
-      handleClose()
-    }
-  };  */
 
   const handleChange = (e: { target: { value: number | undefined } }) => {
     let userFilter = users.find((elem) => elem.id === Number(e.target.value));
@@ -95,18 +81,11 @@ function RelationAssignStudent({
       idTutor:idTutor,
       relation:newBond
     }
-
     if (user) {  
       handleSave(relation)  
       setAdded(false)
-        setNewRelations([
-        ...newRelations,
-        {
-          fullNameTutor: user.fullName,
-          idTutor: user.id,
-          relation: newBond,
-        },
-      ]);  
+      setBond(undefined)
+
     }  
   };
   const handleChangeRelation = (e: { target: { value: number } }) => {
@@ -199,7 +178,7 @@ function RelationAssignStudent({
             {relationsStatus !== undefined && (
               <Container>
   <ListGroup>
-    
+    {console.log(relationsStatus)}
     {relationsStatus.map(
       ({
         fullNameStudent,
@@ -244,21 +223,6 @@ function RelationAssignStudent({
             )}
           </Container>
         </Modal.Body>
-
-        {/*         <Modal.Footer>
-          <ButtonSecondary
-            text={"Cancelar"}
-            size="md"
-            icon="fa fa-times"
-            onClick={handleCloseModal}
-          />
-          <ButtonMain
-            text={"Guardar"}
-            size="md"
-            icon="fa fa-save"
-            onClick={handleSaveData}
-          />
-        </Modal.Footer> */}
       </Modal>
     </>
   );
