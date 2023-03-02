@@ -3,7 +3,7 @@
 ## PROFESOR - Rutas Protegidas
 
 ---
-#### GET http://localhost:8080/api/teacher/qualification
+#### POST http://localhost:8080/api/teacher/qualification
 * [Calificar Estudiante](). El profesor podrá calificar a un estudiante colocándole nota numérica a uno de los tres trimestres.
 
 **JSON ENTRADA**
