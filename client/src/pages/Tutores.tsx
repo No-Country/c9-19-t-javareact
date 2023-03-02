@@ -13,9 +13,11 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchPersons, getAllStudents, getAllTutors, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
 import { Person } from '../models/Person';
 import { User } from '../models';
+import { FamilyRelationship } from '../models/FamilyRelationship';
 import UserInfo from '../components/UI/UserInfo';
 import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
 import { deleteRelation, fetchRelation, setRelation } from '../app/states/Relation';
+import Loader from '../components/UI/Loader';
 
 
 
@@ -23,8 +25,8 @@ function Tutores() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
     const [selectedUser, setSelectedUser] = useState<Person>({});
     const [showRelations, setShowRelations] = useState<boolean>(false);
-    const [usersToReltions, setUsersToReltions] = useState<Array<User>>([]);
-    const [relations, setRelations] = useState<Array<User>>([]);
+    const [usersToReltions, setUsersToReltions] = useState<Array<Person>>([]);
+    const [relations, setRelations] = useState<Array<FamilyRelationship>>([]);
     const [modalTitle, setModalTitle] = useState<string>('');
     const users = useAppSelector(getAllTutors)
     const students = useAppSelector(getAllStudents)

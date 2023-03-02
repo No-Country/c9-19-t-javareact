@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // Models
-import { User } from "../models/User";
+import { FamilyRelationship } from "../models/FamilyRelationship";
+import { Person } from "../models/Person";
 // UI
 import ButtonMain from "./UI/ButtonMain";
 import ButtonSecondary from "./UI/ButtonSecondary";
@@ -18,13 +19,13 @@ import { useAppSelector } from "../app/hooks";
 export interface Props {
   show: boolean;
   title: string;
-  user: User;
-  relations: Array<any>;
-  users: Array<User>;
+  user: Person;
+  relations: Array<FamilyRelationship>;
+  users: Array<Person>;
   handleClose: () => void;
-  handleSave: (value: Array<User>) => void;
+  handleSave: (value: FamilyRelationship) => void;
   handleDel: (id: number) => void;
-  handleFetch: (id: number, path: string) => void;
+  // handleFetch: (id: number, path: string) => void;
 }
 export const bonds = [
   { id: 1, name: "FATHER" },
@@ -57,7 +58,7 @@ function RelationAssignStudent({
   handleSave,
   handleDel,
 }: Props) {
-  const [newRelations, setNewRelations] = useState<Array>([]);
+  const [newRelations, setNewRelations] = useState<Array<any>>([]);
   const [newBond, setBond] = useState<string | undefined>(undefined);
   const [isAdded, setAdded] = useState<Boolean>(false);
   const relationsStatus = useAppSelector(selectRelations)
@@ -87,8 +88,8 @@ function RelationAssignStudent({
 
   const handleChange = (e: { target: { value: number | undefined } }) => {
     let userFilter = users.find((elem) => elem.id === Number(e.target.value));
-    let idStudent = user.roleName === 'STUDENT' ? user.id : userFilter.id;
-    let idTutor = user.roleName === 'TUTOR' ? user.id : userFilter.id;
+    let idStudent = user.roleName === 'STUDENT' ? user.id : userFilter!.id;
+    let idTutor = user.roleName === 'TUTOR' ? user.id : userFilter!.id;
     let relation= {
       idStudent:idStudent,
       idTutor:idTutor,
@@ -168,8 +169,8 @@ function RelationAssignStudent({
                   >
                     <Form.Label>
                       Asignar{" "}
-                      {user.rol_id
-                        ? user.rol_id === "2"
+                      {user.roleName
+                        ? user.roleName === "STUDENT"
                           ? "estudiante"
                           : "tutor"
                         : "entidad"}
@@ -225,7 +226,7 @@ function RelationAssignStudent({
                   variant="danger"
                   size="sm"
                   onClick={() =>
-                    onClickDeleteRelation({ idRelation: idRelation, id: id })
+                    onClickDeleteRelation(id)
                   }
                 >
                   <i className="fa fa-trash"></i>
