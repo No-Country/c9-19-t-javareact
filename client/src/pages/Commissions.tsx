@@ -18,6 +18,7 @@ import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchCommissions, getAllCommissions, getCommissionsError, getCommissionsStatus } from '../app/states/Commissions';
 import Loader from '../components/UI/Loader';
+import { apiProps, useApi } from '../hooks/useApi';
 
 function Commissions() {
     const [selectedCommission, setSelectedCommission] = useState<Commission>(new Commission());
@@ -45,7 +46,7 @@ function Commissions() {
         setShowCommissions(false);
     }
 
-    const handleSaveNewData = (data: Array<any>, currentSubjectId: number, subjectIndex: number) => {
+    const handleSaveNewData = async (data: Array<any>, currentSubjectId: number, subjectIndex: number) => {
         if (data[0].roleName === 'TEACHER') {
             let nt = new Teacher();
             nt.idPerson = data[0].id;
@@ -53,7 +54,17 @@ function Commissions() {
             nt.lastName = data[0].fullName.split(' ')[1];
             selectedCommission.subjects![subjectIndex].teacher = nt;
             commissions[commissionIndex] = selectedCommission;
-        }
+
+            const apiPropertyes: apiProps = {
+                path: `admin/commission/subject/teacher`,
+                method: 'PUT',
+                body:  {
+                    "idCommissionSubject": selectedCommission.subjects![subjectIndex].idCommissionSubject,
+                    "idTeacher": data[0].id,
+                  }
+            }
+            const response = await useApi(apiPropertyes);
+    }
         if (data[0].rol_id === '3') {
             selectedCommission.students!.push(User.parseItem(data[0]));
         }

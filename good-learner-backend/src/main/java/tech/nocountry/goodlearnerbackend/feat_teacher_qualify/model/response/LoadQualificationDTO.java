@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.feat_load_grades.dto;
+package tech.nocountry.goodlearnerbackend.feat_teacher_qualify.model.response;
 
 import lombok.*;
 import tech.nocountry.goodlearnerbackend.model.*;

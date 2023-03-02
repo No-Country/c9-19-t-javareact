@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 // Models
 import { User } from '../models/User';
@@ -144,3 +143,4 @@ function RelationAssign({show, title, user, relations, users, handleClose, handl
     }
     
     export default RelationAssign;
+

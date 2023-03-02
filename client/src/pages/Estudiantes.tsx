@@ -5,7 +5,7 @@ import { User } from '../models/User';
 
 // compoents
 import FormUsuario from '../components/formUsuario';
-import RelationAssign from '../components/RelationAssign';
+import RelationAssignStudent from '../components/RelationAssignStudent';
 import CardPerson from '../components/UI/CardPerson';
 
 // UI
@@ -13,22 +13,25 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { fetchPersons, getAllStudents, getAllTeachers, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
+import { fetchPersons, getAllStudents, getAllTeachers, getAllTutors, getPersonsError, getPersonsStatus, updatePerson } from '../app/states/Persons';
 import { Person } from '../models/Person';
+import { deleteRelation, fetchRelation, setRelation } from '../app/states/Relation';
 import UserInfo from '../components/UI/UserInfo';
 import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
 import Loader from '../components/UI/Loader';
+import { FamilyRelationship } from '../models/FamilyRelationship';
+
 
 
 function Estudiantes() {
     const [showFormUser, setShowFormUser] = useState<boolean>(false);
     const [selectedUser, setSelectedUser] = useState<Person>({});
     const [showRelations, setShowRelations] = useState<boolean>(false);
-    const [usersToReltions, setUsersToReltions] = useState<Array<User>>([]);
-    const [relations, setRelations] = useState<Array<User>>([]);
+    const [usersToReltions, setUsersToReltions] = useState<Array<Person>>([]);
+    const [relations, setRelations] = useState<Array<FamilyRelationship>>([]);
     const [modalTitle, setModalTitle] = useState<string>('');
     const students = useAppSelector(getAllStudents)
-    const teachers = useAppSelector(getAllTeachers)
+    const tutors = useAppSelector(getAllTutors)
     const studentsStatus = useAppSelector(getPersonsStatus)
     const studentsError = useAppSelector(getPersonsError)
     const InfoModalState = useAppSelector(getUserInfoModalState)
@@ -42,10 +45,10 @@ function Estudiantes() {
         if (effectRan.current === false) {
             if (studentsStatus === "idle")
                 dispatch(fetchPersons())
+                
             effectRan.current = true
         }
     }, [studentsStatus, dispatch])
-
 
     const handleCloseFormUser = () => {
         setShowFormUser(false);
@@ -62,23 +65,44 @@ function Estudiantes() {
         handleCloseFormUser();
     };
 
-    const handleShowRelations = (user: any) => {
+    const handleShowRelations = async(user: any) => {
+
+        let {payload} = await dispatch(fetchRelation({id:user.id,path:'student'}))
         setSelectedUser(user);
         setModalTitle('Asignar tutor al estudiante')
-        setUsersToReltions(teachers);
-        setRelations([]);
+        setUsersToReltions(tutors);
+        console.log(payload);
+        setRelations(payload);
         setShowRelations(true);
+
     }
+   
 
     const handleCloseRelations = () => {
         setShowRelations(false);
         setSelectedUser({});
     }
 
-    const handleSaveRelations = (data: Array<User>) => {
-
+    const handleSaveRelations = (data: any) => {
+        console.log(data);
+        let shouldDispatch = true;
+    
+        if (relations.length > 0) {
+            relations?.map((elem) => {
+                if ((elem.idTutor === data.idTutor) && (elem.idStudent === data.idStudent)) {
+                    shouldDispatch = false;
+                }
+            });
+        }
+    
+        if (shouldDispatch) {
+            dispatch(setRelation(data));
+        }
+    };
+    const handleDelRelations = (id: number) => {
+        
+        dispatch(deleteRelation(id))
     }
-
     let content
     if (studentsStatus === 'loading') {
         content = <Loader show={true} />
@@ -121,9 +145,10 @@ function Estudiantes() {
                     user={selectedUser}
                     setShowFormUser={setShowFormUser}
                 />
-                <RelationAssign
+                <RelationAssignStudent
                     show={showRelations}
                     title={modalTitle} 
+                    handleDel={handleDelRelations}
                     handleClose={handleCloseRelations} 
                     handleSave={handleSaveRelations} 
                     user={selectedUser} 

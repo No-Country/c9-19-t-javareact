@@ -22,7 +22,7 @@ export interface Props {
     showModal: boolean;
     backToSubjects: () => void;
     setShowModal: (value: boolean) => void;
-    saveQualification: (value: number, value2: number, value3: number) => void;
+    saveQualification: (value: number, value2: number, value3: number, value4: number) => void;
 }
 
 
@@ -50,7 +50,7 @@ function SubjectDetails({
 
     
     const handleSaveQualification = (value: number) => {
-        saveQualification(studentindex, period, value);
+        saveQualification(studentindex, period, value, selectedStudent.idPerson!);
     }
 
     return (

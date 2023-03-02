@@ -108,31 +108,35 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
     }
 
     const handleSave = async (data: Array<any>) => {
-        // handleSaveNewData(data, currentSubject.idCommissionSubject || 1, subjectIndex);
-        let index = studentsCommission.findIndex(elem => elem.id === data[0].id);
-        if (index === -1) {
-            setLoadingStudents(true);
-            const apiPropertyes: apiProps = {
-            path: `admin/inscription`,
-            method: 'post',
-            body: {
-                "inscriptionDate": "2023-02-26",
-                "idCommission":commission.commissionId,
-                "idStudent": data[0].id
+        if (!addTeacher) {
+            let index = studentsCommission.findIndex(elem => elem.id === data[0].id);
+            if (index === -1) {
+                setLoadingStudents(true);
+                const apiPropertyes: apiProps = {
+                path: `admin/inscription`,
+                method: 'post',
+                body: {
+                    "inscriptionDate": "2023-02-26",
+                    "idCommission":commission.commissionId,
+                    "idStudent": data[0].id
+                    }
+                };
+                const response = await useApi(apiPropertyes);
+                let ns = {
+                    id: data[0].id,
+                    idIncription: response.data.idIncription,
+                    firstName: data[0].fullName.split(' ')[0],
+                    lastName: data[0].fullName.split(' ')[1],
+                    document: response.data.document,
+                    isRegular: true
                 }
-            };
-            const response = await useApi(apiPropertyes);
-            let ns = {
-                id: data[0].id,
-                idIncription: response.data.idIncription,
-                firstName: data[0].fullName.split(' ')[0],
-                lastName: data[0].fullName.split(' ')[1],
-                document: response.data.document,
-                isRegular: true
+                studentsCommission.push(Student.parseItem(ns))
+                setLoadingStudents(false);
             }
-            studentsCommission.push(Student.parseItem(ns))
-            setLoadingStudents(false);
+        } else {
+            handleSaveNewData(data, currentSubject.idCommissionSubject || 1, subjectIndex)
         }
+        
         setModalTitle('');
         setShowModal(false);   
     }
@@ -144,7 +148,6 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
           method: 'get',
         };
         const response = await useApi(apiPropertyes);
-        console.log(response.data)
         setStudentsCommission(Student.parseArray(response.data.students));
         setLoadingStudents(false);
     }
