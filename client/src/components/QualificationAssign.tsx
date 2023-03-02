@@ -15,7 +15,7 @@ import Button from 'react-bootstrap/Button';
 
 export interface Props {
     show: boolean;
-    student: User;
+    student: any;
     qualification: any;
     handleCancelModal: () => void,
     handleSaveQualification: (value: number) => void;
@@ -50,7 +50,7 @@ function QualificationAssign({
         >
             <Modal.Header closeButton>
                 <Modal.Title>
-                    Asignar nota a { student.name } { student.last_name }
+                    Asignar nota a { student.firstName } { student.lastName }
                 </Modal.Title>
             </Modal.Header>
             

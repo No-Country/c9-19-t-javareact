@@ -3,6 +3,7 @@ package tech.nocountry.goodlearnerbackend.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import tech.nocountry.goodlearnerbackend.model.CommissionSubject;
 import tech.nocountry.goodlearnerbackend.model.Qualification;
 import tech.nocountry.goodlearnerbackend.model.Student;
 
@@ -13,4 +14,7 @@ public interface QualificationRepository extends JpaRepository<Qualification, Lo
 
     @Query("SELECT q FROM Qualification q WHERE q.student = :student")
     public List<Qualification> findByStudent(Student student);
+
+    @Query("SELECT q FROM Qualification q WHERE q.commissionSubject = :commissionSubject")
+    public List<Qualification> findByCommissionSubject(CommissionSubject commissionSubject);
 }
