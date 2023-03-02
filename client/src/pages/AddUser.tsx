@@ -45,12 +45,12 @@ const AddUser = () => {
     <>
       <Container>
         <Row className="header">
-          <Col xs={9}>
+          <Col>
             <h3 className="header-title">Añadir {user || "usuario"}</h3>
             <div className="header-line"></div>
           </Col>
         </Row>
-        <Form className="px-5" onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Row>
             <Col xs={12} md={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

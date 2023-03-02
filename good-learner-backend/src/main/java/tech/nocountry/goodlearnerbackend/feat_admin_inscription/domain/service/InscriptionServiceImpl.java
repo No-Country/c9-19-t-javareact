@@ -47,7 +47,8 @@ public class InscriptionServiceImpl implements IInscriptionService{
                             inscription.getIdInscription(),
                             inscription.getInscriptionDate(),
                             inscription.getCommission().getCommissionId(),
-                            inscription.getStudent().getIdPerson()
+                            inscription.getStudent().getIdPerson(),
+                            inscription.getStudent().getDocument()
                             )
             );
         }
@@ -62,7 +63,8 @@ public class InscriptionServiceImpl implements IInscriptionService{
                     inscription.get().getIdInscription(),
                     inscription.get().getInscriptionDate(),
                     inscription.get().getCommission().getCommissionId(),
-                    inscription.get().getStudent().getIdPerson()
+                    inscription.get().getStudent().getIdPerson(),
+                    inscription.get().getStudent().getDocument()
             ));
         }
         return new ResponseEntity<>("No se ha encontrado inscripción", HttpStatus.NOT_FOUND);
@@ -104,7 +106,8 @@ public class InscriptionServiceImpl implements IInscriptionService{
                             inscription.getIdInscription(),
                             inscription.getInscriptionDate(),
                             inscription.getCommission().getCommissionId(),
-                            inscription.getStudent().getIdPerson()
+                            inscription.getStudent().getIdPerson(),
+                            inscription.getStudent().getDocument()
                     )
             );
         }

@@ -3,9 +3,10 @@ import { useState, useEffect, useRef } from 'react';
 // Models
 import { Commission } from '../models/Commission';
 import { User } from '../models/User';
+import { Student } from '../models/Student';
 import { Subject } from '../models/Subject';
 import { CommissionSubject } from '../models/CommissionSubject';
-
+import Loader from './UI/Loader'
 // Components
 import TableSubjects from './UI/TableSubjects';
 import TableStudents from './UI/TableStudents';
@@ -22,6 +23,8 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { getAllTeachers, getAllStudents, fetchPersons, getPersonsStatus } from '../app/states/Persons'
+// import { fetchCommissionStudents, getStudentsCommissionError, getStudentsCommissionStatus } from '../app/states/Commissions'
+import { apiProps, useApi } from '../hooks/useApi';
 
 export interface Props {
     commission: Commission,
@@ -41,6 +44,10 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
     const personsStatus = useAppSelector(getPersonsStatus)
     const teachers = useAppSelector(getAllTeachers);
     const students = useAppSelector(getAllStudents);
+    // const StudentsCommissionStatus = useAppSelector(getStudentsCommissionStatus);
+    // const StudentsCommissionError = useAppSelector(getStudentsCommissionError);
+    const [studentsCommission, setStudentsCommission] = useState<Array<Student>>([]);
+    const [loadingStudents, setLoadingStudents] = useState<boolean>(false);
 
     const dispatch = useAppDispatch()
 
@@ -48,15 +55,24 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
 
     useEffect(() => {
         if (effectRan.current === false) {
-            if (personsStatus === "idle")
+            if (personsStatus === "idle") {
                 dispatch(fetchPersons())
+            }
+            // if (StudentsCommissionStatus === "idle") {
+            // dispatch(fetchCommissionStudents(commission.commissionId));
+            // }
+            // if (commission.students!.length === 0) {
+            //     console.log(commission.commissionId)
+            // }
             effectRan.current = true
         }
-    }, [personsStatus, dispatch])
+    }, [personsStatus, commission, dispatch])
+
 
     const handleUpdateTeacher = (subject: CommissionSubject, index: number) => {
         setCurrentSubject(subject);
         setSubjectIndex(index);
+        setAddTeacher(true);
         setModalTitle('Seleccionar profesor');
         setShowModal(true);
     }
@@ -69,8 +85,15 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
         setShowModal(true);
     }
 
-    const handleClickDeleteStudent = (studentId: number) => {
-        handleDeleteStudent(studentId)
+    const handleClickDeleteStudent = async (idInscription: number) => {
+        setLoadingStudents(true);
+        const apiPropertyes: apiProps = {
+            path: `admin/inscription/${idInscription}`,
+            method: 'delete',
+        };
+        const response = await useApi(apiPropertyes);
+        setStudentsCommission(studentsCommission.filter(elem => elem.idInscription != idInscription))
+        setLoadingStudents(false);
     }
     
     const handleClickAddStudent = () => {
@@ -84,10 +107,52 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
         setShowModal(false);   
     }
 
-    const handleSave = (data: Array<any>) => {
-        handleSaveNewData(data, currentSubject.idCommissionSubject || 1, subjectIndex);
+    const handleSave = async (data: Array<any>) => {
+        // handleSaveNewData(data, currentSubject.idCommissionSubject || 1, subjectIndex);
+        let index = studentsCommission.findIndex(elem => elem.id === data[0].id);
+        if (index === -1) {
+            setLoadingStudents(true);
+            const apiPropertyes: apiProps = {
+            path: `admin/inscription`,
+            method: 'post',
+            body: {
+                "inscriptionDate": "2023-02-26",
+                "idCommission":commission.commissionId,
+                "idStudent": data[0].id
+                }
+            };
+            const response = await useApi(apiPropertyes);
+            let ns = {
+                id: data[0].id,
+                idIncription: response.data.idIncription,
+                firstName: data[0].fullName.split(' ')[0],
+                lastName: data[0].fullName.split(' ')[1],
+                document: response.data.document,
+                isRegular: true
+            }
+            studentsCommission.push(Student.parseItem(ns))
+            setLoadingStudents(false);
+        }
         setModalTitle('');
         setShowModal(false);   
+    }
+
+    const getStudents =  async () => {
+        setLoadingStudents(true);
+        const apiPropertyes: apiProps = {
+          path: `admin/commission/${commission.commissionId}`,
+          method: 'get',
+        };
+        const response = await useApi(apiPropertyes);
+        console.log(response.data)
+        setStudentsCommission(Student.parseArray(response.data.students));
+        setLoadingStudents(false);
+    }
+
+    const handleSelectTab = (key: any) => {
+        if (key == 2) {
+            getStudents();
+        }
     }
 
     return (
@@ -102,10 +167,10 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
                     <div className="sub-header-line"></div>
                 </Col>
             </Row>
-            <Tabs defaultActiveKey="1" justify className='tabs'>
+            <Tabs defaultActiveKey="1" justify className='tabs' onSelect={handleSelectTab}>
                 <Tab title='Profesores' eventKey="1">
                     <TableSubjects
-                        subjects={commission.subjects}
+                        subjects={commission.subjects!}
                         handleUpdateTeacher={handleUpdateTeacher}
                         handleAddTeacher={handleAddTeacher}
                     />
@@ -118,10 +183,17 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
                         icon="fa fa-add"
                         onClick={() => handleClickAddStudent()}
                     />
-                    {/* <TableStudents
-                        students={commission.students!}
-                        handleDeleteStudent={handleClickDeleteStudent}
-                    /> */}
+                    {
+                        loadingStudents 
+                        ?
+                        <Loader
+                            show={loadingStudents}/>
+                        :
+                        <TableStudents
+                            students={studentsCommission}
+                            handleDeleteStudent={handleClickDeleteStudent}
+                        />
+                    }
                 </Tab>
             </Tabs>
             <RelationAssign 
@@ -130,7 +202,7 @@ function CommissionDetails({commission, handleSaveNewData, handleDeleteStudent, 
                 handleClose={handleCloseModal} 
                 handleSave={handleSave} 
                 user={new User()} 
-                users={addTeacher ? students : teachers} 
+                users={addTeacher ? teachers : students} 
                 relations={[]}
             />
         </Container>

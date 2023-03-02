@@ -1,15 +1,16 @@
 .loader {
     position: absolute;
     top: 0;
-    /* left: 50%; */
+    left: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(2px);
-    height: 100%;
-    width: 82%;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    z-index:1;
 }
 
 .loader Spinner {

@@ -69,10 +69,6 @@ body {
   content: '';
 }
 
-#wrapper {
-  overflow-x: hidden;
-}
-
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;
@@ -80,7 +76,7 @@ body {
 }
 
 #sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
+  padding: 0.9rem 1.25rem;
   font-size: 1.2rem;
 }
 
@@ -122,6 +118,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 .bg-bone {
   background-color: #f0f1f3 !important;
+  height:100dvh;
 }
 .bg-blue .list-group-item {
   background-color: #14238a;
@@ -234,4 +231,33 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
 .row-disaprove {
   background-color: #ffcdd2;
+}
+
+.dropdown-menu.show {
+  position: absolute;
+  left: unset;
+  right: 0;
+}
+
+@media (min-width: 768px) {
+.outlet-container {
+  width: calc(100% - 15rem);
+  margin-left: auto;
+}
+}
+
+.navbar-nav .nav-link.active {
+  color:white
+}
+
+.list-group-item {
+  border:none;
+}
+
+.list-group-item+.list-group-item.active {
+  margin-top:unset;
+}
+
+.card {
+  position: unset!important;
 }

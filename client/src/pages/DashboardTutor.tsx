@@ -2,18 +2,16 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
-import  {BarChart}  from '../components/barChart';
-import faker from 'faker';
 import '../styles/dashboard.css';
 import '../styles/header.css';
-
+import  {BarChart}  from '../components/barChart';
+import faker from 'faker';
 
 const data = [
     {usuario: 'Estudiantes', cantidad: 180, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-graduation-cap', id:1},
-    {usuario: 'Profesores', cantidad: 6, background: '#E1F1FF', color: '#3F7AFC', icon: 'fa fa-user', id:2},
-    {usuario: 'Tutores', cantidad: 140, background: '#FFF2D8', color: '#FFA002', icon: 'fa fa-users', id:3},
+    {usuario: 'Comisiones', cantidad: 4, background: '#D1F3E0', color: '#3CB878', icon: 'fa fa-school', id:2}
 ]
-const labels = ['Matematica', 'Lengua', 'Educacion Fisica', 'Quimica', 'Filosofia',];
+const labels = ['comision 1', 'comision 2', 'comision 3', 'comision 4'];
 
 export const dataChart = {
   labels,
@@ -30,24 +28,29 @@ export const dataChart = {
     },
     {
       label: 'No regulares',
-      data: labels.map(() => faker.datatype.number({ min: 1, max: 4 })),
-      backgroundColor: 'rgba(174,174,174,0.8)',
-    },
+      data: labels.map(() => faker.datatype.number({ min: 1, max: 4})),
+      backgroundColor: 'rgba(156, 37, 77, 0.8)',
+    }
   ],
 };
-function Dashboard () {
+
+/*  */
+function DashboardTeacher () {
     return (
         <Container>
             <Row className='header'>
-                <Col>
-                    <h3 className='header-title'>Administrador</h3>
+
+                <Col xs={12}>
+                    <h3 className='header-title'>Tutor</h3>
                     <div className='header-line'></div>
                 </Col>
             </Row>
-            <Row className="gap-4 gap-lg-0">
+
+           
+            <Row>
                 {
                     data.map( (user: any) => (
-                        <Col xs={12} md={4} className='d-flex justify-content-center' key={user.id}>
+                        <Col xs={12} md={6} className='d-flex justify-content-center mb-2' key={user.id}>
                             <Card className='card-dash' >
                                 <Card.Body>
                                     <Row>
@@ -62,7 +65,6 @@ function Dashboard () {
                                             <span> <strong> {user.cantidad} </strong> </span>
                                         </Col>
                                     </Row>
-                                
                                 </Card.Body>
                             </Card>
                         </Col>   
@@ -82,4 +84,4 @@ function Dashboard () {
     )
 }
 
-export default Dashboard;
+export default DashboardTeacher;

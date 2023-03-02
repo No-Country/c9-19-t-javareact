@@ -27,11 +27,12 @@ const Layout = () => {
     return (
         <>
             <div className="sb-sidenav-toggled">
-                <div className="d-flex" id="wrapper">
-                    <SideNav/>
+                <div className="d-flex">
                     <div className="bg-bone" id="page-content-wrapper">
-                    <Nav/>
-                    <Outlet />
+                        <Nav/>
+                        <div className="outlet-container">
+                            <Outlet />
+                        </div>
                     </div>
                 </div>
             </div>

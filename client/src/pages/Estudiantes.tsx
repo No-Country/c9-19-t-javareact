@@ -18,6 +18,7 @@ import { Person } from '../models/Person';
 import { deleteRelation, fetchRelation, setRelation } from '../app/states/Relation';
 import UserInfo from '../components/UI/UserInfo';
 import { getUserInfoModalState, handleShowInfoModal } from '../app/states/ui';
+import Loader from '../components/UI/Loader';
 
 
 function Estudiantes() {
@@ -101,9 +102,13 @@ function Estudiantes() {
     }
     let content
     if (studentsStatus === 'loading') {
-        content = <p>"Loading...</p>
+        content = <Loader show={true} />
     } else if (studentsStatus === "succeeded") {
-        content = students.map((user) => (
+        content = 
+        <Row>
+            <Container>
+            <Row xs={1} md={2} lg={3} xl={4} className="g-2">
+            { students.map((user) => (
             <Col key={user.id}>
                 <CardPerson
                     user={user}
@@ -111,7 +116,10 @@ function Estudiantes() {
                     handleShowRelations={handleShowRelations}
                 />
             </Col>
-        ))
+        ))}
+            </Row>
+        </Container>
+    </Row>
     } else if (studentsStatus === 'failed') {
         content = <p>{studentsError}</p>;
     }
@@ -126,13 +134,7 @@ function Estudiantes() {
                         <div className="header-line"></div>
                     </Col>
                 </Row>
-                <Row>
-                    <Container>
-                        <Row xs={1} md={2} lg={3} xl={4} className="g-2">
-                        {content}
-                        </Row>
-                    </Container>
-                </Row>
+                    {content}
                 <FormUsuario
                     show={showFormUser}
                     handleClose={handleCloseFormUser}

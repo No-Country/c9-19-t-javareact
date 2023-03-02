@@ -12,7 +12,9 @@ import {
   
   export interface State {
     status: string;
+    studentsStatus: string;
     error: string | undefined | null;
+    studentsError: string | undefined | null;
   }
   
   const commissionsAdapter = createEntityAdapter<Commission>({
@@ -21,9 +23,11 @@ import {
   
   export const initialCommissionsState: EntityState<Commission> & State = commissionsAdapter.getInitialState({
     status: 'idle',
+    studentsStatus: 'idle',
     error: null,
+    studentsError: null,
   });
-  
+
   export const fetchCommissions: any = createAsyncThunk('commissions', async () => {
     const apiPropertyes: apiProps = {
       path: 'commissions',
@@ -31,6 +35,16 @@ import {
     };
     const response = await useApi(apiPropertyes);
     return Commission.parseArray(response.data);
+  });
+
+  
+  export const fetchCommissionStudents: any = createAsyncThunk('admin/commission/id', async (id) => {
+    const apiPropertyes: apiProps = {
+      path: `admin/commission/${id}`,
+      method: 'get',
+    };
+    const response = await useApi(apiPropertyes);
+    return response.data;
   });
 
   
@@ -64,6 +78,22 @@ import {
           state.status = 'failed';
           state.error = action.error.message;
         })
+        // .addCase(fetchCommissionStudents.pending, (state, action) => {
+        //   state.studentsStatus = 'loading';
+        // })
+        // .addCase(fetchCommissionStudents.fulfilled, (state, action) => {
+        //   state.studentsStatus = 'succeeded';
+        //   const {idCommission, students} = action.payload;
+        //   const updatedCommission = {idCommission: idCommission, students: students}
+        //   console.log(updatedCommission);
+        //   commissionsAdapter.getSelectors((state: RootState) => { })
+        //   commissionsAdapter.upsertOne(state, updatedCommission);
+        //   console.log(commissionsAdapter);
+        // })
+        .addCase(fetchCommissionStudents.rejected, (state, action) => {
+          state.studentsStatus = 'failed';
+          state.studentsError = action.error.message;
+        })
         .addCase(updateTeacher.fulfilled, (state, action) => {
           if (!action.payload) {
             console.log(`Update could not complete`);
@@ -82,7 +112,8 @@ import {
   
   export const getCommissionsStatus = (state: RootState) => state.commissions.status;
   export const getCommissionsError = (state: RootState) => state.commissions.error;
-  
+  export const getStudentsCommissionStatus = (state: RootState) => state.commissions.studentsStatus;
+  export const getStudentsCommissionError = (state: RootState) => state.commissions.studentsError;
   
   export const getAllCommissions = createSelector(
     [selectAllCommissions ],

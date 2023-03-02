@@ -8,7 +8,7 @@ export interface apiProps{
     body?:{}
 }
 
-const baseUrl= 'http://localhost:8080/api';
+const baseUrl = import.meta.env.VITE_BASE_URL_API || "http://localhost:8080/api"
 
 export const useApi = async({path,body,method}:apiProps) => {
   const token = getTokenFromLocalStorage()
@@ -23,7 +23,6 @@ export const useApi = async({path,body,method}:apiProps) => {
       },
       data:body
     }
-
    try {
     const res = await axios(options)
     return {

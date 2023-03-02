@@ -8,5 +8,13 @@ import lombok.*;
 @Setter
 @ToString
 public class StudentResponse {
-    private String fullName;
+
+    private Long idInscription;
+    private Long id;
+    private String firstName;
+    private String lastName;
+
+    private String document;
+    private Boolean isRegular;
+
 }
