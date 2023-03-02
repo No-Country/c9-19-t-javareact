@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.feat_load_grades.mapper;
+package tech.nocountry.goodlearnerbackend.feat_load_grades.service.mapper;
 
 import org.springframework.stereotype.Component;
 import tech.nocountry.goodlearnerbackend.feat_load_grades.model.response.LoadQualificationDTO;
