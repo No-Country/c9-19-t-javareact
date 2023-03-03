@@ -49,13 +49,13 @@ export const setRelation: any = createAsyncThunk(
 );
 export const deleteRelation: any = createAsyncThunk(
   "admin/relationship/",
-  async ({idRelation,id}) => {
+  async (id) => {
     const apiPropertyes: apiProps = {
-      path: `admin/relationship/${idRelation}`,
+      path: `admin/relationship/${id}`,
       method: `delete`,
     };
     const response = await useApi(apiPropertyes);
-    const responseId = {...response,data:{idRelation:idRelation,id:id}}
+    const responseId = {...response,data:{idRelation:id,id:id}}
     return responseId;
   }
 );
