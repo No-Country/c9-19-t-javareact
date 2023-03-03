@@ -1,5 +1,6 @@
 package tech.nocountry.goodlearnerbackend.data.datasource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,34 @@ import tech.nocountry.goodlearnerbackend.repository.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
 
 
 @Service
 public class LoadResource {
+    @Autowired
+    private CommissionRepository commissionRepository;
+    @Autowired
+    private ShiftRepository shiftRepository;
+
+    public void loadDatasourceCommission(){
+        /**----------------------------------------------------------------------------------------------
+         * 								CARGA DE COMISIONES
+         */
+        Optional<Shift> morning = shiftRepository.findShiftByName(ShiftName.MORNING);
+        Optional<Shift> afternoon = shiftRepository.findShiftByName(ShiftName.AFTERNOON);
+
+        Commission quintoA = commissionRepository.save(new Commission("5°", "A", 2023, morning.get()));
+        Commission quintaB = commissionRepository.save(new Commission("5°", "B", 2023, afternoon.get()));
+        Commission cuartoA = commissionRepository.save(new Commission("4°", "A", 2023, morning.get()));
+        Commission cuartoB = commissionRepository.save(new Commission("4°", "B", 2023, afternoon.get()));
+        Commission terceroA = commissionRepository.save(new Commission("3°", "A", 2023, morning.get()));
+        Commission terceroB = commissionRepository.save(new Commission("3°", "B", 2023, afternoon.get()));
+        Commission segundoA = commissionRepository.save(new Commission("2°", "A", 2023, morning.get()));
+        Commission segundoB = commissionRepository.save(new Commission("2°", "B", 2023, afternoon.get()));
+        Commission primerA = commissionRepository.save(new Commission("1°", "A", 2023, morning.get()));
+        Commission primeroB = commissionRepository.save(new Commission("1°", "B", 2023, afternoon.get()));
+    }
 
     public void loadDatasource(ApplicationContext context){
 
