@@ -20,12 +20,10 @@ import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.model.respo
 import tech.nocountry.goodlearnerbackend.feat_qualify_student.domain.service.mapper.ReportQualifyService;
 import tech.nocountry.goodlearnerbackend.feat_teacher.domain.dto.TeacherCommissionsDTO;
 import tech.nocountry.goodlearnerbackend.model.*;
-import tech.nocountry.goodlearnerbackend.repository.CommissionSubjectRepository;
-import tech.nocountry.goodlearnerbackend.repository.PersonRepository;
-import tech.nocountry.goodlearnerbackend.repository.QualificationRepository;
-import tech.nocountry.goodlearnerbackend.repository.StudentRepository;
+import tech.nocountry.goodlearnerbackend.repository.*;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api")
@@ -45,6 +43,8 @@ public class QualifyController {
     @Autowired
     private CommissionSubjectRepository commissionSubjectRepository;
 
+    @Autowired
+    private InscriptionRepository inscriptionRepository;
 
     @GetMapping("/student/report")
     @PreAuthorize("hasAuthority('STUDENT')")
@@ -169,7 +169,7 @@ public class QualifyController {
             List<Qualification> qualificationList = qualificationRepository.findByCommissionSubject(commissionSubject);
 
             List<SubjectQualificationsDTO> subjectQualificationsList = new ArrayList<>();
-
+            List<Inscription> students =  inscriptionRepository.findAllByIdCommission(commissionSubject.getCommissionId());
             for(int i=0; i< qualificationList.size(); i++){
                 Qualification qualification = qualificationList.get(i);
                 PeriodName periodName =  qualification.getPeriod().getPeriodName();
@@ -198,6 +198,23 @@ public class QualifyController {
                 }
                 else{
                     subjectQualificationsList.get(position).getQualifications().put(periodName, note);
+                }
+            }
+            if (students.size() != subjectQualificationsList.size()) {
+                for(int j=0; j< students.size(); j++) {
+                    Inscription student = students.get(j);
+                    Stream l = subjectQualificationsList.stream().filter(d -> d.getIdPerson() == student.getStudent().getIdPerson());
+                    if (l.count() == 0) {
+                        Map<PeriodName, Integer> n = new HashMap<>();
+                        n.put(PeriodName.FIRST_TRIMESTER, 0);
+                        SubjectQualificationsDTO data = new SubjectQualificationsDTO();
+                        data.setQualifications(n);
+                        data.setIdPerson(student.getStudent().getIdPerson());
+                        data.setDocument(student.getStudent().getDocument());
+                        data.setFirstName(student.getStudent().getFirstName());
+                        data.setLastName(student.getStudent().getLastName());
+                        subjectQualificationsList.add(data);
+                    }
                 }
             }
             return ResponseEntity.ok(subjectQualificationsList);

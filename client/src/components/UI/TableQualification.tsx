@@ -27,6 +27,9 @@ import { useState } from 'react';
     const getPromedio = (data: any): string => {
         let total = 0;
         let notas = 0;
+        if (data === null) {
+            return '-'
+        }
         if (data.FIRST_TRIMESTER) {
             total += data.FIRST_TRIMESTER;
             notas += 1 
@@ -66,7 +69,7 @@ import { useState } from 'react';
             <tbody>
                 {
                     students.map( (student: Student, index: number) => (
-                        <tr key={student.idPerson} className={(Number(getPromedio(student.qualifications!)) > 0 && Number(getPromedio(student.qualifications!))< 6) ? 'row-disaprove' : 'row-aprove'}>
+                        <tr key={student.idPerson} className={student.qualifications ? (Number(getPromedio(student.qualifications!)) > 0 && Number(getPromedio(student.qualifications!))< 6) ? 'row-disaprove' : 'row-aprove' : 'row-aprove'}>
                             <td>{index + 1}</td>
                             <td>{student.firstName} {student.lastName}</td>
                             <td>{student.document}</td>
@@ -74,8 +77,8 @@ import { useState } from 'react';
                                 <Form>
                                 <Form.Control
                                         type="text"
-                                        onClick={() => handleOnChange(index, student.qualifications!.FIRST_TRIMESTER, 1, student)}
-                                        value={ student.qualifications!.FIRST_TRIMESTER ? student.qualifications!.FIRST_TRIMESTER : '-'} 
+                                        onClick={() => handleOnChange(index, student.qualifications ? student.qualifications!.FIRST_TRIMESTER : 0, 1, student)}
+                                        value={ student.qualifications ? student.qualifications!.FIRST_TRIMESTER ? student.qualifications!.FIRST_TRIMESTER : '-' : '-'} 
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
                                 </Form>    
@@ -84,9 +87,9 @@ import { useState } from 'react';
                                 <Form>
                                 <Form.Control
                                         type="text"
-                                        disabled={student.qualifications!.FIRST_TRIMESTER === undefined}
+                                        disabled={student.qualifications === null || student.qualifications!.FIRST_TRIMESTER === undefined}
                                         onClick={() => handleOnChange(index, student.qualifications!.SECOND_TRIMESTER, 2, student)}
-                                        value={student.qualifications!.SECOND_TRIMESTER ? student.qualifications!.SECOND_TRIMESTER : '-'}                           
+                                        value={student.qualifications ? student.qualifications!.SECOND_TRIMESTER ? student.qualifications!.SECOND_TRIMESTER : '-' : '-'}                           
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
                                 </Form>    
@@ -95,9 +98,9 @@ import { useState } from 'react';
                                 <Form>
                                     <Form.Control
                                         type="text"
-                                        disabled={student.qualifications!.SECOND_TRIMESTER === undefined}
+                                        disabled={student.qualifications === null ||  student.qualifications!.SECOND_TRIMESTER === undefined}
                                         onClick={() => handleOnChange(index, student.qualifications!.THIRD_TRIMESTER, 3, student)}
-                                        value={student.qualifications!.THIRD_TRIMESTER ? student.qualifications!.THIRD_TRIMESTER : '-'}
+                                        value={student.qualifications ? student.qualifications!.THIRD_TRIMESTER ? student.qualifications!.THIRD_TRIMESTER : '-' : '-'}
                                         style={{width: '5em', cursor: 'pointer'}}                          
                                         />
                                 </Form>    

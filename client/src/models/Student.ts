@@ -25,7 +25,7 @@ export class Student {
             student.birthDate = raw.birthDate ? raw.birthDate : undefined;
             student.email = raw.email ? raw.email : undefined;
             student.phone = raw.phone ? raw.phone : undefined;
-            student.qualifications = raw.qualifications ? raw.qualifications : undefined;
+            student.qualifications = raw.qualifications ? raw.qualifications : QualificationTrimestral.voidItem();
         return student;
     }
  

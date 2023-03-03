@@ -93,7 +93,7 @@ function MyCommissions() {
         switch(period) {
             case 1:
                 periodName = 'FIRST_TRIMESTER';
-                if (qualifications[i].qualifications!.FIRST_TRIMESTER === undefined) {
+                if (qualifications[i].qualifications === null || qualifications[i].qualifications!.FIRST_TRIMESTER === undefined) {
                     method = 'POST';
                 } else {
                     method = 'PUT';
