@@ -1,4 +1,4 @@
-package tech.nocountry.goodlearnerbackend.data.datasource;
+package tech.nocountry.goodlearnerbackend.data.datasource.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -42,6 +42,9 @@ public class LoadResource {
         Commission segundoB = commissionRepository.save(new Commission("2°", "B", 2023, afternoon.get()));
         Commission primerA = commissionRepository.save(new Commission("1°", "A", 2023, morning.get()));
         Commission primeroB = commissionRepository.save(new Commission("1°", "B", 2023, afternoon.get()));
+
+
+
     }
 
     public void loadDatasource(ApplicationContext context){

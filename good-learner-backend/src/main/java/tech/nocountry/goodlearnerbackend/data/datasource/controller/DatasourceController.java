@@ -7,7 +7,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.nocountry.goodlearnerbackend.data.datasource.LoadResource;
+import tech.nocountry.goodlearnerbackend.data.datasource.service.LoadCommission;
+import tech.nocountry.goodlearnerbackend.data.datasource.service.LoadResource;
 
 @RestController
 @RequestMapping("/api/datasource")
@@ -15,13 +16,13 @@ import tech.nocountry.goodlearnerbackend.data.datasource.LoadResource;
 public class DatasourceController {
 
     @Autowired
-    LoadResource loadResource;
+    LoadCommission loadCommission;
 
     @PostMapping("/commission")
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<?> loadDatasourceCommission(){
         try{
-            loadResource.loadDatasourceCommission();
+            loadCommission.loadCommission();
             return new ResponseEntity<>("Load datasource commission", HttpStatus.CREATED);
         } catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
