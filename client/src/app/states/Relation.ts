@@ -50,6 +50,7 @@ export const setRelation: any = createAsyncThunk(
 export const deleteRelation: any = createAsyncThunk(
   "admin/relationship/",
   async (id) => {
+    console.log(id)
     const apiPropertyes: apiProps = {
       path: `admin/relationship/${id}`,
       method: `delete`,
