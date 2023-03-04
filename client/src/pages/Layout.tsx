@@ -30,7 +30,7 @@ const Layout = () => {
                 <div className="d-flex">
                     <div className="bg-bone overflow-hidden" id="page-content-wrapper">
                         <Nav/>
-                        <div className="overflow-box">
+                        <div className="outlet-container overflow-box">
                             <Outlet />
                         </div>
                     </div>
