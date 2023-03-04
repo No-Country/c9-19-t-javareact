@@ -27,20 +27,11 @@ const LoginForm = () => {
     }));
   };
 
-  const loginValidation = (username:string,password:string) =>{
-    if((username.length > 3) && (password.length > 3)) return true
-  }
-
   const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-     if(loginValidation(formData.username,formData.password)){ 
       const res = await dispatch(loginService(formData))
-
-      if(res.rol === 'ADMINISTRATOR'){navigate('/dashboard')}
-      if(res.rol === 'TEACHER'){navigate('/dashboard-teacher')}
-      if(res.rol === 'STUDENT'){navigate('/dashboard-student')}
-      if(res.rol === 'TUTOR'){navigate('/dashboard-tutor')}
-     }else{
+      if(res.rol){navigate('/')
+    }else{
       Swal.fire('Error','Por favor, rellena los campos','error');
       // setMessage('Error, por favor, rellena los campos')
     }

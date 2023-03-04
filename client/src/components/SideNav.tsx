@@ -12,7 +12,7 @@ export const SideNav = () => {
 
       { useRol ==='ADMINISTRATOR' ? (
               <Nav className="list-group list-group-flush bg-blue d-flex flex-column" >
-        <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/dashboard'} href="/dashboard"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
+        <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/'} href="/"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
         <Accordion flush style={{ color: "white", background: "inherit" }}>
           <Accordion.Item eventKey="0">
             <Accordion.Header><i className="fa-solid fa-user-graduate me-3"></i>Estudiantes</Accordion.Header>
@@ -41,7 +41,7 @@ export const SideNav = () => {
       ) : (
         useRol ==='TEACHER' ? 
        ( <div className="list-group list-group-flush bg-blue" >
-          <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/dashboard-teacher'} href="/dashboard-teacher"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
+          <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/'} href="/"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
 {/*           <Accordion flush style={{ color: "white", background: "inherit" }}>
             <Accordion.Item eventKey="0">
               <Accordion.Header><i className="fa-solid fa-user-graduate me-3"></i>Estudiantes</Accordion.Header>
@@ -57,13 +57,13 @@ export const SideNav = () => {
        ) : 
        useRol ==='STUDENT' ? 
        ( <div className="list-group list-group-flush bg-blue" >
-          <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/dashboard-student'} href="/dashboard-student"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
+          <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/'} href="/"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
           <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/my-qualifications'} href="/my-qualifications"><i className="fa-solid fa-th-list me-3"></i>Mis Calificaciones</Nav.Link>
         </div>
        )
        : 
        ( <div className="list-group list-group-flush bg-blue" >
-          <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/dashboard-tutor'} href="/dashboard-tutor"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
+          <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/'} href="/"><i className="fa-solid fa-dashboard me-3"></i>Dashboard</Nav.Link>
           <Nav.Link className="list-group-item list-group-item-action list-group-item p-3" as={Link} to={'/my-students'} href="/my-students"><i className="fa-solid fa-graduation-cap me-3"></i>Mis Estudiantes</Nav.Link>
         </div>
        )

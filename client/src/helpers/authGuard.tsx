@@ -8,7 +8,7 @@ interface Props {
 }
 
 const PrivateValidationFragment = <Outlet />;
-const PublicValidationFragment = <Navigate replace to={PrivateRoutes.DASHBOARD} />;
+const PublicValidationFragment = <Navigate replace to={'/'} />;
 
 export const AuthGuard = ({ privateValidation }: Props) => {
   const userState = useSelector((store: RootState) => store.user);

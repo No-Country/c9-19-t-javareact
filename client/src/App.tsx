@@ -22,8 +22,12 @@ import Tutores from './pages/Tutores';
 import Estudiantes from './pages/Estudiantes';
 import AddUser from './pages/AddUser';
 import { PublicRoutes, PrivateRoutes } from './routes';
+import { useAppSelector } from './app/hooks';
+import { selectRol } from './app/states/user';
 
 function App() {
+
+  const userRol = useAppSelector(selectRol)
 
   return (
     <BrowserRouter>
@@ -32,10 +36,13 @@ function App() {
         {/* Rutas Privadas */}
         <Route element={<AuthGuard privateValidation={true} />}>
           <Route path={`/`} element={<Layout />}>
+          {userRol === 'ADMINISTRATOR' && <Route path="/" element={<Dashboard/>} />}
+          {userRol === 'TEACHER' && <Route path="/" element={<DashboardTeacher />} />}
+          {userRol === 'STUDENT' && <Route path="/" element={<DashboardStudent />} />}
+          {userRol === 'TUTOR' && <Route path="/" element={<DashboardTutor />} />}
               {/* Rutas Especificas */}
               <Route element={<RoleGuard rol={Roles.ADMIN} />}>
-                <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
-                 <Route path={PrivateRoutes.COMMISSION} element={<Commissions />} />
+              <Route path={PrivateRoutes.COMMISSION} element={<Commissions />} />
                 <Route path={PrivateRoutes.ADDUSER} element={<AddUser />} />
                 <Route path={PrivateRoutes.STUDENTS} element={<Estudiantes />} />
                 <Route path={PrivateRoutes.TEACHER} element={<Profesores />} />
@@ -44,17 +51,12 @@ function App() {
               </Route>
             <Route element={<RoleGuard rol={Roles.TEACHER} />}>
               <Route path={PrivateRoutes.MY_COMMISSIONS} element={<MyCommissions />} />
-              <Route path={PrivateRoutes.DASHBOARD_TEACHER} element={<DashboardTeacher />} />
             </Route>
-            {/* <Route element={<RoleGuard rol={Roles.TEACHER} />}>
-            </Route> */}
             <Route element={<RoleGuard rol={Roles.STUDENT} />}>
               <Route path={PrivateRoutes.MY_QUALIFICATIONS} element={<MyQualification />} />
-              <Route path={PrivateRoutes.DASHBOARD_STUDENT} element={<DashboardStudent />} />
             </Route>
             <Route element={<RoleGuard rol={Roles.TUTOR} />}>
               <Route path={PrivateRoutes.MY_STUDENTS} element={<MyStudents />} />
-              <Route path={PrivateRoutes.DASHBOARD_TUTOR} element={<DashboardTutor />} />
             </Route>
           </Route>
         </Route>
