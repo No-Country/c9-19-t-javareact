@@ -14,7 +14,6 @@ import MyQualification from './pages/MyQualification';
 import MyStudents from './pages/MyStudents';
 import { RoutesWithNotFound } from './helpers';
 import { Roles } from './models';
-import AuthGuard from './helpers/authGuard';
 import RoleGuard from './helpers/roleGuard';
 import UsuarioInfo from './pages/UsuarioInfo';
 import Profesores from './pages/Profesores';
@@ -24,6 +23,7 @@ import AddUser from './pages/AddUser';
 import { PublicRoutes, PrivateRoutes } from './routes';
 import { useAppSelector } from './app/hooks';
 import { selectRol } from './app/states/user';
+import AuthGuard  from './helpers/authGuard';
 
 function App() {
 

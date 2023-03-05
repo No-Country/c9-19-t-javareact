@@ -9,6 +9,10 @@ export const persistLocalStorage = <T,>(key: string, value: T) => {
   export const setTokenToLocalStorage = (value: string) => {
     localStorage.setItem("token", JSON.stringify(value) )
   }
+  
+  export const removeTokenFromLocalStorage = () => {
+    localStorage.removeItem("token")
+  }
 
   export const getTokenFromLocalStorage = () => {
     const token = localStorage.getItem("token")

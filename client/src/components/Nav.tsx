@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import { resetUser, selectName, selectRol } from '../app/states/user';
+import { removeTokenFromLocalStorage } from '../helpers';
 import { PrivateRoutes, PublicRoutes } from '../routes';
 import { SideNav } from './SideNav';
 
@@ -12,7 +13,8 @@ export const Nav = () => {
     const useRol = useAppSelector(selectRol)
 
     const logout = () => {
-        dispatch(resetUser())
+        dispatch(resetUser()),
+        removeTokenFromLocalStorage()
     }
 
     return (

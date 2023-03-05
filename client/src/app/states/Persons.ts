@@ -79,7 +79,7 @@ export const deletePerson: any = createAsyncThunk(
     try {
       const response = await useApi(apiPropertyes);
       if (response?.status === 200) return id;
-      return `${response?.status}: ${response?.message}`;
+      return `${response?.status}: ${response?.data.message}`;
     } catch (err: any) {
       return err.message;
     }

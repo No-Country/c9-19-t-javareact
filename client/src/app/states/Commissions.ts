@@ -34,7 +34,7 @@ import {
       method: 'get',
     };
     const response = await useApi(apiPropertyes);
-    return Commission.parseArray(response.data);
+    return response.data
   });
 
   
@@ -49,7 +49,7 @@ import {
 
   
   export const updateTeacher: any = createAsyncThunk('commissions/teacher/update',
-    async (body) => {
+    async (body:any) => {
       const apiPropertyes: apiProps = {
         path: `commissions/teacher/update`,
         method: 'put',

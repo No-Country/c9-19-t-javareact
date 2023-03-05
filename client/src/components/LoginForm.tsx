@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { loginService } from '../services/loginService';
 import { useAppDispatch } from '../app/hooks';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export interface FormData {
   username: string;
@@ -30,11 +30,11 @@ const LoginForm = () => {
   const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
       const res = await dispatch(loginService(formData))
-      if(res.rol){navigate('/')
-    }else{
-      Swal.fire('Error','Por favor, rellena los campos','error');
-      // setMessage('Error, por favor, rellena los campos')
-    }
+      if(res?.token){
+        navigate('/')
+      } else {
+        Swal.fire('Error','Usuario o contraseña incorrectos','error')
+      }
   
   };
 
