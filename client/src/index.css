@@ -239,6 +239,11 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   right: 0;
 }
 
+.outlet-container {
+ padding-top:1rem;
+ padding-bottom: 1rem;
+}
+
 @media (min-width: 768px) {
 .outlet-container {
   width: calc(100% - 15rem);
@@ -267,10 +272,12 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 /* SCROLL CUSTOM COLOR AND RAD */
 .overflow-box{
+
   height:calc(100vh - 72px);
   overflow-y: scroll;
   overflow-x: hidden;
   margin-bottom:12vh !important;
+
 }
 /* width */
 ::-webkit-scrollbar {

@@ -13,6 +13,7 @@ const Layout = () => {
                     <div className="bg-bone overflow-hidden" id="page-content-wrapper">
                         <Nav/>
                         <div className="overflow-box pt-5">
+                        <div className="outlet-container overflow-box">
                             <Outlet />
                         </div>
                     </div>
