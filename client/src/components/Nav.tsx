@@ -16,7 +16,7 @@ export const Nav = () => {
     }
 
     return (
-        <Navbar expand={'sm'} collapseOnSelect className="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm mb-4 bg-white rounded animate__animated animate__slideInDown animate__delay-0.5s p-0">
+        <Navbar expand={'sm'} collapseOnSelect className="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm bg-white rounded animate__animated animate__slideInDown animate__delay-0.5s p-0">
             <Container fluid>
                 <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${'sm'}`} />
                 <Navbar.Offcanvas className={"position-absolute"}

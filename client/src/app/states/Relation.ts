@@ -33,6 +33,7 @@ export const initialRelationsState: EntityState<Relations> & State =
 export const setRelation: any = createAsyncThunk(
   "person/relationship",
   async (data : any) => {
+    console.log(data)
     const { idStudent, idTutor, relation } = data;
     const apiPropertyes: apiProps = {
       path: `admin/relationship`,
@@ -44,6 +45,7 @@ export const setRelation: any = createAsyncThunk(
       },
     };
     const response = await useApi(apiPropertyes);
+    console.log(response)
     return response.data;
   }
 );
@@ -96,6 +98,7 @@ const relationsSlice = createSlice({
         state.error = action.error.message;
       })
        .addCase(setRelation.fulfilled, (state, action) => {
+        console.log('setrelation:', action.payload)
         state.status="succeeded"
         const newRelation = {...action.payload, id: action.payload.idRelation}
         relationsAdapter.addOne(state, newRelation);

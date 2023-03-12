@@ -64,10 +64,7 @@ function RelationAssignStudent({
   const relationsStatus = useAppSelector(selectRelations)
 
 
-  useEffect(() => {
-    setNewRelations(relations);
-  }, [relations]);
- 
+
   const handleCloseModal = () => {
     handleClose();
   };
@@ -81,7 +78,8 @@ function RelationAssignStudent({
       idTutor:idTutor,
       relation:newBond
     }
-    if (user) {  
+    console.log(newBond)
+    if (user && newBond) {  
       handleSave(relation)  
       setAdded(false)
       setBond(undefined)
@@ -178,7 +176,6 @@ function RelationAssignStudent({
             {relationsStatus !== undefined && (
               <Container>
   <ListGroup>
-    {console.log(relationsStatus)}
     {relationsStatus.map(
       ({
         fullNameStudent,

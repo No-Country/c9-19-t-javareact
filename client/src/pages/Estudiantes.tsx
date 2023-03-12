@@ -71,7 +71,7 @@ function Estudiantes() {
         setSelectedUser(user);
         setModalTitle('Asignar tutor al estudiante')
         setUsersToReltions(tutors);
-        setRelations(payload);
+        setRelations(payload); 
         setShowRelations(true);
 
     }
@@ -83,20 +83,8 @@ function Estudiantes() {
     }
 
     const handleSaveRelations = (data: any) => {
-
-        let shouldDispatch = true;
-    
-        if (relations.length > 0) {
-            relations?.map((elem) => {
-                if ((elem.idTutor === data.idTutor) && (elem.idStudent === data.idStudent)) {
-                    shouldDispatch = false;
-                }
-            });
-        }
-    
-        if (shouldDispatch) {
-            dispatch(setRelation(data));
-        }
+        dispatch(setRelation(data));
+      
     };
     const handleDelRelations = (id: number) => {
         
