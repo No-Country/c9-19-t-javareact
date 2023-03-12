@@ -13,7 +13,6 @@ export const SideNav = () => {
       <div className="sidebar-heading bg-red">
         <img src="https://media.discordapp.net/attachments/1071146886603489310/1072642125201674350/GoodLearner3.png" width="195" alt="" />
         </div>
-
       { useRol ==='ADMINISTRATOR' ? (
          <LinkAdmin/>
       ) : (
