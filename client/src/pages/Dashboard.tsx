@@ -47,7 +47,7 @@ function Dashboard () {
             <Row className="gap-4 gap-lg-0">
                 {
                     data.map( (user: any) => (
-                        <Col xs={12} md={4} className='d-flex justify-content-center' key={user.id}>
+                        <Col xs={12}  lg={4} className='d-flex justify-content-center' key={user.id}>
                             <Card className='card-dash' >
                                 <Card.Body>
                                     <Row>
@@ -69,14 +69,10 @@ function Dashboard () {
                         ))
                 }
             </Row>
-            <Row className="mb-2" xs={12}>
-            <Col xs={12} md={12}>
-                <BarChart data={dataChart}/>
-
-                </Col>
-{/*                 <Col xs={12} md={4}>
-                <PieChart/>
-                </Col> */}
+            <Row className="mb-5" xs={12} md={12} lg={12}>
+            <Col xs={12}>
+                <div className="d-flex justify-content-center"><BarChart data={dataChart}/></div>
+            </Col>
             </Row>
         </Container>
     )
