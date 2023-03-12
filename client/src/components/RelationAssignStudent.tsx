@@ -83,7 +83,6 @@ function RelationAssignStudent({
       handleSave(relation)  
       setAdded(false)
       setBond(undefined)
-
     }  
   };
   const handleChangeRelation = (e: { target: { value: number } }) => {
