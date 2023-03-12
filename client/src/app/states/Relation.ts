@@ -6,7 +6,6 @@ import {
   EntityState,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { nanoid } from "nanoid";
 import { apiProps, useApi } from "../../hooks/useApi";
 import { Relations } from "../../models/Relations";
 
